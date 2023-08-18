@@ -13,6 +13,15 @@
                 <xpath expr="//button[@name='button_cancel']" position="after">
                     <button name="action_req_approval" string="Req Approval" type="object" class="btn-primary" attrs="{'invisible': [('req_approval','=', True)]}"/>
                 </xpath>
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="context">{'res_partner_search_mode': 'vendor', 'show_address': 1, 'show_vat': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_invoice_id']" position="attributes">
+                    <attribute name="context">{'default_type':'invoice'}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_shipping_id']" position="attributes">
+                    <attribute name="context">{'default_type':'delivery'}</attribute>
+                </xpath>
             </field>
         </record>
     </data>
