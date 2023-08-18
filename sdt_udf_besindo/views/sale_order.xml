@@ -21,7 +21,7 @@
                 </xpath>
                 <xpath expr="//field[@name='partner_shipping_id']" position="attributes">
                     <attribute name="context">{'default_type':'delivery'}</attribute>
-                    <attribute name="domain">[('type','=','invoice')]</attribute>
+                    <attribute name="domain">[('type','=','delivery')]</attribute>
                 </xpath>
             </field>
         </record>
