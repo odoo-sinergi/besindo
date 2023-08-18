@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<odoo>
+        <record model="ir.ui.view" id="view_order_form_inherit">
+            <field name="name">sale.order.form.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='o_td_label'][2]" position="replace">
+                    <div class="o_td_label" attrs="{'invisible': [('state', 'in', ['sent'])]}">
+                        <label for="date_order" string="Order Date"/>
+                    </div>
+                </xpath>
+                <xpath expr="//field[@name='date_order'][2]" position="replace">
+                    <field name="date_order" attrs="{'required': [('state', 'in', ['sale', 'done'])], 'invisible': [('state', 'in', ['sent'])]}" nolabel="1"/>
+                </xpath>
+
+                <!-- <div class="o_td_label" attrs="{'invisible': [('state', 'in', ['draft', 'sent'])]}">
+                    <label for="date_order" string="Order Date"/>
+                </div>
+                <field name="date_order" attrs="{'required': [('state', 'in', ['sale', 'done'])], 'invisible': [('state', 'in', ['draft', 'sent'])]}" nolabel="1"/> -->
+            </field>
+        </record>
+</odoo>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<odoo>
+    <record model="ir.ui.view" id="mrp_unbuild_form_view_inherit">
+        <field name="name">mrp_unbuild_form_view_inherit</field>
+        <field name="model">mrp.unbuild</field>
+        <field name="inherit_id" ref="mrp.mrp_unbuild_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='mo_id']" position="before">
+                <field name="unbuild_date"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="mrp_unbuild_form_view_simplified_inherit">
+        <field name="name">mrp_unbuild_form_view_simplified_inherit</field>
+        <field name="model">mrp.unbuild</field>
+        <field name="inherit_id" ref="mrp.mrp_unbuild_form_view_simplified"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='o_row']" position="after">
+                <label for="unbuild_date"/>
+                <div class="o_row">
+                    <field name="unbuild_date"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

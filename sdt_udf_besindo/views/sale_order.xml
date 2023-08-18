@@ -1,0 +1,19 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="udf_view_order_form_inherit">
+            <field name="name">udf.sale.order.form.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_cancel']" position="after">
+                    <button name="action_req_approval" string="Req Approval" type="object" class="btn-primary" attrs="{'invisible': ['|',('req_approval', '=', True),('approval_disc', '!=', True)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="approval_disc" readonly="1" invisible="1" force_save="1"/>
+                    <field name="req_approval" readonly="1" invisible="1" force_save="1"/>
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</odoo>
