@@ -12,6 +12,12 @@
                     <field name="approval_disc" readonly="1" invisible="1" force_save="1"/>
                     <field name="req_approval" readonly="1" invisible="1" force_save="1"/>
                 </xpath>
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="context">{'res_partner_search_mode': 'customer', 'show_address': 1, 'show_vat': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_invoice_id']" position="attributes">
+                    <attribute name="context">{'default_type':'invoice'}</attribute>
+                </xpath>
             </field>
         </record>
         
