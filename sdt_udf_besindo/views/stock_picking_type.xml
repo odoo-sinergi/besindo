@@ -7,6 +7,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='show_operations']" position="after">
                     <field name="is_qc_production"/>
+                    <field name="different_delivery_date"/>
                   </xpath>
             </field>
         </record>
