@@ -1,5 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_product_jenis,product.jenis,model_product_jenis,,1,1,1,1
-access_sdt_operator_factory,sdt_operator_factory,model_sdt_operator_factory,,1,1,1,1
-access_sdt_operator_factory_tag,sdt_operator_factory_tag,model_sdt_operator_factory_tag,,1,1,1,1
-access_tempat_pengiriman,tempat.pengiriman,model_tempat_pengiriman,,1,1,1,1

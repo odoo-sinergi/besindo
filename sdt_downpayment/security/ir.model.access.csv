@@ -1,5 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-
-access_downpayment_account_user,downpayment.account.user,model_sdt_downpayment_account,group_downpayment_user,1,1,1,1
-access_downpayment_user,downpayment.user,model_sdt_downpayment,group_downpayment_user,1,1,1,1
-access_downpayment_user,downpayment.user,model_sdt_downpayment_lines,group_downpayment_user,1,1,1,1
