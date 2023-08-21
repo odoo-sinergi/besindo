@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_consignment_request_user,consignment.request.user,model_consignment_request,base.group_user,1,1,1,1
+access_consignment_request_line_user,consignment.request.line.user,model_consignment_request_line,base.group_user,1,1,1,1
+access_consignment_billing_user,consignment.billing.user,model_consignment_billing,base.group_user,1,1,1,1
+access_consignment_billing_line_user,consignment.billing.line.user,model_consignment_billing_line,base.group_user,1,1,1,1
+access_consignment_billing_summary_user,consignment.billing.summary.user,model_consignment_billing_summary,base.group_user,1,1,1,1
+

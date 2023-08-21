@@ -1,0 +1,143 @@
+<odoo>
+    <data>
+        <report id="report_standard_purchase_requisition_menu"
+                string="SDT Standard - Purchase Requisition"
+                model="purchase.requisition"
+                report_type="qweb-pdf"
+                file="purchase.requisition"
+                name="form_standard_odoo.purchase_requisition_report"
+                paperformat="form_standard_odoo.paperformat_sdt_standard_form">
+        </report>
+
+        <template id="purchase_requisition_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="form_standard_odoo.purchase_requisition_report_document"></t>
+                </t>
+            </t>
+        </template>
+
+        <template id="purchase_requisition_report_document">
+            <t t-call="web.external_layout">
+                <div name="address" class="col-xs-5 col-xs-offset-7"/>
+                <div style="font-Size:11px;" class="page">
+                    <style type="text/css">
+                      tr, td
+                        {
+                           border-top: 2px solid black;
+                           border-right:1px solid black;
+                           border-left:1px solid black;
+                           border-bottom:1px solid black;
+                        }
+                    </style>
+                    <style type="text/css">
+                      th
+                        {
+                           border-top: 2px solid transparant;
+                           border-right:1px solid black;
+                           border-left:1px solid black;
+                           border-bottom:1px solid transparant;
+                        }
+                    </style>
+                    <style type="text/css">
+                      table
+                        {
+                           border-top: 1px solid transparant;
+                           border-right:1px solid black;
+                           border-left:1px solid black;
+                           border-bottom:1px solid black;
+                        }
+                    </style>
+                    <br/>
+                    <h1 style="font-Size:11px;text-align: center;">
+                            <div style="font-Size:16px;text-align: center;text-decoration: underline;font-weight:bold;">PURCHASE REQUISITION</div>
+                            <td>Nomor : </td><span t-field="doc.name"/>
+                            <td> - </td><span t-field="doc.ordering_date" t-options="{&quot;format&quot;:&quot;dd/MM/YYYY&quot;}"/>
+                    </h1>
+                    <div style="font-Size:11px;" class="row mt16">
+                        <t t-if="doc.vendor_id">
+                            <div class="col-xs-7">
+                                 <strong>REQUEST TO : </strong>
+                                 <div t-field="doc.vendor_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
+                            </div>
+                        </t>
+                        <div class="col-xs-5">
+                            <br>Type               : <span t-field="doc.type_id"/></br>
+                            <br>Deadline         : <span t-field="doc.date_end"/></br>
+                            <br>Order Date     : <span t-field="doc.ordering_date"/></br>
+                            <br>Delivery Date : <span t-field="doc.schedule_date"/></br>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 pull-left"/>
+                    <br/>
+                     <table class="table table-condensed">
+                         <thead>
+                            <tr style="font-Size:11;text-align:center;border-top:2px solid black;border-bottom:2px solid black;">
+                                <th class="text-center" width="40">No</th>
+                                <th class="text-center">Product Code</th>
+                                <th class="text-center">Product Name</th>
+                                <th class="text-center">Quantity</th>
+                                <th class="text-center">UoM</th>
+                                <th class="text-center">Schedule Date</th>
+                            </tr>
+                         </thead>
+                             <tbody class="lines_tbody">
+                                 <t t-set="LineNum" t-value="1"/>
+                                 <tr t-foreach="doc.line_ids" t-as="line">
+                                     <td class="text-center" width="40"><span><t t-esc="LineNum"/></span></td>
+                                     <t t-if="line.product_id.default_code == ''">
+                                        <td class="text-left" style="border:2px solid black;"><span t-field="line.product_id.default_code"/></td>
+                                     </t>
+                                     <t t-else="">
+                                        <td class="text-center" style="border:2px solid black;"><span t-field="line.product_id.barcode"/></td>
+                                     </t>
+                                     <td><span><t t-esc="line.display_name"/></span></td>
+                                     <td class="text-right"><span><t t-esc="line.product_qty"/></span></td>
+                                     <td class="text-center"><span><t t-esc="line.product_uom_id.name"/></span></td>
+                                     <td class="text-right"><span t-field="line.schedule_date"/></td>
+                                     <t t-set="LineNum" t-value="LineNum+1"/>
+                                 </tr>
+                             </tbody>
+                     </table>
+                     <div style="font-Size:11px;" class="row mt16">
+                        <div class="col-xs-6">
+                            <td style="font-weight:bold;">Deliver To : </td>
+                            <span t-field="doc.picking_type_id"/>
+                            <br/>
+                            <td style="font-weight:bold;">Notes : </td>
+                            <div t-field="doc.description"/>
+                        </div>
+                    </div>
+                    <div class="row mt32 mb32">
+                        <div class="col-xs-3">
+                            <p>Request By</p>
+                        </div>
+                        <div class="col-xs-3">
+                        </div>
+                        <div class="col-xs-3">
+                        </div>
+                        <div class="col-xs-3">
+                            <p>Approved By</p>
+                        </div>
+
+                    </div>
+                    <div class="row mt32 mb32">
+                        <div class="col-xs-3">
+                            <br>__________________</br>
+                            <br>Date</br>
+                        </div>
+                        <div class="col-xs-3">
+                        </div>
+                        <div class="col-xs-3">
+                        </div>
+                        <div class="col-xs-3">
+                            <br>__________________</br>
+                            <br>Date</br>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

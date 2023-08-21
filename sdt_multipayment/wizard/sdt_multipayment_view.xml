@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="view_account_payment_register_form_inherit" model="ir.ui.view">
+            <field name="name">account.payment.register.form.inherit</field>
+            <field name="model">account.payment.register</field>
+            <field name="inherit_id" ref="account.view_account_payment_register_form" />
+            <field name="arch" type="xml">
+                <xpath expr="/form/group" position="after">
+                    <!-- <notebook attrs="{'invisible':[('payment_type','=','outbound')]}"> -->
+                    <notebook>
+                        <page string="Other Payments">
+                            <field name="opay_ids" widget="one2many_list">
+                                <tree string="Generate" editable="bottom" create="true">
+                                    <field name="mpay_id" invisible="1"/>
+                                    <field name="mpacc_id" options="{'no_create': True}"/>
+                                    <field name="label" />
+                                    <field name="amount" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+
+                </xpath>
+                <xpath expr="/form/group/group[@name='group2']/field[@name='communication']" position="after">
+                    <field name="amount_tot"/>
+                    <field name="balance_pay"/>
+                    <field name="faktur" invisible="1"/>
+                    <field name="journal_acc" invisible="1"/>
+
+                </xpath>
+                <xpath expr="/form/group/group[@name='group3']/label[@for='payment_difference']" position="replace">
+                    <!-- <label for="payment_difference"  attrs="{'invisible':[('payment_type','=','inbound')]}"/> -->
+                    <label for="payment_difference" invisible="1"/>
+                </xpath>
+                <xpath expr="/form/group/group[@name='group3']/div/field[@name='payment_difference']" position="replace">
+                    <!-- <field name="payment_difference"  attrs="{'invisible':[('payment_type','=','inbound')]}"/> -->
+                    <field name="payment_difference"  invisible="1"/>
+                </xpath>
+                <xpath expr="/form/group/group[@name='group3']/div/field[@name='payment_difference_handling']" position="replace">
+                    <!-- <field name="payment_difference_handling"  attrs="{'invisible':[('payment_type','=','inbound')]}"/> -->
+                    <field name="payment_difference_handling"  invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

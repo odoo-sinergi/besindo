@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sdt_multipayment_account_user,sdt.multipayment.account.user,model_sdt_multipayment_account,sdt_multipayment.group_multipayment,1,1,1,1
+access_sdt_other_payment_user,sdt.other.payment.user,model_sdt_other_payment,sdt_multipayment.group_multipayment,1,1,1,1

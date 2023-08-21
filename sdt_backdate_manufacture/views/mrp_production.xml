@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record model="ir.ui.view" id="mrp_production_form_view_inherit">
+            <field name="name">mrp_production_form_view_inherit</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//label[@for='date_planned_start']" position="before">
+                    <label for="mrp_date"/>
+                    <div class="mrp_date">
+                        <field name="mrp_date" attrs="{'required': [('state','in',('confirmed','to_close'))]}"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+</odoo>

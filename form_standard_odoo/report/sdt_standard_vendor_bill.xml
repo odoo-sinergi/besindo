@@ -1,0 +1,203 @@
+<odoo>
+    <data>
+        
+        <report id="report_standard_vendor_bill_menu"
+                string="SDT Standard - Vendor Bill"
+                model="account.move"
+                report_type="qweb-pdf"
+                file="account.move"
+                name="form_standard_odoo.standard_vendor_bill_report"
+                paperformat="form_standard_odoo.paperformat_sdt_standard_form"
+                print_report_name="'SDT Standard - Vendor Bill - %s' % (object.name)">
+        </report>
+        <template id="standard_vendor_bill_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="form_standard_odoo.standard_vendor_bill_document"></t>
+                </t>
+            </t>
+        </template>
+
+        <template id="standard_vendor_bill_document">
+            <t t-call="web.external_layout">
+                <div name="address" class="col-xs-5 col-xs-offset-7"/>
+                <div style="font-Size:11px;" class="page">
+                    <style type="text/css">
+                      tr, td
+                        {
+                           border-top: 1px solid black;
+                           border-right:1px solid black;
+                           border-left:1px solid black;
+                           border-bottom:1px solid black;
+                           padding: 4px;
+                           padding-left: 7px;
+                           padding-right: 7px;
+                        }
+                    </style>
+                    <style type="text/css">
+                      th
+                        {
+                           border-top: 1px solid black;
+                           border-right:1px solid black;
+                           border-left:1px solid black;
+                           border-bottom:1px solid black;
+                           padding: 4px;
+                           padding-left: 7px;
+                           padding-right: 7px;
+                           color: black;
+                        }
+                    </style>
+                    <style type="text/css">
+                      table
+                        {
+                           border-top: 2px solid black;
+                           border-right:1px solid black;
+                           border-left:1px solid black;
+                           border-bottom:2px solid black;
+                           font-Size:11px;
+                           width: 100%;
+                           margin-top: 5px;
+                           margin-bottom: 10px;
+                        }
+                    </style>
+                    <h1 style="font-Size:11px;text-align: center;">
+                            <div style="font-Size:16px;text-align: center;text-decoration: underline;font-weight:bold;">VENDOR BILL</div>
+                            <td>Nomor : </td><span t-field="doc.name"/>
+                            <!-- <td> - </td><span t-field="doc.invoice_date" t-options="{&quot;format&quot;:&quot;dd/MM/YYYY&quot;}"/> -->
+                    </h1>
+                    <div style="font-Size:11px;" class="row mt16">
+                        <div class="col-7">
+                            <td style="font-weight:bold;">BILL TO : </td>
+                            <div t-field="doc.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
+                        </div>
+                        <div class="col-5">
+                            <table style="border: 2px solid white">
+                                <tr style="border: 2px solid white; padding: 0px;">
+                                    <td style="border: 2px solid white; padding: 0px;">Bill Date</td>
+                                    <td style="border: 2px solid white; padding: 0px;"> : </td>
+                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.invoice_date" t-options='{"format": "dd/MM/yyyy"}'/></td>
+                                </tr>
+                                <tr style="border: 2px solid white">
+                                    <td style="border: 2px solid white; padding: 0px;">Due Date</td>
+                                    <td style="border: 2px solid white; padding: 0px;"> : </td>
+                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.invoice_date_due" t-options='{"format": "dd/MM/yyyy"}'/></td>
+                                </tr>
+                                <tr style="border: 2px solid white">
+                                    <td style="border: 2px solid white; padding: 0px;">Payment Term</td>
+                                    <td style="border: 2px solid white; padding: 0px;"> : </td>
+                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.invoice_payment_term_id"/></td>
+                                </tr>
+                                <tr style="border: 2px solid white">
+                                    <td style="border: 2px solid white; padding: 0px;">Bill Reference</td>
+                                    <td style="border: 2px solid white; padding: 0px;"> : </td>
+                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.ref"/></td>
+                                </tr>
+                                <tr style="border: 2px solid white">
+                                    <td style="border: 2px solid white; padding: 0px;">PO Reference</td>
+                                    <td style="border: 2px solid white; padding: 0px;"> : </td>
+                                    <!-- <td style="border: 2px solid white; padding: 0px;" t-foreach="doc.invoice_line_ids" t-as="invoice_line_id"><span t-esc="invoice_line_id.purchase_order_id.name"/></td> -->
+                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.po_id"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                     <table>
+                         <thead>
+                            <tr style="font-Size:11;text-align:center;border-bottom:2px solid black;">
+                                 <th class="text-center"> Description</th>
+                                 <th class="text-center">Qty</th>
+                                 <th class="text-center">UoM</th>
+                                 <th class="text-center">Unit Price</th>
+                                 <th class="text-center">Discount</th>
+                                 <th class="text-center">Total</th>
+                            </tr>
+                         </thead>
+                             <tbody class="lines_tbody">
+                                 <t t-set="total_discount" t-value="0"/>
+                                 <tr t-foreach="doc.invoice_line_ids" t-as="line">
+                                     <t t-set="total_discount" t-value="total_discount +(line.price_unit * line.quantity * line.discount)"/>
+                                     <td><span t-field="line.name"/></td>
+                                     <td class="text-center"><span t-esc="'%.0f'%line.quantity"/></td>
+                                     <td class="text-center"><span><t t-esc="line.product_uom_id.name"/></span></td>
+                                     <td class="text-right"><span t-field="line.price_unit"/></td>
+                                     <td class="text-right"><span t-esc="'%.0f'%line.discount"/></td>
+                                     <td class="text-right"><span t-field="line.price_subtotal"/></td>
+                                 </tr>
+
+                                 <tr>
+                                    <td rowspan="6"/>
+                                    <td class="text-right" colspan="4">Subtotal</td>
+                                    <td class="text-right">
+                                        <span t-field="doc.amount_untaxed" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="text-right" colspan="4">Discount</td>
+                                    <td class="text-right">
+                                        <span t-esc="'%.2f'%total_discount"/>
+                                    </td>
+                                 </tr>
+                                <tr>
+                                    <td class="text-right" colspan="4">VAT</td>
+                                    <td class="text-right">
+                                        <span t-field="doc.amount_ppn" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right" colspan="4">PPH</td>
+                                    <td class="text-right">
+                                        <span t-field="doc.amount_pph" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
+                                     </td>
+                                </tr>
+                                <tr>
+                                   <td class="text-right" colspan="4"><strong>Grand Total</strong></td>
+                                    <td class="text-right">
+                                        <span t-field="doc.amount_total" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
+                                    </td>
+                                </tr>
+                             </tbody>
+                     </table>
+                     <p>Terbilang : <span t-esc="doc.terbilang_idr()"/></p>
+                     <div style="font-Size:11px;" class="row mt16">
+                        <div class="col-6">
+                            <td style="font-weight:bold;">Notes : </td>
+                            <div t-field="doc.narration"/>
+                        </div>
+                     </div>
+                     <div class="row mt32 mb32">
+                        <div class="col-3">
+                            <p>Prepared By</p>
+                        </div>
+                        <div class="col-3">
+                        </div>
+                        <div class="col-3">
+                        </div>
+                        <div class="col-3">
+                            <p>Approved By</p>
+                        </div>
+
+                     </div>
+                     <div class="row mt32 mb32">
+                        <div class="col-3">
+                            <br/>
+                            <br/>
+                            <br>__________________</br>
+                            <br>Date</br>
+                        </div>
+                        <div class="col-3">
+                        </div>
+                        <div class="col-3">
+                        </div>
+                        <div class="col-3">
+                            <br/>
+                            <br/>
+                            <br>__________________</br>
+                            <br>Date</br>
+                        </div>
+                     </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="product_jenis_view_form" model="ir.ui.view">
+        <field name="model">product.jenis</field>
+        <field name="arch" type="xml">
+            <form version="7.0">
+                <sheet>
+                    <group name="main">
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="product_jenis_view_tree" model="ir.ui.view">
+        <field name="name">product.jenis.tree</field>
+        <field name="model">product.jenis</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="action_product_jenis_tree" model="ir.actions.act_window">
+        <field name="name">Jenis</field>
+        <field name="res_model">product.jenis</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="action_product_jenis_tree"
+              id="menu_product_jenis_tree"
+              parent="stock.menu_stock_inventory_control"
+              sequence="20"/>
+</odoo>

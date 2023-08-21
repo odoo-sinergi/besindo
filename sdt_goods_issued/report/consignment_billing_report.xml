@@ -1,0 +1,166 @@
+<odoo>
+    <data>
+        <record id="paperformat_sdt_consignment" model="report.paperformat">
+            <field name="name">Consignment Billing Form</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">25</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">20</field>
+            <field name="dpi">80</field>
+        </record>
+        <report id="report_consign_billing_menu"
+                string="SDT Standard - Consignment Billing"
+                model="consignment.billing"
+                report_type="qweb-pdf"
+                file="consignment.billing"
+                name="sdt_consignment.consignment_billing_report"
+                paperformat="sdt_consignment.paperformat_sdt_consignment">
+        </report>
+
+        <template id="consignment_billing_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="sdt_consignment.consignment_billing_report_document"></t>
+                </t>
+            </t>
+        </template>
+        <template id="consignment_billing_layout" inherit_id="web.internal_layout" primary="True">
+            <xpath expr="//div[@class='header']" position="replace">
+                <div class="header">
+                    <div class="row">
+                        <div style="font-size:18px" class="col-9" >
+                            <strong>CONSIGNMENT BILLING</strong>
+                        </div>
+                        <div class="col-3" style="padding-left:30px">
+                            <img src="/sdt_consignment/static/src/image/alu_logo.png" style="max-height: 30px;"/>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+        <template id="consignment_billing_report_document">
+            <t t-call="sdt_consignment.consignment_billing_layout">
+                <div name="address" class="col-xs-5 col-xs-offset-7"/>
+                <div style="font-Size:11px;" class="page">
+                    <style type="text/css">
+                         table, tr, td, th
+                         {
+                           border: 1px solid black;
+                         }
+                     </style>
+                    <br/>
+                    <div class="row">
+                        <div class="col-8 text-left">
+                            <h1 style="font-Size:11px;text-align: left;">
+                                <div t-field="doc.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
+                            </h1>
+                        </div>
+                        <div class="col-4 text-left">
+                            <table>
+                                <tr><td style="border: 1px solid white">Nomor Billing</td>
+                                    <td style="border: 1px solid white"> : </td>
+                                    <td style="border: 1px solid white"><span t-field="doc.name"/></td>
+                                </tr>
+                                <tr><td style="border: 1px solid white">Tgl BIlling</td>
+                                    <td style="border: 1px solid white"> : </td>
+                                    <td style="border: 1px solid white"><span t-field="doc.date_billing" t-options="{&quot;format&quot;:&quot;dd/MM/YYYY&quot;}"/></td>
+                                </tr>
+                                <tr/>
+                                <tr><td style="border: 1px solid white; width: 100px">Location</td>
+                                    <td style="border: 1px solid white"> : </td>
+                                    <td style="border: 1px solid white"><spab t-esc="doc.location_id.name[:-6]"/> <spab t-esc="doc.location_id.name[-5:]"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <br/>
+                    <div style="font-Size:11px;" class="row mt16">
+                        <div class="col-12">
+                            <strong>KEPADA Yth : </strong>
+                            <br/>
+                            Berikut ini permintaan konsinyasi sesuai dengan syarat dan ketentuan yang berlaku dibawah ini,
+                        </div>
+                    </div>
+                    <div class="col-xs-6 pull-left"/>
+                    <br/>
+                     <table class="table table-condensed table-bordered">
+                         <thead style="font-Size:10;">
+                            <tr>
+                                <th style="padding:5px" class="text-center" width="40">No</th>
+                                <th style="padding:5px" class="text-center">Kode Barang</th>
+                                <th style="padding:5px" class="text-center">Nama Barang</th>
+                                <th style="padding:5px" class="text-center">QTY</th>
+                                <th style="padding:5px" class="text-center">UoM</th>
+                                <th style="padding:5px" class="text-center">Cost</th>
+                            </tr>
+                         </thead>
+                             <tbody class="lines_tbody">
+                                 <t t-set="LineNum" t-value="1"/>
+                                 <tr t-foreach="doc.summary_ids" t-as="line">
+                                     <td style="padding:5px" class="text-center" width="40"><span><t t-esc="LineNum"/></span></td>
+                                     <t t-if="line.product_id.default_code != ''">
+                                        <td style="padding:5px" class="text-left"><span t-field="line.product_id.default_code"/></td>
+                                     </t>
+                                     <t t-else="">
+                                        <td style="padding:5px" class="text-center"><span t-field="line.product_id.barcode"/></td>
+                                     </t>
+                                     <td style="padding:5px" ><span><t t-esc="line.product_id.name"/></span></td>
+                                     <td style="padding:5px" class="text-right"><span><t t-esc="line.qty_sales"/></span></td>
+                                     <td style="padding:5px" class="text-center"><span><t t-esc="line.product_uom_id.name"/></span></td>
+                                     <td style="padding:5px" class="text-right"><span><t t-esc="line.hpp_cost"/></span></td>
+                                     <t t-set="LineNum" t-value="LineNum+1"/>
+                                     <!--<td class="text-right"/>-->
+                                 </tr>
+                             </tbody>
+                     </table>
+                     <div style="font-Size:11px;" class="row mt16">
+                        <div class="col-6" style="text-decoration: underline;font-weight:bold;">
+                            <td>Syarat &amp; Keterangan : </td>
+                        </div>
+                    </div>
+
+<!--                    <div class="row">-->
+<!--                        <div class="col-5">-->
+<!--                            <table>-->
+<!--                                <tr><td style="border: 1px solid white">Tujuan</td>-->
+<!--                                    <td style="border: 1px solid white"> : </td>-->
+<!--                                    <td style="border: 1px solid white"><span t-field="doc.tujuan"/></td>-->
+<!--                                </tr>-->
+<!--                                <tr><td style="border: 1px solid white">Type Pengiriman</td>-->
+<!--                                    <td style="border: 1px solid white"> : </td>-->
+<!--                                    <td style="border: 1px solid white"><span t-field="doc.type_kirim"/></td>-->
+<!--                                </tr>-->
+<!--                                <tr><td style="border: 1px solid white">Tgl Pengiriman</td>-->
+<!--                                    <td style="border: 1px solid white"> : </td>-->
+<!--                                    <td style="border: 1px solid white"><span t-field="doc.date_kirim"/></td>-->
+<!--                                </tr>-->
+<!--                                <tr><td style="border: 1px solid white">Partial Delivery</td>-->
+<!--                                    <td style="border: 1px solid white"> : </td>-->
+<!--                                    <td style="border: 1px solid white"><span t-field="doc.partial_delivery"/></td>-->
+<!--                                </tr>-->
+<!--                            </table>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div class="row">
+                        <div class="col-3" style="text-align:center">
+                            <br>__________________</br><br/>
+                            <span style="color:red;">A</span>lukita
+                                <!--<img src="/sdt_consignment/static/src/image/alukita2.png" style="max-height: 20px;"/>-->
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>
