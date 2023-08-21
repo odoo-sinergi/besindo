@@ -18,19 +18,6 @@ class SaleOrder(models.Model):
                 else :
                     record.approval_disc = False
     
-    @api.onchange('partner_invoice_id')
-    def _onchange_partner_invoice_id(self):
-        self.partner_invoice_id = self.env['res.partner'].search([('type','=','invoice')])
-
-    @api.depends('partner_id')
-    def _compute_partner_invoice_id(self):
-        invoice_id = self.env['res.partner'].search([('type','=','invoice')])
-        for order in self:
-            if order.partner_id:
-                order.partner_invoice_id = order.partner_id.address_get(['invoice'])['invoice']
-            else:
-                order.partner_invoice_id = False
-    
     def action_confirm(self):
         res = super(SaleOrder, self).action_confirm()
         for record in self:
@@ -49,7 +36,6 @@ class SaleOrder(models.Model):
             else :
                 pass
         return res
-    
 
     def action_req_approval (self):
         for rec in self :
