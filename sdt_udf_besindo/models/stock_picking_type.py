@@ -7,4 +7,4 @@ class StockPickingType(models.Model):
 
     
     is_qc_production = fields.Boolean(string='Is QC Production',)
-    
+    different_delivery_date = fields.Boolean(string='Different Delivery Date')
