@@ -8,6 +8,9 @@
             <field name="partner_id" position="attributes">
                 <attribute name="domain">[('type', '!=', 'private'), ('company_id', 'in', (False, company_id)),('category_id.name','=','Customer')]</attribute>
             </field>
+            <xpath expr="//field[@name='partner_shipping_id']" position="attributes">
+                <attribute name="domain">[('type','=','delivery')]</attribute>
+            </xpath>
         </field>
     </record>
 </odoo>
