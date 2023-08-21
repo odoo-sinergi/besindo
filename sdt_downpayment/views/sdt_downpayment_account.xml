@@ -23,7 +23,7 @@
 					<sheet>
 						<group>
 							<field name="user_id" />
-							<field name="account_id" widget="many2many_tags"/>
+							<field name="account_id" widget="many2many_tags" domain="[('deprecated', '=', False)]"/>
 							<field name="payment_type" />
 						</group>
 					</sheet>
