@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- <report
+            id="msp_informasi_orderan_menu"
+            string="Informasi Orderan"
+            report_type="qweb-pdf"
+            model="mrp.production"
+            file="form_standard_odoo.menu"
+            name="form_standard_odoo.marel_report_informasi_orderan_report"
+        />
+        <template id="marel_report_informasi_orderan_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="form_standard_odoo.report_marel_report_informasi_orderan_doc" t-lang="doc.partner_id.lang"/>
+                </t>
+            </t>
+        </template> -->
+
+        <report id="report_label_qc_post_prod_menu"
+            string="SDT Standard - Label QC"
+            model="mrp.production"
+            report_type="qweb-pdf"
+            file="form_standard_odoo.menu"
+            name="form_standard_odoo.label_qc_post_prod_report"
+            paperformat="form_standard_odoo.sdt_standard_paperformat_label"
+            print_report_name="'SDT Standard - Label QC - %s' % (object.name)">
+        </report>
+
+        <template id="label_qc_post_prod_report">
+            <t t-call="web.html_container">
+                <!-- <t t-foreach="docs" t-as="doc"> -->
+                    <t t-call="form_standard_odoo.label_qc_post_prod_document"></t>
+                <!-- </t> -->
+            </t>
+        </template>
+
+    </data>
+</odoo>

@@ -1,0 +1,133 @@
+<odoo>
+    <data>
+        <report id="report_standard_sales_quotation"
+                string="SDT Standard - Sales Quotation"
+                model="sale.order"
+                report_type="qweb-pdf"
+                file="sale.order"
+                name="form_standard_odoo.standard_sales_quotation_report"
+                paperformat="form_standard_odoo.paperformat_sdt_standard_form"
+                print_report_name="'SDT Standard - Sales Quotation - %s' % (object.name)">
+        </report>
+
+        <template id="standard_sales_quotation_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="form_standard_odoo.standard_sales_quotation_report_document"></t>
+                </t>
+            </t>
+        </template>
+
+        <template id ="standard_sales_quotation_report_document">
+             <t t-call="web.external_layout">
+                <div style="font-Size:11px;" class="page">
+                    <style type="text/css">
+                      tr, td
+                        {
+                           border-top: 1px solid black;
+                           border-right:1px solid black;
+                           border-left:1px solid black;
+                           border-bottom:1px solid black;
+                           padding: 4px;
+                           padding-left: 7px;
+                           padding-right: 7px;
+                        }
+                    </style>
+                    <style type="text/css">
+                      th
+                        {
+                           border-top: 1px solid black;
+                           border-right:1px solid black;
+                           border-left:1px solid black;
+                           border-bottom:1px solid black;
+                           padding: 4px;
+                           padding-left: 7px;
+                           padding-right: 7px;
+                           color: black;
+                        }
+                    </style>
+                    <style type="text/css">
+                      table
+                        {
+                           border-top: 2px solid black;
+                           border-right:1px solid black;
+                           border-left:1px solid black;
+                           border-bottom:2px solid black;
+                           font-Size:11px;
+                           width: 100%;
+                           margin-top: 5px;
+                           margin-bottom: 10px;
+                        }
+                    </style>
+                    <h1 style="font-Size:11px;text-align: center;">
+                            <div style="font-Size:16px;text-align: center;text-decoration: underline;font-weight:bold;">SALES QUOTATION</div>
+                            <td>Nomor : </td><span t-field="doc.name"/>
+                            <td> - </td><span t-field="doc.date_order" t-options="{&quot;format&quot;:&quot;dd/MM/YYYY&quot;}"/>
+                    </h1>
+                    <div class="row mt24 mb16">
+                        <div class="col-7">
+                            <p style="font-weight:bold">CUSTOMER : <span t-field="doc.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/></p>
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr style="border-top:2px solid black;border-bottom:2px solid black;">
+                                <th class="text-center">Code</th>
+                                <th class="text-center">Description</th>
+                                <th class="text-center">Qty Order</th>
+                                <th class="text-center">UoM</th>
+                                <th class="text-center">Unit Price</th>
+                                <th class="text-center">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody class="lines_tbody">
+                            <tr t-foreach="doc.order_line" t-as="line">
+                                <td class="text-left"><span t-field="line.product_id.default_code"/></td>
+                                <td class="text-left"><span t-field="line.product_id.name"/></td>
+                                <td class="text-right"><span t-field="line.product_uom_qty"/></td>
+                                <td class="text-center"><span t-field="line.product_uom"/></td>
+                                <td class="text-right"><span t-field="line.price_unit"/></td>
+                                <td class="text-right"><span t-field="line.price_subtotal"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" rowspan="5"/>
+                                <td colspan="3"><strong> Subtotal</strong></td>
+                                 <td class="text-right" colspan="2">
+                                     <span t-field="doc.amount_untaxed" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"><strong>Tax</strong></td>
+                                <td class="text-right" colspan="2">
+                                    <span t-field="doc.amount_tax" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"><strong>Grand Total</strong></td>
+                                <td class="text-right" colspan="2">
+                                    <span t-field="doc.amount_total" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                     <p>Terbilang : <span t-esc="doc.terbilang_idr()"/></p>
+                    <div class="row mt32 mb32">
+                        <div class="col-3">
+                            <p>Sales Person</p>
+                        </div>
+                    </div>
+                        <div class="row mt24 mb24">
+                            <div class="col-3">
+                                <!--<div style="text-decoration:underline;"><span t-field="user_id"/></div>-->
+                                <span t-field="doc.user_id"/>
+                                <br/>
+                                <br/>
+                                <br>__________________</br>
+                                <br>Date : </br><span t-field="doc.date_order" t-options="{&quot;format&quot;:&quot;dd/MM/YYYY&quot;}"/>
+                            </div>
+                        </div>
+                    </div>
+             </t>
+        </template>
+    </data>
+</odoo>

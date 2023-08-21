@@ -1,0 +1,69 @@
+<odoo>
+    <data>
+        <template id="sdt_layout_standard">
+            <div class="header o_background_header">
+                <div class="pull-left">
+                    <h3 class="mt0 text-right" t-field="company.report_header"/>
+                </div>
+                <img t-if="company.logo" t-att-src="'data:image/png;base64,%s' % to_text(company.logo)" class="pull-right"/>
+                <div class="pull-left company_address">
+                    <div>
+                        <strong t-field="company.partner_id.name"/>
+                    </div>
+                    <span t-field="company.partner_id"
+                        t-field-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'/>
+                </div>
+                <div class="clearfix mb8"/>
+            </div>
+
+            <div class="article o_report_layout_background">
+                <t t-raw="0" />
+            </div>
+
+            <div class="footer o_background_footer">
+                <div class="text-center">
+                    <ul class="list-inline">
+                        <li t-if="company.phone"><i class="fa fa-phone"/> <span t-field="company.phone"/></li>
+                        <li t-if="company.email"><i class="fa fa-at"/> <span t-field="company.email"/></li>
+                        <li t-if="company.website"><i class="fa fa-globe"/> <span t-field="company.website"/></li>
+                        <li t-if="company.vat"><i class="fa fa-building-o"/><t t-esc="company.country_id.vat_label or 'TIN'"/>: <span t-field="company.vat"/></li>
+                    </ul>
+                    <div t-field="company.report_footer"/>
+                    <div class="text-muted">
+                        Page:
+                        <span class="page"/>
+                        of
+                        <span class="topage"/>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <template id="sdt_layout">
+            <!-- Multicompany -->
+            <t t-if="not o and doc">
+                <t t-set="o" t-value="doc"/>
+            </t>
+
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+
+            <t t-if="company.external_report_layout == 'background'">
+                <t t-call="sdt_form_layout.sdt_layout_standard"><t t-raw="0"/></t>
+            </t>
+            <t t-if="company.external_report_layout == 'boxed'">
+                <t t-call="sdt_form_layout.sdt_layout_standard"><t t-raw="0"/></t>
+            </t>
+            <t t-if="company.external_report_layout == 'clean'">
+                <t t-call="sdt_form_layout.sdt_layout_standard"><t t-raw="0"/></t>
+            </t>
+            <t t-if="company.external_report_layout in (False, 'standard')">
+                <t t-call="sdt_form_layout.sdt_layout_standard"><t t-raw="0"/></t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

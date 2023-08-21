@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <record id="seq_return_goods_issued" model="ir.sequence">
+            <field name="name">Return Goods Issued</field>
+            <field name="code">sdt.return.goods.issued</field>
+            <field name="prefix">GIR-</field>
+            <field name="padding">5</field>
+        </record>
+    </data>
+
+</odoo>

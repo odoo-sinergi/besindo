@@ -1,0 +1,34 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="sgi_stock_picking_inherit_form">
+            <field name="name">sgi.stock.picking.inherit.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='move_ids_without_package']//tree" position="inside">
+                    <field name="analytic_product_id" optional="hide"/>
+                    <field name="analytic_project_id" optional="hide"/>
+                    <field name="analytic_section_id" optional="hide"/>
+                    <field name="analytic_departement_id" optional="hide"/>
+                    <!-- <field name="analytic_section_id"/>
+                    <field name="analytic_departement_id"/> -->
+                </xpath>
+            </field>
+        </record>
+
+        <!-- <record id="bompo_stock_move_line_inherit_form" model="ir.ui.view">
+            <field name="name">bompo.stock.move.line.inherit.form</field>
+            <field name="model">stock.move.line</field>
+            <field name="inherit_id" ref="stock.view_stock_move_line_detailed_operation_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_uom_id']" position="after">
+                    <field name="qty_backorder"/>
+                    <field name="qty_fg"/>
+                    <field name="qty_used"/>
+                    <field name="qty_outstanding"/>
+                    <field name="product_fg_id"/>
+                </xpath>
+            </field>
+        </record> -->
+    </data>
+</odoo>

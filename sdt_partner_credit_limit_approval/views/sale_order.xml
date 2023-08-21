@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sdt_sale_order_limit_form_inherit" model="ir.ui.view">
+        <field name="name">sdt.sale.order.limit.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_draft']" position="after">
+                <button name="action_approval_limit" id="action_approval_limit" data-hotkey="q" string="REQ Approval Limit" class="btn-primary" 
+                    type="object" attrs="{'invisible': ['|','|','|',('is_credit_limit', '=',False),('state','in',['sale','done']),('is_approve_limit','=',True),('approval_id','!=',False)]}"/>
+            </xpath>
+            <xpath expr="//button[@name='action_confirm'][1]" position="attributes">
+                <attribute name="attrs">{'invisible': ['|',('state', 'not in', ['sent']),('hide_button_confirm', '=',True)]}</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_confirm'][2]" position="attributes">
+                <attribute name="attrs">{'invisible': ['|',('state', 'not in', ['draft']),('hide_button_confirm', '=',True)]}</attribute>
+            </xpath>
+            <field name="team_id" position="after">
+                <field name="approval_id" readonly="1" force_save="1"/>
+                <field name="is_credit_limit" invisible="1"/>
+                <field name="is_approve_limit" invisible="1"/>
+                <field name="hide_button_confirm" invisible="1"/>
+            </field>
+        </field>
+    </record>
+</odoo>

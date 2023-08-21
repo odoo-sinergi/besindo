@@ -1,0 +1,14 @@
+<odoo>
+    <record id="sequence_view" model="ir.ui.view">
+        <field name="model">ir.sequence</field>
+        <field name="inherit_id" ref="base.sequence_view" />
+        <field name="arch" type="xml">
+            <field name="use_date_range" position="after">
+                <field name="range_type" attrs="{'invisible': [('use_date_range','=', False)]}"/>
+                <field name="records_to_add_line" attrs="{'invisible': [('use_date_range','=', False)]}"/>
+                <field name="to_day" attrs="{'invisible': [('use_date_range','=', False)]}"/>
+                <button name="new_records" string="Generate Records" type="object" />
+            </field>
+        </field>
+    </record>
+</odoo>

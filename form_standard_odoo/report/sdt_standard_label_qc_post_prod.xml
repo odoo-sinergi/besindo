@@ -1,0 +1,152 @@
+<odoo>
+    <data>
+        <!-- <report id="report_label_qc_post_prod_menu"
+            string="SDT Standard - Label QC"
+            model="mrp.production"
+            report_type="qweb-pdf"
+            file="form_standard_odoo.sdt_standard_label_qc_post_prod"
+            name="form_standard_odoo.label_qc_post_prod_report"
+            paperformat="form_standard_odoo.sdt_standard_paperformat_label"
+            print_report_name="'SDT Standard - Label QC - %s' % (object.name)">
+        </report>
+
+        <template id="label_qc_post_prod_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="form_standard_odoo.label_qc_post_prod_document"></t>
+                </t>
+            </t>
+        </template> -->
+
+        <template id="label_qc_post_prod_document">
+            <t t-call="form_standard_odoo.sdt_header_internal_layout_polos">
+                <div style="font-Size:10px;" class="page">
+                    <style type="text/css">
+                        tr, td
+                        {
+                        border-top: 1px solid black;
+                        border-right:1px solid black;
+                        border-left:1px solid black;
+                        border-bottom:1px solid black;
+                        padding: 4px;
+                        padding-left: 7px;
+                        padding-right: 7px;
+                        }
+                    </style>
+                    <style type="text/css">
+                        th
+                        {
+                        border-top: 1px solid black;
+                        border-right:1px solid black;
+                        border-left:1px solid black;
+                        border-bottom:1px solid black;
+                        padding: 4px;
+                        padding-left: 7px;
+                        padding-right: 7px;
+                        color: black;
+                        }
+                    </style>
+                    <style type="text/css">
+                        table
+                        {
+                        border-top: 1px solid black;
+                        border-right:1px solid black;
+                        border-left:1px solid black;
+                        border-bottom:1px solid black;
+                        font-Size:11px;
+                        width: 100%;
+                        margin-top: 5px;
+                        margin-bottom: 10px;
+                        }
+                    </style>
+                    <!-- <t t-set="loop_counter" t-value="0" /> -->
+                    <!-- <t t-foreach="docs" t-as="doc"> -->
+                        <!-- <t t-set="loop_counter" t-value="loop_counter + 1" /> -->
+                        <!-- <t t-if="loop_counter &lt;= 1"> -->
+                            <table width="100%" style="border: 1px solid white">
+                                <tr style="border: 1px solid white" t-foreach="docs" t-as="doc">
+                                <!-- <tr style="border: 1px solid white" t-foreach="doc.move_ids_without_package.filtered(lambda x: x.quantity_done &gt; 0)" t-as="lines"> -->
+                                    <td class="text-left" width="45%" style="border: 1px solid white">
+                                        <table  width="100%">
+                                            <tr>
+                                                <td colspan="3">
+                                                    <span><strong><span t-field="doc.company_id.name"/></strong></span><br/>
+                                                    <span><span t-field="doc.company_id.street2"/></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>Customer</span></td>
+                                                <td colspan="2"><span></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>Size</span></td>
+                                                <td colspan="2"><span t-field="doc.product_id.nama_alias"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>Part Number</span></td>
+                                                <td colspan="2"><span>______________________</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="25%"><span>Qty</span></td>
+                                                <td width="45%"><span>______________________</span><span t-field="doc.product_uom_id"/></td>
+                                                <td width="30%"><span>Pack No. ______</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>Date</span></td>
+                                                <td><span t-field="doc.date_planned_start"/></td>
+                                                <td><span>Line </span><span t-foreach="doc.workorder_ids" t-as="lines">: <span t-esc="lines.workcenter_id.code"/></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>Operator</span></td>
+                                                <td><span></span></td>
+                                                <td><span>Shift :</span></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td style="border: 1px solid white" width="10%"></td>
+                                    <td style="border: 1px solid white" width="45%">
+                                        <table  width="100%">
+                                            <tr>
+                                                <td colspan="3">
+                                                    <span><strong><span t-field="doc.company_id.name"/></strong></span><br/>
+                                                    <span><span t-field="doc.company_id.street2"/></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>Customer</span></td>
+                                                <td colspan="2"><span></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>Size</span></td>
+                                                <td colspan="2"><span t-field="doc.product_id.nama_alias"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>Part Number</span></td>
+                                                <td colspan="2"><span>______________________</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="25%"><span>Qty</span></td>
+                                                <td width="45%"><span>______________________</span><span t-field="doc.product_uom_id"/></td>
+                                                <td width="30%"><span>Pack No. ______</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>Date</span></td>
+                                                <td><span t-field="doc.date_planned_start"/></td>
+                                                <td><span>Line </span><span t-foreach="doc.workorder_ids" t-as="lines">: <span t-esc="lines.workcenter_id.code"/></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span>Operator</span></td>
+                                                <td><span></span></td>
+                                                <td><span>Shift :</span></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        <!-- </t> -->
+                    <!-- </t> -->
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

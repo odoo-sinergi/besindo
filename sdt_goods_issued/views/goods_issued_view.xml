@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_goods_issued_form">
+        <field name="name">goods_issued_form</field>
+        <field name="model">sdt.goods.issued</field>
+        <field name="arch" type="xml">
+            <form string="Goods Issued">
+                <header>
+                    <button name="to_approve" states="open" string="Request Approval" type="object" groups="sdt_goods_issued.group_gi_approval" class="oe_highlight"/>
+                    <button name="approve" states="to_approved" string="Approve" type="object" groups="sdt_goods_issued.group_gi_approval" class="oe_highlight"/>
+                    <button name="reject" states="to_approved" string="Reject" type="object" groups="sdt_goods_issued.group_gi_approval" class="oe_highlight"/>
+                    <button name="draft" states="rejected,to_approved,approved" string="Set To Draft" type="object" class="oe_highlight"/>
+                    <button name="validate" states="approved" string="Validate" type="object" groups="sdt_goods_issued.group_gi_validate" class="oe_highlight"/>
+                    <button name="canceled" states="valid" string="Canceled" confirm="Are you sure to canceled this Goods Issued..?" type="object" groups="sdt_goods_issued.group_gi_canceled" class="oe_highlight"/>
+                    <field name="state" widget="statusbar" statusbar_visible="open,to_approved,approved,rejected,canceled,valid"
+                            statusbar_colors='{"valid":"blue"}'/>
+                </header>
+                <sheet>
+                    <div class="oe_edit_only">
+                        <label for="name" class="oe_inline"/>
+                    </div>
+                    <h1>
+                        <field name="name" class="oe_inline" attrs="{'readonly': [('state','!=', 'open')]}"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="date" attrs="{'readonly': [('state','!=', 'open')]}"/>
+                            <field name="partner_id" attrs="{'readonly': [('state','!=', 'open')]}"/>
+                            <!-- <field name="date_issued" attrs="{'readonly': [('state','!=', 'open')]}"/> -->
+                            <field name="force_date" attrs="{'readonly': [('state','!=', 'open')]}"/>
+                            <field name="description" attrs="{'readonly': [('state','!=', 'open')]}"/>
+                        </group>
+                        <group>
+                            <field name="picking_type_id" attrs="{'readonly': [('state','!=', 'open')]}"/>
+                            <field name="location_from" attrs="{'readonly': [('state','!=', 'open')]}"/>
+                            <field name="location_to" attrs="{'readonly': [('state','!=', 'open')]}"/>
+                            <field name="picking_id" readonly="1" attrs="{'invisible': [('picking_id','=', False)]}"/>
+                            <field name="company_id" attrs="{'readonly': [('state','!=', 'open')]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page id="product_tab" string="Products">
+                            <field name="line_ids" mode="tree,kanban" widget="section_and_note_one2many" attrs="{'readonly':[('state', '!=', 'open')]}">
+                                <tree editable="bottom"  default_order="sequence, id">
+                                    <control>
+                                        <create name="add_product_control" string="Add a product"/>
+                                        <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}"/>
+                                        <create name="add_note_control" string="Add a note" context="{'default_display_type': 'line_note'}"/>
+                                    </control>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="display_type" invisible="1"/>
+                                    <field name="company_id" invisible="1"/>
+                                    <field name="product_id" widget="product_configurator" attrs="{'required': [('display_type', '=', False)]}" options="{'no_create': True, 'no_quick_create': True, 'no_create_edit':True}"/>
+                                    <field name="name" widget="section_and_note_text" optional="show"/>
+                                    <field name="product_uom_id"/>
+                                    <field name="lot_id"/>
+                                    <field name="qty"/>
+                                    <field name="account_id" attrs="{'required': [('display_type', '=', False)]}"/>
+                                    <field name="analytic_product_id"/>
+                                    <field name="analytic_project_id"/>
+                                    <field name="analytic_section_id"/>
+                                    <field name="analytic_departement_id"/>
+                                    <!-- <field name="analytic_account_id" attrs="{'required': [('display_type', '=', False)]}" invisible="1"/>
+                                    <field name="analytic_tag_id" attrs="{'required': [('display_type', '=', False)]}"/> -->
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_goods_issued_tree">
+        <field name="name">goods_issued_tree</field>
+        <field name="model">sdt.goods.issued</field>
+        <field name="arch" type="xml">
+            <tree decoration-info="state in ('open')" string="Goods Issued">
+                <field name="name"/>
+                <!-- <field name="date_issued"/> -->
+                <field name="description"/>
+                <field name="company_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_goods_issued_search" model="ir.ui.view">
+        <field name="name">goods_issued_list_select</field>
+        <field name="model">sdt.goods.issued</field>
+        <field name="arch" type="xml">
+            <search string="Search Goods Issued">
+                <field name="name" string="Goods Issued"/>
+                <separator/>
+                <field name="state"/>
+                <filter name="state_open" string="open"
+                        domain="[('state','=','open')]"/>
+                <filter name="state_to_approved" string="To Be Approved"
+                        domain="[('state','=','to_approved')]"/>
+                <filter name="state_rejected" string="Rejected"
+                        domain="[('state','=','rejected')]"/>
+                <filter name="state_approved" string="Approved"
+                        domain="[('state','=','approved')]"/>
+                <filter name="state_done" string="Done"
+                        domain="[('state','=','valid')]"/>
+                <group expand="0" string="Group By...">
+                    <filter string="Date Issued" name="date_issued" icon="terp-go-month" domain="[]" context="{'group_by':'date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="goods_issued_form_action">
+        <field name="name">Goods Issued</field>
+        <field name="res_model">sdt.goods.issued</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_goods_issued_search"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+            Click to start a new Good Issued process.
+            </p><p>
+            A Good Issued is an instruction to Issued a certain quantity of materials,
+            so that they are available at a certain point in time.
+            </p>
+        </field>
+    </record>
+    <!--<record id="view_goods_issued_line_form" model="ir.ui.view">-->
+        <!--<field name="name">view_goods_issued_line_form</field>-->
+        <!--<field name="model">sdt.goods.issued.line</field>-->
+        <!--<field name="arch" type="xml">-->
+            <!--<form string="Goods Issued Line">-->
+                <!--<group>-->
+                    <!--<group>-->
+                        <!--<field name="origin"/>-->
+                        <!--<field name="picking_id"/>-->
+                        <!--<field name="location_id"/>-->
+                        <!--<field name="product_id"/>-->
+                        <!--<field name="product_uom_id"/>-->
+                    <!--</group>-->
+                    <!--<group>-->
+                        <!--<field name="qty_sales"/>-->
+                        <!--<field name="hpp_cost"/>-->
+                        <!--<field name="amount_untaxed"/>-->
+                        <!--<field name="amount_tax"/>-->
+                        <!--<field name="amount_total"/>-->
+                    <!--</group>-->
+                <!--</group>-->
+            <!--</form>-->
+        <!--</field>-->
+    <!--</record>-->
+
+    <record model="ir.rule" id="goods_issued_comp_rule">
+        <field name="name">SDT Goods Issued Company Rule</field>
+        <field name="model_id" ref="model_sdt_goods_issued"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <menuitem
+        id="menu_goods_issued_act"
+        sequence="2"
+        name="Goods Issued"
+        parent="stock.menu_stock_warehouse_mgmt"
+        action="goods_issued_form_action"
+        groups="base.group_user"
+        />
+
+</odoo>

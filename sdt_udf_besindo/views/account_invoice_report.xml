@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="udf_view_account_invoice_report_search_inherit">
+            <field name="name">udf.view.account.invoice.report.search.inherit</field>
+            <field name="model">account.invoice.report</field>
+            <field name="inherit_id" ref="account.view_account_invoice_report_search" />
+            <field name="arch" type="xml">
+                <xpath expr="//search//filter[@name='supplier']" position="after">
+                    <separator/>
+                    <filter string="Domestic" name="domestic" domain="[('sales_type','=','domestic')]"/>
+                    <filter string="Export" name="export" domain="[('sales_type','=','export')]"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

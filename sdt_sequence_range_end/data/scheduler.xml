@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<odoo>
+  <data>
+    <record id="scheduler_action_seq_range_end" model="ir.cron">
+      <field name="interval_type">months</field>
+      <field name="name">Sequence Range End Scheduler</field>
+      <field name="numbercall">-1</field>
+      <field name="priority">5</field>
+      <field name="doall">False</field>
+      <field name="active">True</field>
+      <field name="interval_number">1</field>
+      <field name="model_id" ref="model_ir_sequence"/>
+      <field name="state">code</field>
+      <field name="nextcall" eval="(DateTime.now() + relativedelta(months=1) - relativedelta(days=1)).strftime('%Y-%m-%d 17:01:00')" />
+      <field name="code">model.action_seq_range()</field>
+    </record>
+  </data>
+</odoo>
