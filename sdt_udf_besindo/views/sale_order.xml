@@ -12,18 +12,7 @@
                     <field name="approval_disc" readonly="1" invisible="1" force_save="1"/>
                     <field name="req_approval" readonly="1" invisible="1" force_save="1"/>
                 </xpath>
-                <xpath expr="//field[@name='partner_id']" position="attributes">
-                    <attribute name="domain">[('category_id', '=', 1)]</attribute>
-                </xpath>
-                <xpath expr="//group[@name='partner_details']/field[@name='partner_invoice_id']" position="attributes">
-                    <attribute name="domain">[('type','!=','private'),('type','!=','contact'),('type','!=','delivery'),('type','=','invoice')]</attribute>
-                    <attribute name="on_change">1</attribute>
-                </xpath>
-                <xpath expr="//field[@name='partner_shipping_id']" position="attributes">
-                    <attribute name="domain">[('type','=','delivery')]</attribute>
-                </xpath>
             </field>
         </record>
-        
     </data>
 </odoo>
