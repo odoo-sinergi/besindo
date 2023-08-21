@@ -6,7 +6,7 @@
             <field name="inherit_id" ref="stock.view_picking_form" />
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='date_done']" position="after">
-                    <field name="actual_date" attrs="{'invisible':[('state','!=','done'),('different_delivery_date','=',False)]}"/>
+                    <field name="actual_date" attrs="{'invisible':[('state','!=','done'),('different_delivery_date','!=',True)]}"/>
                     <field name="workcenter_name" invisible="1"/>
                     <field name="is_qc_production" invisible="1"/>
                     <field name="different_delivery_date" invisible="1"/>
