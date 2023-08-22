@@ -20,7 +20,3 @@ class SaleOrder(models.Model):
             partner_obj = self.env['res.partner'].search([('category_id.name', '=', 'Customer')]).ids
             domain = {'partner_id': [('id', 'in', partner_obj)]}
             return {'domain': domain} 
-
-
-
-    
