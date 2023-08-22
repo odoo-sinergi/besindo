@@ -22,7 +22,12 @@
             <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding" />
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='amount_total']" position="after">
-                    <field name="status_approval" optional="show" decoration-success="status_approval == 'approved'" decoration-info="status_approval == 'waiting' or status_approval == 'draft'" widget="badge"/>
+                    <field name="status_approval" optional="show" 
+                    decoration-warning="status_approval == 'nfa'"
+                    decoration-info="status_approval == 'waiting'" 
+                    decoration-success="status_approval == 'approved'" 
+                    
+                    widget="badge"/>
                 </xpath>
             </field>
         </record>
