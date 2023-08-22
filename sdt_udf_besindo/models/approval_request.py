@@ -38,19 +38,25 @@ class ApprovalRequest(models.Model):
         approvers._create_activity()
         self.write({'date_confirmed': fields.Datetime.now()})
 
-    # def action_approve(self, approver=None):
-    #     approver = self.mapped('approver_ids').filtered(lambda approver: approver.user_id == self.env.user)
-    #     approver.write({'status': 'approved'})
-
-    #     self.sudo()._get_user_approval_activities(user=self.env.user).action_feedback()
-    #     return super(ApprovalRequest, self).action_approve()
-
+    def action_approve(self, approver=None):
+        # Approval SO
+        approval_request_obj = self.env['approval.request'].search([('sale_order_id','=',self.sale_order_id.id)])
+        for approval_request in approval_request_obj :
+            if approval_request.request_status == 'pending':
+                    approval_request.sale_order_id.status_approval = 'approved'
+        approver = self.mapped('approver_ids').filtered(lambda approver: approver.user_id == self.env.user)
+        approver.write({'status': 'approved'})
+        self.sudo()._get_user_approval_activities(user=self.env.user).action_feedback()
+        return super(ApprovalRequest, self).action_approve()
 
     def sdt_action_refuse (self):
         approval_request_obj = self.env['approval.request'].search([('sale_order_id','=',self.sale_order_id.id)])
         for approval_request in approval_request_obj :
+            # SO
+            approval_request.sale_order_id.status_approval = 'refused'
             approval_request.sale_order_id.req_approval = False
             approval_request.sale_order_id = False
+            # PO
             approval_request.purchase_order_id.req_approval = False
             approval_request.purchase_order_id = False
             approval_request.action_refuse()

@@ -9,14 +9,31 @@ class SaleOrder(models.Model):
     req_approval = fields.Boolean(string='Req Approval', copy=False)
     approval_disc = fields.Boolean(string='Approval Disc', copy=False)
 
+    status_approval = fields.Selection(
+        string='Status Approval', default='draft', copy=False,
+        selection=[('draft', 'Draft'),
+                   ('nfa', 'Needs For Approval'),
+                   ('waiting', 'Waiting For Approval'),
+                   ('approved', 'Approved'),
+                   ('noa', 'No Approval'),
+                   ('refused', 'Refused'),
+                   ]
+    )
+
     @api.onchange('order_line')
     def _onchange_approval_disc(self):
         for record in self:
             for order in record.order_line :
                 if order.discount > 0:
-                    record.approval_disc = True
+                    approval_so_obj = self.env['approval.category'].search([('approval_so','=',True)], limit=1)
+                    if approval_so_obj :
+                        record.approval_disc = True
+                        record.status_approval = 'nfa'
+                    else :
+                        record.approval_disc = False
                 else :
                     record.approval_disc = False
+                    record.status_approval = 'noa'
     
     def action_confirm(self):
         res = super(SaleOrder, self).action_confirm()
@@ -95,4 +112,4 @@ class SaleOrder(models.Model):
             else :
                 raise UserError('Jumlah Approver Tidak Boleh Nol')
             rec.req_approval = True
-                    
+            rec.status_approval = 'waiting'
