@@ -11,14 +11,14 @@ class ApprovalRequest(models.Model):
     def action_confirm(self):
         # make sure that the manager is present in the list if he is required
         self.ensure_one()
-        if self.category_id.manager_approval == 'required':
-            employee = self.env['hr.employee'].search([('user_id', '=', self.request_owner_id.id)], limit=1)
-            if not employee.parent_id:
-                raise UserError(_('This request needs to be approved by your manager. There is no manager linked to your employee profile.'))
-            if not employee.parent_id.user_id:
-                raise UserError(_('This request needs to be approved by your manager. There is no user linked to your manager.'))
-            if not self.approver_ids.filtered(lambda a: a.user_id.id == employee.parent_id.user_id.id):
-                raise UserError(_('This request needs to be approved by your manager. Your manager is not in the approvers list.'))
+        # if self.category_id.manager_approval == 'required':
+            # employee = self.env['hr.employee'].search([('user_id', '=', self.request_owner_id.id)], limit=1)
+            # if not employee.parent_id:
+            #     raise UserError(_('This request needs to be approved by your manager. There is no manager linked to your employee profile.'))
+            # if not employee.parent_id.user_id:
+            #     raise UserError(_('This request needs to be approved by your manager. There is no user linked to your manager.'))
+            # if not self.approver_ids.filtered(lambda a: a.user_id.id == employee.parent_id.user_id.id):
+            #     raise UserError(_('This request needs to be approved by your manager. Your manager is not in the approvers list.'))
         # if len(self.approver_ids) < self.approval_minimum:
         #     raise UserError(_("You have to add at least %s approvers to confirm your request.", self.approval_minimum))
         if self.requirer_document == 'required' and not self.attachment_number:

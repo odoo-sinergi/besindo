@@ -26,7 +26,6 @@
                     decoration-warning="status_approval == 'nfa'"
                     decoration-info="status_approval == 'waiting'" 
                     decoration-success="status_approval == 'approved'" 
-                    
                     widget="badge"/>
                 </xpath>
             </field>
