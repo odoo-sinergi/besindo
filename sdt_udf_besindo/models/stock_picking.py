@@ -31,10 +31,11 @@ class StockPicking(models.Model):
         if view_type == 'form':
             doc = etree.XML(res['arch'])
             validate_button = doc.xpath("//button[@name='button_validate']")
+            context = self.env['stock.picking.type'].search([('name','=','RECEIPTS')]).id
 
             if not self.env.user.has_group('sdt_udf_besindo.group_picking_validate_qc'):
-                validate_button[0].set('modifiers','{"invisible": ["|", ["picking_type_code", "=", "incoming"], "|", ["state", "in", ["waiting", "confirmed"]], ["show_validate", "=", false]]}')
-                validate_button[1].set('modifiers','{"invisible": ["|", ["picking_type_code", "=", "incoming"], "|", ["state", "not in", ["waiting", "confirmed"]], ["show_validate", "=", false]]}')
+                validate_button[0].set('modifiers','{"invisible": ["|", ["picking_type_id", "=", '+str(context)+'], "|", ["state", "in", ["waiting", "confirmed"]], ["show_validate", "=", false]]}')
+                validate_button[1].set('modifiers','{"invisible": ["|", ["picking_type_id", "=", '+str(context)+'], "|", ["state", "not in", ["waiting", "confirmed"]], ["show_validate", "=", false]]}')
 
             res['arch'] = etree.tostring(doc)
         return res
