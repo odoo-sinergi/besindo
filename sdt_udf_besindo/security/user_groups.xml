@@ -13,10 +13,11 @@
             <field name="category_id" ref="sdt_udf_ssp.sdt_udf_access"/>
         </record> -->
 
-        <record id="group_picking_button_validate" model="res.groups">
-            <field name="name">Picking Validate</field>
-            <!-- <field name="category_id" ref="sdt_udf_ssp.picking_button_validate_access"/> -->
+        <record id="group_picking_validate_wh" model="res.groups">
+            <field name="name">Picking Validate / Warehouse</field>
         </record>
-
+        <record id="group_picking_validate_qc" model="res.groups">
+            <field name="name">Picking Validate / QC</field>
+        </record>
     </data>
 </odoo>

@@ -3,3 +3,6 @@ access_product_jenis,product.jenis,model_product_jenis,,1,1,1,1
 access_sdt_operator_factory,sdt_operator_factory,model_sdt_operator_factory,,1,1,1,1
 access_sdt_operator_factory_tag,sdt_operator_factory_tag,model_sdt_operator_factory_tag,,1,1,1,1
 access_tempat_pengiriman,tempat.pengiriman,model_tempat_pengiriman,,1,1,1,1
+
+access_stock_picking_warehouse,stock.picking.warehouse,model_stock_picking,group_picking_validate_wh,1,1,1,1
+access_stock_picking_qc,stock.picking.qc,model_stock_picking,group_picking_validate_qc,1,1,1,1

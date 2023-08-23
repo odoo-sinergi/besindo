@@ -1,5 +1,6 @@
 from odoo import api, Command, fields, models, _
 from odoo.exceptions import UserError
+from lxml import etree
 
 
 class StockPicking(models.Model):
@@ -23,6 +24,20 @@ class StockPicking(models.Model):
                         rec.workcenter_name = rec.workcenter_name + '  ' +'||' + '  ' + workorder_id.workcenter_id.name
             elif rec.is_qc_production == False :
                 rec.workcenter_name = '-'
+    
+    @api.model
+    def get_view(self, view_id=None, view_type='form', **options):
+        res = super(StockPicking, self).get_view(view_id=view_id, view_type=view_type, **options)
+        if view_type == 'form':
+            doc = etree.XML(res['arch'])
+            validate_button = doc.xpath("//button[@name='button_validate']")
+
+            if not self.env.user.has_group('sdt_udf_besindo.group_picking_validate_qc'):
+                validate_button[0].set('modifiers','{"invisible": ["|", ["picking_type_code", "=", "incoming"], "|", ["state", "in", ["waiting", "confirmed"]], ["show_validate", "=", false]]}')
+                validate_button[1].set('modifiers','{"invisible": ["|", ["picking_type_code", "=", "incoming"], "|", ["state", "not in", ["waiting", "confirmed"]], ["show_validate", "=", false]]}')
+
+            res['arch'] = etree.tostring(doc)
+        return res
     
 class StockMove(models.Model):
     _inherit = "stock.move"

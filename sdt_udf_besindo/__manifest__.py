@@ -32,6 +32,7 @@
 
     # always loaded
     'data': [
+        'security/user_groups.xml',
         'security/ir.model.access.csv',
         'views/product_template.xml',
         'views/jenis_product.xml',
