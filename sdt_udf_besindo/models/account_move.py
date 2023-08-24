@@ -26,20 +26,21 @@ class AccountMove(models.Model):
 
     do_number = fields.Char(string='Do Number',)
     hs_code = fields.Char(string='HS Code',)
-    no_faktur_pajak = fields.Char(string='No. Faktur Pajak',)
+    no_faktur_pajak = fields.Char(string='Tax Invoice Number',)
     date_payment = fields.Date(string='Date Payment', store=True, )
     
 
     def _compute_date_payment(self):
         for record in self:
-            if record.payment_state != 'not_paid' :
+            if record.payment_state == 'paid' :
                 payment_obj = self.env['account.payment'].search([('ref', '=', record.name)], order='date desc', limit=1)
                 if payment_obj :
                     for payment in payment_obj :
                         if not record.date_payment :
                             record.date_payment = payment.date
                         else :
-                            pass
+                            # pass
+                            record.date_payment = payment.date
                 else :
                     pass
             else :
