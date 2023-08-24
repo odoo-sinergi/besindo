@@ -10,10 +10,10 @@
                     <field name="workcenter_name" invisible="1"/>
                     <field name="is_qc_production" invisible="1"/>
                     <field name="different_delivery_date" invisible="1"/>
-                    <field name="is_alasan_selisih" invisible="1"/>
+                    <!-- <field name="is_alasan_selisih" invisible="1"/> -->
                 </xpath>
                 <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='operations']/field[@name='move_ids_without_package']/tree[1]/field[@name='product_uom']" position="after">
-                    <field name="alasan_selisih" attrs="{'column_invisible': [('parent.is_alasan_selisih','=',False)],'readonly':[('state', '!=', 'done')]}"/>
+                    <!-- <field name="alasan_selisih" attrs="{'column_invisible': [('parent.is_alasan_selisih','=',False)],'readonly':[('state', '!=', 'done')]}"/> -->
                 </xpath>
             </field>
         </record>
