@@ -10,6 +10,7 @@ class StockPicking(models.Model):
     workcenter_name = fields.Char(string='Workcenter Name', compute='_get_workcenter')
     is_qc_production = fields.Boolean(string='Is QC Production',related='picking_type_id.is_qc_production',readonly=True, store=True)
     different_delivery_date = fields.Boolean(string='Different Delivery Date',related='picking_type_id.different_delivery_date',readonly=True, store=True)
+    is_alasan_selisih = fields.Boolean(string='Alasan Selisih Quantity',related='picking_type_id.is_alasan_selisih',readonly=True, store=True)
 
     @api.depends('location_id','location_dest_id','date_done','move_ids_without_package','scheduled_date')
     def _get_workcenter(self):

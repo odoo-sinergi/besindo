@@ -8,3 +8,4 @@ class StockPickingType(models.Model):
     
     is_qc_production = fields.Boolean(string='Is QC Production',)
     different_delivery_date = fields.Boolean(string='Different Delivery Date')
+    is_alasan_selisih = fields.Boolean(string='Alasan Selisih Quantity', default=False)
