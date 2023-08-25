@@ -29,11 +29,12 @@ class AccountMove(models.Model):
     
     def button_cancel(self):
         res = super(AccountMove, self).button_cancel()
+        dp_po_product_id = self.env['ir.config_parameter'].sudo().get_param('purchase_vendorbill_advance.deposit_default_purchase_product_id')
         for rec in self:
             if rec.move_type == 'in_invoice':
                 if len(rec.invoice_line_ids) == 1:
                     for line in rec.invoice_line_ids:
-                        if line.product_id.default_code == 'PURCHASEDP':
+                        if line.product_id.id == dp_po_product_id:
                             if line.purchase_line_id:
                                 sql_query="""delete from purchase_order_line where id=%s 
                                     """
