@@ -292,7 +292,7 @@
                                <tr style="border: 2px solid white; padding: 0px;">
                                    <td style="border: 2px solid white; padding: 0px;">Delivery Address</td>
                                    <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                   <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.partner_shipping_id.street" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/></td>
+                                   <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.partner_shipping_id.street"/></td>
                                </tr>
                            </table>
                            <!-- <p>Order Date : <span t-field="doc.date_order" t-options='{"format": "dd/MM/yyyy"}'/></p> -->

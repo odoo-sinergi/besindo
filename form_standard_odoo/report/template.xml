@@ -108,8 +108,9 @@
                             <img src="/form_standard_odoo/static/img/logo_besindo.png" style="height: 60px; width: 150px;"/><br/>
                             <br/>
                             <span t-field="doc.company_id.name"/><br/>
-                            <span t-field="doc.company_id.street"/><br/>
-                            <span><span t-field="doc.company_id.city"/>, <span t-field="doc.company_id.zip"/>, <span t-field="doc.company_id.country_id"/></span>
+                            <span t-field="doc.company_id.street"/>
+                            <!-- <br/> -->
+                            <!-- <span><span t-field="doc.company_id.city"/>, <span t-field="doc.company_id.zip"/>, <span t-field="doc.company_id.country_id"/></span> -->
                         </div>
                         <div class="col-6"/>
                     </div>
