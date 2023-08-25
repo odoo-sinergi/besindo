@@ -18,10 +18,10 @@
         </template>
 
         <template id="standard_sales_invoice_document">
-            <t t-call="web.external_layout">
+            <t t-call="form_standard_odoo.sdt_header_internal_layout">
                 <div name="address" class="col-xs-5 col-xs-offset-7"/>
                 <!-- IDR -->
-                <div style="font-Size:11px;" class="page" t-if="doc.currency_id.id == 12">
+                <div style="font-Size:13px;" class="page" t-if="doc.currency_id.id == 12">
                     <style type="text/css">
                       tr, td
                         {
@@ -75,12 +75,12 @@
                                 <tr style="border: 2px solid white; padding: 0px;">
                                     <td style="border: 2px solid white; padding: 0px;">Invoice Date</td>
                                     <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.invoice_date" t-options='{"format": "dd/MM/yyyy"}'/></td>
+                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.invoice_date" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/></td>
                                 </tr>
                                 <tr style="border: 2px solid white">
                                     <td style="border: 2px solid white; padding: 0px;">Due Date</td>
                                     <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.invoice_date_due" t-options='{"format": "dd/MM/yyyy"}'/></td>
+                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.invoice_date_due" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/></td>
                                 </tr>
                                 <tr style="border: 2px solid white">
                                     <td style="border: 2px solid white; padding: 0px;">Payment Term</td>
@@ -126,10 +126,10 @@
                                  <t t-set="total_discount" t-value="0"/>
                                  <tr t-foreach="doc.invoice_line_ids" t-as="line">
                                      <t t-set="total_discount" t-value="total_discount +(line.price_unit * line.quantity * line.discount)"/>
-                                     <td><span t-field="line.name"/>  <span t-if="line.product_id.part_number"> (<span t-field="line.product_id.part_number"/>)</span></td>
+                                     <td><span t-field="line.name"/> <span t-if="line.product_id.part_number"> (<span t-field="line.product_id.part_number"/>)</span></td>
                                      <td class="text-center"><span t-esc="'%.2f'%line.quantity"/></td>
                                      <td class="text-center"><span><t t-esc="line.product_uom_id.name"/></span></td>
-                                     <td class="text-right"><span t-esc="'%.2f'% line.price_unit"/></td>
+                                     <td class="text-right"><span t-field="line.price_unit" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/></td>
                                      <td class="text-right"><span t-esc="'%.0f'%line.discount"/></td>
                                      <td class="text-right"><span t-field="line.price_subtotal"/></td>
                                  </tr>
@@ -149,13 +149,13 @@
                                  </tr>
 
                                  <tr>
-                                    <td class="text-right" colspan="4">Incoming Tax</td>
+                                    <td class="text-right" colspan="4">VAT</td>
                                     <td class="text-right">
                                         <span t-field="doc.amount_ppn" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="text-right" colspan="4">PPH</td>
+                                    <td class="text-right" colspan="4">PPh</td>
                                     <td class="text-right">
                                         <span t-field="doc.amount_pph" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
                                     </td>
@@ -238,7 +238,7 @@
                      </div> -->
                 </div>
                 <!-- != IDR -->
-                <div style="font-Size:11px;" class="page" t-if="doc.currency_id.id != 12">
+                <div style="font-Size:13px;" class="page" t-if="doc.currency_id.id != 12">
                     <style type="text/css">
                       tr, td
                         {
@@ -292,12 +292,12 @@
                                 <tr style="border: 2px solid white; padding: 0px;">
                                     <td style="border: 2px solid white; padding: 0px;">Invoice Date</td>
                                     <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.invoice_date" t-options='{"format": "dd/MM/yyyy"}'/></td>
+                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.invoice_date" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/></td>
                                 </tr>
                                 <tr style="border: 2px solid white">
                                     <td style="border: 2px solid white; padding: 0px;">Due Date</td>
                                     <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.invoice_date_due" t-options='{"format": "dd/MM/yyyy"}'/></td>
+                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.invoice_date_due" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/></td>
                                 </tr>
                                 <tr style="border: 2px solid white">
                                     <td style="border: 2px solid white; padding: 0px;">Payment Term</td>
@@ -343,10 +343,11 @@
                                  <t t-set="total_discount" t-value="0"/>
                                  <tr t-foreach="doc.invoice_line_ids" t-as="line">
                                      <t t-set="total_discount" t-value="total_discount +(line.price_unit * line.quantity * line.discount)"/>
-                                     <td><span t-field="line.name"/>  <span t-if="line.product_id.part_number"> (<span t-field="line.product_id.part_number"/>)</span></td>
+                                     <td><span t-field="line.name"/> <span t-if="line.product_id.part_number"> (<span t-field="line.product_id.part_number"/>)</span></td>
                                      <td class="text-center"><span t-esc="'%.2f'%line.quantity"/></td>
                                      <td class="text-center"><span><t t-esc="line.product_uom_id.name"/></span></td>
-                                     <td class="text-right"><span t-esc="'%.5f'% line.price_unit"/></td>
+                                     <!--<td class="text-right"><span t-esc="'%.5f'% line.price_unit"/></td>-->
+                                     <td class="text-right"><span t-field="line.price_unit" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/></td>
                                      <td class="text-right"><span t-esc="'%.0f'%line.discount"/></td>
                                      <td class="text-right"><span t-esc="'%.2f'%line.price_subtotal"/></td>
                                  </tr>
@@ -367,7 +368,7 @@
                                  </tr>
 
                                  <tr>
-                                    <td class="text-right" colspan="4">Incoming Tax</td>
+                                    <td class="text-right" colspan="4">VAT</td>
                                     <td class="text-right">
                                         <span t-field="doc.currency_id.symbol"/> <span t-field="doc.amount_ppn" t-options="{'widget': 'float', 'precision': 2}"/>
 
@@ -375,7 +376,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="text-right" colspan="4">PPH</td>
+                                    <td class="text-right" colspan="4">PPh</td>
                                     <td class="text-right">
                                         <!-- <span t-field="doc.amount_pph" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/> -->
                                         <span t-field="doc.currency_id.symbol"/> <span t-field="doc.amount_pph" t-options="{'widget': 'float', 'precision': 2}"/>

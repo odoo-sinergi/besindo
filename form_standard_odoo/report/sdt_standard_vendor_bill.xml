@@ -19,7 +19,7 @@
         </template>
 
         <template id="standard_vendor_bill_document">
-            <t t-call="web.external_layout">
+            <t t-call="form_standard_odoo.sdt_header_internal_layout">
                 <div name="address" class="col-xs-5 col-xs-offset-7"/>
                 <div style="font-Size:11px;" class="page">
                     <style type="text/css">
@@ -96,7 +96,8 @@
                                     <td style="border: 2px solid white; padding: 0px;">PO Reference</td>
                                     <td style="border: 2px solid white; padding: 0px;"> : </td>
                                     <!-- <td style="border: 2px solid white; padding: 0px;" t-foreach="doc.invoice_line_ids" t-as="invoice_line_id"><span t-esc="invoice_line_id.purchase_order_id.name"/></td> -->
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.po_id"/></td>
+                                    <!-- <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.po_id"/></td> -->
+                                    <td style="border: 2px solid white; padding: 0px;"></td>
                                 </tr>
                             </table>
                         </div>

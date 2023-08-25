@@ -7,7 +7,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='approver_ids']" position="before">
                     <field name="approval_so"/>
-                    <field name="approval_po"/>
+                    <!-- <field name="approval_po"/> -->
                 </xpath>
             </field>
         </record>
