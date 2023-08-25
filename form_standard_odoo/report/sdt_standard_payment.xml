@@ -34,7 +34,7 @@
         </template>
 
         <template id="payment_report_document">
-            <t t-call="web.external_layout">
+            <t t-call="form_standard_odoo.sdt_header_internal_layout">
                 <div name="address" class="col-xs-5 col-xs-offset-7"/>
                 <div style="font-Size:11px;" class="page">
                     <style type="text/css">
