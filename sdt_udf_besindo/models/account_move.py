@@ -24,7 +24,7 @@ class AccountMove(models.Model):
         column2='account_move_id',
     )
 
-    do_number = fields.Char(string='Do Number',)
+    do_number = fields.Char(string='DO Number',)
     hs_code = fields.Char(string='HS Code',)
     no_faktur_pajak = fields.Char(string='Tax Invoice Number',)
     date_payment = fields.Date(string='Paid Date', store=True, )

@@ -84,12 +84,12 @@
                                 <tr style="border: 2px solid white; padding: 0px;">
                                     <td style="border: 2px solid white; padding: 0px;">Creation Date</td>
                                     <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.create_date" t-options='{"format": "dd/MM/yyyy"}'/></td>
+                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.create_date" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/></td>
                                 </tr>
                                 <tr style="border: 2px solid white; padding: 0px;">
                                     <td style="border: 2px solid white; padding: 0px;">Effective Date</td>
                                     <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.date_done" t-options='{"format": "dd/MM/yyyy"}'/></td>
+                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.date_done" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/></td>
                                 </tr>
                             </table>
                         </div>
@@ -98,8 +98,8 @@
                          <thead>
                              <tr>
                                  <th class="text-center" style="border:2px solid black;">No</th>
-                                 <th class="text-center" style="border:2px solid black;">Product Code</th>
-                                 <th class="text-center" style="border:2px solid black;">Product Name</th>
+                                 <th class="text-center" style="border:2px solid black;">Product</th>
+                                 <th class="text-center" style="border:2px solid black;">Product Alias</th>
                                  <th class="text-center" style="border:2px solid black;">Qty Demand</th>
                                  <th class="text-center" style="border:2px solid black;">Quantity</th>
                                  <th class="text-center" style="border:2px solid black;">UoM</th>
@@ -109,7 +109,7 @@
                              <t t-set="LineNum" t-value="1"/>
                              <tr t-foreach="doc.move_ids_without_package" t-as="move_lines">
                                  <td class="text-center" style="border:2px solid black;" width="40"><span><t t-esc="LineNum"/></span></td>
-                                 <td class="text-left" style="border:2px solid black;"><span t-field="move_lines.product_id.default_code"/></td>
+                                 <td class="text-left" style="border:2px solid black;"><span t-field="move_lines.product_id.product_tmpl_id"/></td>
                                  <t t-if="move_lines.product_id.nama_alias">
                                     <td class="text-left" style="border:2px solid black;"><span t-field="move_lines.product_id.nama_alias"/></td>
                                  </t>
@@ -124,47 +124,47 @@
                          </tbody>
                      </table>
 
-                    <div class="row mt32 mb32">
-                         <div class="col-3">
-                             <p>Prepared By</p>
-                         </div>
-                         <div class="col-3">
-                             <p>Approved By</p>
-                         </div>
-                         <div class="col-3">
-                             <p>Delivered By</p>
-                         </div>
-                         <div class="col-3">
-                             <p>Received By</p>
-                         </div>
-                     </div>
-
                      <div class="row mt32 mb32">
-                         <div class="col-3">
-                            <br/>
-                            <br/>
-                             <br>__________________</br>
-                             <br>Date</br>
-                         </div>
-                         <div class="col-3">
-                            <br/>
-                            <br/>
-                             <br>__________________</br>
-                             <br>Date</br>
-                         </div>
-                         <div class="col-3">
-                            <br/>
-                            <br/>
-                             <br>__________________</br>
-                             <br>Date</br>
-                         </div>
-                         <div class="col-3">
-                            <br/>
-                            <br/>
-                             <br>__________________</br>
-                             <br>Date</br>
-                         </div>
-                     </div>
+                        <div class="col-1">
+                            <!--<p>Prepared By</p>-->
+                        </div>
+                        <div class="col-4">
+                            <p>Approved By</p>
+                        </div>
+                        <div class="col-4">
+                            <p>Delivered By</p>
+                        </div>
+                        <div class="col-3">
+                            <p>Received By</p>
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32">
+                        <div class="col-1">
+                           <br/>
+                           <!--<br/>-->
+                           <!-- <br>__________________</br>-->
+                           <!-- <br>Date</br>-->
+                        </div>
+                        <div class="col-4">
+                           <br/>
+                           <br/>
+                            <br>__________________</br>
+                            <br>Date</br>
+                        </div>
+                        <div class="col-4">
+                           <br/>
+                           <br/>
+                            <br>__________________</br>
+                            <br>Date</br>
+                        </div>
+                        <div class="col-3">
+                           <br/>
+                           <br/>
+                            <br>__________________</br>
+                            <br>Date</br>
+                        </div>
+                    </div>
                 </div>
             </t>
         </template>

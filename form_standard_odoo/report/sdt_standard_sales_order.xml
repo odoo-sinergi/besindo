@@ -35,7 +35,6 @@
 
         <!-- <template id ="standard_sales_order_report_document">
             <t t-call="form_standard_odoo.sdt_header_internal_layout">
-                <div name="address" class="col-xs-5 col-xs-offset-7"/>
                 <div style="font-Size:11px;" class="page">
                     <style type="text/css">
                       tr, td
@@ -76,64 +75,53 @@
                         }
                     </style>
                     <h1 style="font-Size:11px;text-align: center;">
-                            <div style="font-Size:16px;text-align: center;text-decoration: underline;font-weight:bold;">INVOICE</div>
+                            <div style="font-Size:16px;text-align: center;text-decoration: underline;font-weight:bold;">SALES ORDER</div>
                             <td>Nomor : </td><span t-field="doc.name"/>
+                            <!-- <td> - </td><span t-field="doc.invoice_date" t-options="{&quot;format&quot;:&quot;dd/MM/YYYY&quot;}"/> -->
                     </h1>
-                    <div style="font-Size:11px;" class="row mt16">
+                    <div class="row mt24 mb16">
                         <div class="col-7">
-                            <td style="font-weight:bold;">INVOICE TO : </td>
-                            <div t-field="doc.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
+                            <!--<p style="font-weight:bold">CUSTOMER :</p>-->
+                            <span style="font-weight:bold">CUSTOMER :</span><br/>
+                            <span t-field="doc.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/><br/>
+                            <!--<p>></p>-->
+                            <span>Customer reference : <span t-field="doc.client_order_ref"/></span>
                         </div>
                         <div class="col-5">
                             <table style="border: 2px solid white">
                                 <tr style="border: 2px solid white; padding: 0px;">
-                                    <td style="border: 2px solid white; padding: 0px;">Invoice Date</td>
-                                    <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.invoice_date" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/></td>
+                                    <td style="border: 2px solid white; padding: 0px;" width="35%">Order Date</td>
+                                    <td style="border: 2px solid white; padding: 0px;" width="1%"> : </td>
+                                    <td style="border: 2px solid white; padding: 0px;" width="64%"><span t-field="doc.date_order" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/></td>
                                 </tr>
-                                <tr style="border: 2px solid white">
-                                    <td style="border: 2px solid white; padding: 0px;">Due Date</td>
+                                <tr style="border: 2px solid white; padding: 0px;">
+                                    <td style="border: 2px solid white; padding: 0px;">Expected Delivery</td>
                                     <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.invoice_date_due" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/></td>
+                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.commitment_date" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/></td>
                                 </tr>
-                                <tr style="border: 2px solid white">
-                                    <td style="border: 2px solid white; padding: 0px;">Payment Term</td>
+                                <tr style="border: 2px solid white; padding: 0px;">
+                                    <td style="border: 2px solid white; padding: 0px;">Salesman</td>
                                     <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.invoice_payment_term_id"/></td>
+                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.team_id.name"/></td>
                                 </tr>
-                                <tr style="border: 2px solid white">
-                                    <td style="border: 2px solid white; padding: 0px;">SO No</td>
+                                <tr style="border: 2px solid white; padding: 0px;">
+                                    <td style="border: 2px solid white; padding: 0px;">Delivery Address</td>
                                     <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.invoice_origin"/></td>
-                                </tr>
-                                <tr style="border: 2px solid white">
-                                    <td style="border: 2px solid white; padding: 0px;">DO Number</td>
-                                    <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.do_number"/></td>
-                                </tr>
-                                <tr style="border: 2px solid white">
-                                    <td style="border: 2px solid white; padding: 0px;">PO Number</td>
-                                    <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.ref"/></td>
-                                </tr>
-                                <tr style="border: 2px solid white">
-                                    <td style="border: 2px solid white; padding: 0px;">HS Code</td>
-                                    <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.hs_code"/></td>
+                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.partner_shipping_id.name"/><br/><span t-field="doc.partner_shipping_id.street"/></td>
                                 </tr>
                             </table>
+                            <!-- <p>Order Date : <span t-field="doc.date_order" t-options='{"format": "dd/MM/yyyy"}'/></p> -->
                         </div>
                     </div>
-
-                     <table>
-                         <thead>
-                            <tr style="font-Size:11;text-align:center;border-bottom:2px solid black;">
-                                 <th class="text-center"> Description</th>
-                                 <th class="text-center">Qty</th>
-                                 <th class="text-center">UoM</th>
-                                 <th class="text-center">Unit Price</th>
-                                 <th class="text-center">Discount</th>
-                                 <th class="text-center">Total</th>
+                    <table>
+                        <thead>
+                            <tr style="border-top:2px solid black;border-bottom:2px solid black;">
+                                <th class="text-center">Code</th>
+                                <th class="text-center">Description</th>
+                                <th class="text-center">Qty Order</th>
+                                <th class="text-center">UoM</th>
+                                <th class="text-center">Unit Price</th>
+                                <th class="text-center">Subtotal</th>
                             </tr>
                          </thead>
                              <tbody class="lines_tbody">
@@ -142,6 +130,7 @@
                                      <t t-set="total_discount" t-value="total_discount +(line.price_unit * line.quantity * line.discount)"/>
                                      <td><span t-field="line.name"/></td>
                                      <td class="text-center"><span t-esc="'%.2f'%line.quantity"/></td>
+                                     <!-- <td class="text-center"><span t-esc="'%.0f'%line.quantity"/></td> -->
                                      <td class="text-center"><span><t t-esc="line.product_uom_id.name"/></span></td>
                                      <td class="text-right"><span t-field="line.price_unit"/></td>
                                      <td class="text-right"><span t-esc="'%.0f'%line.discount"/></td>
@@ -207,7 +196,13 @@
                         </div>
                         <div class="col-4">
                         </div>
-                    
+                        <!-- <div class="col-3">
+                            <p>Prepared By</p>
+                            <br/>
+                            <br/>
+                            <br>__________________</br>
+                            <br>Date</br>
+                        </div> -->
                         <div class="col-3">
                             <p>Approved By</p>
                             <br/>
@@ -217,146 +212,26 @@
                         </div>
 
                      </div>
-                    
+                     <!-- <div class="row mt32 mb32">
+                        <div class="col-3">
+                        </div>
+                        <div class="col-3">
+                        </div>
+                        <div class="col-3">
+                            <br/>
+                            <br/>
+                            <br>__________________</br>
+                            <br>Date</br>
+                        </div>
+                        <div class="col-3">
+                            <br/>
+                            <br/>
+                            <br>__________________</br>
+                            <br>Date</br>
+                        </div>
+                     </div> -->
                 </div>
             </t>
-        </template> -->
-        <template id ="standard_sales_order_report_document">
-            <t t-call="form_standard_odoo.sdt_header_internal_layout">
-               <div style="font-Size:11px;" class="page">
-                   <style type="text/css">
-                     tr, td
-                       {
-                          border-top: 1px solid black;
-                          border-right:1px solid black;
-                          border-left:1px solid black;
-                          border-bottom:1px solid black;
-                          padding: 4px;
-                          padding-left: 7px;
-                          padding-right: 7px;
-                       }
-                   </style>
-                   <style type="text/css">
-                     th
-                       {
-                          border-top: 1px solid black;
-                          border-right:1px solid black;
-                          border-left:1px solid black;
-                          border-bottom:1px solid black;
-                          padding: 4px;
-                          padding-left: 7px;
-                          padding-right: 7px;
-                          color: black;
-                       }
-                   </style>
-                   <style type="text/css">
-                     table
-                       {
-                          border-top: 2px solid black;
-                          border-right:1px solid black;
-                          border-left:1px solid black;
-                          border-bottom:2px solid black;
-                          font-Size:11px;
-                          width: 100%;
-                          margin-top: 5px;
-                          margin-bottom: 10px;
-                       }
-                   </style>
-                   <h1 style="font-Size:11px;text-align: center;">
-                           <div style="font-Size:16px;text-align: center;text-decoration: underline;font-weight:bold;">SALES ORDER</div>
-                           <td>Nomor : </td><span t-field="doc.name"/>
-                           <!-- <td> - </td><span t-field="doc.date_order" t-options="{&quot;format&quot;:&quot;dd/MM/YYYY&quot;}"/> -->
-                   </h1>
-                   <div class="row mt24 mb16">
-                       <div class="col-7">
-                           <p style="font-weight:bold">CUSTOMER : <span t-field="doc.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/></p>
-                           <p>Customer reference : <span t-field="doc.client_order_ref"/></p>
-                       </div>
-                       <div class="col-5">
-                           <table style="border: 2px solid white">
-                               <tr style="border: 2px solid white; padding: 0px;">
-                                   <td style="border: 2px solid white; padding: 0px;">Order Date</td>
-                                   <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                   <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.date_order" t-options='{"format": "dd/MM/yyyy"}'/></td>
-                               </tr>
-                               <tr style="border: 2px solid white; padding: 0px;">
-                                   <td style="border: 2px solid white; padding: 0px;">Delivery Date</td>
-                                   <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                   <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.commitment_date" t-options='{"format": "dd/MM/yyyy"}'/></td>
-                               </tr>
-                               <tr style="border: 2px solid white; padding: 0px;">
-                                   <td style="border: 2px solid white; padding: 0px;">Salesman</td>
-                                   <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                   <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.team_id.name"/></td>
-                               </tr>
-                               <tr style="border: 2px solid white; padding: 0px;">
-                                   <td style="border: 2px solid white; padding: 0px;">Delivery Address</td>
-                                   <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                   <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.partner_shipping_id.street"/></td>
-                               </tr>
-                           </table>
-                           <!-- <p>Order Date : <span t-field="doc.date_order" t-options='{"format": "dd/MM/yyyy"}'/></p> -->
-                       </div>
-                   </div>
-                   <table>
-                       <thead>
-                           <tr style="border-top:2px solid black;border-bottom:2px solid black;">
-                               <th class="text-center">Code</th>
-                               <th class="text-center">Description</th>
-                               <th class="text-center">Qty Order</th>
-                               <th class="text-center">UoM</th>
-                               <th class="text-center">Unit Price</th>
-                               <th class="text-center">Subtotal</th>
-                           </tr>
-                       </thead>
-                       <tbody class="lines_tbody">
-                           <tr t-foreach="doc.order_line" t-as="line">
-                               <td class="text-left"><span t-field="line.product_id.default_code"/></td>
-                               <td class="text-left"><span t-field="line.product_id.name"/></td>
-                               <td class="text-right"><span t-field="line.product_uom_qty"/></td>
-                               <td class="text-center"><span t-field="line.product_uom"/></td>
-                               <td class="text-right"><span t-field="line.price_unit"/></td>
-                               <td class="text-right"><span t-field="line.price_subtotal"/></td>
-                           </tr>
-                           <tr>
-                               <td colspan="2" rowspan="5"/>
-                               <td colspan="3"><strong> Subtotal</strong></td>
-                                <td class="text-right" colspan="2">
-                                    <span t-field="doc.amount_untaxed" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
-                               </td>
-                           </tr>
-                           <tr>
-                               <td colspan="3"><strong>Tax</strong></td>
-                               <td class="text-right" colspan="2">
-                                   <span t-field="doc.amount_tax" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
-                               </td>
-                           </tr>
-                           <tr>
-                               <td colspan="3"><strong>Grand Total</strong></td>
-                               <td class="text-right" colspan="2">
-                                   <span t-field="doc.amount_total" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
-                               </td>
-                           </tr>
-                       </tbody>
-                   </table>
-                    <p>Terbilang : <span t-esc="doc.terbilang_idr()"/></p>
-                   <div class="row mt32 mb32">
-                       <div class="col-3">
-                           <p>Sales Person</p>
-                       </div>
-                   </div>
-                       <div class="row mt24 mb24">
-                           <div class="col-3">
-                               <!--<div style="text-decoration:underline;"><span t-field="user_id"/></div>-->
-                               <span t-field="doc.user_id"/>
-                               <br/>
-                               <br/>
-                               <br>__________________</br>
-                               <br>Date : </br>
-                           </div>
-                       </div>
-                   </div>
-            </t>
-       </template>
+        </template>
     </data>
 </odoo>
