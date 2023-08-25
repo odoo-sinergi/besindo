@@ -70,7 +70,7 @@
                 <xpath expr="//field[@name='active']" position="after">
                     <field name="nama_alias"/>
                 </xpath>
-                <!-- <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/field[@name='company_id']" position="after">
+                <xpath expr="//field[@name='product_tag_ids']" position="after">
                     <field name="jenis_product_id" options="{'no_open': True, 'no_create': True}"/>
                     <br/>
                     <br/>
@@ -117,7 +117,7 @@
                             </div>
                         </div>
                     </div>
-                </xpath> -->
+                </xpath>
                 <xpath expr="//field[@name='barcode']" position="after">
                     <field name="part_number"/>
                 </xpath>
