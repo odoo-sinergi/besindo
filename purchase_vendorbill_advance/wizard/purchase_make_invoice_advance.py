@@ -281,7 +281,7 @@ class PurchaseAdvancePaymentInv(models.TransientModel):
             journal_id = self.env["account.journal"].search(
                 [("type", "in", ["purchase"]), ("company_id", "=", company_id.id)], limit=1
             )
-            inv = self.env["account.move"].create({"move_type": "in_invoice", "journal_id":journal_id.id})
+            inv = self.env["account.move"].create({"move_type": "in_invoice", "journal_id":journal_id.id, "partner_id": purchase_orders.partner_id.id, "invoice_origin": purchase_orders.name})
             inv.update({"purchase_id": purchase_orders.id})
             inv._onchange_purchase_auto_complete()
             if all(

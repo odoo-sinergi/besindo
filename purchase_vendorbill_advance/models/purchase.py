@@ -135,6 +135,31 @@ class PurchaseOrderLine(models.Model):
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
 
+    amount_dp = fields.Monetary(string='Amount DP', store=True, readonly=True)
+    amount_due = fields.Monetary(string='Amount Due', store=True, readonly=True)
+
+    @api.depends('order_line.taxes_id', 'order_line.price_subtotal', 'amount_total', 'amount_untaxed')
+    def  _compute_tax_totals(self):
+        res = super(PurchaseOrder, self)._compute_tax_totals()
+        for rec in self:
+            downpayment_lines = rec.order_line.filtered(lambda line: line.is_downpayment)
+            if downpayment_lines:
+                amount_dp = 0
+                for dp in downpayment_lines:
+                    dp_inv = dp.invoice_lines.filtered(lambda inv: inv.parent_state == 'posted' and inv.move_id.payment_state in ['paid','in_payment'] and len(inv.move_id.invoice_line_ids.product_id.ids) == 1)
+                    if dp_inv:
+                        amount_dp += dp_inv.move_id.amount_total
+                if amount_dp > 0:
+                    rec.amount_dp = amount_dp
+                    rec.amount_due = rec.amount_total - amount_dp
+                else:
+                    rec.amount_dp = 0
+                    rec.amount_due = 0
+            else:
+                rec.amount_dp = 0
+                rec.amount_due = 0
+        return res
+    
     def copy_data(self, default=None):
         if default is None:
             default = {}
