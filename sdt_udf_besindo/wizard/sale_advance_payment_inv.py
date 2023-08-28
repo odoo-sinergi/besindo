@@ -13,7 +13,7 @@ class SaleAdvancePayment(models.TransientModel):
     def create_invoices(self):
         res = super(SaleAdvancePayment, self).create_invoices()
         for sale_order_id in self.sale_order_ids :
-            for sale_order in self.sale_order_ids.order_line :
+            for sale_order in sale_order_id.order_line :
                 if sale_order :
                     account_move_obj = self.env['account.move'].search([('invoice_origin', '=',sale_order_id.name)])
                     if account_move_obj :

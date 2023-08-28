@@ -91,4 +91,4 @@ class AccountMove(models.Model):
 class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
-    sdt_price_unit = fields.Float(string='Sdt Price Unit', digits='Product Price Sales',) 
+    sdt_price_unit = fields.Float(string='Sdt Price Unit', digits='Product Price Sales',) 
