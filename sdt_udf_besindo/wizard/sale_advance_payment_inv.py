@@ -13,14 +13,14 @@ class SaleAdvancePayment(models.TransientModel):
     def create_invoices(self):
         res = super(SaleAdvancePayment, self).create_invoices()
         for sale_order_id in self.sale_order_ids :
-            for sale_order in sale_order_id.order_line :
-                if sale_order :
+            for order in sale_order_id.order_line :
+                if order :
                     account_move_obj = self.env['account.move'].search([('invoice_origin', '=',sale_order_id.name)])
                     if account_move_obj :
                         for account_move in account_move_obj :
                             for invoice_line_id in account_move.invoice_line_ids :
-                                if invoice_line_id.product_id.id == sale_order.product_id.id :
-                                    invoice_line_id.sdt_price_unit = self.sale_order_ids.order_line.sdt_price_unit
+                                if invoice_line_id.product_id.id == order.product_id.id :
+                                    invoice_line_id.sdt_price_unit = order.sdt_price_unit
                                     x=1
                                 else :
                                     pass
