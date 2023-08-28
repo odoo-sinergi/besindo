@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="alasan_selisih_wizard" model="ir.ui.view">
+            <field name="name">alasan_selisih_wizard_form</field>
+            <field name="model">stock.move.alasan.selisih</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <span>Isi Alasan Selisih</span>
+                    </header>
+                    <group>
+                        <field name="move_id" invisible="1"/>
+                        <field name="product_id"/>
+                        <field name="product_uom_qty"/>
+                        <field name="quantity_done"/>
+                        <field name="product_uom_id"/>
+                        <field name="alasan_selisih"/>
+                    </group>
+                    <footer>
+                        <button name="action_save_button" type="object" string="Save" clas="btn-primary" groups="sdt_udf_besindo.group_picking_validate_qc"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
