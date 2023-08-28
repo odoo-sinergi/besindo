@@ -29,7 +29,7 @@ class AccountMove(models.Model):
     
     def button_cancel(self):
         res = super(AccountMove, self).button_cancel()
-        dp_po_product_id = self.env['ir.config_parameter'].sudo().get_param('purchase_vendorbill_advance.deposit_default_purchase_product_id')
+        dp_po_product_id = int(self.env['ir.config_parameter'].sudo().get_param('purchase.default_deposit_product_id'))
         for rec in self:
             if rec.move_type == 'in_invoice':
                 if len(rec.invoice_line_ids) == 1:
