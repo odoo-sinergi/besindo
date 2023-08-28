@@ -113,3 +113,11 @@ class SaleOrder(models.Model):
                 raise UserError('Jumlah Approver Tidak Boleh Nol')
             rec.req_approval = True
             rec.status_approval = 'waiting'
+
+
+class SaleOrderLine(models.Model):
+    _inherit = "sale.order.line"
+
+    # price_unit = fields.Float(digits='Product Price Sales',)
+    sdt_price_unit = fields.Float(string='Sdt Price Unit', digits='Product Price Sales', store=True) 
+    

@@ -86,3 +86,9 @@ class AccountMove(models.Model):
                 move.amount_pph = 0
         self._compute_date_payment()
         return res
+    
+
+class AccountMoveLine(models.Model):
+    _inherit = "account.move.line"
+
+    sdt_price_unit = fields.Float(string='Sdt Price Unit', digits='Product Price Sales',) 
