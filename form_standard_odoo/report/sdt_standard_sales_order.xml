@@ -126,26 +126,26 @@
                                <td class="text-right"><span t-field="line.product_uom_qty"/></td>
                                <td class="text-center"><span t-field="line.product_uom"/></td>
                                <!-- <td class="text-right"><span t-field="line.price_unit"/></td> -->
-                               <td class="text-right"><span t-esc="'%.5f'%line.sdt_price_unit"/></td>
-                               <td class="text-right"><span t-field="line.price_subtotal"/></td>
+                               <td class="text-right"><span t-field="doc.currency_id.symbol"/> <span t-esc="'%.5f'%line.sdt_price_unit"/></td>
+                               <td class="text-right"><span t-field="doc.currency_id.symbol"/> <span t-field="line.price_subtotal" t-options="{'widget': 'float', 'precision': 2}"/></td>
                            </tr>
                            <tr>
                                <td colspan="2" rowspan="5"/>
                                <td colspan="3"><strong> Subtotal</strong></td>
                                 <td class="text-right" colspan="2">
-                                    <span t-field="doc.amount_untaxed" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
+                                    <span t-field="doc.currency_id.symbol"/> <span t-field="doc.amount_untaxed" t-options="{'widget': 'float', 'precision': 2}"/>
                                </td>
                            </tr>
                            <tr>
                                <td colspan="3"><strong>Tax</strong></td>
                                <td class="text-right" colspan="2">
-                                   <span t-field="doc.amount_tax" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
+                                <span t-field="doc.currency_id.symbol"/> <span t-field="doc.amount_tax" t-options="{'widget': 'float', 'precision': 2}"/>
                                </td>
                            </tr>
                            <tr>
                                <td colspan="3"><strong>Grand Total</strong></td>
                                <td class="text-right" colspan="2">
-                                   <span t-field="doc.amount_total" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
+                                <span t-field="doc.currency_id.symbol"/> <span t-field="doc.amount_total" t-options="{'widget': 'float', 'precision': 2}"/>
                                </td>
                            </tr>
                        </tbody>
