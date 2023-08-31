@@ -18,7 +18,7 @@
         </template>
 
         <template id="standard_sales_invoice_document">
-            <t t-call="form_standard_odoo.sdt_header_internal_layout">
+            <t t-call="form_standard_odoo.sdt_header_internal_layout_polos">
                 <div name="address" class="col-xs-5 col-xs-offset-7"/>
                 <!-- IDR -->
                 <div style="font-Size:13px;" class="page" t-if="doc.currency_id.id == 12">
@@ -126,7 +126,7 @@
                                  <t t-set="total_discount" t-value="0"/>
                                  <tr t-foreach="doc.invoice_line_ids" t-as="line">
                                      <t t-set="total_discount" t-value="total_discount +(line.price_unit * line.quantity * line.discount)"/>
-                                     <td><span t-field="line.name"/> <span t-if="line.product_id.part_number"> (<span t-field="line.product_id.part_number"/>)</span></td>
+                                     <td><span t-field="line.name"/> <span t-if="line.product_id.part_number"> <span t-if="line.product_id.part_number">(</span><span t-field="line.product_id.part_number"/><span t-if="line.product_id.part_number">)</span></span></td>
                                      <td class="text-center"><span t-esc="'%.2f'%line.quantity"/></td>
                                      <td class="text-center"><span><t t-esc="line.product_uom_id.name"/></span></td>
                                      <td class="text-right"><span t-esc="'%.2f'%line.sdt_price_unit"/></td>
@@ -343,7 +343,7 @@
                                  <t t-set="total_discount" t-value="0"/>
                                  <tr t-foreach="doc.invoice_line_ids" t-as="line">
                                      <t t-set="total_discount" t-value="total_discount +(line.price_unit * line.quantity * line.discount)"/>
-                                     <td><span t-field="line.name"/> <span t-if="line.product_id.part_number"> (<span t-field="line.product_id.part_number"/>)</span></td>
+                                     <td><span t-field="line.name"/> <span t-if="line.product_id.part_number"> <span t-if="line.product_id.part_number">(</span><span t-field="line.product_id.part_number"/><span t-if="line.product_id.part_number">)</span></span></td>
                                      <td class="text-center"><span t-esc="'%.2f'%line.quantity"/></td>
                                      <td class="text-center"><span><t t-esc="line.product_uom_id.name"/></span></td>
                                      <!--<td class="text-right"><span t-esc="'%.5f'% line.price_unit"/></td>-->
