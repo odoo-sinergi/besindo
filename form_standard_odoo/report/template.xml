@@ -109,8 +109,6 @@
                             <br/>
                             <span t-field="doc.company_id.name"/><br/>
                             <span t-field="doc.company_id.street"/>
-                            <!-- <br/> -->
-                            <!-- <span><span t-field="doc.company_id.city"/>, <span t-field="doc.company_id.zip"/>, <span t-field="doc.company_id.country_id"/></span> -->
                         </div>
                         <div class="col-6"/>
                     </div>
@@ -132,6 +130,14 @@
                 <div class="header">
                     <div class="row">
                         <div class="col-6">
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
                         </div>
                         <div class="col-6"/>
                     </div>

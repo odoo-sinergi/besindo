@@ -18,7 +18,7 @@
         </template>
 
         <template id="standard_sales_invoice_document">
-            <t t-call="form_standard_odoo.sdt_header_internal_layout">
+            <t t-call="form_standard_odoo.sdt_header_internal_layout_polos">
                 <div name="address" class="col-xs-5 col-xs-offset-7"/>
                 <!-- IDR -->
                 <div style="font-Size:13px;" class="page" t-if="doc.currency_id.id == 12">
