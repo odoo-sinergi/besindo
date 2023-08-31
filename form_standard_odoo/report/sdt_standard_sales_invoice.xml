@@ -71,11 +71,11 @@
                             <div t-field="doc.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
                         </div>
                         <div class="col-6">
-                            <table style="border: 2px solid white">
+                            <table style="border: 2px solid white" width="100%">
                                 <tr style="border: 2px solid white; padding: 0px;">
-                                    <td style="border: 2px solid white; padding: 0px;">Invoice Date</td>
-                                    <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.invoice_date" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/></td>
+                                    <td style="border: 2px solid white; padding: 0px;" width="19%">Invoice Date</td>
+                                    <td style="border: 2px solid white; padding: 0px;" width="1%"> : </td>
+                                    <td style="border: 2px solid white; padding: 0px;" width="80%"><span t-field="doc.invoice_date" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/></td>
                                 </tr>
                                 <tr style="border: 2px solid white">
                                     <td style="border: 2px solid white; padding: 0px;">Due Date</td>
@@ -289,7 +289,7 @@
                             <div t-field="doc.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
                         </div>
                         <div class="col-6">
-                            <table style="border: 2px solid white">
+                            <table style="border: 2px solid white" width="100%">
                                 <tr style="border: 2px solid white; padding: 0px;">
                                     <td style="border: 2px solid white; padding: 0px;" width="19%">Invoice Date</td>
                                     <td style="border: 2px solid white; padding: 0px;" width="1%"> : </td>
