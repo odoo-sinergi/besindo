@@ -49,6 +49,7 @@
         'views/sale_order.xml',
         'views/approval_category.xml',
         'views/approval_request.xml',
+        'wizard/sdt_stock_picking_wizard.xml',
     ],
     # only loaded in demonstration mode
     # 'demo': [

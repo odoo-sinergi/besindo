@@ -18,7 +18,6 @@ class MRPProduction(models.Model):
                     pass
             else :
                 workorder_id.name = ""
-
     
 
 class MRPWorkOrder(models.Model):

@@ -82,7 +82,7 @@
                                 <tr style="border: 2px solid white; padding: 0px;">
                                     <td style="border: 2px solid white; padding: 0px;">Creation Date</td>
                                     <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.create_date" t-options='{"format": "dd/MM/yyyy"}'/></td>
+                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.date" t-options='{"format": "dd/MM/yyyy"}'/></td>
                                 </tr>
                                 <tr style="border: 2px solid white; padding: 0px;">
                                     <td style="border: 2px solid white; padding: 0px;">Expected Arrival</td>

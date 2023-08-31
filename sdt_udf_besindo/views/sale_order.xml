@@ -13,6 +13,9 @@
                     <field name="req_approval" readonly="1" invisible="1" force_save="1"/>
                     <field name="status_approval" readonly="1" invisible="1" force_save="1"/>
                 </xpath>
+                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='price_unit']" position="after">
+                    <field name="sdt_price_unit" optional="show"/>
+                </xpath>
             </field>
         </record>
 
