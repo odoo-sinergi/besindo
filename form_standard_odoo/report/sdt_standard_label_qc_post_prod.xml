@@ -67,28 +67,26 @@
                                 <tr style="border: 1px solid white" t-foreach="docs" t-as="doc">
                                 <!-- <tr style="border: 1px solid white" t-foreach="doc.move_ids_without_package.filtered(lambda x: x.quantity_done &gt; 0)" t-as="lines"> -->
                                     <td class="text-left" width="45%" style="border: 1px solid white">
-                                        <table  width="100%">
+                                        <table width="100%">
                                             <tr>
-                                                <td colspan="3">
+                                                <td colspan="2">
                                                     <span><strong><span t-field="doc.company_id.name"/></strong></span><br/>
                                                     <span><span t-field="doc.company_id.street2"/></span>
                                                 </td>
+                                                    <img src="/form_standard_odoo/static/img/icon_rohs.png" style="height: 80px; width: 85px;"/>
+                                                <td></td>
                                             </tr>
                                             <tr>
                                                 <td><span>Customer</span></td>
-                                                <td colspan="2"><span></span></td>
-                                            </tr>
-                                            <tr>
-                                                <td><span>Size</span></td>
-                                                <td colspan="2"><span t-field="doc.product_id.nama_alias"/></td>
+                                                <td colspan="2"><span t-field="doc.x_studio_customer"/></td>
                                             </tr>
                                             <tr>
                                                 <td><span>Part Number</span></td>
-                                                <td colspan="2"><span>______________________</span></td>
+                                                <td colspan="2"><span t-field="doc.product_id.part_number"/></td>
                                             </tr>
                                             <tr>
                                                 <td width="25%"><span>Qty</span></td>
-                                                <td width="45%"><span>______________________</span><span t-field="doc.product_uom_id"/></td>
+                                                <td width="45%"><span t-field="doc.product_qty"/><span t-field="doc.product_uom_id"/></td>
                                                 <td width="30%"><span>Pack No. ______</span></td>
                                             </tr>
                                             <tr>
@@ -98,8 +96,10 @@
                                             </tr>
                                             <tr>
                                                 <td><span>Operator</span></td>
-                                                <td><span></span></td>
-                                                <td><span>Shift :</span></td>
+                                                <td><span t-field="doc.user_id"/></td>
+                                                <t t-set="counter" t-value="0"/>
+                                                <t t-foreach="doc.workorder_ids" t-as="wi"><t t-set="counter" t-value="counter + 1"/></t>
+                                                <td><span>Shift : <span t-esc="counter"/></span></td>
                                             </tr>
                                         </table>
                                     </td>
