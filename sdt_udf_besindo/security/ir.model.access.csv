@@ -6,3 +6,4 @@ access_tempat_pengiriman,tempat.pengiriman,model_tempat_pengiriman,,1,1,1,1
 
 access_stock_picking_warehouse,stock.picking.warehouse,model_stock_picking,group_picking_validate_wh,1,1,1,1
 access_stock_picking_qc,stock.picking.qc,model_stock_picking,group_picking_validate_qc,1,1,1,1
+access_alasan_selisih_wizard_user,stock.move.alasan.selisih.user,sdt_udf_besindo.model_stock_move_alasan_selisih,,1,1,1,1

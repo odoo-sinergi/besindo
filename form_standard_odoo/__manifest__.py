@@ -49,6 +49,7 @@
         'report/sdt_standard_journal_entries.xml',
         'report/menu.xml',
         'report/sdt_standard_label_qc_post_prod.xml',
+        'views/stock_picking_views.xml',
     ],
     # only loaded in demonstration mode
 }

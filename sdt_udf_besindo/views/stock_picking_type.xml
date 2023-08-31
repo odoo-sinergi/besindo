@@ -8,7 +8,7 @@
                 <xpath expr="//field[@name='show_operations']" position="after">
                     <field name="is_qc_production"/>
                     <field name="different_delivery_date"/>
-                    <!-- <field name="is_alasan_selisih"/> -->
+                    <field name="is_alasan_selisih"/>
                   </xpath>
             </field>
         </record>

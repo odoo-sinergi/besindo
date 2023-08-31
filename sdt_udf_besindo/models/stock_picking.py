@@ -45,4 +45,19 @@ class StockMove(models.Model):
     _inherit = "stock.move"
 
     alasan_selisih = fields.Char(string='Alasan Selisih',)
-        
+    
+    def action_assign_alasan_selisih(self):
+        self.ensure_one()
+        params = {'move_id':self.id}
+        view_id = self.env['stock.move.alasan.selisih']
+        new = view_id.create(params)
+        return {
+            'name': _('Alasan Selisih'),
+            'type': 'ir.actions.act_window',
+            'res_model': 'stock.move.alasan.selisih',
+            'res_id': new.id,
+            'view_type': 'form',
+            'view_mode': 'form',
+            'view_id': self.env.ref('sdt_udf_besindo.alasan_selisih_wizard',False).id,
+            'target': 'new',
+        }    

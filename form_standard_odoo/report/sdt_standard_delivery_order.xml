@@ -19,7 +19,7 @@
         </template>
 
         <template id="standard_do_document">
-            <t t-call="web.external_layout">
+            <t t-call="form_standard_odoo.sdt_header_internal_layout">
                 <!-- step 1 -->
                 <div t-if="doc.picking_type_code == 'internal'" style="font-Size:11px;" class="page">
                    <style type="text/css">

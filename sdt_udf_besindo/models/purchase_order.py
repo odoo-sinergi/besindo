@@ -63,82 +63,82 @@ class PurchaseOrder(models.Model):
     #             else :
     #                 record.approval_disc = False
 
-    def button_confirm(self):
-        res = super(PurchaseOrder, self).button_confirm()
-        for record in self:
-            approval_category_obj = self.env['approval.category'].search([('approval_po','=',True)], limit=1)
-            if approval_category_obj :
-                if record.req_approval == False :
-                    raise UserError('Silahkan Meminta Approval Terlebih Dahulu')
-                else :
-                    approval_request_obj = self.env['approval.request'].search([('purchase_order_id','=',record.id)])
-                    for approval_request in approval_request_obj :
-                        if approval_request.request_status == 'new':
-                            raise UserError('Silahkan Menunggu Approval Terlebih Dahulu')
-                        elif approval_request.request_status == 'pending' :
-                            raise UserError('Silahkan Menunggu Approval Terlebih Dahulu')
-                        else :
-                            pass
-            else :
-                pass
-        return res
+    # def button_confirm(self):
+    #     res = super(PurchaseOrder, self).button_confirm()
+    #     for record in self:
+    #         approval_category_obj = self.env['approval.category'].search([('approval_po','=',True)], limit=1)
+    #         if approval_category_obj :
+    #             if record.req_approval == False :
+    #                 raise UserError('Silahkan Meminta Approval Terlebih Dahulu')
+    #             else :
+    #                 approval_request_obj = self.env['approval.request'].search([('purchase_order_id','=',record.id)])
+    #                 for approval_request in approval_request_obj :
+    #                     if approval_request.request_status == 'new':
+    #                         raise UserError('Silahkan Menunggu Approval Terlebih Dahulu')
+    #                     elif approval_request.request_status == 'pending' :
+    #                         raise UserError('Silahkan Menunggu Approval Terlebih Dahulu')
+    #                     else :
+    #                         pass
+    #         else :
+    #             pass
+    #     return res
     
 
-    def action_req_approval (self):
-        for rec in self :
-            approval_po_obj = self.env['approval.category'].search([('approval_po','=',True)], limit=1)
-            if approval_po_obj.approval_minimum == 1 :
-                approvals_id = self.env['approval.request'].sudo().create({
-                'name':'Approval/SO/-'+self.name,
-                'date' : fields.Datetime.now(),
-                'reference':rec.name,
-                'category_id' : approval_po_obj.id,
-                'purchase_order_id' : self.id,
-                'request_owner_id' : self.env.uid,
-                'request_status' : 'pending',
-                'amount' : self.amount_total,
-                })
-                for line_id in self.order_line:
-                    vals ={
-                        'approval_request_id': approvals_id.id,
-                        'product_id': line_id.product_id.id,
-                        'description': line_id.name,
-                        'quantity': line_id.product_uom_qty,
-                        'product_uom_id': line_id.product_uom.id,
-                    }
-                    self.env['approval.product.line'].create(vals)
-                approvals_id.action_confirm()
-            elif approval_po_obj.approval_minimum == len(approval_po_obj.approver_ids.ids) :
-                for user_id in approval_po_obj.user_ids:
-                    approvals_id = self.env['approval.request'].sudo().create({
-                    'name':'Approval/SO/-'+self.name,
-                    'date' : fields.Datetime.now(),
-                    'reference':rec.name,
-                    'category_id' : approval_po_obj.id,
-                    'purchase_order_id' : self.id,
-                    'request_owner_id' : self.env.uid,
-                    'request_status' : 'pending',
-                    'amount' : self.amount_total,
-                    })
-                    for line_id in self.order_line:
-                        vals ={
-                            'approval_request_id': approvals_id.id,
-                            'product_id': line_id.product_id.id,
-                            'description': line_id.name,
-                            'quantity': line_id.product_uom_qty,
-                            'product_uom_id': line_id.product_uom.id,
-                        }
-                        self.env['approval.product.line'].create(vals)
-                    for approver_id1 in approvals_id.approver_ids :
-                        approver_id1.unlink()
+    # def action_req_approval (self):
+    #     for rec in self :
+    #         approval_po_obj = self.env['approval.category'].search([('approval_po','=',True)], limit=1)
+    #         if approval_po_obj.approval_minimum == 1 :
+    #             approvals_id = self.env['approval.request'].sudo().create({
+    #             'name':'Approval/SO/-'+self.name,
+    #             'date' : fields.Datetime.now(),
+    #             'reference':rec.name,
+    #             'category_id' : approval_po_obj.id,
+    #             'purchase_order_id' : self.id,
+    #             'request_owner_id' : self.env.uid,
+    #             'request_status' : 'pending',
+    #             'amount' : self.amount_total,
+    #             })
+    #             for line_id in self.order_line:
+    #                 vals ={
+    #                     'approval_request_id': approvals_id.id,
+    #                     'product_id': line_id.product_id.id,
+    #                     'description': line_id.name,
+    #                     'quantity': line_id.product_uom_qty,
+    #                     'product_uom_id': line_id.product_uom.id,
+    #                 }
+    #                 self.env['approval.product.line'].create(vals)
+    #             approvals_id.action_confirm()
+    #         elif approval_po_obj.approval_minimum == len(approval_po_obj.approver_ids.ids) :
+    #             for user_id in approval_po_obj.user_ids:
+    #                 approvals_id = self.env['approval.request'].sudo().create({
+    #                 'name':'Approval/SO/-'+self.name,
+    #                 'date' : fields.Datetime.now(),
+    #                 'reference':rec.name,
+    #                 'category_id' : approval_po_obj.id,
+    #                 'purchase_order_id' : self.id,
+    #                 'request_owner_id' : self.env.uid,
+    #                 'request_status' : 'pending',
+    #                 'amount' : self.amount_total,
+    #                 })
+    #                 for line_id in self.order_line:
+    #                     vals ={
+    #                         'approval_request_id': approvals_id.id,
+    #                         'product_id': line_id.product_id.id,
+    #                         'description': line_id.name,
+    #                         'quantity': line_id.product_uom_qty,
+    #                         'product_uom_id': line_id.product_uom.id,
+    #                     }
+    #                     self.env['approval.product.line'].create(vals)
+    #                 for approver_id1 in approvals_id.approver_ids :
+    #                     approver_id1.unlink()
                     
-                    approvals_id.approver_ids += self.env['approval.approver'].new({
-                        'request_id': approvals_id.id,
-                        'user_id': user_id.id,
-                    })
-                    approvals_id.action_confirm()
-            elif approval_po_obj.approval_minimum > len(approval_po_obj.approver_ids.ids) :
-                raise UserError('Jumlah Approver Tidak Boleh Lebih Besar Dari Approver')
-            else :
-                raise UserError('Jumlah Approver Tidak Boleh Nol')
-            rec.req_approval = True
+    #                 approvals_id.approver_ids += self.env['approval.approver'].new({
+    #                     'request_id': approvals_id.id,
+    #                     'user_id': user_id.id,
+    #                 })
+    #                 approvals_id.action_confirm()
+    #         elif approval_po_obj.approval_minimum > len(approval_po_obj.approver_ids.ids) :
+    #             raise UserError('Jumlah Approver Tidak Boleh Lebih Besar Dari Approver')
+    #         else :
+    #             raise UserError('Jumlah Approver Tidak Boleh Nol')
+    #         rec.req_approval = True
