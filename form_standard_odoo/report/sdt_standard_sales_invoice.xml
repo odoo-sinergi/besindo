@@ -66,11 +66,11 @@
                             <!-- <td> - </td><span t-field="doc.invoice_date" t-options="{&quot;format&quot;:&quot;dd/MM/YYYY&quot;}"/> -->
                     </h1>
                     <div style="font-Size:16px;" class="row mt16">
-                        <div class="col-7">
+                        <div class="col-6">
                             <td style="font-weight:bold;">INVOICE TO : </td>
                             <div t-field="doc.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
                         </div>
-                        <div class="col-5">
+                        <div class="col-6">
                             <table style="border: 2px solid white">
                                 <tr style="border: 2px solid white; padding: 0px;">
                                     <td style="border: 2px solid white; padding: 0px;">Invoice Date</td>
@@ -215,7 +215,7 @@
                             <br/>
                             <br/>
                             <br>__________________</br>
-                            <br>Date</br>
+                            <!-- <br>Date</br> -->
                         </div>
 
                      </div>
@@ -284,11 +284,11 @@
                             <!-- <td> - </td><span t-field="doc.invoice_date" t-options="{&quot;format&quot;:&quot;dd/MM/YYYY&quot;}"/> -->
                     </h1>
                     <div style="font-Size:16px;" class="row mt16">
-                        <div class="col-7">
+                        <div class="col-6">
                             <td style="font-weight:bold;">INVOICE TO : </td>
                             <div t-field="doc.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
                         </div>
-                        <div class="col-5">
+                        <div class="col-6">
                             <table style="border: 2px solid white">
                                 <tr style="border: 2px solid white; padding: 0px;">
                                     <td style="border: 2px solid white; padding: 0px;" width="19%">Invoice Date</td>
@@ -438,7 +438,7 @@
                             <br/>
                             <br/>
                             <br>__________________</br>
-                            <br>Date</br>
+                            <!-- <br>Date</br> -->
                         </div>
 
                      </div>
