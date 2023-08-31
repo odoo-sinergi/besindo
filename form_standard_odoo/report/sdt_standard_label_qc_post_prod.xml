@@ -66,15 +66,14 @@
                             <table width="100%" style="border: 1px solid white">
                                 <tr style="border: 1px solid white" t-foreach="docs" t-as="doc">
                                 <!-- <tr style="border: 1px solid white" t-foreach="doc.move_ids_without_package.filtered(lambda x: x.quantity_done &gt; 0)" t-as="lines"> -->
-                                    <td class="text-left" width="45%" style="border: 1px solid white">
+                                    <td class="text-left" width="50%" style="border: 1px solid white">
                                         <table width="100%">
                                             <tr>
-                                                <td colspan="2">
+                                                <td colspan="2" style="border-right:0px;">
                                                     <span><strong><span t-field="doc.company_id.name"/></strong></span><br/>
                                                     <span><span t-field="doc.company_id.street2"/></span>
                                                 </td>
-                                                    <img src="/form_standard_odoo/static/img/icon_rohs.png" style="height: 80px; width: 85px;"/>
-                                                <td></td>
+                                                <td style="border-left:0px; text-align:center; vertical-align:middle;"><img src="/form_standard_odoo/static/img/icon_rohs.png" style="height: 35px; width: 85px;"/></td>
                                             </tr>
                                             <tr>
                                                 <td><span>Customer</span></td>
@@ -103,9 +102,9 @@
                                             </tr>
                                         </table>
                                     </td>
-                                    <td style="border: 1px solid white" width="10%"></td>
-                                    <td style="border: 1px solid white" width="45%">
-                                        <table  width="100%">
+                                    
+                                    <td style="border: 1px solid white" width="50%">
+                                        <table width="100%">
                                             <tr>
                                                 <td colspan="3">
                                                     <span><strong><span t-field="doc.company_id.name"/></strong></span><br/>
@@ -114,7 +113,7 @@
                                             </tr>
                                             <tr>
                                                 <td><span>Customer</span></td>
-                                                <td colspan="2"><span></span></td>
+                                                <td colspan="2"><span/></td>
                                             </tr>
                                             <tr>
                                                 <td><span>Size</span></td>
@@ -136,7 +135,7 @@
                                             </tr>
                                             <tr>
                                                 <td><span>Operator</span></td>
-                                                <td><span></span></td>
+                                                <td><span/></td>
                                                 <td><span>Shift :</span></td>
                                             </tr>
                                         </table>
