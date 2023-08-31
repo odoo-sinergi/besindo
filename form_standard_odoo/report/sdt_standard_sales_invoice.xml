@@ -73,9 +73,9 @@
                         <div class="col-6">
                             <table style="border: 2px solid white" width="100%">
                                 <tr style="border: 2px solid white; padding: 0px;">
-                                    <td style="border: 2px solid white; padding: 0px;" width="19%">Invoice Date</td>
+                                    <td style="border: 2px solid white; padding: 0px;" width="29%">Invoice Date</td>
                                     <td style="border: 2px solid white; padding: 0px;" width="1%"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;" width="80%"><span t-field="doc.invoice_date" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/></td>
+                                    <td style="border: 2px solid white; padding: 0px;" width="70%"><span t-field="doc.invoice_date" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/></td>
                                 </tr>
                                 <tr style="border: 2px solid white">
                                     <td style="border: 2px solid white; padding: 0px;">Due Date</td>
@@ -291,9 +291,9 @@
                         <div class="col-6">
                             <table style="border: 2px solid white" width="100%">
                                 <tr style="border: 2px solid white; padding: 0px;">
-                                    <td style="border: 2px solid white; padding: 0px;" width="19%">Invoice Date</td>
+                                    <td style="border: 2px solid white; padding: 0px;" width="29%">Invoice Date</td>
                                     <td style="border: 2px solid white; padding: 0px;" width="1%"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;" width="80%"><span t-field="doc.invoice_date" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/></td>
+                                    <td style="border: 2px solid white; padding: 0px;" width="70%"><span t-field="doc.invoice_date" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/></td>
                                 </tr>
                                 <tr style="border: 2px solid white">
                                     <td style="border: 2px solid white; padding: 0px;">Due Date</td>
