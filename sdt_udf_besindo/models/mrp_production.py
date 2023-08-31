@@ -6,6 +6,18 @@ from odoo.tools import float_compare, float_round, format_datetime
 class MRPProduction(models.Model):
     _inherit = "mrp.production"
 
+    @api.onchange('workorder_ids','workorder_ids.workcenter_id')
+    def _onchange_workcenter_id(self):
+        for workorder_id in self.workorder_ids :
+            if workorder_id.workcenter_id :
+                mrp_routing_workcenter_obj = self.env['mrp.routing.workcenter'].search([('workcenter_id', '=', workorder_id.workcenter_id.id)], limit=1)
+                if mrp_routing_workcenter_obj :
+                    for mrp_routing_workcenter in mrp_routing_workcenter_obj :
+                        workorder_id.name = mrp_routing_workcenter.name
+                else :
+                    pass
+            else :
+                workorder_id.name = ""
     
 
 class MRPWorkOrder(models.Model):

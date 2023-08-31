@@ -54,18 +54,18 @@
                            border-right:1px solid black;
                            border-left:1px solid black;
                            border-bottom:2px solid black;
-                           font-Size:11px;
+                           font-Size:13px;
                            width: 100%;
                            margin-top: 5px;
                            margin-bottom: 10px;
                         }
                     </style>
-                    <h1 style="font-Size:11px;text-align: center;">
+                    <h1 style="font-Size:13px;text-align: center;">
                             <div style="font-Size:16px;text-align: center;text-decoration: underline;font-weight:bold;">INVOICE</div>
                             <td>Nomor : </td><span t-field="doc.name"/>
                             <!-- <td> - </td><span t-field="doc.invoice_date" t-options="{&quot;format&quot;:&quot;dd/MM/YYYY&quot;}"/> -->
                     </h1>
-                    <div style="font-Size:11px;" class="row mt16">
+                    <div style="font-Size:13px;" class="row mt16">
                         <div class="col-7">
                             <td style="font-weight:bold;">INVOICE TO : </td>
                             <div t-field="doc.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
@@ -170,7 +170,7 @@
                      </table>
                      <p>Terbilang : <span t-esc="doc.terbilang_idr()"/></p>
                      <p>Tax Invoice Number : <span t-field="doc.no_faktur_pajak"/></p>
-                     <div style="font-Size:11px;" class="row mt16">
+                     <div style="font-Size:13px;" class="row mt16">
                         <div class="col-6">
                             <td style="font-weight:bold;">Notes : </td>
                             <div t-field="doc.narration"/>
@@ -271,18 +271,18 @@
                            border-right:1px solid black;
                            border-left:1px solid black;
                            border-bottom:2px solid black;
-                           font-Size:11px;
+                           font-Size:13px;
                            width: 100%;
                            margin-top: 5px;
                            margin-bottom: 10px;
                         }
                     </style>
-                    <h1 style="font-Size:11px;text-align: center;">
+                    <h1 style="font-Size:13px;text-align: center;">
                             <div style="font-Size:16px;text-align: center;text-decoration: underline;font-weight:bold;">INVOICE</div>
                             <td>Nomor : </td><span t-field="doc.name"/>
                             <!-- <td> - </td><span t-field="doc.invoice_date" t-options="{&quot;format&quot;:&quot;dd/MM/YYYY&quot;}"/> -->
                     </h1>
-                    <div style="font-Size:11px;" class="row mt16">
+                    <div style="font-Size:13px;" class="row mt16">
                         <div class="col-7">
                             <td style="font-weight:bold;">INVOICE TO : </td>
                             <div t-field="doc.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
@@ -290,9 +290,9 @@
                         <div class="col-5">
                             <table style="border: 2px solid white">
                                 <tr style="border: 2px solid white; padding: 0px;">
-                                    <td style="border: 2px solid white; padding: 0px;">Invoice Date</td>
-                                    <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.invoice_date" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/></td>
+                                    <td style="border: 2px solid white; padding: 0px;" width="19%">Invoice Date</td>
+                                    <td style="border: 2px solid white; padding: 0px;" width="1%"> : </td>
+                                    <td style="border: 2px solid white; padding: 0px;" width="80%"><span t-field="doc.invoice_date" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/></td>
                                 </tr>
                                 <tr style="border: 2px solid white">
                                     <td style="border: 2px solid white; padding: 0px;">Due Date</td>
@@ -393,7 +393,7 @@
                      </table>
                      <p>Say : <span t-esc="doc.terbilang_usd()"/></p>
                      <p>Tax Invoice Number : <span t-field="doc.no_faktur_pajak"/></p>
-                     <div style="font-Size:11px;" class="row mt16">
+                     <div style="font-Size:13px;" class="row mt16">
                         <div class="col-6">
                             <td style="font-weight:bold;">Notes : </td>
                             <div t-field="doc.narration"/>
@@ -417,7 +417,8 @@
                                 <tr style="border: 1px solid white" t-foreach="doc.sdt_partner_bank_ids" t-as="sdt_partner_bank_id">
                                     <td style="border: 1px solid white">
                                         <span t-field="sdt_partner_bank_id.partner_id"/> <span t-field="sdt_partner_bank_id.acc_holder_name"/> <br/>
-                                        <span t-field="sdt_partner_bank_id.bank_id.name"/><br/>
+                                        <span t-field="sdt_partner_bank_id.bank_id.street"/><br/>
+                                        <!--<span t-field="sdt_partner_bank_id.bank_id.name"/><br/>-->
                                         <span t-field="sdt_partner_bank_id.acc_number"/><br/>
                                     </td>
                                 </tr>
