@@ -88,12 +88,12 @@
                                <tr style="border: 2px solid white; padding: 0px;">
                                    <td style="border: 2px solid white; padding: 0px;">Order Date</td>
                                    <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                   <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.date_order" t-options='{"format": "dd/MM/yyyy"}'/></td>
+                                   <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.date_order" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/></td>
                                </tr>
                                <tr style="border: 2px solid white; padding: 0px;">
                                    <td style="border: 2px solid white; padding: 0px;">Delivery Date</td>
                                    <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                   <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.commitment_date" t-options='{"format": "dd/MM/yyyy"}'/></td>
+                                   <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.commitment_date" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/></td>
                                </tr>
                                <tr style="border: 2px solid white; padding: 0px;">
                                    <td style="border: 2px solid white; padding: 0px;">Salesman</td>
@@ -121,13 +121,19 @@
                        </thead>
                        <tbody class="lines_tbody">
                            <tr t-foreach="doc.order_line" t-as="line">
+                             <t t-if="line.product_id.default_code">
                                <td class="text-left"><span t-field="line.product_id.default_code"/></td>
                                <td class="text-left"><span t-field="line.product_id.name"/></td>
                                <td class="text-right"><span t-field="line.product_uom_qty"/></td>
                                <td class="text-center"><span t-field="line.product_uom"/></td>
                                <!-- <td class="text-right"><span t-field="line.price_unit"/></td> -->
-                               <td class="text-right"><span t-field="doc.currency_id.symbol"/> <span t-esc="'%.5f'%line.sdt_price_unit"/></td>
+                               <td class="text-right"><span t-field="doc.currency_id.symbol"/>
+                                  <!--<t t-if="doc.currency_id.symbol == 'Rp'"><span t-esc="'%.5f'%line.price_unit"/></t>-->
+                                  <t t-if="doc.currency_id.symbol == 'Rp'"><span t-esc="'{0:,.2f}'.format(line.price_unit)"/></t>
+                                  <t t-if="doc.currency_id.symbol == '$'"><span t-esc="'{0:,.5f}'.format(line.sdt_price_unit)"/></t>
+                               </td>
                                <td class="text-right"><span t-field="doc.currency_id.symbol"/> <span t-field="line.price_subtotal" t-options="{'widget': 'float', 'precision': 2}"/></td>
+                             </t>
                            </tr>
                            <tr>
                                <td colspan="2" rowspan="5"/>
