@@ -11,18 +11,11 @@
                 <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/label[1]" position="attributes">
                     <attribute name="groups">sdt_udf_besindo.group_product_sales_price</attribute>
                 </xpath>
-                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/div[@name='pricing']" position="attributes">
-                    <attribute name="groups">sdt_udf_besindo.group_product_sales_price</attribute>
-                </xpath>
                 <field name="list_price" position="attributes">
                     <attribute name="groups">sdt_udf_besindo.group_product_sales_price</attribute>
                 </field>
 
-
-                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/label[2]" position="attributes">
-                    <attribute name="groups">sdt_udf_besindo.group_product_cost</attribute>
-                </xpath>
-                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/div[@name='standard_price_uom']" position="attributes">
+                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/label[@for='standard_price']" position="attributes">
                     <attribute name="groups">sdt_udf_besindo.group_product_cost</attribute>
                 </xpath>
                 <field name="list_price" position="attributes">
