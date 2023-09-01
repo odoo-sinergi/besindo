@@ -8,11 +8,24 @@
                 <xpath expr="//field[@name='active']" position="after">
                     <field name="nama_alias"/>
                 </xpath>
-                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/div[@name='standard_price_uom']" position="replace">
-                    <field name="standard_price" class="oe_inline" groups= "sdt_udf_besindo.group_product_cost" widget="monetary" options="{'currency_field': 'cost_currency_id', 'field_digits': True}"/>
-                    <span groups="uom.group_uom, sdt_udf_besindo.group_product_cost">per
-                        <field name="uom_name" class="oe_inline"/>
-                    </span>
+                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']" position="replace">
+                    <label for="list_price" groups= "sdt_udf_besindo.group_product_sales_price"/>
+                    <div name="pricing" groups= "sdt_udf_besindo.group_product_sales_price">
+                        <field name="list_price" class="oe_inline" groups= "sdt_udf_besindo.group_product_sales_price" widget="monetary" options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                    </div>
+                    <label for="standard_price" groups= "sdt_udf_besindo.group_product_cost" attrs="{'invisible': [('product_variant_count', '&gt;', 1), ('is_product_variant', '=', False)]}"/>
+                    <div name="standard_price_uom" attrs="{'invisible': [('product_variant_count', '&gt;', 1), ('is_product_variant', '=', False)]}">
+                        <field name="standard_price" class="oe_inline" groups= "sdt_udf_besindo.group_product_cost" widget="monetary" options="{'currency_field': 'cost_currency_id', 'field_digits': True}"/>
+                        <span groups="uom.group_uom, sdt_udf_besindo.group_product_cost"><span groups="uom.group_uom, sdt_udf_besindo.group_product_cost">per </span>
+                            <field name="uom_name" groups="uom.group_uom, sdt_udf_besindo.group_product_cost" class="oe_inline"/>
+                        </span>
+                    </div>
+                    <field name="categ_id" string="Product Category"/>
+                    <field name="product_tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                    <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="cost_currency_id" invisible="1"/>
+                    <field name="product_variant_id" invisible="1"/>
                 </xpath>
                 <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/field[@name='company_id']" position="after">
                     <field name="jenis_product_id" options="{'no_open': True, 'no_create': True}"/>
