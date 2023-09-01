@@ -8,8 +8,11 @@
                 <xpath expr="//field[@name='active']" position="after">
                     <field name="nama_alias"/>
                 </xpath>
-                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/div[@name='standard_price_uom']/field[@name='standard_price']" position="attributes">
-                    <attribute name="groups">sdt_udf_besindo.group_product_cost</attribute>
+                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/div[@name='standard_price_uom']" position="replace">
+                    <field name="standard_price" class="oe_inline" groups= "sdt_udf_besindo.group_product_cost" widget="monetary" options="{'currency_field': 'cost_currency_id', 'field_digits': True}"/>
+                    <span groups="uom.group_uom, sdt_udf_besindo.group_product_cost">per
+                        <field name="uom_name" class="oe_inline"/>
+                    </span>
                 </xpath>
                 <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/field[@name='company_id']" position="after">
                     <field name="jenis_product_id" options="{'no_open': True, 'no_create': True}"/>
