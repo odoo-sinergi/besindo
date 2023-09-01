@@ -17,6 +17,18 @@
                 <field name="list_price" position="attributes">
                     <attribute name="groups">sdt_udf_besindo.group_product_sales_price</attribute>
                 </field>
+                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/label[2]" position="attributes">
+                    <attribute name="groups">sdt_udf_besindo.group_product_cost</attribute>
+                </xpath>
+                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/div[@name='standard_price_uom']" position="attributes">
+                    <attribute name="groups">sdt_udf_besindo.group_product_cost</attribute>
+                </xpath>
+                <field name="list_price" position="attributes">
+                    <attribute name="groups">sdt_udf_besindo.group_product_cost</attribute>
+                </field>
+                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/div[@name='standard_price_uom']/span[1]" position="replace">
+                    <span groups="sdt_udf_besindo.group_product_cost">per <field name="uom_name" class="oe_inline"/></span>
+                </xpath>
                 <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/field[@name='company_id']" position="after">
                     <field name="jenis_product_id" options="{'no_open': True, 'no_create': True}"/>
                     <!-- <br/>
