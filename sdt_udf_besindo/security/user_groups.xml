@@ -19,5 +19,12 @@
         <record id="group_picking_validate_qc" model="res.groups">
             <field name="name">Picking Validate / QC</field>
         </record>
+        
+        <record id="group_product_cost" model="res.groups">
+            <field name="name">User Master Product Cost</field>
+        </record>
+        <record id="group_product_sales_price" model="res.groups">
+            <field name="name">User Master Product Sales Price</field>
+        </record>
     </data>
 </odoo>
