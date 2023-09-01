@@ -59,6 +59,9 @@
                 <xpath expr="//field[@name='barcode']" position="after">
                     <field name="part_number"/>
                 </xpath>
+                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/div[@name='standard_price_uom']" position="attributes">
+                    <attribute name="groups">sdt_udf_besindo.group_product_cost</attribute>
+                </xpath>
             </field>
         </record>
 
