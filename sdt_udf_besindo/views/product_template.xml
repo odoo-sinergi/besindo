@@ -8,56 +8,79 @@
                 <xpath expr="//field[@name='active']" position="after">
                     <field name="nama_alias"/>
                 </xpath>
-                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/field[@name='company_id']" position="after">
-                    <field name="jenis_product_id" options="{'no_open': True, 'no_create': True}"/>
-                    <br/>
-                    <br/>
-                    <div class="o_cell flex-grow-1 flex-sm-grow-0 o_wrap_label w-100 text-break text-900" style="">
-                        <label for='panjang'>Panjang</label>
-                    </div>
-                    <div class="o_cell flex-grow-1 flex-sm-grow-0" style="width: 100%;">
-                        <div name="panjang_uom">
-                            <div name="panjang" class="o_field_widget o_field_monetary oe_inline">
-                                <div class="text-nowrap d-inline-flex w-100 align-items-baseline">
-                                    <field name="panjang"/>
+                                
+                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']" position="replace">
+                    <group name="group_standard_price">
+                        <label for="list_price"/>
+                        <div name="pricing">
+                            <field name="list_price" class="oe_inline" widget="monetary" options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                        </div>
+                        <label for="standard_price" groups="sdt_udf_besindo.group_product_cost" attrs="{'invisible': [('product_variant_count', '&gt;', 1), ('is_product_variant', '=', False)]}"/>
+                        <div name="standard_price_uom" groups="sdt_udf_besindo.group_product_cost" attrs="{'invisible': [('product_variant_count', '&gt;', 1), ('is_product_variant', '=', False)]}">
+                            <field name="standard_price" class="oe_inline" widget="monetary" options="{'currency_field': 'cost_currency_id', 'field_digits': True}"/>
+                            <span groups="uom.group_uom">per
+                                <field name="uom_name" class="oe_inline"/>
+                            </span>
+                        </div>
+                        <field name="categ_id" string="Product Category"/>
+                        <field name="product_tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                        <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                        <field name="jenis_product_id" options="{'no_open': True, 'no_create': True}"/>
+                        <br/>
+                        <br/>
+                        <div class="o_cell flex-grow-1 flex-sm-grow-0 o_wrap_label w-100 text-break text-900" style="">
+                            <label for='panjang'>Panjang</label>
+                        </div>
+                        <div class="o_cell flex-grow-1 flex-sm-grow-0" style="width: 100%;">
+                            <div name="panjang_uom">
+                                <div name="panjang" class="o_field_widget o_field_monetary oe_inline">
+                                    <div class="text-nowrap d-inline-flex w-100 align-items-baseline">
+                                        <field name="panjang"/>
+                                    </div>
+                                    <span style="color: darkblue;"><field name="panjang_uom_id"/></span>
                                 </div>
-                                <span style="color: darkblue;"><field name="panjang_uom_id"/></span>
                             </div>
                         </div>
-                    </div>
-                    <br/>
-                    <br/>
-                    <div class="o_cell flex-grow-1 flex-sm-grow-0 o_wrap_label w-100 text-break text-900" style="">
-                        <label for='lebar'>Lebar</label>
-                    </div>
-                    <div class="o_cell flex-grow-1 flex-sm-grow-0" style="width: 100%;">
-                        <div name="lebar_uom">
-                            <div name="lebar" class="o_field_widget o_field_monetary oe_inline">
-                                <div class="text-nowrap d-inline-flex w-100 align-items-baseline">
-                                    <field name="lebar"/>
+                        <br/>
+                        <br/>
+                        <div class="o_cell flex-grow-1 flex-sm-grow-0 o_wrap_label w-100 text-break text-900" style="">
+                            <label for='lebar'>Lebar</label>
+                        </div>
+                        <div class="o_cell flex-grow-1 flex-sm-grow-0" style="width: 100%;">
+                            <div name="lebar_uom">
+                                <div name="lebar" class="o_field_widget o_field_monetary oe_inline">
+                                    <div class="text-nowrap d-inline-flex w-100 align-items-baseline">
+                                        <field name="lebar"/>
+                                    </div>
+                                    <span style="color: darkblue;"> <field name="lebar_uom_id"/></span>
                                 </div>
-                                <span style="color: darkblue;"> <field name="lebar_uom_id"/></span>
                             </div>
                         </div>
-                    </div>
-                    <br/>
-                    <br/>
-                    <div class="o_cell flex-grow-1 flex-sm-grow-0 o_wrap_label w-100 text-break text-900" style="">
-                        <label for='tebal'>Tebal</label>
-                    </div>
-                    <div class="o_cell flex-grow-1 flex-sm-grow-0" style="width: 100%;">
-                        <div name="tebal_uom">
-                            <div name="tebal" class="o_field_widget o_field_monetary oe_inline">
-                                <div class="text-nowrap d-inline-flex w-100 align-items-baseline">
-                                    <field name="tebal"/>
+                        <br/>
+                        <br/>
+                        <div class="o_cell flex-grow-1 flex-sm-grow-0 o_wrap_label w-100 text-break text-900" style="">
+                            <label for='tebal'>Tebal</label>
+                        </div>
+                        <div class="o_cell flex-grow-1 flex-sm-grow-0" style="width: 100%;">
+                            <div name="tebal_uom">
+                                <div name="tebal" class="o_field_widget o_field_monetary oe_inline">
+                                    <div class="text-nowrap d-inline-flex w-100 align-items-baseline">
+                                        <field name="tebal"/>
+                                    </div>
+                                    <span style="color: darkblue;"><field name="tebal_uom_id"/></span>
                                 </div>
-                                <span style="color: darkblue;"><field name="tebal_uom_id"/></span>
                             </div>
                         </div>
-                    </div>
+                        <field name="currency_id" invisible="1"/>
+                        <field name="cost_currency_id" invisible="1"/>
+                        <field name="product_variant_id" invisible="1"/>
+                    </group>
                 </xpath>
                 <xpath expr="//field[@name='barcode']" position="after">
                     <field name="part_number"/>
+                </xpath>
+                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/label[@name='standard_price_uom']" position="attributes">
+                    <attribute name="groups">sdt_udf_besindo.group_product_cost</attribute>
                 </xpath>
                 <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/div[@name='standard_price_uom']" position="attributes">
                     <attribute name="groups">sdt_udf_besindo.group_product_cost</attribute>
