@@ -17,7 +17,7 @@
                 <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='price_unit']" position="after">
                     <field name="sdt_price_unit" optional="show"/>
                 </xpath>
-                <!-- <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='margin']" position="attributes">
+                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='margin']" position="attributes">
                     <attribute name="groups">sdt_udf_besindo.group_product_cost</attribute>
                 </xpath>
                 <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='margin_percent']" position="attributes">
@@ -25,7 +25,7 @@
                 </xpath>
                 <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/group[@name='note_group']/group[@name='sale_total']/div[1]" position="attributes">
                     <attribute name="groups">base.group_user, sdt_udf_besindo.group_product_cost</attribute>
-                </xpath> -->
+                </xpath>
             </field>
         </record>
 
