@@ -26,12 +26,10 @@
                         <field name="product_tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                         <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
                         <field name="jenis_product_id" options="{'no_open': True, 'no_create': True}"/>
-                        <br/>
-                        <br/>
-                        <div class="o_cell flex-grow-1 flex-sm-grow-0 o_wrap_label w-100 text-break text-900" style="">
+                        <!-- <div class="o_cell flex-grow-1 flex-sm-grow-0 o_wrap_label w-100 text-break text-900" style=""> -->
                             <label for='panjang'>Panjang</label>
-                        </div>
-                        <div class="o_cell flex-grow-1 flex-sm-grow-0" style="width: 100%;">
+                        <!-- </div> -->
+                        <!-- <div class="o_cell flex-grow-1 flex-sm-grow-0" style="width: 100%;"> -->
                             <div name="panjang_uom">
                                 <div name="panjang" class="o_field_widget o_field_monetary oe_inline">
                                     <div class="text-nowrap d-inline-flex w-100 align-items-baseline">
@@ -40,13 +38,11 @@
                                     <span style="color: darkblue;"><field name="panjang_uom_id"/></span>
                                 </div>
                             </div>
-                        </div>
-                        <br/>
-                        <br/>
-                        <div class="o_cell flex-grow-1 flex-sm-grow-0 o_wrap_label w-100 text-break text-900" style="">
+                        <!-- </div> -->
+                        <!-- <div class="o_cell flex-grow-1 flex-sm-grow-0 o_wrap_label w-100 text-break text-900" style=""> -->
                             <label for='lebar'>Lebar</label>
-                        </div>
-                        <div class="o_cell flex-grow-1 flex-sm-grow-0" style="width: 100%;">
+                        <!-- </div> -->
+                        <!-- <div class="o_cell flex-grow-1 flex-sm-grow-0" style="width: 100%;"> -->
                             <div name="lebar_uom">
                                 <div name="lebar" class="o_field_widget o_field_monetary oe_inline">
                                     <div class="text-nowrap d-inline-flex w-100 align-items-baseline">
@@ -55,13 +51,11 @@
                                     <span style="color: darkblue;"> <field name="lebar_uom_id"/></span>
                                 </div>
                             </div>
-                        </div>
-                        <br/>
-                        <br/>
-                        <div class="o_cell flex-grow-1 flex-sm-grow-0 o_wrap_label w-100 text-break text-900" style="">
+                        <!-- </div> -->
+                        <!-- <div class="o_cell flex-grow-1 flex-sm-grow-0 o_wrap_label w-100 text-break text-900" style=""> -->
                             <label for='tebal'>Tebal</label>
-                        </div>
-                        <div class="o_cell flex-grow-1 flex-sm-grow-0" style="width: 100%;">
+                        <!-- </div> -->
+                        <!-- <div class="o_cell flex-grow-1 flex-sm-grow-0" style="width: 100%;"> -->
                             <div name="tebal_uom">
                                 <div name="tebal" class="o_field_widget o_field_monetary oe_inline">
                                     <div class="text-nowrap d-inline-flex w-100 align-items-baseline">
@@ -70,7 +64,7 @@
                                     <span style="color: darkblue;"><field name="tebal_uom_id"/></span>
                                 </div>
                             </div>
-                        </div>
+                        <!-- </div> -->
                         <field name="currency_id" invisible="1"/>
                         <field name="cost_currency_id" invisible="1"/>
                         <field name="product_variant_id" invisible="1"/>
