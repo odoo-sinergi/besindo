@@ -27,7 +27,7 @@
             print_report_name="'SDT Standard - Label QC - %s' % (object.name)">
         </report>
 
-        <report id="report_label_qc_post_prod_menu"
+        <report id="report_label_qc_post_prod_menu_qc"
             string="SDT Standard - Label QC"
             model="stock.picking"
             report_type="qweb-pdf"
