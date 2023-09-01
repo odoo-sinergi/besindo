@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
 {
-    'name': 'Journal Sequence For Odoo',
-    'version': '16.0.0',
+    'name': 'Journal Sequence For Odoo 14',
+    'version': '14.0.2.0.0',
     'category': 'Accounting',
-    'summary': 'Journal Sequence For Odoo',
-    'description': 'Journal Sequence For Odoo',
+    'summary': 'Journal Sequence For Odoo 14',
+    'description': 'Journal Sequence For Odoo 14',
     'sequence': '1',
     'author': 'Odoo Developers',
     'support': 'developersodoo@gmail.com',
