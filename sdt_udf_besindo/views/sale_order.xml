@@ -4,7 +4,7 @@
             <field name="name">udf.sale.order.form.inherit</field>
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form" />
-            <field name="priority">17</field>
+            <field name="priority">160</field>
             <field name="arch" type="xml">
                 <xpath expr="//button[@name='action_cancel']" position="after">
                     <button name="action_req_approval" string="Req Approval" type="object" class="btn-primary" attrs="{'invisible': ['|',('req_approval', '=', True),('approval_disc', '!=', True)]}"/>
