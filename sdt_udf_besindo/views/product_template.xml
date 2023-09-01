@@ -23,11 +23,6 @@
                     <field name="categ_id" string="Product Category"/>
                     <field name="product_tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                     <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
-                    <field name="currency_id" invisible="1"/>
-                    <field name="cost_currency_id" invisible="1"/>
-                    <field name="product_variant_id" invisible="1"/>
-                </xpath>
-                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/field[@name='company_id']" position="after">
                     <field name="jenis_product_id" options="{'no_open': True, 'no_create': True}"/>
                     <!-- <br/>
                     <br/>
@@ -74,6 +69,9 @@
                             </div>
                         </div>
                     <!-- </div> -->
+                    <field name="currency_id" invisible="1"/>
+                    <field name="cost_currency_id" invisible="1"/>
+                    <field name="product_variant_id" invisible="1"/>
                 </xpath>
                 <xpath expr="//field[@name='barcode']" position="after">
                     <field name="part_number"/>
