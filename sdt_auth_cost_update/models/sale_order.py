@@ -3,8 +3,8 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 
-class ProductTemplate(models.Model):
-    _inherit = "product.template"
+class SaleOrderLine(models.Model):
+    _inherit = "sale.order.line"
 
     is_show_inventory_cost = fields.Boolean(string='Is Show Inventory Cost', readonly=True, compute='_get_auth_user_cost')
     is_show_inventory_price = fields.Boolean(string='Is Show Inventory Price', readonly=True, compute='_get_auth_user_price')
