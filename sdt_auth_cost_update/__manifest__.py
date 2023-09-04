@@ -26,6 +26,7 @@
         # 'security/user_groups.xml',
         # 'security/ir.model.access.csv',
         'views/product_template.xml',
+        'views/sale_order.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
