@@ -7,21 +7,50 @@
             <field name="arch" type="xml">
                 <field name="sel_groups_2_4" position="before">
                     <field name="show_inventory_cost"/>
+                    <field name="show_inventory_price"/>
                 </field>
 
             </field>
         </record>
 
         <record model="ir.ui.view" id="sdt_product_template_form_view_inherit_form">
-            <field name="name">product_template_mascot_form</field>
+            <field name="name">product_template_besindo_form</field>
             <field name="model">product.template</field>
-            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
             <field name="arch" type="xml">
                 <field name="uom_po_id" position="after">
-                    <field name="is_show_inventory_cost"/>
+                    <field name="is_show_inventory_cost" invisible="1"/>
+                    <field name="is_show_inventory_price" invisible="1"/>
                 </field>
+                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/label[@for='list_price']" position="attributes">
+                    <attribute name="attrs">{'invisible':[('is_show_inventory_price','=',False)]}</attribute>
+                </xpath>
+                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/div[@name='pricing']" position="attributes">
+                    <attribute name="attrs">{'invisible':[('is_show_inventory_price','=',False)]}</attribute>
+                </xpath>
+
+                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/label[@for='standard_price']" position="attributes">
+                    <attribute name="attrs">{'invisible':[('is_show_inventory_cost','=',False)]}</attribute>
+                </xpath>
+                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/div[@name='standard_price_uom']" position="attributes">
+                    <attribute name="attrs">{'invisible':[('is_show_inventory_cost','=',False)]}</attribute>
+                </xpath>
             </field>
         </record>
 
+        <record model="ir.ui.view" id="udf_product_template_only_tree_view_tree">
+            <field name="name">udf.product.templateinherit.tree</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view" />
+            <field name="arch" type="xml">
+                <field name="list_price" position="attributes">
+                    <attribute name="attrs">{'invisible':[('is_show_inventory_price','=',False)]}</attribute>
+                </field>
+                <field name="standard_price" position="attributes">
+                    <attribute name="attrs">{'invisible':[('is_show_inventory_cost','=',False)]}</attribute>
+                </field>
+
+            </field>
+        </record>
     </data>
 </odoo>
