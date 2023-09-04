@@ -23,11 +23,11 @@
                     <attribute name="attrs">{'invisible': ['|',('price_subtotal', '=', 0),('is_show_inventory_cost','=',False)]}</attribute>
                 </xpath>
 
-                <xpath expr="//group[@name='sale_total']/label[@for='margin']" position="attributes">
+                <xpath expr="//label[@for='margin']" position="attributes">
                     <attribute name="attrs">{'invisible':[('is_show_inventory_cost','=',False)]}</attribute>
                 </xpath>
 
-                <xpath expr="//group[@name='sale_total']/div[@class='text-nowrap']" position="attributes">
+                <xpath expr="//div[@class='text-nowrap']" position="attributes">
                     <attribute name="attrs">{'invisible':[('is_show_inventory_cost','=',False)]}</attribute>
                 </xpath>
             </field>
