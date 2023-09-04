@@ -4,15 +4,16 @@
             <field name="name">cost.sale.order.form.inherit</field>
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form" />
-            <field name="priority">160</field>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='order_line']/tree//field[@name='price_unit']" position="after">
                     <field name="is_show_inventory_cost" invisible="1"/>
                     <field name="is_show_inventory_price" invisible="1"/>
                 </xpath>
-                <field name="margin" position="attributes"/>
+
+                <field name="margin" position="attributes">
                     <attribute name="attrs">{'invisible':[('is_show_inventory_cost','=',False)]}</attribute>
                 </field>
+
                 <field name="margin_percent" position="atttributes">
                     <attribute name="attrs">{'invisible': ['|',('price_subtotal', '=', 0),('is_show_inventory_cost','=',False)]}</attribute>
                 </field>
@@ -20,6 +21,7 @@
                 <xpath expr="//group[@name='sale_total']/label[@for='margin']" position="attributes">
                     <attribute name="attrs">{'invisible':[('is_show_inventory_cost','=',False)]}</attribute>
                 </xpath>
+
                 <xpath expr="//group[@name='sale_total']/div[@class='text-nowrap']" position="attributes">
                     <attribute name="attrs">{'invisible':[('is_show_inventory_cost','=',False)]}</attribute>
                 </xpath>
