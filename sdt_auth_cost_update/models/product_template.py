@@ -7,7 +7,7 @@ class ResUsers(models.Model):
     _inherit = 'res.users'
 
     show_inventory_cost = fields.Boolean('Show Inventory Cost', default=False)
-    show_inventory_price = fields.Boolean('Show Inventory Cost', default=False)
+    show_inventory_price = fields.Boolean('Show Inventory Price', default=False)
 
 class ProductTemplate(models.Model):
     _inherit = "product.template"
