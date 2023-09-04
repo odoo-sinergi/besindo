@@ -17,6 +17,7 @@
                 <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='price_unit']" position="after">
                     <field name="sdt_price_unit" optional="show"/>
                 </xpath>
+            </field>
         </record>
 
         <record model="ir.ui.view" id="udf_view_quotation_tree_with_onboarding_inherit">
