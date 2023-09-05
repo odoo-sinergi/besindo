@@ -7,8 +7,8 @@ class SaleReport(models.Model):
 
     def fields_get(self, allfields=None, attributes=None):
         res = super(SaleReport, self).fields_get(allfields, attributes=attributes)
-        for record in self:
-            is_margin = self.env['res.users'].search([('id', '=', record._uid)]).show_inventory_cost
+        if res['margin']:
+            is_margin = self.env['res.users'].search([('id', '=', self._uid)]).show_inventory_cost
             if not is_margin:
                 res['margin']=False
         return res
