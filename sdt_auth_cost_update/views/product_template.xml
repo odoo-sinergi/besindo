@@ -56,7 +56,7 @@
             </field>
         </record>
 
-        <record model="ir.ui.view" id="product_template_tree_view_inherit">
+        <record model="ir.ui.view" id="product_product_tree_view_inherit">
             <field name="name">product.product.tree.inherit</field>
             <field name="model">product.product</field>
             <field name="inherit_id" ref="product.product_product_tree_view" />
