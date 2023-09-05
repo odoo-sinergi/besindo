@@ -1,5 +1,14 @@
 <odoo>
     <data>
+        <record id="view_update_cost_users_form" model="ir.ui.view">
+            <field name="name">view.update.cost.users.form</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <field name="sel_groups_2_4" position="before">
+                </field>
+            </field>
+        </record>
         <record model="ir.ui.view" id="udf_product_template_only_form_view_form">
             <field name="name">udf.product.templateinherit.form</field>
             <field name="model">product.template</field>
