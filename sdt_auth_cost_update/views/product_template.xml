@@ -55,6 +55,25 @@
                 </field>
             </field>
         </record>
+
+        <record model="ir.ui.view" id="product_template_tree_view_inherit">
+            <field name="name">product.product.tree.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_product_tree_view" />
+            <field name="arch" type="xml">
+                <field name="lst_price" position="before">
+                    <field name="is_show_inventory_cost" invisible="1"/>
+                    <field name="is_show_inventory_price" invisible="1"/>
+                </field>
+                <field name="lst_price" position="attributes">
+                    <attribute name="attrs">{'invisible':[('is_show_inventory_price','=',False)]}</attribute>
+                </field>
+                <field name="standard_price" position="attributes">
+                    <attribute name="attrs">{'invisible':[('is_show_inventory_cost','=',False)]}</attribute>
+                </field>
+            </field>
+        </record>
+
         <record model="ir.ui.view" id="udf_product_template_only_tree_view_tree">
             <field name="name">Product.template.product.kanban.inherit</field>
             <field name="model">product.template</field>
