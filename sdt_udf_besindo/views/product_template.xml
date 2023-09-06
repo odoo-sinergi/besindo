@@ -7,22 +7,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='active']" position="after">
                     <field name="nama_alias"/>
-                </xpath>
-                
-                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/label[@for='list_price']" position="attributes">
-                    <attribute name="groups">sdt_udf_besindo.group_product_sales_price</attribute>
-                </xpath>
-                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/div[@name='pricing']" position="attributes">
-                    <attribute name="groups">sdt_udf_besindo.group_product_sales_price</attribute>
-                </xpath>
-
-                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/label[@for='standard_price']" position="attributes">
-                    <attribute name="groups">sdt_udf_besindo.group_product_cost</attribute>
-                </xpath>
-                <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/div[@name='standard_price_uom']" position="attributes">
-                    <attribute name="groups">sdt_udf_besindo.group_product_cost</attribute>
-                </xpath>
-
+                </xpath>    
                 <xpath expr="//form[@name='Product Template']/sheet[@name='product_form']/notebook[1]/page[@name='general_information']/group[1]/group[@name='group_standard_price']/field[@name='company_id']" position="after">
                     <field name="jenis_product_id" options="{'no_open': True, 'no_create': True}"/>
                     <!-- <br/>

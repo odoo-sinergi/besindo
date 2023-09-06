@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">        
+        <record id="group_product_cost" model="res.groups">
+            <field name="name">User Master Product Cost</field>
+        </record>
+        <record id="group_product_sales_price" model="res.groups">
+            <field name="name">User Master Product Sales Price</field>
+        </record>
+    </data>
+</odoo>
