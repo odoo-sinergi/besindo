@@ -357,7 +357,7 @@
                                  </tr>
 
                                  <tr>
-                                    <td rowspan="6" colspan="2"/>
+                                    <td rowspan="6" colspan="3"/>
                                     <td class="text-right" colspan="2">Subtotal</td>
                                     <td class="text-right">
                                         <span t-field="doc.currency_id.symbol"/> <span t-field="doc.amount_untaxed" t-options="{'widget': 'float', 'precision': 2}"/>
