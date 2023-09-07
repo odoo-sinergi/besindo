@@ -348,7 +348,7 @@
                                      <td class="text-center"><span t-esc="'%.2f'%line.quantity"/></td>
                                      <td class="text-center"><span><t t-esc="line.product_uom_id.name"/></span></td>
                                      <!-- <td class="text-right"><span t-esc="'%.5f'%line.sdt_price_unit"/></td> -->
-                                     <td class="text-right">
+                                     <td class="text-right"><span t-field="doc.currency_id.symbol"/>
                                         <t t-if="doc.currency_id.symbol == 'Rp'"><span t-esc="'{0:,.2f}'.format(line.price_unit)"/></t>
                                         <t t-if="doc.currency_id.symbol == '$'"><span t-esc="'{0:,.5f}'.format(line.price_unit)"/></t>
                                      </td>
