@@ -24,7 +24,7 @@ class MRPProduction(models.Model):
     @api.onchange('contact')
     def _onchange_contact(self):
         for picking in self.picking_id:
-            picking.contact = self.contact
+            picking.partner_id = self.contact
     
 
 class MRPWorkOrder(models.Model):
