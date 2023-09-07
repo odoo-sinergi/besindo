@@ -25,9 +25,9 @@ class StockPicking(models.Model):
                         else :
                             rec.workcenter_name = rec.workcenter_name + '  ' +'||' + '  ' + workorder_id.workcenter_id.name
                 else:
-                    rec.workcenter_name = '-'
+                    rec.workcenter_name = ''
             elif rec.is_qc_production == False :
-                rec.workcenter_name = '-'
+                rec.workcenter_name = ''
     
     @api.model
     def get_view(self, view_id=None, view_type='form', **options):
