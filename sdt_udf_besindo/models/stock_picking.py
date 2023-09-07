@@ -17,12 +17,15 @@ class StockPicking(models.Model):
         # self.name = self.name
         for rec in self :
             if rec.is_qc_production == True :
-                mrp_obj = self.env['mrp.production'].search([('name', '=', rec.group_id.name)])
-                for workorder_id in mrp_obj.workorder_ids :
-                    if not rec.workcenter_name :
-                        rec.workcenter_name = workorder_id.workcenter_id.name
-                    else :
-                        rec.workcenter_name = rec.workcenter_name + '  ' +'||' + '  ' + workorder_id.workcenter_id.name
+                if rec.group_id.name:
+                    mrp_obj = self.env['mrp.production'].search([('name', '=', rec.group_id.name)])
+                    for workorder_id in mrp_obj.workorder_ids :
+                        if not rec.workcenter_name :
+                            rec.workcenter_name = workorder_id.workcenter_id.name
+                        else :
+                            rec.workcenter_name = rec.workcenter_name + '  ' +'||' + '  ' + workorder_id.workcenter_id.name
+                else:
+                    rec.workcenter_name = '-'
             elif rec.is_qc_production == False :
                 rec.workcenter_name = '-'
     
