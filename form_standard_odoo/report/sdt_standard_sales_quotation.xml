@@ -86,7 +86,9 @@
                                 <td class="text-left"><span t-field="line.product_id.name"/></td>
                                 <td class="text-right"><span t-field="line.product_uom_qty"/></td>
                                 <td class="text-center"><span t-field="line.product_uom"/></td>
-                                <td class="text-right"><span t-field="line.price_unit"/></td>
+                                <!-- <td class="text-right"><span t-field="line.price_unit"/></td> -->
+                                <t t-if="doc.currency_id.symbol == 'Rp'"><span t-esc="'{0:,.2f}'.format(line.price_unit)"/></t>
+                                <t t-if="doc.currency_id.symbol == '$'"><span t-esc="'{0:,.5f}'.format(line.price_unit)"/></t>
                                 <td class="text-right"><span t-field="line.price_subtotal"/></td>
                             </tr>
                             <tr>
