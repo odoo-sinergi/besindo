@@ -21,11 +21,12 @@ class MRPProduction(models.Model):
             else :
                 workorder_id.name = ""
     
-    @api.onchange('contact')
+    @api.depends('contact')
     def _onchange_contact(self):
-        # for picking in self.picking_id:
-            # picking.partner_id = self.contact
-        test = self
+        if self.picking_ids:
+            for picking in self.picking_ids:
+                picking.partner_id = self.contact
+        # test = self
     
 
 class MRPWorkOrder(models.Model):
