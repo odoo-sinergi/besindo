@@ -296,7 +296,7 @@
                                                         <span>Customer</span>
                                                     </td>
                                                     <td colspan="2">
-                                                        <span t-field="doc.mrp_id.x_studio_customer"/>
+                                                        <span t-field="doc.mrp_id.contact"/>
                                                     </td>
                                                 </tr>
                                                 <tr>
