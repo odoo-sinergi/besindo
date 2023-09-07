@@ -332,7 +332,8 @@
                                                         <span>Date</span>
                                                     </td>
                                                     <td>
-                                                        <span t-esc="doc.mrp_id.date_planned_start.strftime('%d %B %Y')"/>
+                                                        <span t-field="doc.mrp_id.date_planned_start" t-field-options="{&quot;format&quot;: &quot;dd MM yy&quot;}"/>
+                                                        <!-- <span t-field="doc.mrp_id.date_planned_start" t-field-options="{&quot;format&quot;: &quot;dd MM yy&quot;}"/> -->
                                                     </td>
                                                     <td>
                                                         <span>Line </span>
@@ -413,7 +414,7 @@
                                                         <span>Date</span>
                                                     </td>
                                                     <td>
-                                                        <span t-esc="doc.mrp_id.date_planned_start.strftime('%d %B %Y')"/>
+                                                        <span t-field="doc.mrp_id.date_planned_start" t-field-options="{&quot;format&quot;: &quot;dd MM yy&quot;}"/>
                                                     </td>
                                                     <td>
                                                         <span>Line </span>
@@ -496,7 +497,7 @@
                                                         <span>Date</span>
                                                     </td>
                                                     <td>
-                                                        <span t-esc="doc.mrp_id.date_planned_start.strftime('%d %B %Y')"/>
+                                                        <span t-field="doc.mrp_id.date_planned_start" t-field-options="{&quot;format&quot;: &quot;dd MM yy&quot;}"/>
                                                     </td>
                                                     <td>
                                                         <span>Line </span>
@@ -577,7 +578,7 @@
                                                         <span>Date</span>
                                                     </td>
                                                     <td>
-                                                        <span t-esc="doc.mrp_id.date_planned_start.strftime('%d %B %Y')"/>
+                                                        <span t-field="doc.mrp_id.date_planned_start" t-field-options="{&quot;format&quot;: &quot;dd MM yy&quot;}"/>
                                                     </td>
                                                     <td>
                                                         <span>Line </span>
@@ -660,7 +661,7 @@
                                                         <span>Date</span>
                                                     </td>
                                                     <td>
-                                                        <span t-esc="doc.mrp_id.date_planned_start.strftime('%d %B %Y')"/>
+                                                        <span t-field="doc.mrp_id.date_planned_start" t-field-options="{&quot;format&quot;: &quot;dd MM yy&quot;}"/>
                                                     </td>
                                                     <td>
                                                         <span>Line </span>
@@ -741,7 +742,7 @@
                                                         <span>Date</span>
                                                     </td>
                                                     <td>
-                                                        <span t-esc="doc.mrp_id.date_planned_start.strftime('%d %B %Y')"/>
+                                                        <span t-field="doc.mrp_id.date_planned_start" t-field-options="{&quot;format&quot;: &quot;dd MM yy&quot;}"/>
                                                     </td>
                                                     <td>
                                                         <span>Line </span>
@@ -824,7 +825,7 @@
                                                         <span>Date</span>
                                                     </td>
                                                     <td>
-                                                        <span t-esc="doc.mrp_id.date_planned_start.strftime('%d %B %Y')"/>
+                                                        <span t-field="doc.mrp_id.date_planned_start" t-field-options="{&quot;format&quot;: &quot;dd MM yy&quot;}"/>
                                                     </td>
                                                     <td>
                                                         <span>Line </span>
@@ -905,7 +906,7 @@
                                                         <span>Date</span>
                                                     </td>
                                                     <td>
-                                                        <span t-esc="doc.mrp_id.date_planned_start.strftime('%d %B %Y')"/>
+                                                        <span t-field="doc.mrp_id.date_planned_start" t-field-options="{&quot;format&quot;: &quot;dd MM yy&quot;}"/>
                                                     </td>
                                                     <td>
                                                         <span>Line </span>
@@ -988,7 +989,7 @@
                                                         <span>Date</span>
                                                     </td>
                                                     <td>
-                                                        <span t-esc="doc.mrp_id.date_planned_start.strftime('%d %B %Y')"/>
+                                                        <span t-field="doc.mrp_id.date_planned_start" t-field-options="{&quot;format&quot;: &quot;dd MM yy&quot;}"/>
                                                     </td>
                                                     <td>
                                                         <span>Line </span>
@@ -1069,7 +1070,7 @@
                                                         <span>Date</span>
                                                     </td>
                                                     <td>
-                                                        <span t-esc="doc.mrp_id.date_planned_start.strftime('%d %B %Y')"/>
+                                                        <span t-field="doc.mrp_id.date_planned_start" t-field-options="{&quot;format&quot;: &quot;dd MM yy&quot;}"/>
                                                     </td>
                                                     <td>
                                                         <span>Line </span>
@@ -1152,7 +1153,7 @@
                                                         <span>Date</span>
                                                     </td>
                                                     <td>
-                                                        <span t-esc="doc.mrp_id.date_planned_start.strftime('%d %B %Y')"/>
+                                                        <span t-field="doc.mrp_id.date_planned_start" t-field-options="{&quot;format&quot;: &quot;dd MM yy&quot;}"/>
                                                     </td>
                                                     <td>
                                                         <span>Line </span>
@@ -1233,7 +1234,7 @@
                                                         <span>Date</span>
                                                     </td>
                                                     <td>
-                                                        <span t-esc="doc.mrp_id.date_planned_start.strftime('%d %B %Y')"/>
+                                                        <span t-field="doc.mrp_id.date_planned_start" t-field-options="{&quot;format&quot;: &quot;dd MM yy&quot;}"/>
                                                     </td>
                                                     <td>
                                                         <span>Line </span>
