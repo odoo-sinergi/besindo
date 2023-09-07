@@ -6,6 +6,8 @@ from odoo.tools import float_compare, float_round, format_datetime
 class MRPProduction(models.Model):
     _inherit = "mrp.production"
 
+    contact = fields.Char("Contact")
+
     @api.onchange('workorder_ids','workorder_ids.workcenter_id')
     def _onchange_workcenter_id(self):
         for workorder_id in self.workorder_ids :
@@ -26,6 +28,7 @@ class MRPWorkOrder(models.Model):
 
     operator_factory_ids = fields.Many2many('sdt.operator.factory', string='Operator Factory')
     qty_remaining2 = fields.Float('Quantity to Produced', compute='_compute_qty_remaining2', digits='Product Unit of Measure', store=True)
+    shift = fields.Selection([('shift_1', 'Shift 1'), ('shift_2', 'Shift 2')], string="Shift", required=True, default='shift_1')
 
 
     @api.depends('qty_production', 'qty_reported_from_previous_wo', 'qty_produced', 'production_id.product_uom_id')

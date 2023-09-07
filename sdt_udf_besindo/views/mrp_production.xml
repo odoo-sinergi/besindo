@@ -24,6 +24,7 @@
                 <xpath expr="//field[@name='qty_remaining']" position="after">
                     <field name="qty_remaining2" optional="hide" string="Quantity to Produced"/>
                     <field name="operator_factory_ids" widget="many2many_tags" optional="show"/>
+                    <field name="shift"/>
                 </xpath>
             </field>
         </record>
@@ -51,6 +52,7 @@
                                     </span>
                                 </h2>
                                 <h5><br/><field name="operator_factory_ids"/></h5>
+                                <h5><br/><field name="shift"/></h5>
                                 
                             </div>
                         </div>
@@ -73,6 +75,17 @@
                         </div>
                     </div>
                 </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="udf_mrp_production_form_view_inherit">
+            <field name="name">udf.mrp.production.form.inherit</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+            <field name="arch" type="xml">
+                <field name="user_id" position="after">
+                    <field name="contact"/>
+                </field>
             </field>
         </record>
     </data>
