@@ -10,3 +10,4 @@ class StockPicking(models.Model):
     @api.onchange('origin')
     def onchange_mrp_id(self):
         self.mrp_id = self.env['mrp.production'].search([('name', '=', self.origin)])
+        self.partner_id = self.mrp_id.contact

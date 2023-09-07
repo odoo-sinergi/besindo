@@ -232,9 +232,9 @@
                         border-right:1px solid black;
                         border-left:1px solid black;
                         border-bottom:1px solid black;
-                        padding: 4px;
-                        padding-left: 7px;
-                        padding-right: 7px;
+                        padding: 2px;
+                        padding-left: 5px;
+                        padding-right: 5px;
                         }
                     </style>
                     <style type="text/css">
@@ -244,9 +244,9 @@
                         border-right:1px solid black;
                         border-left:1px solid black;
                         border-bottom:1px solid black;
-                        padding: 4px;
-                        padding-left: 7px;
-                        padding-right: 7px;
+                        padding: 2px;
+                        padding-left: 5px;
+                        padding-right: 5px;
                         color: black;
                         }
                     </style>
@@ -257,10 +257,10 @@
                         border-right:1px solid black;
                         border-left:1px solid black;
                         border-bottom:1px solid black;
-                        font-Size:11px;
+                        font-Size:9px;
                         width: 100%;
-                        margin-top: 5px;
-                        margin-bottom: 10px;
+                        margin-top: 2px;
+                        margin-bottom: 2px;
                         }
                     </style>
                     <!-- <t t-set="loop_counter" t-value="0" /> -->
@@ -301,6 +301,14 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
+                                                        <span>Description</span>
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <span t-field="doc.mrp_id.product_id.nama_alias"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
                                                         <span>Part Number</span>
                                                     </td>
                                                     <td colspan="2">
@@ -312,8 +320,8 @@
                                                         <span>Qty</span>
                                                     </td>
                                                     <td width="45%">
-                                                        <span t-field="doc.mrp_id.product_qty"/>
-                                                        <span t-field="doc.mrp_id.product_uom_id"/>
+                                                        <!-- <span t-field="doc.mrp_id.product_qty"/>
+                                                        <span t-field="doc.mrp_id.product_uom_id"/> -->
                                                     </td>
                                                     <td width="30%">
                                                         <span>Pack No. ______</span>
@@ -324,7 +332,7 @@
                                                         <span>Date</span>
                                                     </td>
                                                     <td>
-                                                        <span t-field="doc.mrp_id.date_planned_start"/>
+                                                        <span t-esc="doc.mrp_id.date_planned_start.strftime('%d %B %Y')"/>
                                                     </td>
                                                     <td>
                                                         <span>Line </span>
@@ -339,13 +347,8 @@
                                                     <td>
                                                         <span t-field="doc.mrp_id.user_id"/>
                                                     </td>
-                                                    <t t-set="counter" t-value="0"/>
-                                                    <t t-foreach="doc.mrp_id.workorder_ids" t-as="wi">
-                                                        <t t-set="counter" t-value="counter + 1"/>
-                                                    </t>
                                                     <td>
-                                                        <span>Shift : <span t-esc="counter"/>
-                                                        </span>
+                                                        <span>Shift : ______</span>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -374,7 +377,15 @@
                                                         <span>Customer</span>
                                                     </td>
                                                     <td colspan="2">
-                                                        <span t-field="doc.mrp_id.x_studio_customer"/>
+                                                        <span t-field="doc.mrp_id.contact"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span>Description</span>
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <span t-field="doc.mrp_id.product_id.nama_alias"/>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -390,8 +401,8 @@
                                                         <span>Qty</span>
                                                     </td>
                                                     <td width="45%">
-                                                        <span t-field="doc.mrp_id.product_qty"/>
-                                                        <span t-field="doc.mrp_id.product_uom_id"/>
+                                                        <!-- <span t-field="doc.mrp_id.product_qty"/>
+                                                        <span t-field="doc.mrp_id.product_uom_id"/> -->
                                                     </td>
                                                     <td width="30%">
                                                         <span>Pack No. ______</span>
@@ -402,7 +413,7 @@
                                                         <span>Date</span>
                                                     </td>
                                                     <td>
-                                                        <span t-field="doc.mrp_id.date_planned_start"/>
+                                                        <span t-esc="doc.mrp_id.date_planned_start.strftime('%d %B %Y')"/>
                                                     </td>
                                                     <td>
                                                         <span>Line </span>
@@ -417,13 +428,8 @@
                                                     <td>
                                                         <span t-field="doc.mrp_id.user_id"/>
                                                     </td>
-                                                    <t t-set="counter" t-value="0"/>
-                                                    <t t-foreach="doc.mrp_id.workorder_ids" t-as="wi">
-                                                        <t t-set="counter" t-value="counter + 1"/>
-                                                    </t>
                                                     <td>
-                                                        <span>Shift : <span t-esc="counter"/>
-                                                        </span>
+                                                        <span>Shift : ______</span>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -454,7 +460,15 @@
                                                         <span>Customer</span>
                                                     </td>
                                                     <td colspan="2">
-                                                        <span t-field="doc.mrp_id.x_studio_customer"/>
+                                                        <span t-field="doc.mrp_id.contact"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span>Description</span>
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <span t-field="doc.mrp_id.product_id.nama_alias"/>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -470,8 +484,8 @@
                                                         <span>Qty</span>
                                                     </td>
                                                     <td width="45%">
-                                                        <span t-field="doc.mrp_id.product_qty"/>
-                                                        <span t-field="doc.mrp_id.product_uom_id"/>
+                                                        <!-- <span t-field="doc.mrp_id.product_qty"/>
+                                                        <span t-field="doc.mrp_id.product_uom_id"/> -->
                                                     </td>
                                                     <td width="30%">
                                                         <span>Pack No. ______</span>
@@ -482,7 +496,7 @@
                                                         <span>Date</span>
                                                     </td>
                                                     <td>
-                                                        <span t-field="doc.mrp_id.date_planned_start"/>
+                                                        <span t-esc="doc.mrp_id.date_planned_start.strftime('%d %B %Y')"/>
                                                     </td>
                                                     <td>
                                                         <span>Line </span>
@@ -497,13 +511,8 @@
                                                     <td>
                                                         <span t-field="doc.mrp_id.user_id"/>
                                                     </td>
-                                                    <t t-set="counter" t-value="0"/>
-                                                    <t t-foreach="doc.mrp_id.workorder_ids" t-as="wi">
-                                                        <t t-set="counter" t-value="counter + 1"/>
-                                                    </t>
                                                     <td>
-                                                        <span>Shift : <span t-esc="counter"/>
-                                                        </span>
+                                                        <span>Shift : ______</span>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -532,7 +541,15 @@
                                                         <span>Customer</span>
                                                     </td>
                                                     <td colspan="2">
-                                                        <span t-field="doc.mrp_id.x_studio_customer"/>
+                                                        <span t-field="doc.mrp_id.contact"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span>Description</span>
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <span t-field="doc.mrp_id.product_id.nama_alias"/>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -548,8 +565,8 @@
                                                         <span>Qty</span>
                                                     </td>
                                                     <td width="45%">
-                                                        <span t-field="doc.mrp_id.product_qty"/>
-                                                        <span t-field="doc.mrp_id.product_uom_id"/>
+                                                        <!-- <span t-field="doc.mrp_id.product_qty"/>
+                                                        <span t-field="doc.mrp_id.product_uom_id"/> -->
                                                     </td>
                                                     <td width="30%">
                                                         <span>Pack No. ______</span>
@@ -560,7 +577,7 @@
                                                         <span>Date</span>
                                                     </td>
                                                     <td>
-                                                        <span t-field="doc.mrp_id.date_planned_start"/>
+                                                        <span t-esc="doc.mrp_id.date_planned_start.strftime('%d %B %Y')"/>
                                                     </td>
                                                     <td>
                                                         <span>Line </span>
@@ -575,13 +592,8 @@
                                                     <td>
                                                         <span t-field="doc.mrp_id.user_id"/>
                                                     </td>
-                                                    <t t-set="counter" t-value="0"/>
-                                                    <t t-foreach="doc.mrp_id.workorder_ids" t-as="wi">
-                                                        <t t-set="counter" t-value="counter + 1"/>
-                                                    </t>
                                                     <td>
-                                                        <span>Shift : <span t-esc="counter"/>
-                                                        </span>
+                                                        <span>Shift : ______</span>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -612,7 +624,15 @@
                                                         <span>Customer</span>
                                                     </td>
                                                     <td colspan="2">
-                                                        <span t-field="doc.mrp_id.x_studio_customer"/>
+                                                        <span t-field="doc.mrp_id.contact"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span>Description</span>
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <span t-field="doc.mrp_id.product_id.nama_alias"/>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -628,8 +648,8 @@
                                                         <span>Qty</span>
                                                     </td>
                                                     <td width="45%">
-                                                        <span t-field="doc.mrp_id.product_qty"/>
-                                                        <span t-field="doc.mrp_id.product_uom_id"/>
+                                                        <!-- <span t-field="doc.mrp_id.product_qty"/>
+                                                        <span t-field="doc.mrp_id.product_uom_id"/> -->
                                                     </td>
                                                     <td width="30%">
                                                         <span>Pack No. ______</span>
@@ -640,7 +660,7 @@
                                                         <span>Date</span>
                                                     </td>
                                                     <td>
-                                                        <span t-field="doc.mrp_id.date_planned_start"/>
+                                                        <span t-esc="doc.mrp_id.date_planned_start.strftime('%d %B %Y')"/>
                                                     </td>
                                                     <td>
                                                         <span>Line </span>
@@ -655,13 +675,8 @@
                                                     <td>
                                                         <span t-field="doc.mrp_id.user_id"/>
                                                     </td>
-                                                    <t t-set="counter" t-value="0"/>
-                                                    <t t-foreach="doc.mrp_id.workorder_ids" t-as="wi">
-                                                        <t t-set="counter" t-value="counter + 1"/>
-                                                    </t>
                                                     <td>
-                                                        <span>Shift : <span t-esc="counter"/>
-                                                        </span>
+                                                        <span>Shift : ______</span>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -690,7 +705,15 @@
                                                         <span>Customer</span>
                                                     </td>
                                                     <td colspan="2">
-                                                        <span t-field="doc.mrp_id.x_studio_customer"/>
+                                                        <span t-field="doc.mrp_id.contact"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span>Description</span>
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <span t-field="doc.mrp_id.product_id.nama_alias"/>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -706,8 +729,8 @@
                                                         <span>Qty</span>
                                                     </td>
                                                     <td width="45%">
-                                                        <span t-field="doc.mrp_id.product_qty"/>
-                                                        <span t-field="doc.mrp_id.product_uom_id"/>
+                                                        <!-- <span t-field="doc.mrp_id.product_qty"/>
+                                                        <span t-field="doc.mrp_id.product_uom_id"/> -->
                                                     </td>
                                                     <td width="30%">
                                                         <span>Pack No. ______</span>
@@ -718,7 +741,7 @@
                                                         <span>Date</span>
                                                     </td>
                                                     <td>
-                                                        <span t-field="doc.mrp_id.date_planned_start"/>
+                                                        <span t-esc="doc.mrp_id.date_planned_start.strftime('%d %B %Y')"/>
                                                     </td>
                                                     <td>
                                                         <span>Line </span>
@@ -733,13 +756,8 @@
                                                     <td>
                                                         <span t-field="doc.mrp_id.user_id"/>
                                                     </td>
-                                                    <t t-set="counter" t-value="0"/>
-                                                    <t t-foreach="doc.mrp_id.workorder_ids" t-as="wi">
-                                                        <t t-set="counter" t-value="counter + 1"/>
-                                                    </t>
                                                     <td>
-                                                        <span>Shift : <span t-esc="counter"/>
-                                                        </span>
+                                                        <span>Shift : ______</span>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -770,7 +788,15 @@
                                                         <span>Customer</span>
                                                     </td>
                                                     <td colspan="2">
-                                                        <span t-field="doc.mrp_id.x_studio_customer"/>
+                                                        <span t-field="doc.mrp_id.contact"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span>Description</span>
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <span t-field="doc.mrp_id.product_id.nama_alias"/>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -786,8 +812,8 @@
                                                         <span>Qty</span>
                                                     </td>
                                                     <td width="45%">
-                                                        <span t-field="doc.mrp_id.product_qty"/>
-                                                        <span t-field="doc.mrp_id.product_uom_id"/>
+                                                        <!-- <span t-field="doc.mrp_id.product_qty"/>
+                                                        <span t-field="doc.mrp_id.product_uom_id"/> -->
                                                     </td>
                                                     <td width="30%">
                                                         <span>Pack No. ______</span>
@@ -798,7 +824,7 @@
                                                         <span>Date</span>
                                                     </td>
                                                     <td>
-                                                        <span t-field="doc.mrp_id.date_planned_start"/>
+                                                        <span t-esc="doc.mrp_id.date_planned_start.strftime('%d %B %Y')"/>
                                                     </td>
                                                     <td>
                                                         <span>Line </span>
@@ -813,13 +839,8 @@
                                                     <td>
                                                         <span t-field="doc.mrp_id.user_id"/>
                                                     </td>
-                                                    <t t-set="counter" t-value="0"/>
-                                                    <t t-foreach="doc.mrp_id.workorder_ids" t-as="wi">
-                                                        <t t-set="counter" t-value="counter + 1"/>
-                                                    </t>
                                                     <td>
-                                                        <span>Shift : <span t-esc="counter"/>
-                                                        </span>
+                                                        <span>Shift : ______</span>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -848,7 +869,15 @@
                                                         <span>Customer</span>
                                                     </td>
                                                     <td colspan="2">
-                                                        <span t-field="doc.mrp_id.x_studio_customer"/>
+                                                        <span t-field="doc.mrp_id.contact"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span>Description</span>
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <span t-field="doc.mrp_id.product_id.nama_alias"/>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -864,8 +893,8 @@
                                                         <span>Qty</span>
                                                     </td>
                                                     <td width="45%">
-                                                        <span t-field="doc.mrp_id.product_qty"/>
-                                                        <span t-field="doc.mrp_id.product_uom_id"/>
+                                                        <!-- <span t-field="doc.mrp_id.product_qty"/>
+                                                        <span t-field="doc.mrp_id.product_uom_id"/> -->
                                                     </td>
                                                     <td width="30%">
                                                         <span>Pack No. ______</span>
@@ -876,7 +905,7 @@
                                                         <span>Date</span>
                                                     </td>
                                                     <td>
-                                                        <span t-field="doc.mrp_id.date_planned_start"/>
+                                                        <span t-esc="doc.mrp_id.date_planned_start.strftime('%d %B %Y')"/>
                                                     </td>
                                                     <td>
                                                         <span>Line </span>
@@ -891,13 +920,8 @@
                                                     <td>
                                                         <span t-field="doc.mrp_id.user_id"/>
                                                     </td>
-                                                    <t t-set="counter" t-value="0"/>
-                                                    <t t-foreach="doc.mrp_id.workorder_ids" t-as="wi">
-                                                        <t t-set="counter" t-value="counter + 1"/>
-                                                    </t>
                                                     <td>
-                                                        <span>Shift : <span t-esc="counter"/>
-                                                        </span>
+                                                        <span>Shift : ______</span>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -928,7 +952,15 @@
                                                         <span>Customer</span>
                                                     </td>
                                                     <td colspan="2">
-                                                        <span t-field="doc.mrp_id.x_studio_customer"/>
+                                                        <span t-field="doc.mrp_id.contact"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span>Description</span>
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <span t-field="doc.mrp_id.product_id.nama_alias"/>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -944,8 +976,8 @@
                                                         <span>Qty</span>
                                                     </td>
                                                     <td width="45%">
-                                                        <span t-field="doc.mrp_id.product_qty"/>
-                                                        <span t-field="doc.mrp_id.product_uom_id"/>
+                                                        <!-- <span t-field="doc.mrp_id.product_qty"/>
+                                                        <span t-field="doc.mrp_id.product_uom_id"/> -->
                                                     </td>
                                                     <td width="30%">
                                                         <span>Pack No. ______</span>
@@ -956,7 +988,7 @@
                                                         <span>Date</span>
                                                     </td>
                                                     <td>
-                                                        <span t-field="doc.mrp_id.date_planned_start"/>
+                                                        <span t-esc="doc.mrp_id.date_planned_start.strftime('%d %B %Y')"/>
                                                     </td>
                                                     <td>
                                                         <span>Line </span>
@@ -971,13 +1003,8 @@
                                                     <td>
                                                         <span t-field="doc.mrp_id.user_id"/>
                                                     </td>
-                                                    <t t-set="counter" t-value="0"/>
-                                                    <t t-foreach="doc.mrp_id.workorder_ids" t-as="wi">
-                                                        <t t-set="counter" t-value="counter + 1"/>
-                                                    </t>
                                                     <td>
-                                                        <span>Shift : <span t-esc="counter"/>
-                                                        </span>
+                                                        <span>Shift : ______</span>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -1006,7 +1033,15 @@
                                                         <span>Customer</span>
                                                     </td>
                                                     <td colspan="2">
-                                                        <span t-field="doc.mrp_id.x_studio_customer"/>
+                                                        <span t-field="doc.mrp_id.contact"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span>Description</span>
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <span t-field="doc.mrp_id.product_id.nama_alias"/>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -1022,8 +1057,8 @@
                                                         <span>Qty</span>
                                                     </td>
                                                     <td width="45%">
-                                                        <span t-field="doc.mrp_id.product_qty"/>
-                                                        <span t-field="doc.mrp_id.product_uom_id"/>
+                                                        <!-- <span t-field="doc.mrp_id.product_qty"/>
+                                                        <span t-field="doc.mrp_id.product_uom_id"/> -->
                                                     </td>
                                                     <td width="30%">
                                                         <span>Pack No. ______</span>
@@ -1034,7 +1069,7 @@
                                                         <span>Date</span>
                                                     </td>
                                                     <td>
-                                                        <span t-field="doc.mrp_id.date_planned_start"/>
+                                                        <span t-esc="doc.mrp_id.date_planned_start.strftime('%d %B %Y')"/>
                                                     </td>
                                                     <td>
                                                         <span>Line </span>
@@ -1049,13 +1084,8 @@
                                                     <td>
                                                         <span t-field="doc.mrp_id.user_id"/>
                                                     </td>
-                                                    <t t-set="counter" t-value="0"/>
-                                                    <t t-foreach="doc.mrp_id.workorder_ids" t-as="wi">
-                                                        <t t-set="counter" t-value="counter + 1"/>
-                                                    </t>
                                                     <td>
-                                                        <span>Shift : <span t-esc="counter"/>
-                                                        </span>
+                                                        <span>Shift : ______</span>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -1086,7 +1116,15 @@
                                                         <span>Customer</span>
                                                     </td>
                                                     <td colspan="2">
-                                                        <span t-field="doc.mrp_id.x_studio_customer"/>
+                                                        <span t-field="doc.mrp_id.contact"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span>Description</span>
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <span t-field="doc.mrp_id.product_id.nama_alias"/>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -1102,8 +1140,8 @@
                                                         <span>Qty</span>
                                                     </td>
                                                     <td width="45%">
-                                                        <span t-field="doc.mrp_id.product_qty"/>
-                                                        <span t-field="doc.mrp_id.product_uom_id"/>
+                                                        <!-- <span t-field="doc.mrp_id.product_qty"/>
+                                                        <span t-field="doc.mrp_id.product_uom_id"/> -->
                                                     </td>
                                                     <td width="30%">
                                                         <span>Pack No. ______</span>
@@ -1114,7 +1152,7 @@
                                                         <span>Date</span>
                                                     </td>
                                                     <td>
-                                                        <span t-field="doc.mrp_id.date_planned_start"/>
+                                                        <span t-esc="doc.mrp_id.date_planned_start.strftime('%d %B %Y')"/>
                                                     </td>
                                                     <td>
                                                         <span>Line </span>
@@ -1129,13 +1167,8 @@
                                                     <td>
                                                         <span t-field="doc.mrp_id.user_id"/>
                                                     </td>
-                                                    <t t-set="counter" t-value="0"/>
-                                                    <t t-foreach="doc.mrp_id.workorder_ids" t-as="wi">
-                                                        <t t-set="counter" t-value="counter + 1"/>
-                                                    </t>
                                                     <td>
-                                                        <span>Shift : <span t-esc="counter"/>
-                                                        </span>
+                                                        <span>Shift : ______</span>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -1164,7 +1197,15 @@
                                                         <span>Customer</span>
                                                     </td>
                                                     <td colspan="2">
-                                                        <span t-field="doc.mrp_id.x_studio_customer"/>
+                                                        <span t-field="doc.mrp_id.contact"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span>Description</span>
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <span t-field="doc.mrp_id.product_id.nama_alias"/>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -1180,8 +1221,8 @@
                                                         <span>Qty</span>
                                                     </td>
                                                     <td width="45%">
-                                                        <span t-field="doc.mrp_id.product_qty"/>
-                                                        <span t-field="doc.mrp_id.product_uom_id"/>
+                                                        <!-- <span t-field="doc.mrp_id.product_qty"/>
+                                                        <span t-field="doc.mrp_id.product_uom_id"/> -->
                                                     </td>
                                                     <td width="30%">
                                                         <span>Pack No. ______</span>
@@ -1192,7 +1233,7 @@
                                                         <span>Date</span>
                                                     </td>
                                                     <td>
-                                                        <span t-field="doc.mrp_id.date_planned_start"/>
+                                                        <span t-esc="doc.mrp_id.date_planned_start.strftime('%d %B %Y')"/>
                                                     </td>
                                                     <td>
                                                         <span>Line </span>
@@ -1207,13 +1248,8 @@
                                                     <td>
                                                         <span t-field="doc.mrp_id.user_id"/>
                                                     </td>
-                                                    <t t-set="counter" t-value="0"/>
-                                                    <t t-foreach="doc.mrp_id.workorder_ids" t-as="wi">
-                                                        <t t-set="counter" t-value="counter + 1"/>
-                                                    </t>
                                                     <td>
-                                                        <span>Shift : <span t-esc="counter"/>
-                                                        </span>
+                                                        <span>Shift : ______</span>
                                                     </td>
                                                 </tr>
                                             </table>
