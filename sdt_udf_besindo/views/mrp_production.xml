@@ -108,7 +108,7 @@
             <field name="inherit_id" ref="mrp.mrp_production_form_view" />
             <field name="arch" type="xml">
                 <field name="user_id" position="after">
-                    <field name="contact"/>
+                    <field name="contact" options="{'no_create':true, 'no_edit':true}"/>
                 </field>
                 <xpath expr="/form[1]/sheet[1]/notebook[1]/page[2]/field[1]" position="inside">
                     <tree editable="bottom" multi_edit="1">
