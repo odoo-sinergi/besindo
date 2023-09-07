@@ -347,7 +347,8 @@
                                      <td><span t-field="line.name"/> <span t-if="line.product_id.part_number"> <span t-if="line.product_id.part_number">(</span><span t-field="line.product_id.part_number"/><span t-if="line.product_id.part_number">)</span></span></td>
                                      <td class="text-center"><span t-esc="'%.2f'%line.quantity"/></td>
                                      <td class="text-center"><span><t t-esc="line.product_uom_id.name"/></span></td>
-                                     <td class="text-right"><span t-esc="'%.5f'%line.sdt_price_unit"/></td>
+                                     <!-- <td class="text-right"><span t-esc="'%.5f'%line.sdt_price_unit"/></td> -->
+                                     <td class="text-right"><span t-esc="'%.5f'%line.price_unit"/></td>
                                      <td class="text-right"><span t-esc="'%.0f'%line.discount"/></td>
                                      <td class="text-right"><span t-esc="'%.2f'%line.price_subtotal"/></td>
                                  </tr>
