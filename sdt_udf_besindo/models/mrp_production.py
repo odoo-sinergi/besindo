@@ -25,6 +25,7 @@ class MRPProduction(models.Model):
     def _onchange_contact(self):
         # for picking in self.picking_id:
             # picking.partner_id = self.contact
+        test = self
     
 
 class MRPWorkOrder(models.Model):
