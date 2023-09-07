@@ -332,12 +332,12 @@
                      <table>
                          <thead>
                             <tr style="font-Size:11;text-align:center;border-bottom:2px solid black;">
-                                 <th class="text-center"> Description</th>
-                                 <th class="text-center">Qty</th>
-                                 <th class="text-center">UoM</th>
-                                 <th class="text-center">Unit Price</th>
-                                 <th class="text-center">Discount</th>
-                                 <th class="text-center">Total</th>
+                                 <th class="text-center" style="width: 50%;"> Description</th>
+                                 <th class="text-center" style="width: 10%;">Qty</th>
+                                 <th class="text-center" style="width: 5%;">UoM</th>
+                                 <th class="text-center" style="width: 15%;">Unit Price</th>
+                                 <th class="text-center" style="width: 5%;">Discount</th>
+                                 <th class="text-center" style="width: 20%;">Total</th>
                             </tr>
                          </thead>
                              <tbody>
@@ -348,21 +348,23 @@
                                      <td class="text-center"><span t-esc="'%.2f'%line.quantity"/></td>
                                      <td class="text-center"><span><t t-esc="line.product_uom_id.name"/></span></td>
                                      <!-- <td class="text-right"><span t-esc="'%.5f'%line.sdt_price_unit"/></td> -->
-                                     <t t-if="doc.currency_id.symbol == 'Rp'"><span t-esc="'{0:,.2f}'.format(line.price_unit)"/></t>
-                                     <t t-if="doc.currency_id.symbol == '$'"><span t-esc="'{0:,.5f}'.format(line.price_unit)"/></t>
+                                     <td class="text-right">
+                                        <t t-if="doc.currency_id.symbol == 'Rp'"><span t-esc="'{0:,.2f}'.format(line.price_unit)"/></t>
+                                        <t t-if="doc.currency_id.symbol == '$'"><span t-esc="'{0:,.5f}'.format(line.price_unit)"/></t>
+                                     </td>
                                      <td class="text-right"><span t-esc="'%.0f'%line.discount"/></td>
                                      <td class="text-right"><span t-esc="'%.2f'%line.price_subtotal"/></td>
                                  </tr>
 
                                  <tr>
                                     <td rowspan="6"/>
-                                    <td class="text-right" colspan="4">Subtotal</td>
+                                    <td class="text-right" colspan="2">Subtotal</td>
                                     <td class="text-right">
                                         <span t-field="doc.currency_id.symbol"/> <span t-field="doc.amount_untaxed" t-options="{'widget': 'float', 'precision': 2}"/>
                                     </td>
                                  </tr>
                                  <tr>
-                                    <td class="text-right" colspan="4">Discount</td>
+                                    <td class="text-right" colspan="2">Discount</td>
                                     <td class="text-right">
                                         <span t-field="doc.currency_id.symbol"/> <span t-esc="'%.2f'%total_discount"/>
                                         <!-- <span t-field="doc.currency_id.symbol"/> <span t-field="doc.total_discount" t-options="{'widget': 'float', 'precision': 2}"/> -->
@@ -370,7 +372,7 @@
                                  </tr>
 
                                  <tr>
-                                    <td class="text-right" colspan="4">VAT</td>
+                                    <td class="text-right" colspan="2">VAT</td>
                                     <td class="text-right">
                                         <span t-field="doc.currency_id.symbol"/> <span t-field="doc.amount_ppn" t-options="{'widget': 'float', 'precision': 2}"/>
 
@@ -378,14 +380,14 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="text-right" colspan="4">PPh</td>
+                                    <td class="text-right" colspan="2">PPh</td>
                                     <td class="text-right">
                                         <!-- <span t-field="doc.amount_pph" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/> -->
                                         <span t-field="doc.currency_id.symbol"/> <span t-field="doc.amount_pph" t-options="{'widget': 'float', 'precision': 2}"/>
                                     </td>
                                 </tr>
                                 <tr>
-                                   <td class="text-right" colspan="4"><strong>Grand Total</strong></td>
+                                   <td class="text-right" colspan="2"><strong>Grand Total</strong></td>
                                     <td class="text-right">
                                         <span t-field="doc.currency_id.symbol"/> <span t-field="doc.amount_total" t-options="{'widget': 'float', 'precision': 2}"/>
                                         <!-- <span t-field="doc.amount_total" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/> -->
