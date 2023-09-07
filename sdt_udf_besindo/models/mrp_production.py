@@ -21,6 +21,11 @@ class MRPProduction(models.Model):
             else :
                 workorder_id.name = ""
     
+    @api.onchange('contact')
+    def _onchange_contact(self):
+        for picking in self.picking_id:
+            picking.contact = self.contact
+    
 
 class MRPWorkOrder(models.Model):
     _inherit = "mrp.workorder"
