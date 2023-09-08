@@ -80,7 +80,7 @@
                     <td>Nomor : </td>
                     <span t-field="doc.name"/>
                 </h1>
-                <div style="font-Size:16px;" class="row mt16">
+                <div style="font-Size:14px;" class="row mt16">
                     <div class="col-6">
                         <td style="font-weight:bold;">INVOICE TO : </td>
                         <div t-field="doc.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
