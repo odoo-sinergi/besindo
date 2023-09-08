@@ -223,6 +223,7 @@
                                     <span t-field="sdt_partner_bank_id.partner_id"/>
                                     <span t-field="sdt_partner_bank_id.acc_holder_name"/>
                                     <br/>
+                                    <span t-field="sdt_partner_bank_id.bank_id.name"
                                     <span t-field="sdt_partner_bank_id.bank_id.street"/>
                                     <br/>
                                     <span t-field="sdt_partner_bank_id.acc_number"/>
