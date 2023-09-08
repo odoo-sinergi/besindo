@@ -22,7 +22,7 @@
             report_type="qweb-pdf"
             file="account.move"
             name="form_standard_odoo.standard_sales_invoice_report"
-            paperformat="form_standard_odoo.paperformat_sdt_standard_form"
+            paperformat="form_standard_odoo.paperformat_sdt_standard_form_invoice"
             print_report_name="'SDT Standard - Invoices - %s' % (object.name)">
         </report>
 
