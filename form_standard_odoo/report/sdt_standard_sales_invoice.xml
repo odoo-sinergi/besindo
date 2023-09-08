@@ -95,30 +95,30 @@
                                 </td>
                             </tr>
                             <tr style="border: 2px solid white">
-                                <td style="border: 2px solid white; padding: 0px;">Due Date</td>
-                                <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                <td style="border: 2px solid white; padding: 0px;">
+                                <td style="border: 2px solid white; padding: 0px;" width="39%">Due Date</td>
+                                <td style="border: 2px solid white; padding: 0px;" width="1%"> : </td>
+                                <td style="border: 2px solid white; padding: 0px;" width="60%">
                                     <span t-field="doc.invoice_date_due" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/>
                                 </td>
                             </tr>
                             <tr style="border: 2px solid white">
-                                <td style="border: 2px solid white; padding: 0px;">Payment Term</td>
-                                <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                <td style="border: 2px solid white; padding: 0px;">
+                                <td style="border: 2px solid white; padding: 0px;" width="39%">Payment Term</td>
+                                <td style="border: 2px solid white; padding: 0px;" width="1%"> : </td>
+                                <td style="border: 2px solid white; padding: 0px;" width="60%">
                                     <span t-field="doc.invoice_payment_term_id"/>
                                 </td>
                             </tr>
                             <tr style="border: 2px solid white">
-                                <td style="border: 2px solid white; padding: 0px;">SO No</td>
-                                <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                <td style="border: 2px solid white; padding: 0px;">
+                                <td style="border: 2px solid white; padding: 0px;" width="39%">SO No</td>
+                                <td style="border: 2px solid white; padding: 0px;" width="1%"> : </td>
+                                <td style="border: 2px solid white; padding: 0px;" width="60%">
                                     <span t-field="doc.invoice_origin"/>
                                 </td>
                             </tr>
                             <tr style="border: 2px solid white">
-                                <td style="border: 2px solid white; padding: 0px;">DO Number</td>
-                                <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                <td style="border: 2px solid white; padding: 0px;">
+                                <td style="border: 2px solid white; padding: 0px;" width="39%">DO Number</td>
+                                <td style="border: 2px solid white; padding: 0px;" width="1%"> : </td>
+                                <td style="border: 2px solid white; padding: 0px;" width="60%">
                                     <span t-field="doc.do_number"/>
                                 </td>
                             </tr>
