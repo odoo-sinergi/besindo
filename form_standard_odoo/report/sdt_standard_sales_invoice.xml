@@ -3,7 +3,7 @@
         <record id="paperformat_sdt_standard_form_invoice" model="report.paperformat">
             <field name="name">SDT Standard Form Invoice</field>
             <field name="default" eval="True"/>
-            <field name="format">Custom</field>
+            <field name="format">custom</field>
             <field name="page_height">279</field>
             <field name="page_width">241</field>
             <field name="orientation">Portrait</field>
