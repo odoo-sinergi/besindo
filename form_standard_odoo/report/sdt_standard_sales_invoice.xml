@@ -148,7 +148,7 @@
                                     <t t-esc="line.product_uom_id.name"/>
                                 </span>
                             </td>
-                            <td class="text-right">
+                            <td style="text-align:right;">
                                 <span t-field="doc.currency_id.symbol"/>
                                 <t t-if="doc.currency_id.symbol == 'Rp'">
                                     <span t-esc="'{0:,.2f}'.format(line.price_unit)"/>
@@ -157,45 +157,45 @@
                                     <span t-esc="'{0:,.5f}'.format(line.price_unit)"/>
                                 </t>
                             </td>
-                            <td class="text-right">
+                            <td style="text-align:right;">
                                 <span t-esc="'%.0f'%line.discount"/>
                             </td>
-                            <td class="text-right">
+                            <td style="text-align:right;">
                                 <span t-field="line.price_subtotal"/>
                             </td>
                         </tr>
 
                         <tr>
                             <td rowspan="6" colspan="3"/>
-                            <td class="text-right" colspan="2">Subtotal</td>
-                            <td class="text-right">
+                            <td style="text-align:right;" colspan="2">Subtotal</td>
+                            <td style="text-align:right;">
                                 <span t-field="doc.amount_untaxed" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-right" colspan="2">Discount</td>
-                            <td class="text-right">
+                            <td style="text-align:right;" colspan="2">Discount</td>
+                            <td style="text-align:right;">
                                 <span t-esc="'%.2f'%total_discount"/>
                             </td>
                         </tr>
 
                         <tr>
-                            <td class="text-right" colspan="2">VAT</td>
-                            <td class="text-right">
+                            <td style="text-align:right;" colspan="2">VAT</td>
+                            <td style="text-align:right;">
                                 <span t-field="doc.amount_ppn" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-right" colspan="2">PPh</td>
-                            <td class="text-right">
+                            <td style="text-align:right;" colspan="2">PPh</td>
+                            <td style="text-align:right;">
                                 <span t-field="doc.amount_pph" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-right" colspan="2">
+                            <td style="text-align:right;" colspan="2">
                                 <strong>Grand Total</strong>
                             </td>
-                            <td class="text-right">
+                            <td style="text-align:right;">
                                 <span t-field="doc.amount_total" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
                             </td>
                         </tr>
