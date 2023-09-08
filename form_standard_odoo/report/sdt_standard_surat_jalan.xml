@@ -159,18 +159,18 @@
                 <table>
                     <thead>
                         <tr>
-                            <th class="text-center" style="border:0px solid black; width: 5%">No</th>
-                            <th class="text-center" style="border:0px solid black; width: 15%">Part No.</th>
-                            <th class="text-center" style="border:0px solid black; width: 50%">Part Name</th>
-                            <!-- <th class="text-center" style="border:0px solid black; width: 30%">Deskripsi</th> -->
-                            <th class="text-center" style="border:0px solid black; width: 30%">Qty</th>
-                            <!-- <th class="text-center" style="border:0px solid black; width: 20%">Keterangan</th> -->
+                            <th style="text-align:center; border:0px solid black; width: 5%">No</th>
+                            <th style="text-align:center; border:0px solid black; width: 15%">Part No.</th>
+                            <th style="text-align:center; border:0px solid black; width: 50%">Part Name</th>
+                            <!-- <th style="text-align:center; border:0px solid black; width: 30%">Deskripsi</th> -->
+                            <th style="text-align:center; border:0px solid black; width: 30%">Qty</th>
+                            <!-- <th style="text-align:center; border:0px solid black; width: 20%">Keterangan</th> -->
                         </tr>
                     </thead>
                     <tbody class="lines_tbody">
                         <t t-set="LineNum" t-value="1"/>
                         <tr t-foreach="doc.move_ids" t-as="move_lines">
-                            <td class="text-center" style="border:0px solid black;">
+                            <td style="text-align:center; border:0px solid black;">
                                 <span>
                                     <t t-esc="LineNum"/>
                                 </span>
@@ -189,11 +189,10 @@
                                 </td>
                             </t>
                             <!-- <td class="text-left" style="border:0px solid black;"><span t-field="move_lines.product_id.product_tmpl_id"/></td> -->
-                            <td class="text-center" style="border:0px solid black;">
+                            <td style="text-align:center; border:0px solid black;">
                                 <span t-field="move_lines.quantity_done"/>
                             </td>
                             <!-- <td class="text-center" style="border:0px solid black;"><span t-field="move_lines.description_picking"/></td> -->
-                            <td class="text-center" style="border:0px solid black;"></td>
                             <t t-set="LineNum" t-value="LineNum+1"/>
                         </tr>
                     </tbody>
@@ -219,7 +218,7 @@
                                 </tr>
                             </tbody>
                          </table> -->
-                <div class="row mt32 mb32">
+                <!-- <div class="row mt32 mb32">
                     <div class="col-5">
                         <p>Barang yang sudah diterima dalam keadaan baik oleh: <br/>
                                  *Tanda Tangan dan Cap(Stempel) Perusahaan </p>
@@ -229,27 +228,31 @@
                             <br/>
                                  *Page 1 &amp; 3: Internal, 2: Penerima/Pembeli</p>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="center">
-                    <table >
+                    <
+                    <table style="border: 0px solid white; padding: 0px;">
                         <thead>
-                            <tr>
-                                <td style="width: 33%; height: 10px;" align="center">Mengetahui</td>
-                                <td style="width: 33%; height: 10px;" align="center">Bagian Pengiriman</td>
-                                <td style="width: 33%; height: 10px;" align="center">Penerima/Pembeli</td>
+                            <tr style="border: 0px solid white; padding: 0px;">
+                                <td style="width: 25%; height: 10px; border: 0px solid white; padding: 0px;" align="center">Penerima</td>
+                                <td style="width: 25%; height: 10px; border: 0px solid white; padding: 0px;" align="center">Pengirim</td>
+                                <td style="width: 25%; height: 10px; border: 0px solid white; padding: 0px;" align="center">Pengawas</td>
+                                <td style="width: 25%; height: 10px; border: 0px solid white; padding: 0px;" align="center"></td>
                             </tr>
-                            <tr style="height: 70px;">
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                            <tr style="height: 70px; border: 0px solid white; padding: 0px;">
+                                <td style="border: 0px solid white; padding: 0px;"></td>
+                                <td style="border: 0px solid white; padding: 0px;"></td>
+                                <td style="border: 0px solid white; padding: 0px;"></td>
+                                <td style="border: 0px solid white; padding: 0px;"></td>
                             </tr>
                         </thead>
                         <tbody>
                             <tr t-foreach="doc" t-as="move_lines">
-                                <td align="center"></td>
-                                <td align="center"></td>
-                                <td align="center"></td>
+                                <td style="border: 0px solid white; padding: 0px;" align="center"></td>
+                                <td style="border: 0px solid white; padding: 0px;" align="center"></td>
+                                <td style="border: 0px solid white; padding: 0px;" align="center"></td>
+                                <td style="border: 0px solid white; padding: 0px;" align="center"></td>
                             </tr>
                         </tbody>
                     </table>
