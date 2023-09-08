@@ -120,12 +120,12 @@
                 <table>
                     <thead>
                         <tr style="font-Size:11;text-align:center;border-bottom:2px solid black;">
-                            <th class="text-center">Description</th>
-                            <th class="text-center">Qty</th>
-                            <th class="text-center">UoM</th>
-                            <th class="text-center">Unit Price</th>
-                            <th class="text-center">Discount</th>
-                            <th class="text-center">Total</th>
+                            <th style="text-align:center; width:50%;">Description</th>
+                            <th style="text-align:center; width:7%;">Qty</th>
+                            <th style="text-align:center; width:8%;">UoM</th>
+                            <th style="text-align:center; width:15%;">Unit Price</th>
+                            <th style="text-align:center; width:5%;">Discount</th>
+                            <th style="text-align:center; width:15%;">Total</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -140,10 +140,10 @@
                                     <span t-if="line.product_id.part_number">)</span>
                                 </span>
                             </td>
-                            <td class="text-center">
+                            <td style="text-align:center;">
                                 <span t-esc="'%.2f'%line.quantity"/>
                             </td>
-                            <td class="text-center">
+                            <td style="text-align:center;">
                                 <span>
                                     <t t-esc="line.product_uom_id.name"/>
                                 </span>
