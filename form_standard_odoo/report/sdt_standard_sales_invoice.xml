@@ -1,6 +1,29 @@
 <odoo>
     <data>
-        <report id="report_standard_sales_invoice_menu" string="SDT Standard - Invoices" model="account.move" report_type="qweb-pdf" file="account.move" name="form_standard_odoo.standard_sales_invoice_report" paperformat="form_standard_odoo.paperformat_sdt_standard_form" print_report_name="'SDT Standard - Invoices - %s' % (object.name)">
+        <record id="paperformat_sdt_standard_form_sj_delivery" model="report.paperformat">
+            <field name="name">SDT Standard Form Invoice</field>
+            <field name="default" eval="True"/>
+            <!-- <field name="format">A5</field> -->
+            <field name="page_height">279</field>
+            <field name="page_width">241</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">10</field>
+            <field name="dpi">80</field>
+        </record>
+        <report
+            id="report_standard_sales_invoice_menu"
+            string="SDT Standard - Invoices"
+            model="account.move"
+            report_type="qweb-pdf"
+            file="account.move"
+            name="form_standard_odoo.standard_sales_invoice_report"
+            paperformat="form_standard_odoo.paperformat_sdt_standard_form"
+            print_report_name="'SDT Standard - Invoices - %s' % (object.name)">
         </report>
 
         <template id="standard_sales_invoice_report">
@@ -164,7 +187,6 @@
                                 <span t-field="line.price_subtotal"/>
                             </td>
                         </tr>
-
                         <tr>
                             <td rowspan="6" colspan="3"/>
                             <td style="text-align:right;" colspan="2">Subtotal</td>
