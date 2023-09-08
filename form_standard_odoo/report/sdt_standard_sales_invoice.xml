@@ -158,9 +158,7 @@
                             <td>
                                 <span t-field="line.name"/>
                                 <span t-if="line.product_id.part_number">
-                                    <span t-if="line.product_id.part_number">(</span>
-                                    <span t-field="line.product_id.part_number"/>
-                                    <span t-if="line.product_id.part_number">)</span>
+                                    (<span t-field="line.product_id.part_number"/>)
                                 </span>
                             </td>
                             <td style="text-align:center;">
