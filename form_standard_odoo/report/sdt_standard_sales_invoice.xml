@@ -75,8 +75,8 @@
                            margin-bottom: 10px;
                         }
                 </style>
-                <h1 style="font-Size:16px;text-align: center;">
-                    <div style="font-Size:16px;text-align: center;text-decoration: underline;font-weight:bold;">INVOICE</div>
+                <h1 style="font-Size:18px;text-align: center;">
+                    <div style="font-Size:18px;text-align: center;text-decoration: underline;font-weight:bold;">INVOICE</div>
                     <td>Nomor : </td>
                     <span t-field="doc.name"/>
                 </h1>
@@ -143,12 +143,12 @@
                 <table>
                     <thead>
                         <tr style="font-Size:11;text-align:center;border-bottom:2px solid black;">
-                            <th style="text-align:center; width:50%;">Description</th>
-                            <th style="text-align:center; width:7%;">Qty</th>
-                            <th style="text-align:center; width:8%;">UoM</th>
-                            <th style="text-align:center; width:15%;">Unit Price</th>
-                            <th style="text-align:center; width:5%;">Discount</th>
-                            <th style="text-align:center; width:15%;">Total</th>
+                            <th style="text-align:center; width:50%;">DESCRIPTION</th>
+                            <th style="text-align:center; width:7%;">QTY</th>
+                            <th style="text-align:center; width:8%;">UOM</th>
+                            <th style="text-align:center; width:15%;">UNIT PRICE</th>
+                            <th style="text-align:center; width:5%;">DISC.</th>
+                            <th style="text-align:center; width:15%;">TOTAL</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -256,6 +256,9 @@
                     </div>
                     <div class="col-3">
                         <p>Approved By</p>
+                        <br/>
+                        <br/>
+                        <br/>
                         <br/>
                         <br/>
                         <br>__________________</br>
