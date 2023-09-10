@@ -171,12 +171,7 @@
                             </td>
                             <td style="text-align:right;">
                                 <span t-field="doc.currency_id.symbol"/>
-                                <t t-if="doc.currency_id.symbol == 'Rp'">
-                                    <span t-esc="'{0:,.2f}'.format(line.price_unit)"/>
-                                </t>
-                                <t t-if="doc.currency_id.symbol == '$'">
-                                    <span t-esc="'{0:,.2f}'.format(line.price_unit)"/>
-                                </t>
+                                <span t-esc="'{0:,.2f}'.format(line.price_unit)"/>
                             </td>
                             <td style="text-align:right;">
                                 <span t-esc="'%.0f'%line.discount"/>
