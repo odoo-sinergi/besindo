@@ -175,7 +175,7 @@
                                     <span t-esc="'{0:,.2f}'.format(line.price_unit)"/>
                                 </t>
                                 <t t-if="doc.currency_id.symbol == '$'">
-                                    <span t-esc="'{0:,.5f}'.format(line.price_unit)"/>
+                                    <span t-esc="'{0:,.2f}'.format(line.price_unit)"/>
                                 </t>
                             </td>
                             <td style="text-align:right;">
@@ -211,7 +211,7 @@
                                 <span t-field="doc.amount_pph" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
                             </td>
                         </tr>
-                        <tr>
+                        <tr style="font-Size:16px;">
                             <td style="text-align:right;" colspan="2">
                                 <strong>Grand Total</strong>
                             </td>
@@ -221,11 +221,11 @@
                         </tr>
                     </tbody>
                 </table>
-                <p>Terbilang : <span t-esc="doc.terbilang_idr()"/>
+                <p style="font-Size:18px;">Terbilang : <span t-esc="doc.terbilang_idr()"/>
                 </p>
-                <p>Tax Invoice Number : <span t-field="doc.no_faktur_pajak"/>
+                <p style="font-Size:18px;">Tax Invoice Number : <span t-field="doc.no_faktur_pajak"/>
                 </p>
-                <div style="font-Size:16px;" class="row mt16">
+                <div style="font-Size:18px;" class="row mt16">
                     <div class="col-6">
                         <td style="font-weight:bold;">Notes : </td>
                         <div t-field="doc.narration"/>
@@ -233,7 +233,7 @@
                 </div>
                 <br/>
                 <div class="row mt32 mb32">
-                    <div class="col-5">
+                    <div style="font-Size:18px;" class="col-5">
                         <span>
                             <b>DETAIL PAYMENT</b>
                         </span>
