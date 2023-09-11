@@ -221,7 +221,7 @@
                             </td>
                         </tr>
                 </table>
-                <p style="font-Size:18px;">Terbilang : <span t-if="doc.currency_id.symbol=='Rp'" t-esc="doc.terbilang_idr()"/><span t-if="doc.currency_id.symbol=='$'" t-esc="doc.terbilang_usd()"/>
+                <p style="font-Size:18px;"><span t-if="doc.currency_id.symbol=='Rp'" t-esc="'%s : %s'%('Terbilang', doc.terbilang_idr())"/><span t-if="doc.currency_id.symbol=='$'" t-esc="'%s : %s'%('Amount',doc.terbilang_usd())"/>
                 </p>
                 <p style="font-Size:18px;">Tax Invoice Number : <span t-field="doc.no_faktur_pajak"/>
                 </p>
