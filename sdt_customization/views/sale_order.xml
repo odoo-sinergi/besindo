@@ -13,7 +13,7 @@
                 <attribute name="on_change">1</attribute>
             </xpath>
             <xpath expr="//group[@name='partner_details']/field[@name='partner_invoice_id']" position="attributes">
-                <attribute name="domain">['|',('type','=','invoice'),('id', '=', partner_id.id)]</attribute>
+                <attribute name="domain">['|',('type','=','invoice'),('id', '=', partner_id)]</attribute>
                 <attribute name="on_change">1</attribute>
             </xpath>
             <xpath expr="//field[@name='partner_shipping_id']" position="attributes">
