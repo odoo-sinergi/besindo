@@ -103,21 +103,21 @@
                             <tr style="border: 2px solid white">
                                 <td style="border: 2px solid white; padding: 0px;" width="39%">SO No</td>
                                 <td style="border: 2px solid white; padding: 0px;" width="1%"> : </td>
-                                <td style="border: 2px solid white; padding: 0px;" width="60%">
+                                <td style="font-Size:14px; border: 2px solid white; padding: 0px;" width="60%">
                                     <span t-field="doc.invoice_origin"/>
                                 </td>
                             </tr>
                             <tr style="border: 2px solid white">
                                 <td style="border: 2px solid white; padding: 0px;" width="39%">DO Number</td>
                                 <td style="border: 2px solid white; padding: 0px;" width="1%"> : </td>
-                                <td style="border: 2px solid white; padding: 0px;" width="60%">
+                                <td style="font-Size:14px; border: 2px solid white; padding: 0px;" width="60%">
                                     <span t-field="doc.do_number"/>
                                 </td>
                             </tr>
                             <tr style="border: 2px solid white">
                                 <td style="border: 2px solid white; padding: 0px;">PO Number</td>
                                 <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                <td style="border: 2px solid white; padding: 0px;">
+                                <td style="font-Size:14px; border: 2px solid white; padding: 0px;">
                                     <span t-field="doc.ref"/>
                                 </td>
                             </tr>
@@ -177,44 +177,45 @@
                         </tr>
                     </tbody>
                 </table>
-                <table>
-                        <tr>
-                            <td rowspan="6" colspan="3"/>
-                            <td style="text-align:right;" colspan="2">Subtotal</td>
-                            <td style="text-align:right;">
+                
+                <table style="border: 0px;">
+                        <tr style="">
+                            <td style="text-align:right; border:0px; width:65%" rowspan="5"/>
+                            <td style="text-align:right; border:1px solid black; width:20%;">Subtotal</td>
+                            <td style="text-align:right; border:1px solid black; width:15%">
                                 <!--<span t-field="doc.amount_untaxed" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>-->
                                 <span t-field="doc.currency_id.symbol"/>
                                 <span t-esc="'%.2f'%doc.amount_untaxed"/>
                             </td>
                         </tr>
-                        <tr>
-                            <td style="text-align:right;" colspan="2">Discount</td>
-                            <td style="text-align:right;">
+                        <tr style="">
+                            <td style="text-align:right; border:1px solid black;">Discount</td>
+                            <td style="text-align:right; border:1px solid black;">
                                 <span t-esc="'%.2f'%total_discount"/>
                             </td>
                         </tr>
 
-                        <tr>
-                            <td style="text-align:right;" colspan="2">VAT</td>
-                            <td style="text-align:right;">
+                        <tr style="">
+                            <td style="text-align:right; border:1px solid black;">VAT</td>
+                            <td style="text-align:right; border:1px solid black;">
                                 <!--<span t-field="doc.amount_ppn" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>-->
                                 <span t-field="doc.currency_id.symbol"/>
                                 <span t-esc="'%.2f'%doc.amount_ppn"/>
                             </td>
                         </tr>
-                        <tr>
-                            <td style="text-align:right;" colspan="2">PPh</td>
-                            <td style="text-align:right;">
+                        <tr style="">
+                            <td style="text-align:right; border:1px solid black;">PPh</td>
+                            <td style="text-align:right; border:1px solid black;">
                                 <!--<span t-field="doc.amount_pph" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>-->
                                 <span t-field="doc.currency_id.symbol"/>
                                 <span t-esc="'%.2f'%doc.amount_pph"/>
                             </td>
                         </tr>
                         <tr style="font-Size:18px;">
-                            <td style="text-align:right;" colspan="2">
+                            <td style="text-align:right; border:1px solid black;">
                                 <strong>Grand Total</strong>
                             </td>
-                            <td style="text-align:right;">
+                            <td style="text-align:right; border:1px solid black;">
                                 <!--<span t-field="doc.amount_total" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>-->
                                 <span t-field="doc.currency_id.symbol"/>
                                 <span t-esc="'%.2f'%doc.amount_total"/>
