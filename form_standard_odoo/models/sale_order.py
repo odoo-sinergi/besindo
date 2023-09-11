@@ -7,12 +7,16 @@ class SaleOrder(models.Model):
 
     def terbilang_idr(self):
         return terbilang.terbilang(self.amount_total, 'idr', 'id')
+    
+    def terbilang_usd(self):
+        return terbilang.terbilang(self.amount_total, 'usd', 'us')
 
     def render_html(self, data=None):
         report_obj = self.env['report']
         report = report_obj._get_report_from_name(self._template)
         docargs = {
             'terbilang_idr': self.terbilang_idr,
+            'terbilang_usd': self.terbilang_usd,
             'doc_ids': self._ids,
             'doc_model': report.model,
             'docs': self,

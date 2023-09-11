@@ -15,15 +15,7 @@
             <field name="header_spacing">35</field>
             <field name="dpi">80</field>
         </record>
-        <report
-            id="report_standard_sales_invoice_menu"
-            string="SDT Standard - Invoices"
-            model="account.move"
-            report_type="qweb-pdf"
-            file="account.move"
-            name="form_standard_odoo.standard_sales_invoice_report"
-            paperformat="form_standard_odoo.paperformat_sdt_standard_form_invoice"
-            print_report_name="'SDT Standard - Invoices - %s' % (object.name)">
+        <report id="report_standard_sales_invoice_menu" string="SDT Standard - Invoices" model="account.move" report_type="qweb-pdf" file="account.move" name="form_standard_odoo.standard_sales_invoice_report" paperformat="form_standard_odoo.paperformat_sdt_standard_form_invoice" print_report_name="'SDT Standard - Invoices - %s' % (object.name)">
         </report>
 
         <template id="standard_sales_invoice_report">
@@ -75,8 +67,8 @@
                            margin-bottom: 10px;
                         }
                 </style>
-                <h1 style="font-Size:16px;text-align: center;">
-                    <div style="font-Size:16px;text-align: center;text-decoration: underline;font-weight:bold;">INVOICE</div>
+                <h1 style="font-Size:18px;text-align: center;">
+                    <div style="font-Size:18px;text-align: center;text-decoration: underline;font-weight:bold;">INVOICE</div>
                     <td>Nomor : </td>
                     <span t-field="doc.name"/>
                 </h1>
@@ -143,12 +135,12 @@
                 <table>
                     <thead>
                         <tr style="font-Size:11;text-align:center;border-bottom:2px solid black;">
-                            <th style="text-align:center; width:50%;">Description</th>
-                            <th style="text-align:center; width:7%;">Qty</th>
-                            <th style="text-align:center; width:8%;">UoM</th>
-                            <th style="text-align:center; width:15%;">Unit Price</th>
-                            <th style="text-align:center; width:5%;">Discount</th>
-                            <th style="text-align:center; width:15%;">Total</th>
+                            <th style="text-align:center; width:50%;">DESCRIPTION</th>
+                            <th style="text-align:center; width:7%;">QTY</th>
+                            <th style="text-align:center; width:8%;">UOM</th>
+                            <th style="text-align:center; width:15%;">UNIT PRICE</th>
+                            <th style="text-align:center; width:5%;">DISC.</th>
+                            <th style="text-align:center; width:15%;">TOTAL</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -158,7 +150,9 @@
                             <td>
                                 <span t-field="line.name"/>
                                 <t t-if="line.product_id.part_number">
-                                    <span>(<span t-field="line.product_id.part_number"/>)</span>
+                                    <span>
+                                        (<span t-field="line.product_id.part_number"/>)
+                                    </span>
                                 </t>
                             </td>
                             <td style="text-align:center;">
@@ -171,61 +165,69 @@
                             </td>
                             <td style="text-align:right;">
                                 <span t-field="doc.currency_id.symbol"/>
-                                <t t-if="doc.currency_id.symbol == 'Rp'">
-                                    <span t-esc="'{0:,.2f}'.format(line.price_unit)"/>
-                                </t>
-                                <t t-if="doc.currency_id.symbol == '$'">
-                                    <span t-esc="'{0:,.5f}'.format(line.price_unit)"/>
-                                </t>
+                                <span t-if="doc.currency_id.symbol == 'Rp'" t-esc="'%.2f'%line.price_unit"/>
+                                <span t-if="doc.currency_id.symbol == '$'" t-esc="'%.5f'%line.price_unit"/>
                             </td>
                             <td style="text-align:right;">
                                 <span t-esc="'%.0f'%line.discount"/>
                             </td>
                             <td style="text-align:right;">
-                                <span t-field="line.price_subtotal"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td rowspan="6" colspan="3"/>
-                            <td style="text-align:right;" colspan="2">Subtotal</td>
-                            <td style="text-align:right;">
-                                <span t-field="doc.amount_untaxed" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align:right;" colspan="2">Discount</td>
-                            <td style="text-align:right;">
-                                <span t-esc="'%.2f'%total_discount"/>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td style="text-align:right;" colspan="2">VAT</td>
-                            <td style="text-align:right;">
-                                <span t-field="doc.amount_ppn" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align:right;" colspan="2">PPh</td>
-                            <td style="text-align:right;">
-                                <span t-field="doc.amount_pph" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align:right;" colspan="2">
-                                <strong>Grand Total</strong>
-                            </td>
-                            <td style="text-align:right;">
-                                <span t-field="doc.amount_total" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
+                                <!--<span t-field="line.price_subtotal"/>-->
+                                <span t-field="doc.currency_id.symbol"/>
+                                <span t-esc="'%.2f'%line.price_subtotal"/>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <p>Terbilang : <span t-esc="doc.terbilang_idr()"/>
+                <table>
+                    <tr>
+                        <td rowspan="6" colspan="3"/>
+                        <td style="text-align:right;" colspan="2">Subtotal</td>
+                        <td style="text-align:right;">
+                            <!--<span t-field="doc.amount_untaxed" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>-->
+                            <span t-field="doc.currency_id.symbol"/>
+                            <span t-esc="'%.2f'%doc.amount_untaxed"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right;" colspan="2">Discount</td>
+                        <td style="text-align:right;">
+                            <span t-esc="'%.2f'%total_discount"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="text-align:right;" colspan="2">VAT</td>
+                        <td style="text-align:right;">
+                            <!--<span t-field="doc.amount_ppn" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>-->
+                            <span t-field="doc.currency_id.symbol"/>
+                            <span t-esc="'%.2f'%doc.amount_ppn"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right;" colspan="2">PPh</td>
+                        <td style="text-align:right;">
+                            <!--<span t-field="doc.amount_pph" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>-->
+                            <span t-field="doc.currency_id.symbol"/>
+                            <span t-esc="'%.2f'%doc.amount_pph"/>
+                        </td>
+                    </tr>
+                    <tr style="font-Size:18px;">
+                        <td style="text-align:right;" colspan="2">
+                            <strong>Grand Total</strong>
+                        </td>
+                        <td style="text-align:right;">
+                            <!--<span t-field="doc.amount_total" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>-->
+                            <span t-field="doc.currency_id.symbol"/>
+                            <span t-esc="'%.2f'%doc.amount_total"/>
+                        </td>
+                    </tr>
+                </table>
+                <p style="font-Size:18px;">Terbilang : <span t-esc="doc.terbilang_idr()"/>
                 </p>
-                <p>Tax Invoice Number : <span t-field="doc.no_faktur_pajak"/>
+                <p style="font-Size:18px;">Tax Invoice Number : <span t-field="doc.no_faktur_pajak"/>
                 </p>
-                <div style="font-Size:16px;" class="row mt16">
+                <div style="font-Size:18px;" class="row mt16">
                     <div class="col-6">
                         <td style="font-weight:bold;">Notes : </td>
                         <div t-field="doc.narration"/>
@@ -233,7 +235,7 @@
                 </div>
                 <br/>
                 <div class="row mt32 mb32">
-                    <div class="col-5">
+                    <div style="font-Size:18px;" class="col-5">
                         <span>
                             <b>DETAIL PAYMENT</b>
                         </span>
@@ -256,6 +258,9 @@
                     </div>
                     <div class="col-3">
                         <p>Approved By</p>
+                        <br/>
+                        <br/>
+                        <br/>
                         <br/>
                         <br/>
                         <br>__________________</br>
