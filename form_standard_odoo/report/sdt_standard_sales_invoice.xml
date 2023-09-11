@@ -165,8 +165,7 @@
                             </td>
                             <td style="text-align:right;">
                                 <span t-field="doc.currency_id.symbol"/>
-                                <span t-if="doc.currency_id.symbol == 'Rp'" t-esc="'%.2f'%line.price_unit"/>
-                                <span t-if="doc.currency_id.symbol == '$'" t-esc="'%.5f'%line.price_unit"/>
+                                <span t-esc="'%.2f'%line.price_unit"/>
                             </td>
                             <td style="text-align:right;">
                                 <span t-esc="'%.0f'%line.discount"/>
@@ -196,32 +195,27 @@
                         </td>
                     </tr>
 
-                    <tr>
-                        <td style="text-align:right;" colspan="2">VAT</td>
-                        <td style="text-align:right;">
-                            <!--<span t-field="doc.amount_ppn" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>-->
-                            <span t-field="doc.currency_id.symbol"/>
-                            <span t-esc="'%.2f'%doc.amount_ppn"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align:right;" colspan="2">PPh</td>
-                        <td style="text-align:right;">
-                            <!--<span t-field="doc.amount_pph" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>-->
-                            <span t-field="doc.currency_id.symbol"/>
-                            <span t-esc="'%.2f'%doc.amount_pph"/>
-                        </td>
-                    </tr>
-                    <tr style="font-Size:18px;">
-                        <td style="text-align:right;" colspan="2">
-                            <strong>Grand Total</strong>
-                        </td>
-                        <td style="text-align:right;">
-                            <!--<span t-field="doc.amount_total" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>-->
-                            <span t-field="doc.currency_id.symbol"/>
-                            <span t-esc="'%.2f'%doc.amount_total"/>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td style="text-align:right;" colspan="2">VAT</td>
+                            <td style="text-align:right;">
+                                <span t-field="doc.amount_ppn" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:right;" colspan="2">PPh</td>
+                            <td style="text-align:right;">
+                                <span t-field="doc.amount_pph" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
+                            </td>
+                        </tr>
+                        <tr style="font-Size:16px;">
+                            <td style="text-align:right;" colspan="2">
+                                <strong>Grand Total</strong>
+                            </td>
+                            <td style="text-align:right;">
+                                <span t-field="doc.amount_total" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
                 <p style="font-Size:18px;">Terbilang : <span t-esc="doc.terbilang_idr()"/>
                 </p>
