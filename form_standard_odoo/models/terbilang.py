@@ -20,13 +20,15 @@ def terbilang(number, currency, bhs):
     start_word = english_number(int(lis[0]), bhs)
     end_word = english_number(int(lis[1]), bhs)
     cents_number = int(lis[1])
-    cents_name = (cents_number > 1) and 'Sen' or 'sen'
-    final_result_sen = start_word + units_name + end_word + ' ' + cents_name
+    cents_name_id = (cents_number > 1) and 'Sen' or 'sen'
+    cents_name_en = (cents_number > 1) and 'Cent' or 'cent'
+    final_result_sen_id = start_word + units_name + end_word + ' ' + cents_name_id
+    final_result_sen_en = start_word + units_name + end_word + ' ' + cents_name_en
     final_result = start_word + units_name
     if end_word == 'Nol' or end_word == 'Zero':
         final_result = final_result
     else:
-        final_result = final_result_sen
+        final_result = final_result_sen_id if bhs == 'en' else final_result_sen_en
 
     return final_result[:1].upper() + final_result[1:]
 
