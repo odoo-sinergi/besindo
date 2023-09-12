@@ -37,9 +37,9 @@ class StockPicking(models.Model):
         if self.origin:
             sales_order_id = self.env['sale.order'].search([('name', '=', self.origin)])
             order_line = sales_order_id.order_line
-            if order_line and self.move_ids_without_package:
+            if order_line and self.move_ids:
                 for line in order_line:
-                    for move in self.move_ids_without_pakage:
+                    for move in self.move_ids:
                         if move.product_id == line.product_id:
                             move.description_picking = line.name
                             break
