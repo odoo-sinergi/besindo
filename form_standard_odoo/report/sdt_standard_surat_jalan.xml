@@ -13,7 +13,15 @@
             <field name="header_spacing">10</field>
             <field name="dpi">80</field>
         </record>
-        <report id="report_standard_surat_jalan_menu" string="SDT Standard - Surat Jalan" model="stock.picking" report_type="qweb-pdf" file="stock.picking" name="form_standard_odoo.standard_surat_jalan_report" paperformat="form_standard_odoo.paperformat_sdt_standard_form" print_report_name="'Surat Jalan - %s' % (object.name)">
+        <report
+            id="report_standard_surat_jalan_menu" 
+            string="SDT Standard - Surat Jalan"
+            model="stock.picking"
+            report_type="qweb-pdf"
+            file="stock.picking"
+            name="form_standard_odoo.standard_surat_jalan_report"
+            paperformat="form_standard_odoo.paperformat_sdt_standard_form"
+            print_report_name="'Surat Jalan - %s' % (object.name)">
         </report>
 
         <template id="standard_surat_jalan_report">
@@ -25,7 +33,6 @@
         </template>
 
         <template id="standard_surat_jalan_document">
-            <!-- <t t-call="web.external_layout"> -->
             <t t-call="form_standard_odoo.sdt_header_internal_layout_polos">
 
                 <div style="font-Size:12px;" class="page">
