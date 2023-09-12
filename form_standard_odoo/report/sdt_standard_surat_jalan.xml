@@ -125,32 +125,32 @@
                         <tbody class="lines_tbody">
                             <t t-set="LineNum" t-value="1"/>
                             <tr t-foreach="doc.move_ids" t-as="move_lines">
-                                <td style="text-align:center; border:0px solid black;">
+                                <td style="text-align:center; border:0px solid black; padding: 0px;">
                                     <span>
                                         <t t-esc="LineNum"/>
                                     </span>
                                 </td>
-                                <td class="text-left" style="border:0px solid black;">
+                                <td class="text-left" style="border:0px solid black; padding: 0px;">
                                     <span t-field="move_lines.product_id.part_number"/>
                                 </td>
                                 <t t-if="move_lines.product_id.nama_alias">
-                                    <td class="text-left" style="border:0px solid black;">
+                                    <td class="text-left" style="border:0px solid black; padding: 0px;">
                                         <span t-field="move_lines.product_id.nama_alias"/>
                                     </td>
                                 </t>
                                 <t t-else="">
-                                    <td class="text-left" style="border:0px solid black;">
+                                    <td class="text-left" style="border:0px solid black; padding: 0px;">
                                         <span t-field="move_lines.product_id.name"/>
                                     </td>
                                 </t>
-                                <td style="text-align:center; border:0px solid black;">
+                                <td style="text-align:center; border:0px solid black; padding: 0px;">
                                     <span t-field="move_lines.quantity_done"/>
                                 </td>
                                 <t t-set="LineNum" t-value="LineNum+1"/>
                             </tr>
                             <t t-if="len(doc.move_ids) &lt; 14">
                                 <tr t-foreach="14-len(doc.move_ids)" t-as="empty_line">
-                                    <td style="border:0px;"><br/></td>
+                                    <td style="border:0px; padding: 0px;"><br/></td>
                                 </tr>
                             </t>
                         </tbody>
@@ -159,8 +159,8 @@
                     <div class="center">
                         <table style="border: 0px solid white; padding: 0px;">
                             <tr style="border: 0px solid white; padding: 0px;">
-                                <td>
-                                  <span t-raw="'Remark    : %s' % doc.note"/>
+                                <td style="border: 0px solid white; padding: 0px;">
+                                  <span>Remark   : <span t-field="doc.note"/></span>
                                 </td>
                             </tr>
                             <tr style="border: 0px solid white; padding: 0px;">
