@@ -5,12 +5,12 @@
             <field name="default" eval="True"/>
             <field name="format">A5</field>
             <field name="orientation">Landscape</field>
-            <field name="margin_top">10</field>
+            <field name="margin_top">8</field>
             <field name="margin_bottom">0</field>
             <field name="margin_left">0</field>
             <field name="margin_right">0</field>
             <field name="header_line" eval="False"/>
-            <field name="header_spacing">10</field>
+            <field name="header_spacing">8</field>
             <field name="dpi">80</field>
         </record>
         <report
@@ -32,7 +32,7 @@
             </t>
         </template>
 
-        <template id="standard_surat_jalan_document">
+        <!-- <template id="standard_surat_jalan_documentx">
             <t t-call="form_standard_odoo.sdt_header_internal_layout_polos">
 
                 <div style="font-Size:12px;" class="page">
@@ -124,7 +124,7 @@
                         </thead>
                         <tbody class="lines_tbody">
                             <t t-set="LineNum" t-value="1"/>
-                            <tr t-foreach="doc.move_ids" t-as="move_lines">
+                            <tr t-foreach="doc.move_ids" t-as="move_lines" style="padding: 0px;">
                                 <td style="text-align:center; border:0px solid black; padding: 0px;">
                                     <span>
                                         <t t-esc="LineNum"/>
@@ -150,11 +150,165 @@
                             </tr>
                             <t t-if="len(doc.move_ids) &lt; 14">
                                 <tr t-foreach="14-len(doc.move_ids)" t-as="empty_line">
-                                    <td style="border:0px; padding: 0px;"><br/></td>
+                                    <td style="border:0px; height: 10px; padding: 0px;"></td>
                                 </tr>
                             </t>
                         </tbody>
                     </table>
+                    <br/>
+                    <div class="center">
+                        <table style="border: 0px solid white; padding: 0px;">
+                            <tr style="border: 0px solid white; padding: 0px;">
+                                <td style="border: 0px solid white; padding: 0px;">
+                                  <span>Remark   : <span t-field="doc.note"/></span>
+                                </td>
+                            </tr>
+                            <tr style="border: 0px solid white; padding: 0px;">
+                                <td style="width: 25%; height: 10px; border: 0px solid white; padding: 0px;" align="center">Penerima</td>
+                                <td style="width: 25%; height: 10px; border: 0px solid white; padding: 0px;" align="center">Pengirim</td>
+                                <td style="width: 25%; height: 10px; border: 0px solid white; padding: 0px;" align="center">Pengawas</td>
+                                <td style="width: 25%; height: 10px; border: 0px solid white; padding: 0px;" align="center"/>
+                            </tr>
+                            <tr style="height: 70px; border: 0px solid white; padding: 0px;">
+                                <td style="border: 0px solid white; padding: 0px;"/>
+                                <td style="border: 0px solid white; padding: 0px;"/>
+                                <td style="border: 0px solid white; padding: 0px;"/>
+                                <td style="border: 0px solid white; padding: 0px;"/>
+                                </tr>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </template> -->
+        <template id="standard_surat_jalan_document">
+            <t t-call="form_standard_odoo.sdt_header_internal_layout_polos">
+
+                <div style="font-Size:12px;" class="page">
+                    <style type="text/css">
+                          tr, td
+                            {
+                               border-top: 1px solid black;
+                               border-right:1px solid black;
+                               border-left:1px solid black;
+                               border-bottom:1px solid black;
+                               padding: 4px;
+                               padding-left: 7px;
+                               padding-right: 7px;
+                            }
+                    </style>
+                    <style type="text/css">
+                          th
+                            {
+                               border-top: 1px solid black;
+                               border-right:1px solid black;
+                               border-left:1px solid black;
+                               border-bottom:1px solid black;
+                               padding: 4px;
+                               padding-left: 7px;
+                               padding-right: 7px;
+                               color: black;
+                            }
+                    </style>
+                    <style type="text/css">
+                          table
+                            {
+                               border-top: 2px solid black;
+                               border-right:1px solid black;
+                               border-left:1px solid black;
+                               border-bottom:2px solid black;
+                               font-Size:12px;
+                               width: 100%;
+                               margin-top: 5px;
+                               margin-bottom: 10px;
+                            }
+                    </style>
+
+                    <table style="border: 0px solid black; border-collapse: collapse;">
+                        <tr style="border: 0px solid white;">
+                            <td style="border: 0px solid white; width:50%;">
+                                Kepada : <br/>
+                                <div t-field="doc.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
+                            </td>
+                            <td style="border: 0px solid white; width:50%;">
+                                <table style="border: 0px solid white; padding: 0px;">
+                                    <tr style="border: 0px solid white; padding: 0px;">
+                                        <td style="border: 0px solid white; padding: 0px;">No. SJ</td>
+                                        <td style="border: 0px solid white; padding: 0px;"> : </td>
+                                        <td style="border: 0px solid white; padding: 0px;">
+                                            <span t-field="doc.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="border: 0px solid white; padding: 0px;">
+                                        <td style="border: 0px solid white; padding: 0px; width:30%;">Date</td>
+                                        <td style="border: 0px solid white; padding: 0px; width:5%;"> : </td>
+                                        <td style="border: 0px solid white; padding: 0px; width:65%;">
+                                            <span t-field="doc.force_date" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="border: 0px solid white; padding: 0px;">
+                                        <td style="border: 0px solid white; padding: 0px; width:30%;">Order No.</td>
+                                        <td style="border: 0px solid white; padding: 0px; width:5%;"> : </td>
+                                        <td style="border: 0px solid white; padding: 0px; width:65%;">
+                                            <span t-field="doc.origin"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="border: 0px solid white; padding: 0px;">
+                                        <td style="border: 0px solid white; padding: 0px; width:30%;">Customer PO No.</td>
+                                        <td style="border: 0px solid white; padding: 0px; width:5%;"> : </td>
+                                        <td style="border: 0px solid white; padding: 0px; width:65%;"/>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="row">
+                        <div class="col-1">No</div>
+                        <div class="col-3">Part No.</div>
+                        <div class="col-6">Part Name</div>
+                        <div class="col-2">Qty</div>
+                    </div>
+                    <t t-set="LineNum" t-value="1"/>
+                    <t t-foreach="doc.move_ids" t-as="move_lines" style="padding: 0px;">
+
+                        <div class="row">
+                            <div class="col-1">
+                                <span>
+                                    <t t-esc="LineNum"/>
+                                </span>
+                            </div>
+                            <div class="col-3">
+                                <span t-field="move_lines.product_id.part_number"/>
+                            </div>
+                            <div class="col-6">
+                                <t t-if="move_lines.product_id.nama_alias">                            
+                                    <span t-field="move_lines.product_id.nama_alias"/>
+                                </t>
+                                <t t-else="">
+                                        <span t-field="move_lines.product_id.name"/>
+                                </t>
+                            </div>
+                            <div class="col-2">
+                              <div class="row">
+                                <div class="col-6">
+                                  <span t-field="move_lines.quantity_done"/>
+                                </div>
+                                <div class="col-6">
+                                  <span t-field="move_lines.product_uom"/>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                        <t t-set="LineNum" t-value="LineNum+1"/>
+                    </t>
+                    <t t-if="len(doc.move_ids) &lt; 14">
+                            <t t-foreach="14-len(doc.move_ids)" t-as="empty_line">
+                        <div class="row">
+                                <div class="col-12">
+                                    <br/>
+                                </div>
+                        </div>
+                            </t>
+                    </t>
                     <br/>
                     <div class="center">
                         <table style="border: 0px solid white; padding: 0px;">
