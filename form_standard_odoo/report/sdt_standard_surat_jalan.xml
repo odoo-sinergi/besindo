@@ -68,15 +68,6 @@
                             }
                     </style>
 
-
-
-                    <!-- <h1 style="font-Size:12px;text-align: center;"> -->
-                    <!-- <div style="font-Size:16px;text-align: center;text-decoration: underline;font-weight:bold;">SURAT JALAN</div> -->
-                    <!-- <td>Nomor : </td><span t-field="doc.name"/> -->
-                    <!-- <td> - </td><span t-field="doc.scheduled_date" t-options="{&quot;format&quot;:&quot;dd/MM/YYYY&quot;}"/> -->
-                    <!-- </h1> -->
-                    <!-- <div class="row mt16"> -->
-                    <!-- <div class="col-7"> -->
                     <table style="border: 0px solid black; border-collapse: collapse;">
                         <tr style="border: 0px solid white;">
                             <td style="border: 0px solid white; width:50%;">
@@ -152,35 +143,25 @@
                             </tr>
                             <t t-if="len(doc.move_ids) &lt; 14">
                                 <tr t-foreach="14-len(doc.move_ids)" t-as="empty_line">
-                                    <td style="border:0px;"><span /></td>
+                                    <td style="border:0px;"><br/></td>
                                 </tr>
                             </t>
                         </tbody>
                     </table>
                     <div class="center">
                         <table style="border: 0px solid white; padding: 0px;">
-                            <thead>
-                                <tr style="border: 0px solid white; padding: 0px;">
-                                    <td style="width: 25%; height: 10px; border: 0px solid white; padding: 0px;" align="center">Penerima</td>
-                                    <td style="width: 25%; height: 10px; border: 0px solid white; padding: 0px;" align="center">Pengirim</td>
-                                    <td style="width: 25%; height: 10px; border: 0px solid white; padding: 0px;" align="center">Pengawas</td>
-                                    <td style="width: 25%; height: 10px; border: 0px solid white; padding: 0px;" align="center"/>
+                            <tr style="border: 0px solid white; padding: 0px;">
+                                <td style="width: 25%; height: 10px; border: 0px solid white; padding: 0px;" align="center">Penerima</td>
+                                <td style="width: 25%; height: 10px; border: 0px solid white; padding: 0px;" align="center">Pengirim</td>
+                                <td style="width: 25%; height: 10px; border: 0px solid white; padding: 0px;" align="center">Pengawas</td>
+                                <td style="width: 25%; height: 10px; border: 0px solid white; padding: 0px;" align="center"/>
+                            </tr>
+                            <tr style="height: 70px; border: 0px solid white; padding: 0px;">
+                                <td style="border: 0px solid white; padding: 0px;"/>
+                                <td style="border: 0px solid white; padding: 0px;"/>
+                                <td style="border: 0px solid white; padding: 0px;"/>
+                                <td style="border: 0px solid white; padding: 0px;"/>
                                 </tr>
-                                <tr style="height: 70px; border: 0px solid white; padding: 0px;">
-                                    <td style="border: 0px solid white; padding: 0px;"/>
-                                    <td style="border: 0px solid white; padding: 0px;"/>
-                                    <td style="border: 0px solid white; padding: 0px;"/>
-                                    <td style="border: 0px solid white; padding: 0px;"/>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr t-foreach="doc" t-as="move_lines">
-                                    <td style="border: 0px solid white; padding: 0px;" align="center"/>
-                                    <td style="border: 0px solid white; padding: 0px;" align="center"/>
-                                    <td style="border: 0px solid white; padding: 0px;" align="center"/>
-                                    <td style="border: 0px solid white; padding: 0px;" align="center"/>
-                                </tr>
-                            </tbody>
                         </table>
                     </div>
                 </div>
