@@ -4,8 +4,6 @@
             <field name="name">SDT Standard Form SJ</field>
             <field name="default" eval="True"/>
             <field name="format">A5</field>
-            <!-- <field name="page_height">210</field> -->
-            <!-- <field name="page_width">148</field> -->
             <field name="orientation">Landscape</field>
             <field name="margin_top">10</field>
             <field name="margin_bottom">0</field>
@@ -17,36 +15,6 @@
         </record>
         <report id="report_standard_surat_jalan_menu" string="SDT Standard - Surat Jalan" model="stock.picking" report_type="qweb-pdf" file="stock.picking" name="form_standard_odoo.standard_surat_jalan_report" paperformat="form_standard_odoo.paperformat_sdt_standard_form" print_report_name="'Surat Jalan - %s' % (object.name)">
         </report>
-
-        <!-- <template id="custom_external_layout_ir" inherit_id="web.internal_layout">
-            <xpath expr="//div[@class='header']" position="replace">
-                <div class="header">
-                    <div class="row" style="font-size: 12pt; font-family: arial;">
-                        <div class="col-2"> 
-                            <img t-att-src="'/form_standard_odoo/static/img/inastek.jpeg'" style="max-height: 95px;"/>
-                        </div>
-                        <div class="col-4" style="margin-left: 5px;">
-                            <strong><p style="margin-bottom: 0px;margin-top: 0px;">PT. INAMAS SINTESIS TEKNOLOGI</p></strong>
-                            <table style="border: none; font-size: 10pt; outline:none;">
-                                <tr style="border: none; outline:none;">
-                                    <td style="border: 2px solid white; padding: 0px;">Jl. Werkudoro No. 4, Wirobrajan </td>
-                                </tr>
-                                <tr style="border: none; outline:none;">
-                                    <td style="border: 2px solid white; padding: 0px;">Yogyakarta YO 55252</td>
-                                </tr>
-                                <tr style="border: none; outline:none;">
-                                    <td style="border: 2px solid white; padding: 0px;">Indonesia</td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="col-3">
-                            <img src="/addon_report_nw/static/img/Logo_MUI_Halal.jpeg" style="max-height: 40px;"/>               
-                            <img src="/addon_report_nw/static/img/Logo_ISO.jpeg" style="max-height: 40px;"/>                       
-                        </div>
-                    </div>
-                </div>
-            </xpath>
-        </template> -->
 
         <template id="standard_surat_jalan_report">
             <t t-call="web.html_container">
@@ -115,149 +83,149 @@
                                 <table style="border: 0px solid white; border-collapse: collapse;">
                                     <tr>
                                         <td style="font-weight:bold; border: 0px solid white;">Kepada : <br/>
-                                        <div t-field="doc.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                        <td style="border: 0px solid white;">
-                            <!-- </div> -->
-                            <!-- <div class="col-5"> -->
-                            <table style="border: 0px solid white; padding: 0px;">
-                                <tr style="border: 0px solid white; padding: 0px;">
-                                    <td style="border: 0px solid white; padding: 0px;">No. SJ</td>
-                                    <td style="border: 0px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 0px solid white; padding: 0px;">
-                                        <span t-field="doc.name"/>
-                                    </td>
-                                </tr>
-                                <tr style="border: 0px solid white; padding: 0px;">
-                                    <td style="border: 0px solid white; padding: 0px;">Date</td>
-                                    <td style="border: 0px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 0px solid white; padding: 0px;">
-                                        <span t-field="doc.force_date" t-options='{"format": "dd/MM/yyyy"}'/>
-                                    </td>
-                                </tr>
-                                <tr style="border: 0px solid white; padding: 0px;">
-                                    <td style="border: 0px solid white; padding: 0px;">Order No.</td>
-                                    <td style="border: 0px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 0px solid white; padding: 0px;">
-                                        <span t-field="doc.origin"/>
-                                    </td>
-                                </tr>
-                                <tr style="border: 0px solid white; padding: 0px;">
-                                    <td style="border: 0px solid white; padding: 0px;">Customer PO No.</td>
-                                    <td style="border: 0px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 0px solid white; padding: 0px;"></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-                <!-- </div> -->
-                <!-- </div> -->
-                <table>
-                    <thead>
-                        <tr>
-                            <th style="text-align:center; border:0px solid black; width: 5%">No</th>
-                            <th style="text-align:center; border:0px solid black; width: 15%">Part No.</th>
-                            <th style="text-align:center; border:0px solid black; width: 50%">Part Name</th>
-                            <!-- <th style="text-align:center; border:0px solid black; width: 30%">Deskripsi</th> -->
-                            <th style="text-align:center; border:0px solid black; width: 30%">Qty</th>
-                            <!-- <th style="text-align:center; border:0px solid black; width: 20%">Keterangan</th> -->
+                                            <div t-field="doc.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="border: 0px solid white;">
+                                <!-- </div> -->
+                                <!-- <div class="col-5"> -->
+                                <table style="border: 0px solid white; padding: 0px;">
+                                    <tr style="border: 0px solid white; padding: 0px;">
+                                        <td style="border: 0px solid white; padding: 0px;">No. SJ</td>
+                                        <td style="border: 0px solid white; padding: 0px;"> : </td>
+                                        <td style="border: 0px solid white; padding: 0px;">
+                                            <span t-field="doc.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="border: 0px solid white; padding: 0px;">
+                                        <td style="border: 0px solid white; padding: 0px;">Date</td>
+                                        <td style="border: 0px solid white; padding: 0px;"> : </td>
+                                        <td style="border: 0px solid white; padding: 0px;">
+                                            <span t-field="doc.force_date" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="border: 0px solid white; padding: 0px;">
+                                        <td style="border: 0px solid white; padding: 0px;">Order No.</td>
+                                        <td style="border: 0px solid white; padding: 0px;"> : </td>
+                                        <td style="border: 0px solid white; padding: 0px;">
+                                            <span t-field="doc.origin"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="border: 0px solid white; padding: 0px;">
+                                        <td style="border: 0px solid white; padding: 0px;">Customer PO No.</td>
+                                        <td style="border: 0px solid white; padding: 0px;"> : </td>
+                                        <td style="border: 0px solid white; padding: 0px;"/>
+                                    </tr>
+                                </table>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody class="lines_tbody">
-                        <t t-set="LineNum" t-value="1"/>
-                        <tr t-foreach="doc.move_ids" t-as="move_lines">
-                            <td style="text-align:center; border:0px solid black;">
-                                <span>
-                                    <t t-esc="LineNum"/>
-                                </span>
-                            </td>
-                            <td class="text-left" style="border:0px solid black;">
-                                <span t-field="move_lines.product_id.part_number"/>
-                            </td>
-                            <t t-if="move_lines.product_id.nama_alias">
-                                <td class="text-left" style="border:0px solid black;">
-                                    <span t-field="move_lines.product_id.nama_alias"/>
-                                </td>
-                            </t>
-                            <t t-else="">
-                                <td class="text-left" style="border:0px solid black;">
-                                    <span t-field="move_lines.product_id.name"/>
-                                </td>
-                            </t>
-                            <!-- <td class="text-left" style="border:0px solid black;"><span t-field="move_lines.product_id.product_tmpl_id"/></td> -->
-                            <td style="text-align:center; border:0px solid black;">
-                                <span t-field="move_lines.quantity_done"/>
-                            </td>
-                            <!-- <td class="text-center" style="border:0px solid black;"><span t-field="move_lines.description_picking"/></td> -->
-                            <t t-set="LineNum" t-value="LineNum+1"/>
-                        </tr>
-                    </tbody>
-                </table>
-                <!-- <table style="width: 100%;">
-                            <thead>
-                                <tr>
-                                    <td style="width: 50%;">CATATAN:
-                                    </td>
-                                    <td style="width: 50%">PERHATIAN:
-                                    </td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr t-foreach="doc" t-as="note">
-                                    <td>
-                                        <span t-field="note.note"/>
-                                    </td>
-                                    <td>
-                                            1. Surat Jalan ini bukti resmi penerimaan barang<br/>
-                                            2. Surat Jalan ini bukan bukti penjualan<br/>
-                                    </td>
-                                </tr>
-                            </tbody>
-                         </table> -->
-                <!-- <div class="row mt32 mb32">
-                    <div class="col-5">
-                        <p>Barang yang sudah diterima dalam keadaan baik oleh: <br/>
-                                 *Tanda Tangan dan Cap(Stempel) Perusahaan </p>
-                    </div>
-                    <div class="col-5">
-                        <p>
-                            <br/>
-                                 *Page 1 &amp; 3: Internal, 2: Penerima/Pembeli</p>
-                    </div>
-                </div> -->
-
-                <div class="center">
-                    <table style="border: 0px solid white; padding: 0px;">
+                    </table>
+                    <!-- </div> -->
+                    <!-- </div> -->
+                    <table>
                         <thead>
-                            <tr style="border: 0px solid white; padding: 0px;">
-                                <td style="width: 25%; height: 10px; border: 0px solid white; padding: 0px;" align="center">Penerima</td>
-                                <td style="width: 25%; height: 10px; border: 0px solid white; padding: 0px;" align="center">Pengirim</td>
-                                <td style="width: 25%; height: 10px; border: 0px solid white; padding: 0px;" align="center">Pengawas</td>
-                                <td style="width: 25%; height: 10px; border: 0px solid white; padding: 0px;" align="center"></td>
-                            </tr>
-                            <tr style="height: 70px; border: 0px solid white; padding: 0px;">
-                                <td style="border: 0px solid white; padding: 0px;"></td>
-                                <td style="border: 0px solid white; padding: 0px;"></td>
-                                <td style="border: 0px solid white; padding: 0px;"></td>
-                                <td style="border: 0px solid white; padding: 0px;"></td>
+                            <tr>
+                                <th style="text-align:center; border:0px solid black; width: 5%">No</th>
+                                <th style="text-align:center; border:0px solid black; width: 15%">Part No.</th>
+                                <th style="text-align:center; border:0px solid black; width: 50%">Part Name</th>
+                                <!-- <th style="text-align:center; border:0px solid black; width: 30%">Deskripsi</th> -->
+                                <th style="text-align:center; border:0px solid black; width: 30%">Qty</th>
+                                <!-- <th style="text-align:center; border:0px solid black; width: 20%">Keterangan</th> -->
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr t-foreach="doc" t-as="move_lines">
-                                <td style="border: 0px solid white; padding: 0px;" align="center"></td>
-                                <td style="border: 0px solid white; padding: 0px;" align="center"></td>
-                                <td style="border: 0px solid white; padding: 0px;" align="center"></td>
-                                <td style="border: 0px solid white; padding: 0px;" align="center"></td>
+                        <tbody class="lines_tbody">
+                            <t t-set="LineNum" t-value="1"/>
+                            <tr t-foreach="doc.move_ids" t-as="move_lines">
+                                <td style="text-align:center; border:0px solid black;">
+                                    <span>
+                                        <t t-esc="LineNum"/>
+                                    </span>
+                                </td>
+                                <td class="text-left" style="border:0px solid black;">
+                                    <span t-field="move_lines.product_id.part_number"/>
+                                </td>
+                                <t t-if="move_lines.product_id.nama_alias">
+                                    <td class="text-left" style="border:0px solid black;">
+                                        <span t-field="move_lines.product_id.nama_alias"/>
+                                    </td>
+                                </t>
+                                <t t-else="">
+                                    <td class="text-left" style="border:0px solid black;">
+                                        <span t-field="move_lines.product_id.name"/>
+                                    </td>
+                                </t>
+                                <!-- <td class="text-left" style="border:0px solid black;"><span t-field="move_lines.product_id.product_tmpl_id"/></td> -->
+                                <td style="text-align:center; border:0px solid black;">
+                                    <span t-field="move_lines.quantity_done"/>
+                                </td>
+                                <!-- <td class="text-center" style="border:0px solid black;"><span t-field="move_lines.description_picking"/></td> -->
+                                <t t-set="LineNum" t-value="LineNum+1"/>
                             </tr>
                         </tbody>
                     </table>
+                    <!-- <table style="width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <td style="width: 50%;">CATATAN:
+                                        </td>
+                                        <td style="width: 50%">PERHATIAN:
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="doc" t-as="note">
+                                        <td>
+                                            <span t-field="note.note"/>
+                                        </td>
+                                        <td>
+                                                1. Surat Jalan ini bukti resmi penerimaan barang<br/>
+                                                2. Surat Jalan ini bukan bukti penjualan<br/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table> -->
+                    <!-- <div class="row mt32 mb32">
+                        <div class="col-5">
+                            <p>Barang yang sudah diterima dalam keadaan baik oleh: <br/>
+                                    *Tanda Tangan dan Cap(Stempel) Perusahaan </p>
+                        </div>
+                        <div class="col-5">
+                            <p>
+                                <br/>
+                                    *Page 1 &amp; 3: Internal, 2: Penerima/Pembeli</p>
+                        </div>
+                    </div> -->
+
+                    <div class="center">
+                        <table style="border: 0px solid white; padding: 0px;">
+                            <thead>
+                                <tr style="border: 0px solid white; padding: 0px;">
+                                    <td style="width: 25%; height: 10px; border: 0px solid white; padding: 0px;" align="center">Penerima</td>
+                                    <td style="width: 25%; height: 10px; border: 0px solid white; padding: 0px;" align="center">Pengirim</td>
+                                    <td style="width: 25%; height: 10px; border: 0px solid white; padding: 0px;" align="center">Pengawas</td>
+                                    <td style="width: 25%; height: 10px; border: 0px solid white; padding: 0px;" align="center"/>
+                                </tr>
+                                <tr style="height: 70px; border: 0px solid white; padding: 0px;">
+                                    <td style="border: 0px solid white; padding: 0px;"/>
+                                    <td style="border: 0px solid white; padding: 0px;"/>
+                                    <td style="border: 0px solid white; padding: 0px;"/>
+                                    <td style="border: 0px solid white; padding: 0px;"/>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="doc" t-as="move_lines">
+                                    <td style="border: 0px solid white; padding: 0px;" align="center"/>
+                                    <td style="border: 0px solid white; padding: 0px;" align="center"/>
+                                    <td style="border: 0px solid white; padding: 0px;" align="center"/>
+                                    <td style="border: 0px solid white; padding: 0px;" align="center"/>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-        </t>
-    </template>
-</data>
+            </t>
+        </template>
+    </data>
 </odoo>
