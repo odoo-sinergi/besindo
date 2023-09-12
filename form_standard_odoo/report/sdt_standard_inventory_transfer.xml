@@ -62,7 +62,7 @@
                     </style>
                     <h1 style="font-Size:11px;text-align: center;">
                             <div style="font-Size:16px;text-align: center;text-decoration: underline;font-weight:bold;">BUKTI SERAH TERIMA BARANG</div>
-                            <td>Nomor : </td><span t-field="doc.name"/>
+                            <td style="font-Size:14px;">Nomor : </td><span t-field="doc.name"/>
                             <!-- <td> - </td><span t-field="doc.scheduled_date" t-options="{&quot;format&quot;:&quot;dd/MM/YYYY&quot;}"/> -->
                     </h1>
                     <div class="row mt16">
