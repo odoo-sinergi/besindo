@@ -43,6 +43,7 @@ class StockPicking(models.Model):
                         if move.product_id == line.product_id:
                             move.description_picking = line.name
                             break
+        self._compute_move_without_package()
 
 
     @api.model
