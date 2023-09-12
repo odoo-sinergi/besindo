@@ -79,18 +79,11 @@
                     <!-- <div class="col-7"> -->
                     <table style="border: 0px solid black; border-collapse: collapse;">
                         <tr style="border: 0px solid white;">
-                            <td style="border: 0px solid white;">
-                                <table style="border: 0px solid white; border-collapse: collapse;">
-                                    <tr>
-                                        <td style="font-weight:bold; border: 0px solid white;">Kepada : <br/>
-                                            <div t-field="doc.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
-                                        </td>
-                                    </tr>
-                                </table>
+                            <td style="border: 0px solid white; width:50%;">
+                                Kepada : <br/>
+                                <div t-field="doc.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
                             </td>
-                            <td style="border: 0px solid white;">
-                                <!-- </div> -->
-                                <!-- <div class="col-5"> -->
+                            <td style="border: 0px solid white; width:50%;">
                                 <table style="border: 0px solid white; padding: 0px;">
                                     <tr style="border: 0px solid white; padding: 0px;">
                                         <td style="border: 0px solid white; padding: 0px;">No. SJ</td>
@@ -122,17 +115,13 @@
                             </td>
                         </tr>
                     </table>
-                    <!-- </div> -->
-                    <!-- </div> -->
                     <table>
                         <thead>
                             <tr>
                                 <th style="text-align:center; border:0px solid black; width: 5%">No</th>
                                 <th style="text-align:center; border:0px solid black; width: 15%">Part No.</th>
                                 <th style="text-align:center; border:0px solid black; width: 50%">Part Name</th>
-                                <!-- <th style="text-align:center; border:0px solid black; width: 30%">Deskripsi</th> -->
                                 <th style="text-align:center; border:0px solid black; width: 30%">Qty</th>
-                                <!-- <th style="text-align:center; border:0px solid black; width: 20%">Keterangan</th> -->
                             </tr>
                         </thead>
                         <tbody class="lines_tbody">
@@ -156,48 +145,18 @@
                                         <span t-field="move_lines.product_id.name"/>
                                     </td>
                                 </t>
-                                <!-- <td class="text-left" style="border:0px solid black;"><span t-field="move_lines.product_id.product_tmpl_id"/></td> -->
                                 <td style="text-align:center; border:0px solid black;">
                                     <span t-field="move_lines.quantity_done"/>
                                 </td>
-                                <!-- <td class="text-center" style="border:0px solid black;"><span t-field="move_lines.description_picking"/></td> -->
                                 <t t-set="LineNum" t-value="LineNum+1"/>
                             </tr>
+                            <t t-if="len(doc.move_ids) < 14">
+                                <tr t-foreach="14-len(doc.move_ids)" t-as="empty_line">
+                                    <td style="border:0px;"><span /></td>
+                                </tr>
+                            </t>
                         </tbody>
                     </table>
-                    <!-- <table style="width: 100%;">
-                                <thead>
-                                    <tr>
-                                        <td style="width: 50%;">CATATAN:
-                                        </td>
-                                        <td style="width: 50%">PERHATIAN:
-                                        </td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr t-foreach="doc" t-as="note">
-                                        <td>
-                                            <span t-field="note.note"/>
-                                        </td>
-                                        <td>
-                                                1. Surat Jalan ini bukti resmi penerimaan barang<br/>
-                                                2. Surat Jalan ini bukan bukti penjualan<br/>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table> -->
-                    <!-- <div class="row mt32 mb32">
-                        <div class="col-5">
-                            <p>Barang yang sudah diterima dalam keadaan baik oleh: <br/>
-                                    *Tanda Tangan dan Cap(Stempel) Perusahaan </p>
-                        </div>
-                        <div class="col-5">
-                            <p>
-                                <br/>
-                                    *Page 1 &amp; 3: Internal, 2: Penerima/Pembeli</p>
-                        </div>
-                    </div> -->
-
                     <div class="center">
                         <table style="border: 0px solid white; padding: 0px;">
                             <thead>
