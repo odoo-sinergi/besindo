@@ -157,7 +157,7 @@
                     </table>
                     <br/>
                     <br/>
-                    <span t-field="note"/>
+                    <span t-field="doc.note"/>
                     <div class="center">
                         <table style="border: 0px solid white; padding: 0px;">
                             <tr style="border: 0px solid white; padding: 0px;">
