@@ -32,6 +32,19 @@ class StockPicking(models.Model):
             elif rec.is_qc_production == False :
                 rec.workcenter_name = '-'
     
+    @api.onchange('origin')
+    def fill_line_description(self):
+        if self.origin:
+            sales_order_id = self.env['sale.order'].search([('name', '=', self.origin)])
+            order_line = sales_order_id.order_line
+            if order_line and self.move_ids_without_package:
+                for line in order_line:
+                    for move in self.move_ids_without_pakage:
+                        if move.product_id == line.product_id:
+                            move.description_picking = line.name
+                            break
+
+
     @api.model
     def get_view(self, view_id=None, view_type='form', **options):
         res = super(StockPicking, self).get_view(view_id=view_id, view_type=view_type, **options)
