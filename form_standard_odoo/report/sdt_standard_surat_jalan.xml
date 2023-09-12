@@ -150,7 +150,7 @@
                                 </td>
                                 <t t-set="LineNum" t-value="LineNum+1"/>
                             </tr>
-                            <t t-if="len(doc.move_ids) < 14">
+                            <t t-if="len(doc.move_ids) &lt; 14">
                                 <tr t-foreach="14-len(doc.move_ids)" t-as="empty_line">
                                     <td style="border:0px;"><span /></td>
                                 </tr>
