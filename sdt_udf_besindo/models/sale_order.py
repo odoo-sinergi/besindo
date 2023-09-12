@@ -52,6 +52,14 @@ class SaleOrder(models.Model):
                             pass
             else :
                 pass
+        if self.picking_ids and self.order_line:
+            for picking in self.picking_ids:
+                if picking.move_ids:
+                    for pick in picking.move_ids:
+                        for order in self.order_line:
+                            if pick.product_id == order.product_id:
+                                pick.description_picking = order.name
+                                break
         return res
 
     def action_req_approval (self):

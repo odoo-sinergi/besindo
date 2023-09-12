@@ -81,3 +81,11 @@ class StockMove(models.Model):
             'view_id': self.env.ref('sdt_udf_besindo.alasan_selisih_wizard',False).id,
             'target': 'new',
         }    
+    
+    @api.depends('picking_id.origin')
+    def update_description_picking(self):
+        if self.picking_id.origin:
+            so_id = self.env['sale.order'].search([('name', '=', self.picking_id.origin)])
+            for line in so_id.order_line:
+                if line.product_id == self.product_id:
+                    self.description_picking = line.name
