@@ -7,6 +7,7 @@
             <field name="arch" type="xml">
                 <field name="origin" position="after">
                     <field name="mrp_id" invisible="1"/>
+                    <field name="customer_reference" invisible="1"/>
                 </field>
             </field>
         </record>

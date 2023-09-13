@@ -255,7 +255,9 @@
                                     <tr style="border: 0px solid white; padding: 0px;">
                                         <td style="border: 0px solid white; padding: 0px; width:30%;">Customer PO No.</td>
                                         <td style="border: 0px solid white; padding: 0px; width:5%;"> : </td>
-                                        <td style="border: 0px solid white; padding: 0px; width:65%;"/>
+                                        <td style="border: 0px solid white; padding: 0px; width:65%;">
+                                            <span t-field="doc.customer_reference"/>
+                                        </td>
                                     </tr>
                                 </table>
                             </td>
