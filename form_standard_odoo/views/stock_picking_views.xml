@@ -7,8 +7,20 @@
             <field name="arch" type="xml">
                 <field name="origin" position="after">
                     <field name="mrp_id" invisible="1"/>
-                    <field name="customer_reference" invisible="1"/>
                 </field>
+                <field name="location_id" position="after">
+                    <field name="customer_reference"/>
+                </field>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="udf_vpicktree_inherit">
+            <field name="name">udf.stock.picking.tree.inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.vpicktree" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='location_dest_id']" position="after">
+                    <field name="customer_reference" optional="show"/>
+                </xpath>
             </field>
         </record>
     </data>
