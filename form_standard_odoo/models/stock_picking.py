@@ -17,6 +17,8 @@ class StockPicking(models.Model):
     @api.onchange('origin')
     def _compute_customer_reference(self):
         for rec in self:
-            so_origin = rec.env['sale.order'].search([('name', '=', rec.origin)])
+            so_origin = rec.env['sale.order'].search([('name', '=', rec.origin)], limit=1)
             if so_origin:
                 rec.customer_reference = so_origin.client_order_ref
+            else:
+                rec.customer_reference = False
