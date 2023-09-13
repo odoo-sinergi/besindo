@@ -8,9 +8,9 @@
                 <field name="origin" position="after">
                     <field name="mrp_id" invisible="1"/>
                 </field>
-                <field name="location_id" position="after">
+                <xpath expr="//form[1]/sheet[1]/group[1]/group[1]" position="inside">
                     <field name="customer_reference"/>
-                </field>
+                </xpath>
             </field>
         </record>
         <record model="ir.ui.view" id="udf_vpicktree_inherit">
