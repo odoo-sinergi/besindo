@@ -1,14 +1,23 @@
 <odoo>
     <data>
-        <report id="report_standard_sales_invoice_menu"
-                string="SDT Standard - Invoices"
-                model="account.move"
-                report_type="qweb-pdf"
-                file="account.move"
-                name="form_standard_odoo.standard_sales_invoice_report"
-                paperformat="form_standard_odoo.paperformat_sdt_standard_form"
-                print_report_name="'SDT Standard - Invoices - %s' % (object.name)">
+        <record id="paperformat_sdt_standard_form_invoice" model="report.paperformat">
+            <field name="name">SDT Standard Form Invoice</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">279</field>
+            <field name="page_width">241</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">35</field>
+            <field name="dpi">80</field>
+        </record>
+        <report id="report_standard_sales_invoice_menu" string="SDT Standard - Invoices" model="account.move" report_type="qweb-pdf" file="account.move" name="form_standard_odoo.standard_sales_invoice_report" paperformat="form_standard_odoo.paperformat_sdt_standard_form_invoice" print_report_name="'SDT Standard - Invoices - %s' % (object.name)">
         </report>
+
         <template id="standard_sales_invoice_report">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="doc">
@@ -20,9 +29,7 @@
         <template id="standard_sales_invoice_document">
             <t t-call="form_standard_odoo.sdt_header_internal_layout_polos">
                 <div name="address" class="col-xs-5 col-xs-offset-7"/>
-                <!-- IDR -->
-                <div style="font-Size:16px;" class="page" t-if="doc.currency_id.id == 12">
-                    <style type="text/css">
+                <style type="text/css">
                       tr, td
                         {
                            border-top: 1px solid black;
@@ -33,8 +40,8 @@
                            padding-left: 7px;
                            padding-right: 7px;
                         }
-                    </style>
-                    <style type="text/css">
+                </style>
+                <style type="text/css">
                       th
                         {
                            border-top: 1px solid black;
@@ -46,8 +53,8 @@
                            padding-right: 7px;
                            color: black;
                         }
-                    </style>
-                    <style type="text/css">
+                </style>
+                <style type="text/css">
                       table
                         {
                            border-top: 2px solid black;
@@ -59,409 +66,206 @@
                            margin-top: 5px;
                            margin-bottom: 10px;
                         }
-                    </style>
-                    <h1 style="font-Size:16px;text-align: center;">
-                            <div style="font-Size:16px;text-align: center;text-decoration: underline;font-weight:bold;">INVOICE</div>
-                            <td>Nomor : </td><span t-field="doc.name"/>
-                            <!-- <td> - </td><span t-field="doc.invoice_date" t-options="{&quot;format&quot;:&quot;dd/MM/YYYY&quot;}"/> -->
-                    </h1>
-                    <div style="font-Size:16px;" class="row mt16">
-                        <div class="col-6">
-                            <td style="font-weight:bold;">INVOICE TO : </td>
-                            <div t-field="doc.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
-                        </div>
-                        <div class="col-6">
-                            <table style="border: 2px solid white" width="100%">
-                                <tr style="border: 2px solid white; padding: 0px;">
-                                    <td style="border: 2px solid white; padding: 0px;" width="39%">Invoice Date</td>
-                                    <td style="border: 2px solid white; padding: 0px;" width="1%"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;" width="60%"><span t-field="doc.invoice_date" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/></td>
-                                </tr>
-                                <tr style="border: 2px solid white">
-                                    <td style="border: 2px solid white; padding: 0px;">Due Date</td>
-                                    <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.invoice_date_due" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/></td>
-                                </tr>
-                                <tr style="border: 2px solid white">
-                                    <td style="border: 2px solid white; padding: 0px;">Payment Term</td>
-                                    <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.invoice_payment_term_id"/></td>
-                                </tr>
-                                <tr style="border: 2px solid white">
-                                    <td style="border: 2px solid white; padding: 0px;">SO No</td>
-                                    <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.invoice_origin"/></td>
-                                </tr>
-                                <tr style="border: 2px solid white">
-                                    <td style="border: 2px solid white; padding: 0px;">DO Number</td>
-                                    <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.do_number"/></td>
-                                </tr>
-                                <tr style="border: 2px solid white">
-                                    <td style="border: 2px solid white; padding: 0px;">PO Number</td>
-                                    <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.ref"/></td>
-                                </tr>
-                                <tr style="border: 2px solid white">
-                                    <td style="border: 2px solid white; padding: 0px;">HS Code</td>
-                                    <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.hs_code"/></td>
-                                </tr>
-                            </table>
-                        </div>
+                </style>
+                <h1 style="font-Size:18px;text-align: center;">
+                    <div style="font-Size:18px;text-align: center;text-decoration: underline;font-weight:bold;">INVOICE</div>
+                    <td>Nomor : </td>
+                    <span t-field="doc.name"/>
+                </h1>
+                <div style="font-Size:14px;" class="row mt16">
+                    <div class="col-6">
+                        <td style="font-weight:bold;">INVOICE TO : </td>
+                        <div t-field="doc.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
                     </div>
-
-                     <table>
-                         <thead>
-                            <tr style="font-Size:11;text-align:center;border-bottom:2px solid black;">
-                                 <th class="text-center">Description</th>
-                                 <th class="text-center">Qty</th>
-                                 <th class="text-center">UoM</th>
-                                 <th class="text-center">Unit Price</th>
-                                 <th class="text-center">Discount</th>
-                                 <th class="text-center">Total</th>
+                    <div class="col-6">
+                        <table style="border: 2px solid white" width="100%">
+                            <tr style="border: 2px solid white; padding: 0px;">
+                                <td style="border: 2px solid white; padding: 0px;" width="39%">Invoice Date</td>
+                                <td style="border: 2px solid white; padding: 0px;" width="1%"> : </td>
+                                <td style="border: 2px solid white; padding: 0px;" width="60%">
+                                    <span t-field="doc.invoice_date" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/>
+                                </td>
                             </tr>
-                         </thead>
-                             <tbody>
-                                 <t t-set="total_discount" t-value="0"/>
-                                 <tr t-foreach="doc.invoice_line_ids" t-as="line">
-                                     <t t-set="total_discount" t-value="total_discount +(line.price_unit * line.quantity * line.discount)"/>
-                                     <td><span t-field="line.name"/> <span t-if="line.product_id.part_number"> <span t-if="line.product_id.part_number">(</span><span t-field="line.product_id.part_number"/><span t-if="line.product_id.part_number">)</span></span></td>
-                                     <td class="text-center"><span t-esc="'%.2f'%line.quantity"/></td>
-                                     <td class="text-center"><span><t t-esc="line.product_uom_id.name"/></span></td>
-                                     <td class="text-right"><span t-esc="'%.2f'%line.price_unit"/></td>
-                                     <td class="text-right"><span t-esc="'%.0f'%line.discount"/></td>
-                                     <td class="text-right"><span t-field="line.price_subtotal"/></td>
-                                 </tr>
-
-                                 <tr>
-                                    <td rowspan="6"/>
-                                    <td class="text-right" colspan="4">Subtotal</td>
-                                    <td class="text-right">
-                                        <span t-field="doc.amount_untaxed" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
-                                    </td>
-                                 </tr>
-                                 <tr>
-                                    <td class="text-right" colspan="4">Discount</td>
-                                    <td class="text-right">
-                                        <span t-esc="'%.2f'%total_discount"/>
-                                    </td>
-                                 </tr>
-
-                                 <tr>
-                                    <td class="text-right" colspan="4">VAT</td>
-                                    <td class="text-right">
-                                        <span t-field="doc.amount_ppn" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-right" colspan="4">PPh</td>
-                                    <td class="text-right">
-                                        <span t-field="doc.amount_pph" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                   <td class="text-right" colspan="4"><strong>Grand Total</strong></td>
-                                    <td class="text-right">
-                                        <span t-field="doc.amount_total" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
-                                    </td>
-                                </tr>
-                             </tbody>
-                     </table>
-                     <p>Terbilang : <span t-esc="doc.terbilang_idr()"/></p>
-                     <p>Tax Invoice Number : <span t-field="doc.no_faktur_pajak"/></p>
-                     <div style="font-Size:16px;" class="row mt16">
-                        <div class="col-6">
-                            <td style="font-weight:bold;">Notes : </td>
-                            <div t-field="doc.narration"/>
-                        </div>
-                     </div>
-                     <br/>
-                     <div class="row mt32 mb32">
-                        <div class="col-5">
-                            <span><b>DETAIL PAYMENT</b></span>
-                            <table style="border: 2px solid black">
-                                <!-- <tr>
-                                    <td>Name</td>
-                                    <td>Bank</td>
-                                    <td>Account Number</td>
-                                </tr> -->
-                                <!-- <tr t-foreach="doc.sdt_partner_bank_ids" t-as="sdt_partner_bank_id">
-                                    <td><span t-field="sdt_partner_bank_id.partner_id"/> <span t-field="sdt_partner_bank_id.acc_holder_name"/></td>
-                                    <td><span t-field="sdt_partner_bank_id.bank_id.name"/></td>
-                                    <td><span t-field="sdt_partner_bank_id.acc_number"/></td>
-                                </tr> -->
-                                <tr style="border: 1px solid white" t-foreach="doc.sdt_partner_bank_ids" t-as="sdt_partner_bank_id">
-                                    <td style="border: 1px solid white">
-                                        <span t-field="sdt_partner_bank_id.partner_id"/> <span t-field="sdt_partner_bank_id.acc_holder_name"/> <br/>
-                                        <span t-field="sdt_partner_bank_id.bank_id.street"/><br/>
-                                        <!--<span t-field="sdt_partner_bank_id.bank_id.name"/><br/>-->
-                                        <span t-field="sdt_partner_bank_id.acc_number"/><br/>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="col-4">
-                        </div>
-                        <!-- <div class="col-3">
-                            <p>Prepared By</p>
-                            <br/>
-                            <br/>
-                            <br>__________________</br>
-                            <br>Date</br>
-                        </div> -->
-                        <div class="col-3">
-                            <p>Approved By</p>
-                            <br/>
-                            <br/>
-                            <br>__________________</br>
-                            <!-- <br>Date</br> -->
-                        </div>
-
-                     </div>
-                     <!-- <div class="row mt32 mb32">
-                        <div class="col-3">
-                        </div>
-                        <div class="col-3">
-                        </div>
-                        <div class="col-3">
-                            <br/>
-                            <br/>
-                            <br>__________________</br>
-                            <br>Date</br>
-                        </div>
-                        <div class="col-3">
-                            <br/>
-                            <br/>
-                            <br>__________________</br>
-                            <br>Date</br>
-                        </div>
-                     </div> -->
-                </div>
-                <!-- != IDR -->
-                <div style="font-Size:16px;" class="page" t-if="doc.currency_id.id != 12">
-                    <style type="text/css">
-                      tr, td
-                        {
-                           border-top: 1px solid black;
-                           border-right:1px solid black;
-                           border-left:1px solid black;
-                           border-bottom:1px solid black;
-                           padding: 4px;
-                           padding-left: 7px;
-                           padding-right: 7px;
-                        }
-                    </style>
-                    <style type="text/css">
-                      th
-                        {
-                           border-top: 1px solid black;
-                           border-right:1px solid black;
-                           border-left:1px solid black;
-                           border-bottom:1px solid black;
-                           padding: 4px;
-                           padding-left: 7px;
-                           padding-right: 7px;
-                           color: black;
-                        }
-                    </style>
-                    <style type="text/css">
-                      table
-                        {
-                           border-top: 2px solid black;
-                           border-right:1px solid black;
-                           border-left:1px solid black;
-                           border-bottom:2px solid black;
-                           font-Size:16px;
-                           width: 100%;
-                           margin-top: 5px;
-                           margin-bottom: 10px;
-                        }
-                    </style>
-                    <h1 style="font-Size:16px;text-align: center;">
-                            <div style="font-Size:16px;text-align: center;text-decoration: underline;font-weight:bold;">INVOICE</div>
-                            <td>Nomor : </td><span t-field="doc.name"/>
-                            <!-- <td> - </td><span t-field="doc.invoice_date" t-options="{&quot;format&quot;:&quot;dd/MM/YYYY&quot;}"/> -->
-                    </h1>
-                    <div style="font-Size:16px;" class="row mt16">
-                        <div class="col-6">
-                            <td style="font-weight:bold;">INVOICE TO : </td>
-                            <div t-field="doc.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
-                        </div>
-                        <div class="col-6">
-                            <table style="border: 2px solid white" width="100%">
-                                <tr style="border: 2px solid white; padding: 0px;">
-                                    <td style="border: 2px solid white; padding: 0px;" width="39%">Invoice Date</td>
-                                    <td style="border: 2px solid white; padding: 0px;" width="1%"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;" width="60%"><span t-field="doc.invoice_date" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/></td>
-                                </tr>
-                                <tr style="border: 2px solid white">
-                                    <td style="border: 2px solid white; padding: 0px;">Due Date</td>
-                                    <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.invoice_date_due" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/></td>
-                                </tr>
-                                <tr style="border: 2px solid white">
-                                    <td style="border: 2px solid white; padding: 0px;">Payment Term</td>
-                                    <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.invoice_payment_term_id"/></td>
-                                </tr>
-                                <tr style="border: 2px solid white">
-                                    <td style="border: 2px solid white; padding: 0px;">SO No</td>
-                                    <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.invoice_origin"/></td>
-                                </tr>
-                                <tr style="border: 2px solid white">
-                                    <td style="border: 2px solid white; padding: 0px;">DO Number</td>
-                                    <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.do_number"/></td>
-                                </tr>
-                                <tr style="border: 2px solid white">
-                                    <td style="border: 2px solid white; padding: 0px;">PO Number</td>
-                                    <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.ref"/></td>
-                                </tr>
-                                <tr style="border: 2px solid white">
-                                    <td style="border: 2px solid white; padding: 0px;">HS Code</td>
-                                    <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                    <td style="border: 2px solid white; padding: 0px;"><span t-field="doc.hs_code"/></td>
-                                </tr>
-                            </table>
-                        </div>
+                            <tr style="border: 2px solid white">
+                                <td style="border: 2px solid white; padding: 0px;" width="39%">Due Date</td>
+                                <td style="border: 2px solid white; padding: 0px;" width="1%"> : </td>
+                                <td style="border: 2px solid white; padding: 0px;" width="60%">
+                                    <span t-field="doc.invoice_date_due" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/>
+                                </td>
+                            </tr>
+                            <tr style="border: 2px solid white">
+                                <td style="border: 2px solid white; padding: 0px;" width="39%">Payment Term</td>
+                                <td style="border: 2px solid white; padding: 0px;" width="1%"> : </td>
+                                <td style="border: 2px solid white; padding: 0px;" width="60%">
+                                    <span t-field="doc.invoice_payment_term_id"/>
+                                </td>
+                            </tr>
+                            <tr style="border: 2px solid white">
+                                <td style="border: 2px solid white; padding: 0px;" width="39%">SO No</td>
+                                <td style="border: 2px solid white; padding: 0px;" width="1%"> : </td>
+                                <td style="font-Size:14px; border: 2px solid white; padding: 0px;" width="60%">
+                                    <span t-field="doc.invoice_origin"/>
+                                </td>
+                            </tr>
+                            <tr style="border: 2px solid white">
+                                <td style="border: 2px solid white; padding: 0px;" width="39%">DO Number</td>
+                                <td style="border: 2px solid white; padding: 0px;" width="1%"> : </td>
+                                <td style="font-Size:14px; border: 2px solid white; padding: 0px;" width="60%">
+                                    <span t-field="doc.do_number"/>
+                                </td>
+                            </tr>
+                            <tr style="border: 2px solid white">
+                                <td style="border: 2px solid white; padding: 0px;">PO Number</td>
+                                <td style="border: 2px solid white; padding: 0px;"> : </td>
+                                <td style="font-Size:14px; border: 2px solid white; padding: 0px;">
+                                    <span t-field="doc.ref"/>
+                                </td>
+                            </tr>
+                            <tr style="border: 2px solid white">
+                                <td style="border: 2px solid white; padding: 0px;">HS Code</td>
+                                <td style="border: 2px solid white; padding: 0px;"> : </td>
+                                <td style="font-Size:14px; border: 2px solid white; padding: 0px;">
+                                    <span t-field="doc.hs_code"/>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
-
-                     <table>
-                         <thead>
-                            <tr style="font-Size:11;text-align:center;border-bottom:2px solid black;">
-                                 <th class="text-center"> Description</th>
-                                 <th class="text-center">Qty</th>
-                                 <th class="text-center">UoM</th>
-                                 <th class="text-center">Unit Price</th>
-                                 <th class="text-center">Discount</th>
-                                 <th class="text-center">Total</th>
-                            </tr>
-                         </thead>
-                             <tbody>
-                                 <t t-set="total_discount" t-value="0"/>
-                                 <tr t-foreach="doc.invoice_line_ids" t-as="line">
-                                     <t t-set="total_discount" t-value="total_discount +(line.price_unit * line.quantity * line.discount)"/>
-                                     <td><span t-field="line.name"/> <span t-if="line.product_id.part_number"> <span t-if="line.product_id.part_number">(</span><span t-field="line.product_id.part_number"/><span t-if="line.product_id.part_number">)</span></span></td>
-                                     <td class="text-center"><span t-esc="'%.2f'%line.quantity"/></td>
-                                     <td class="text-center"><span><t t-esc="line.product_uom_id.name"/></span></td>
-                                     <td class="text-right"><span t-esc="'%.5f'%line.sdt_price_unit"/></td>
-                                     <td class="text-right"><span t-esc="'%.0f'%line.discount"/></td>
-                                     <td class="text-right"><span t-esc="'%.2f'%line.price_subtotal"/></td>
-                                 </tr>
-
-                                 <tr>
-                                    <td rowspan="6"/>
-                                    <td class="text-right" colspan="4">Subtotal</td>
-                                    <td class="text-right">
-                                        <span t-field="doc.currency_id.symbol"/> <span t-field="doc.amount_untaxed" t-options="{'widget': 'float', 'precision': 2}"/>
-                                    </td>
-                                 </tr>
-                                 <tr>
-                                    <td class="text-right" colspan="4">Discount</td>
-                                    <td class="text-right">
-                                        <span t-field="doc.currency_id.symbol"/> <span t-esc="'%.2f'%total_discount"/>
-                                        <!-- <span t-field="doc.currency_id.symbol"/> <span t-field="doc.total_discount" t-options="{'widget': 'float', 'precision': 2}"/> -->
-                                    </td>
-                                 </tr>
-
-                                 <tr>
-                                    <td class="text-right" colspan="4">VAT</td>
-                                    <td class="text-right">
-                                        <span t-field="doc.currency_id.symbol"/> <span t-field="doc.amount_ppn" t-options="{'widget': 'float', 'precision': 2}"/>
-
-                                        <!-- <span t-field="doc.amount_ppn" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/> -->
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-right" colspan="4">PPh</td>
-                                    <td class="text-right">
-                                        <!-- <span t-field="doc.amount_pph" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/> -->
-                                        <span t-field="doc.currency_id.symbol"/> <span t-field="doc.amount_pph" t-options="{'widget': 'float', 'precision': 2}"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                   <td class="text-right" colspan="4"><strong>Grand Total</strong></td>
-                                    <td class="text-right">
-                                        <span t-field="doc.currency_id.symbol"/> <span t-field="doc.amount_total" t-options="{'widget': 'float', 'precision': 2}"/>
-                                        <!-- <span t-field="doc.amount_total" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/> -->
-                                    </td>
-                                </tr>
-                             </tbody>
-                     </table>
-                     <p>Say : <span t-esc="doc.terbilang_usd()"/></p>
-                     <p>Tax Invoice Number : <span t-field="doc.no_faktur_pajak"/></p>
-                     <div style="font-Size:16px;" class="row mt16">
-                        <div class="col-6">
-                            <td style="font-weight:bold;">Notes : </td>
-                            <div t-field="doc.narration"/>
-                        </div>
-                     </div>
-                     <br/>
-                     <div class="row mt32 mb32">
-                        <div class="col-5">
-                            <span><b>DETAIL PAYMENT</b></span>
-                            <table style="border: 2px solid black">
-                                <!-- <tr>
-                                    <td>Name</td>
-                                    <td>Bank</td>
-                                    <td>Account Number</td>
-                                </tr> -->
-                                <!-- <tr t-foreach="doc.sdt_partner_bank_ids" t-as="sdt_partner_bank_id">
-                                    <td><span t-field="sdt_partner_bank_id.partner_id"/> <span t-field="sdt_partner_bank_id.acc_holder_name"/></td>
-                                    <td><span t-field="sdt_partner_bank_id.bank_id.name"/></td>
-                                    <td><span t-field="sdt_partner_bank_id.acc_number"/></td>
-                                </tr> -->
-                                <tr style="border: 1px solid white" t-foreach="doc.sdt_partner_bank_ids" t-as="sdt_partner_bank_id">
-                                    <td style="border: 1px solid white">
-                                        <span t-field="sdt_partner_bank_id.partner_id"/> <span t-field="sdt_partner_bank_id.acc_holder_name"/> <br/>
-                                        <span t-field="sdt_partner_bank_id.bank_id.street"/><br/>
-                                        <!--<span t-field="sdt_partner_bank_id.bank_id.name"/><br/>-->
-                                        <span t-field="sdt_partner_bank_id.acc_number"/><br/>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="col-4">
-                        </div>
-                        <!-- <div class="col-3">
-                            <p>Prepared By</p>
-                            <br/>
-                            <br/>
-                            <br>__________________</br>
-                            <br>Date</br>
-                        </div> -->
-                        <div class="col-3">
-                            <p>Approved By</p>
-                            <br/>
-                            <br/>
-                            <br>__________________</br>
-                            <!-- <br>Date</br> -->
-                        </div>
-
-                     </div>
-                     <!-- <div class="row mt32 mb32">
-                        <div class="col-3">
-                        </div>
-                        <div class="col-3">
-                        </div>
-                        <div class="col-3">
-                            <br/>
-                            <br/>
-                            <br>__________________</br>
-                            <br>Date</br>
-                        </div>
-                        <div class="col-3">
-                            <br/>
-                            <br/>
-                            <br>__________________</br>
-                            <br>Date</br>
-                        </div>
-                     </div> -->
                 </div>
 
+                <table>
+                    <thead>
+                        <tr style="font-Size:11;text-align:center;border-bottom:2px solid black;">
+                            <th style="text-align:center; width:50%;">DESCRIPTION</th>
+                            <th style="text-align:center; width:7%;">QTY</th>
+                            <th style="text-align:center; width:8%;">UOM</th>
+                            <th style="text-align:center; width:15%;">UNIT PRICE</th>
+                            <th style="text-align:center; width:5%;">DISC.</th>
+                            <th style="text-align:center; width:15%;">TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="total_discount" t-value="0"/>
+                        <tr t-foreach="doc.invoice_line_ids" t-as="line">
+                            <t t-set="total_discount" t-value="total_discount +(line.price_unit * line.quantity * line.discount)"/>
+                            <td>
+                                <span t-field="line.name"/>
+                                <t t-if="line.product_id.part_number">
+                                    <span>(<span t-field="line.product_id.part_number"/>)</span>
+                                </t>
+                            </td>
+                            <td style="text-align:center;">
+                                <span t-esc="'{0:,.2f}'.format(line.quantity)"/>
+                            </td>
+                            <td style="text-align:center;">
+                                <span>
+                                    <t t-esc="line.product_uom_id.name"/>
+                                </span>
+                            </td>
+                            <td style="text-align:right;">
+                                <span t-field="doc.currency_id.symbol"/>
+                                <span t-if="doc.currency_id.symbol == 'Rp'" t-esc="'{0:,.2f}'.format(line.price_unit)"/>
+                                <span t-if="doc.currency_id.symbol == '$'" t-esc="'{0:,.5f}'.format(line.price_unit)"/>
+                            </td>
+                            <td style="text-align:right;">
+                                <span t-esc="'%.0f'%line.discount"/>
+                            </td>
+                            <td style="text-align:right;">
+                                <!-- <span t-field="line.price_subtotal" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/> -->
+                                <span t-field="doc.currency_id.symbol"/>
+                                <span t-esc="'{0:,.2f}'.format(line.price_subtotal)"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <table style="border: 0px;">
+                        <tr style="">
+                            <td style="text-align:right; border:0px; width:65%" rowspan="5"/>
+                            <td style="text-align:right; border:1px solid black; width:20%;">Subtotal</td>
+                            <td style="text-align:right; border:1px solid black; width:15%">
+                                <!-- <span t-field="doc.amount_untaxed" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/> -->
+                                <span t-field="doc.currency_id.symbol"/>
+                                <span t-esc="'{0:,.2f}'.format(doc.amount_untaxed)"/>
+                            </td>
+                        </tr>
+                        <tr style="">
+                            <td style="text-align:right; border:1px solid black;">Discount</td>
+                            <td style="text-align:right; border:1px solid black;">
+                                <span t-esc="'%.2f'%total_discount"/>
+                            </td>
+                        </tr>
+
+                        <tr style="">
+                            <td style="text-align:right; border:1px solid black;">VAT</td>
+                            <td style="text-align:right; border:1px solid black;">
+                                <!-- <span t-field="doc.amount_ppn" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/> -->
+                                <span t-field="doc.currency_id.symbol"/>
+                                <span t-esc="'{0:,.2f}'.format(doc.amount_ppn)"/>
+                            </td>
+                        </tr>
+                        <tr style="">
+                            <td style="text-align:right; border:1px solid black;">PPh</td>
+                            <td style="text-align:right; border:1px solid black;">
+                                <!-- <span t-field="doc.amount_pph" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/> -->
+                                <span t-field="doc.currency_id.symbol"/>
+                                <span t-esc="'{0:,.2f}'.format(doc.amount_pph)"/>
+                            </td>
+                        </tr>
+                        <tr style="font-Size:18px;">
+                            <td style="text-align:right; border:1px solid black;">
+                                <strong>Grand Total</strong>
+                            </td>
+                            <td style="text-align:right; border:1px solid black;">
+                                <!-- <span t-field="doc.amount_total" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/> -->
+                                <span t-field="doc.currency_id.symbol"/>
+                                <span t-esc="'{0:,.2f}'.format(doc.amount_total)"/>
+                            </td>
+                        </tr>
+                </table>
+                <p style="font-Size:18px;"><span t-if="doc.currency_id.symbol=='Rp'" t-esc="'%s : %s'%('Terbilang', doc.terbilang_idr())"/><span t-if="doc.currency_id.symbol=='$'" t-esc="'%s : %s'%('Say',doc.terbilang_usd())"/>
+                </p>
+                <p style="font-Size:18px;">Tax Invoice Number : <span t-field="doc.no_faktur_pajak"/>
+                </p>
+                <div style="font-Size:18px;" class="row mt16">
+                    <div class="col-6">
+                        <td style="font-weight:bold;">Notes : </td>
+                        <div t-field="doc.narration"/>
+                    </div>
+                </div>
+                <br/>
+                <div class="row mt32 mb32">
+                    <div style="font-Size:18px;" class="col-5">
+                        <span>
+                            <b>DETAIL PAYMENT</b>
+                        </span>
+                        <table style="border: 2px solid black">
+                            <tr style="border: 1px solid white" t-foreach="doc.sdt_partner_bank_ids" t-as="sdt_partner_bank_id">
+                                <td style="border: 1px solid white">
+                                    <span t-field="sdt_partner_bank_id.partner_id"/>
+                                    <span t-field="sdt_partner_bank_id.acc_holder_name"/>
+                                    <br/>
+                                    <span t-field="sdt_partner_bank_id.bank_id.name"/>
+                                    <span t-field="sdt_partner_bank_id.bank_id.street"/>
+                                    <br/>
+                                    <span t-field="sdt_partner_bank_id.acc_number"/>
+                                    <br/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-4">
+                    </div>
+                    <div class="col-3">
+                        <p>Approved By</p>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br>__________________</br>
+                    </div>
+
+                </div>
             </t>
         </template>
     </data>
