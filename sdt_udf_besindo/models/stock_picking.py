@@ -11,6 +11,7 @@ class StockPicking(models.Model):
     is_qc_production = fields.Boolean(string='Is QC Production',related='picking_type_id.is_qc_production',readonly=True, store=True)
     different_delivery_date = fields.Boolean(string='Different Delivery Date',related='picking_type_id.different_delivery_date',readonly=True, store=True)
     is_alasan_selisih = fields.Boolean(string='Alasan Selisih Quantity',related='picking_type_id.is_alasan_selisih',readonly=True, store=True)
+    mrp_date = fields.Datetime(string="Manufatured Date", compute='_compute_mrp_date')
 
     @api.depends('location_id','location_dest_id','date_done','move_ids_without_package','scheduled_date')
     def _get_workcenter(self):
@@ -60,6 +61,14 @@ class StockPicking(models.Model):
 
             res['arch'] = etree.tostring(doc)
         return res
+    
+    @api.depends('mrp_id')
+    def _compute_mrp_date(self):
+        for rec in self:
+            if rec.mrp_id:
+                rec.mrp_date = rec.mrp_id.mrp_date
+            else:
+                rec.mrp_date = False
     
 class StockMove(models.Model):
     _inherit = "stock.move"

@@ -3,14 +3,14 @@
         <record id="paperformat_sdt_standard_form_sj_delivery" model="report.paperformat">
             <field name="name">SDT Standard Form SJ</field>
             <field name="default" eval="True"/>
-            <field name="format">A5</field>
-            <field name="orientation">Landscape</field>
-            <field name="margin_top">8</field>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">20</field>
             <field name="margin_bottom">0</field>
             <field name="margin_left">0</field>
             <field name="margin_right">0</field>
             <field name="header_line" eval="False"/>
-            <field name="header_spacing">8</field>
+            <field name="header_spacing">20</field>
             <field name="dpi">80</field>
         </record>
         <report
@@ -20,7 +20,7 @@
             report_type="qweb-pdf"
             file="stock.picking"
             name="form_standard_odoo.standard_surat_jalan_report"
-            paperformat="form_standard_odoo.paperformat_sdt_standard_form"
+            paperformat="form_standard_odoo.paperformat_sdt_standard_form_sj_delivery"
             print_report_name="'Surat Jalan - %s' % (object.name)">
         </report>
 
@@ -255,7 +255,9 @@
                                     <tr style="border: 0px solid white; padding: 0px;">
                                         <td style="border: 0px solid white; padding: 0px; width:30%;">Customer PO No.</td>
                                         <td style="border: 0px solid white; padding: 0px; width:5%;"> : </td>
-                                        <td style="border: 0px solid white; padding: 0px; width:65%;"/>
+                                        <td style="border: 0px solid white; padding: 0px; width:65%;">
+                                            <span t-field="doc.customer_reference"/>
+                                        </td>
                                     </tr>
                                 </table>
                             </td>

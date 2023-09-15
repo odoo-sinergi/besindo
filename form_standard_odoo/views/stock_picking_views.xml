@@ -7,6 +7,8 @@
             <field name="arch" type="xml">
                 <field name="origin" position="after">
                     <field name="mrp_id" invisible="1"/>
+                    <field name="customer_reference" invisible="1"/>
+                    <field name="label_qty" attrs="{'invisible':[('picking_type_id', '!=', 8), ('state', '=', 'done')]}"/>
                 </field>
             </field>
         </record>

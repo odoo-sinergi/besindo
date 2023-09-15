@@ -16,6 +16,9 @@
                     <field name="alasan_selisih" attrs="{'column_invisible': [('parent.is_alasan_selisih','=',False)],'readonly':[('state', '!=', 'done')]}"/>
                     <button name="action_assign_alasan_selisih" type="object" icon="fa-plus-square" width="0.1" role="img" tittle="Assign Alasan Selisih" attrs="{'invisible': ['|','|',('parent.is_alasan_selisih','=',False),('state','!=','done'),('is_locked','=',False)]}"/>
                 </xpath>
+                <field name="date_done" position="after">
+                    <field name="mrp_date"/>
+                </field>
             </field>
         </record>
 
