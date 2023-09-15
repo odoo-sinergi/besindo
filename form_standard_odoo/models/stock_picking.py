@@ -7,7 +7,7 @@ class StockPicking(models.Model):
 
     mrp_id = fields.Many2one('mrp.production', string = 'MO Origin')
     customer_reference = fields.Char(string = 'Customer PO Num.', compute='_compute_customer_reference')
-    label_qty = fields.Float(string='Label Print Quantity')
+    # label_qty = fields.Float(string='Label Print Quantity')
 
     @api.depends('origin')
     @api.onchange('origin')
