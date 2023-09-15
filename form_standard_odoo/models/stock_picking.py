@@ -8,6 +8,7 @@ class StockPicking(models.Model):
     mrp_id = fields.Many2one('mrp.production', string = 'MO Origin')
     customer_reference = fields.Char(string = 'Customer PO Num.', compute='_compute_customer_reference')
     label_qty = fields.Float(string='Label Print Quantity')
+    mrp_shift = fields.Char(string='Shift', compute='_compute_mrp_shift')
 
     @api.depends('origin')
     @api.onchange('origin')
@@ -35,11 +36,18 @@ class StockPicking(models.Model):
             so_ref = self.env['sale.order'].search([('name', '=', pick.origin)], limit=1).client_order_ref
             if so_ref:
                 pick.customer_reference = so_ref
-        # for i in self :
-        #     sale_order_obj = self.env['sale.order'].search([('name', '=', self.origin)])
-        #     if sale_order_obj :
-        #         for sale_order in sale_order_obj :
-        #             i.customer_reference = sale_order.client_order_ref
-        #     else :
-        #         i.customer_reference = False
-        # self.customer_reference = self.env['sale.order'].search([('name', '=', self.origin)]).client_order_ref
+
+    @api.depends('origin')
+    @api.onchange('origin')
+    def _compute_mrp_shift(self):
+        for pick in self:
+            pick.mrp_shift = False
+            mrp_production_obj = self.env['mrp.production'].search([('name', '=', pick.origin)], limit=1)
+            if mrp_production_obj.workorder_ids:
+                for mrp in mrp_production_obj.workorder_ids:
+                    shift = {
+                        'shift_1':'Shift 1',
+                        'shift_2':'Shift 2',
+                    }
+                    pick.mrp_shift = shift[mrp.shift]
+                    

@@ -22,6 +22,9 @@
                 <xpath expr="//field[@name='location_dest_id']" position="after">
                     <field name="customer_reference" optional="show"/>
                 </xpath>
+                <xpath expr="//field[@name='partner_id']" position="before">
+                    <field name="mrp_shift" optional="show"/>
+                </xpath>
             </field>
         </record>
     </data>
