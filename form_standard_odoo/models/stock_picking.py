@@ -25,5 +25,6 @@ class StockPicking(models.Model):
     def _compute_customer_reference(self):
         for pick in self:
             so = self.env['sale.order'].search([('name', '=', pick.origin)])
-            for order in so:
-                pick.customer_reference = order.client_order_ref
+            if so:
+                for order in so:
+                    pick.customer_reference = order.client_order_ref
