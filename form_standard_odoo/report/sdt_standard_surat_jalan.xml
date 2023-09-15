@@ -32,7 +32,7 @@
             </t>
         </template>
 
-        <!-- <template id="standard_surat_jalan_documentx">
+        <template id="standard_surat_jalan_document">
             <t t-call="form_standard_odoo.sdt_header_internal_layout_polos">
 
                 <div style="font-Size:12px;" class="page">
@@ -179,8 +179,9 @@
                     </div>
                 </div>
             </t>
-        </template> -->
-        <template id="standard_surat_jalan_document">
+        </template>
+        
+        <template id="standard_surat_jalan_document_x">
             <t t-call="form_standard_odoo.sdt_header_internal_layout_polos">
 
                 <div style="font-Size:12px;" class="page">
