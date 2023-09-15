@@ -36,5 +36,5 @@ class StockPicking(models.Model):
                 for sale_order in sale_order_obj :
                     i.customer_reference = sale_order.client_order_ref
             else :
-                pass
+                i.customer_reference = False
         # self.customer_reference = self.env['sale.order'].search([('name', '=', self.origin)]).client_order_ref
