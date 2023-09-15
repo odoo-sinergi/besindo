@@ -12,13 +12,20 @@ class StockPicking(models.Model):
     @api.depends('origin')
     @api.onchange('origin')
     def partner_origin(self):
-        self.partner_id = self.env['mrp.production'].search([('name', '=', self.origin)]).contact
+        # self.partner_id = self.env['mrp.production'].search([('name', '=', self.origin)]).contact
+        mrp_production_obj = self.env['mrp.production'].search([('name', '=', self.origin)])
+        for mrp_production in mrp_production_obj :
+            self.partner_id = mrp_production.contact
 
     @api.depends('origin')
     @api.onchange('origin')
     def onchange_mrp_id(self):
-        self.mrp_id = self.env['mrp.production'].search([('name', '=', self.origin)])
-        self.partner_id = self.mrp_id.contact
+        # self.mrp_id = self.env['mrp.production'].search([('name', '=', self.origin)])
+        # self.partner_id = self.mrp_id.contact
+        mrp_production_obj = self.env['mrp.production'].search([('name', '=', self.origin)])
+        for mrp_production in mrp_production_obj :
+            self.mrp_id = mrp_production.id
+            self.partner_id = mrp_production.contact
 
     @api.depends('origin')
     @api.onchange('origin')
