@@ -162,11 +162,10 @@
                         </tbody>
                     </table>
                     <!-- <p>Terbilang : <span t-esc="doc.terbilang_idr()"/></p> -->
-                    <!-- <span>Terbilang : <span t-esc="doc.terbilang_idr()"/></span><br/> -->
-                    <p style="font-Size:18px;">
+                    <span>
                         <span t-if="doc.currency_id.symbol=='Rp'" t-esc="'%s : %s'%('Terbilang', doc.terbilang_idr())"/>
                         <span t-if="doc.currency_id.symbol=='$'" t-esc="'%s : %s'%('Say',doc.terbilang_usd())"/>
-                    </p>
+                    </span><br/>
                     <table width="100%" style="border: 1px solid white;">
                         <!-- <tr t-if="doc.partner_ref" style="border: 1px solid white;">
                             <td width="20%" style="border: 1px solid white;">Vendor Reference</td>
