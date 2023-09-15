@@ -135,12 +135,12 @@
                 <table>
                     <thead>
                         <tr style="font-Size:11;text-align:center;border-bottom:2px solid black;">
-                            <th style="text-align:center; width:50%;">DESCRIPTION</th>
+                            <th style="text-align:center; width:40%;">DESCRIPTION</th>
                             <th style="text-align:center; width:7%;">QTY</th>
                             <th style="text-align:center; width:8%;">UOM</th>
                             <th style="text-align:center; width:15%;">UNIT PRICE</th>
                             <th style="text-align:center; width:5%;">DISC.</th>
-                            <th style="text-align:center; width:15%;">TOTAL</th>
+                            <th style="text-align:center; width:20%;">TOTAL</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -149,8 +149,8 @@
                             <t t-set="total_discount" t-value="total_discount +(line.price_unit * line.quantity * line.discount)"/>
                             <td>
                                 <span t-field="line.name"/>
-                                <t t-if="line.product_id.part_number">
-                                    <span>(<span t-field="line.product_id.part_number"/>)</span>
+                                <t t-if="line.product_id.part_number or line.product_id.part_number == ' '">
+                                    <span t-esc="' (%s) ' % line.product_id.part_number"/>
                                 </t>
                             </td>
                             <td style="text-align:center;">
@@ -180,9 +180,9 @@
                 
                 <table style="border: 0px;">
                         <tr style="">
-                            <td style="text-align:right; border:0px; width:65%" rowspan="5"/>
+                            <td style="text-align:right; border:0px; width:60%" rowspan="5"/>
                             <td style="text-align:right; border:1px solid black; width:20%;">Subtotal</td>
-                            <td style="text-align:right; border:1px solid black; width:15%">
+                            <td style="text-align:right; border:1px solid black; width:20%">
                                 <!-- <span t-field="doc.amount_untaxed" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/> -->
                                 <span t-field="doc.currency_id.symbol"/>
                                 <span t-esc="'{0:,.2f}'.format(doc.amount_untaxed)"/>

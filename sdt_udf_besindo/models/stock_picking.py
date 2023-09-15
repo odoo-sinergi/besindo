@@ -33,6 +33,20 @@ class StockPicking(models.Model):
             elif rec.is_qc_production == False :
                 rec.workcenter_name = '-'
     
+    @api.onchange('origin')
+    def fill_line_description(self):
+        if self.origin:
+            sales_order_id = self.env['sale.order'].search([('name', '=', self.origin)])
+            order_line = sales_order_id.order_line
+            if order_line and self.move_ids:
+                for line in order_line:
+                    for move in self.move_ids:
+                        if move.product_id == line.product_id:
+                            move.description_picking = line.name
+                            break
+        self._compute_move_without_package()
+
+
     @api.model
     def get_view(self, view_id=None, view_type='form', **options):
         res = super(StockPicking, self).get_view(view_id=view_id, view_type=view_type, **options)
@@ -76,3 +90,11 @@ class StockMove(models.Model):
             'view_id': self.env.ref('sdt_udf_besindo.alasan_selisih_wizard',False).id,
             'target': 'new',
         }    
+    
+    @api.depends('picking_id.origin')
+    def update_description_picking(self):
+        if self.picking_id.origin:
+            so_id = self.env['sale.order'].search([('name', '=', self.picking_id.origin)])
+            for line in so_id.order_line:
+                if line.product_id == self.product_id:
+                    self.description_picking = line.name

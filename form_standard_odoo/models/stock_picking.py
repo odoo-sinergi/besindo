@@ -7,18 +7,20 @@ class StockPicking(models.Model):
 
     mrp_id = fields.Many2one('mrp.production', string = 'MO Origin')
     customer_reference = fields.Char(string = 'Customer PO Num.', compute='_compute_customer_reference')
+    label_qty = fields.Float(string='Label Print Quantity')
+
+    @api.depends('origin')
+    @api.onchange('origin')
+    def partner_origin(self):
+        self.partner_id = self.env['mrp.production'].search([('name', '=', self.origin)]).contact
 
     @api.depends('origin')
     @api.onchange('origin')
     def onchange_mrp_id(self):
         self.mrp_id = self.env['mrp.production'].search([('name', '=', self.origin)])
+        self.partner_id = self.mrp_id.contact
 
     @api.depends('origin')
     @api.onchange('origin')
     def _compute_customer_reference(self):
-        for rec in self:
-            so_origin = rec.env['sale.order'].search([('name', '=', rec.origin)], limit=1)
-            if so_origin:
-                rec.customer_reference = so_origin.client_order_ref
-            else:
-                rec.customer_reference = False
+        self.customer_reference = self.env['sale.order'].search([('name', '=', self.origin)]).client_order_ref
