@@ -27,4 +27,7 @@ class StockPicking(models.Model):
             so = self.env['sale.order'].search([('name', '=', pick.origin)])
             if so:
                 for order in so:
-                    pick.customer_reference = order.client_order_ref
+                    if order.client_order_ref:
+                        pick.customer_reference = order.client_order_ref
+                    else:
+                        pick.customer_reference = False
