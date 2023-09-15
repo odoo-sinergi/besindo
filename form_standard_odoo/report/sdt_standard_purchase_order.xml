@@ -106,13 +106,13 @@
                                     <span t-field="line.product_id.default_code"/>
                                 </td>
                                 <td>
-                                    <span><t t-field="line.display_name"/></span>
+                                    <span t-field="line.display_name"/>
                                 </td>
                                 <td class="text-right">
-                                    <span><t t-esc="'{0:,.2f}'.format(line.product_qty)"/></span>
+                                    <span t-esc="'{0:,.2f}'.format(line.product_qty)"/>
                                 </td>
                                 <td class="text-center">
-                                    <span><t t-field="line.product_uom.name"/></span>
+                                    <span t-field="line.product_uom.name"/>
                                 </td>
                                 <td class="text-right">
                                     <span t-field="line.price_unit"/>
