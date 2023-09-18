@@ -35,17 +35,19 @@ class StockPicking(models.Model):
     
     @api.onchange('origin')
     def fill_line_description(self):
-        if self.origin:
-            sales_order_id = self.env['sale.order'].search([('name', '=', self.origin)])
-            order_line = sales_order_id.order_line
-            if order_line and self.move_ids:
-                for line in order_line:
-                    for move in self.move_ids:
-                        if move.product_id == line.product_id:
-                            move.description_picking = line.name
-                            break
-        self._compute_move_without_package()
-
+        for rec in self:
+            if rec.origin:
+                order_line = rec.sale_id.order_line if rec.sale_id else False
+                if order_line and rec.move_ids:
+                    for line in order_line:
+                        for move in rec.move_ids:
+                            if move.product_id == line.product_id:
+                                if line.product_id.default_code:
+                                    move.description_picking = line.name.replace('[%s] '%line.product_id.default_code,"")
+                                else:
+                                    move.description_picking = line.name
+                                break
+            rec._compute_move_without_package()
 
     @api.model
     def get_view(self, view_id=None, view_type='form', **options):
@@ -69,11 +71,23 @@ class StockPicking(models.Model):
                 rec.mrp_date = rec.mrp_id.mrp_date
             else:
                 rec.mrp_date = False
+            if rec.origin:
+                order_line = rec.sale_id.order_line if rec.sale_id else False
+                if order_line and rec.move_ids:
+                    for line in order_line:
+                        for move in rec.move_ids:
+                            if move.product_id == line.product_id:
+                                if line.product_id.default_code:
+                                    move.description_picking = line.name.replace('[%s] '%line.product_id.default_code,"")
+                                else:
+                                    move.description_picking = line.name
+                                break
+            rec._compute_move_without_package()
     
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    alasan_selisih = fields.Char(string='Alasan Selisih',)
+    alasan_selisih = fields.Char(string='Alasan Selisih')
     
     def action_assign_alasan_selisih(self):
         self.ensure_one()
@@ -89,12 +103,4 @@ class StockMove(models.Model):
             'view_mode': 'form',
             'view_id': self.env.ref('sdt_udf_besindo.alasan_selisih_wizard',False).id,
             'target': 'new',
-        }    
-    
-    @api.depends('picking_id.origin')
-    def update_description_picking(self):
-        if self.picking_id.origin:
-            so_id = self.env['sale.order'].search([('name', '=', self.picking_id.origin)])
-            for line in so_id.order_line:
-                if line.product_id == self.product_id:
-                    self.description_picking = line.name
+        }
