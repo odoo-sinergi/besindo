@@ -35,16 +35,19 @@ class StockPicking(models.Model):
     
     @api.onchange('origin')
     def fill_line_description(self):
-        if self.origin:
-            sales_order_id = self.env['sale.order'].search([('name', '=', self.origin)])
-            order_line = sales_order_id.order_line
-            if order_line and self.move_ids:
-                for line in order_line:
-                    for move in self.move_ids:
-                        if move.product_id == line.product_id:
-                            move.description_picking = line.name
-                            break
-        self._compute_move_without_package()
+        for rec in self:
+            if rec.origin:
+                order_line = rec.sale_id.order_line if rec.sale_id else False
+                if order_line and rec.move_ids:
+                    for line in order_line:
+                        for move in rec.move_ids:
+                            if move.product_id == line.product_id:
+                                if line.product_id.default_code:
+                                    move.description_picking = line.name.replace('[%s] '%line.product_id.default_code,"")
+                                else:
+                                    move.description_picking = line.name
+                                break
+            rec._compute_move_without_package()
 
     @api.model
     def get_view(self, view_id=None, view_type='form', **options):
@@ -74,7 +77,10 @@ class StockPicking(models.Model):
                     for line in order_line:
                         for move in rec.move_ids:
                             if move.product_id == line.product_id:
-                                move.description_picking = line.name
+                                if line.product_id.default_code:
+                                    move.description_picking = line.name.replace('[%s] '%line.product_id.default_code,"")
+                                else:
+                                    move.description_picking = line.name
                                 break
             rec._compute_move_without_package()
     
@@ -108,6 +114,6 @@ class StockMove(models.Model):
                 if move.picking_id.sale_id.order_line:
                     for line in move.picking_id.sale_id.order_line:
                         if move.product_id == line.product_id:
-                            move.description_so = line.name
+                            move.description_so = line.name.replace('[%s] '%line.product_id.default_code,"")
                             move._description_picking = move.description_so
                             break
