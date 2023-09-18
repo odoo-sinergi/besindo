@@ -12,12 +12,9 @@ class StockPicking(models.Model):
     different_delivery_date = fields.Boolean(string='Different Delivery Date',related='picking_type_id.different_delivery_date',readonly=True, store=True)
     is_alasan_selisih = fields.Boolean(string='Alasan Selisih Quantity',related='picking_type_id.is_alasan_selisih',readonly=True, store=True)
     mrp_date = fields.Datetime(string="Manufatured Date", compute='_compute_mrp_date')
-    #delete on production
-    compute_line_description = fields.Boolean(string="Compute Line Description", compute="_compute_line_description")
 
     @api.depends('location_id','location_dest_id','date_done','move_ids_without_package','scheduled_date')
     def _get_workcenter(self):
-        # self.name = self.name
         for rec in self :
             if rec.is_qc_production == True :
                 if rec.group_id.name:
@@ -47,22 +44,7 @@ class StockPicking(models.Model):
                             move.description_picking = line.name
                             break
         self._compute_move_without_package()
-
-    @api.depends('origin', 'sale_id.order_line')
-    def _compute_compute_line_description(self):
-        for picking in self:
-            picking.compute_line_description = False
-        #     if picking.origin:
-        #         order_line = picking.sale_id.order_line if picking.sale_id else False
-        #         if order_line and picking.move_ids:
-        #             for line in order_line:
-        #                 for move in picking.move_ids:
-        #                     if move.product_id == line.product_id:
-        #                         move.description_picking = line.name
-        #                         picking.compute_line_description = True
-        #                         break
-        #     picking._compute_move_without_package()
-
+        
     @api.model
     def get_view(self, view_id=None, view_type='form', **options):
         res = super(StockPicking, self).get_view(view_id=view_id, view_type=view_type, **options)
