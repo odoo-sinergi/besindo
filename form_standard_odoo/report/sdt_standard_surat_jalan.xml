@@ -266,29 +266,35 @@
                     </table>
                     <div class="row">
                         <div class="col-1">No</div>
-                        <div class="col-3">Part No.</div>
-                        <div class="col-6">Part Name</div>
+                        <div class="col-1">Part No.</div>
+                        <div class="col-8">Part Name</div>
                         <div class="col-2">Qty</div>
                     </div>
                     <t t-set="LineNum" t-value="1"/>
+                    <t t-set="LineName" t-value=""/>
                     <t t-foreach="doc.move_ids" t-as="move_lines" style="padding: 0px;">
-
                         <div class="row">
                             <div class="col-1">
                                 <span>
                                     <t t-esc="LineNum"/>
                                 </span>
                             </div>
-                            <div class="col-3">
+                            <div class="col-1">
                                 <span t-field="move_lines.product_id.part_number"/>
                             </div>
-                            <div class="col-6">
+                            <div class="col-8">
                                 <t t-if="move_lines.product_id.nama_alias">                            
-                                    <span t-field="move_lines.product_id.nama_alias"/>
+                                    <!-- <span t-field="move_lines.product_id.nama_alias"/> -->
+                                    <t t-set="LineName" t-value="move_lines.product_id.nama_alias"/>
                                 </t>
                                 <t t-else="">
-                                        <span t-field="move_lines.product_id.name"/>
+                                        <!-- <span t-field="move_lines.product_id.name"/> -->
+                                        <t t-set="LineName" t-value="move_lines.product_id.name"/>
                                 </t>
+                                <t t-if="LineName != move_lines.description_picking">
+                                  <t t-set="LineName" t-value="move_lines.description_picking"/>
+                                </t>
+                                <span t-esc="LineName"/>
                             </div>
                             <div class="col-2">
                               <div class="row">

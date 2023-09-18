@@ -12,6 +12,8 @@ class StockPicking(models.Model):
     different_delivery_date = fields.Boolean(string='Different Delivery Date',related='picking_type_id.different_delivery_date',readonly=True, store=True)
     is_alasan_selisih = fields.Boolean(string='Alasan Selisih Quantity',related='picking_type_id.is_alasan_selisih',readonly=True, store=True)
     mrp_date = fields.Datetime(string="Manufatured Date", compute='_compute_mrp_date')
+    #delete on production
+    compute_line_description = fields.Boolean(string="Compute Line Description", compute="_compute_line_description")
 
     @api.depends('location_id','location_dest_id','date_done','move_ids_without_package','scheduled_date')
     def _get_workcenter(self):
@@ -46,6 +48,20 @@ class StockPicking(models.Model):
                             break
         self._compute_move_without_package()
 
+    @api.depends('origin', 'sale_id.order_line')
+    def _compute_compute_line_description(self):
+        for picking in self:
+            picking.compute_line_description = False
+        #     if picking.origin:
+        #         order_line = picking.sale_id.order_line if picking.sale_id else False
+        #         if order_line and picking.move_ids:
+        #             for line in order_line:
+        #                 for move in picking.move_ids:
+        #                     if move.product_id == line.product_id:
+        #                         move.description_picking = line.name
+        #                         picking.compute_line_description = True
+        #                         break
+        #     picking._compute_move_without_package()
 
     @api.model
     def get_view(self, view_id=None, view_type='form', **options):
@@ -69,11 +85,23 @@ class StockPicking(models.Model):
                 rec.mrp_date = rec.mrp_id.mrp_date
             else:
                 rec.mrp_date = False
+            rec.compute_line_description = False
+            if rec.origin:
+                order_line = rec.sale_id.order_line if rec.sale_id else False
+                if order_line and rec.move_ids:
+                    for line in order_line:
+                        for move in rec.move_ids:
+                            if move.product_id == line.product_id:
+                                move.description_picking = line.name
+                                rec.compute_line_description = True
+                                break
+            rec._compute_move_without_package()
     
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    alasan_selisih = fields.Char(string='Alasan Selisih',)
+    alasan_selisih = fields.Char(string='Alasan Selisih')
+    desctription_so = fields.Char(string='Description from SO', compute='_compute_description_so')
     
     def action_assign_alasan_selisih(self):
         self.ensure_one()
@@ -89,12 +117,16 @@ class StockMove(models.Model):
             'view_mode': 'form',
             'view_id': self.env.ref('sdt_udf_besindo.alasan_selisih_wizard',False).id,
             'target': 'new',
-        }    
+        }
     
-    @api.depends('picking_id.origin')
-    def update_description_picking(self):
-        if self.picking_id.origin:
-            so_id = self.env['sale.order'].search([('name', '=', self.picking_id.origin)])
-            for line in so_id.order_line:
-                if line.product_id == self.product_id:
-                    self.description_picking = line.name
+    @api.depends('picking_id.sale_id')
+    def _compute_description_so(self):
+        for move in self:
+            move.description_so = False
+            if move.picking_id.sale_id:
+                if move.picking_id.sale_id.order_line:
+                    for line in move.picking_id.sale_id.order_line:
+                        if move.product_id == line.product_id:
+                            move.description_so = line.name
+                            move._description_picking = move.description_so
+                            break
