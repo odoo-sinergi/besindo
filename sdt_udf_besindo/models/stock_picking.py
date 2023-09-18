@@ -15,6 +15,7 @@ class StockPicking(models.Model):
 
     @api.depends('location_id','location_dest_id','date_done','move_ids_without_package','scheduled_date')
     def _get_workcenter(self):
+        # self.name = self.name
         for rec in self :
             if rec.is_qc_production == True :
                 if rec.group_id.name:
@@ -44,7 +45,7 @@ class StockPicking(models.Model):
                             move.description_picking = line.name
                             break
         self._compute_move_without_package()
-        
+
     @api.model
     def get_view(self, view_id=None, view_type='form', **options):
         res = super(StockPicking, self).get_view(view_id=view_id, view_type=view_type, **options)
@@ -67,7 +68,6 @@ class StockPicking(models.Model):
                 rec.mrp_date = rec.mrp_id.mrp_date
             else:
                 rec.mrp_date = False
-            rec.compute_line_description = False
             if rec.origin:
                 order_line = rec.sale_id.order_line if rec.sale_id else False
                 if order_line and rec.move_ids:
@@ -75,7 +75,6 @@ class StockPicking(models.Model):
                         for move in rec.move_ids:
                             if move.product_id == line.product_id:
                                 move.description_picking = line.name
-                                rec.compute_line_description = True
                                 break
             rec._compute_move_without_package()
     
