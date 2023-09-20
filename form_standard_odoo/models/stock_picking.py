@@ -6,7 +6,7 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     mrp_id = fields.Many2one('mrp.production', string = 'MO Origin')
-    customer_reference = fields.Char(string = 'Customer PO Num.', compute='_compute_customer_reference')
+    customer_reference = fields.Char(string = 'Customer PO Num.', compute='_compute_customer_reference', store=True)
     label_qty = fields.Float(string='Label Print Quantity')
     mrp_shift = fields.Char(string='Shift', compute='_compute_mrp_shift')
 
