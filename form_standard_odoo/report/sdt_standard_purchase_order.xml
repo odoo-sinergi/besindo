@@ -100,6 +100,7 @@
                             <t t-set="LineNum" t-value="1"/>
                             <tr t-foreach="doc.order_line" t-as="line">
                                 <td class="text-center">
+
                                     <span><t t-esc="LineNum"/></span>
                                 </td>
                                 <td class="text-left">
@@ -109,6 +110,7 @@
                                     <span t-field="line.display_name"/>
                                 </td>
                                 <td class="text-center">
+
                                     <span t-esc="'{0:,.2f}'.format(line.product_qty)"/>
                                 </td>
                                 <td class="text-center">
@@ -135,6 +137,7 @@
                                     <!-- <span t-field="doc.currency_id.symbol"/>
                                     <span t-esc="'{0:,.2f}'.format(doc.amount_untaxed)"/> -->
                                     <span t-field="doc.amount_untaxed" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
+
                                 </td>
                             </tr>
                             <tr>
@@ -144,14 +147,17 @@
                                     <span t-esc="'{0:,.2f}'.format(doc.amount_ppn)"/> -->
                                     <!-- <span t-field="doc.amount_untaxed" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/> -->
                                     <span t-field="doc.amount_ppn" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
+
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="4">PPh</td>
+
                                 <td class="text-end">
                                     <!-- <span t-field="doc.currency_id.symbol"/>
                                     <span t-esc="'{0:,.2f}'.format(doc.amount_pph)"/> -->
                                     <span t-field="doc.amount_pph" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
+
                                 </td>
                             </tr>
                             <tr>
@@ -160,6 +166,7 @@
                                     <!-- <span t-field="doc.currency_id.symbol"/>
                                     <span t-esc="'{0:,.2f}'.format(doc.amount_total)"/> -->
                                     <span t-field="doc.amount_total" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
+
                                 </td>
 
                             </tr>

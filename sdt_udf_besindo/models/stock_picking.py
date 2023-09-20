@@ -88,7 +88,7 @@ class StockMove(models.Model):
     _inherit = "stock.move"
 
     alasan_selisih = fields.Char(string='Alasan Selisih')
-    desctription_so = fields.Char(string='Description from SO', compute='_compute_description_so')
+
     
     def action_assign_alasan_selisih(self):
         self.ensure_one()
@@ -104,16 +104,5 @@ class StockMove(models.Model):
             'view_mode': 'form',
             'view_id': self.env.ref('sdt_udf_besindo.alasan_selisih_wizard',False).id,
             'target': 'new',
+
         }
-    
-    @api.depends('picking_id.sale_id')
-    def _compute_description_so(self):
-        for move in self:
-            move.description_so = False
-            if move.picking_id.sale_id:
-                if move.picking_id.sale_id.order_line:
-                    for line in move.picking_id.sale_id.order_line:
-                        if move.product_id == line.product_id:
-                            move.description_so = line.name.replace('[%s] '%line.product_id.default_code,"")
-                            move._description_picking = move.description_so
-                            break
