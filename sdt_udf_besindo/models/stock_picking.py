@@ -88,6 +88,7 @@ class StockMove(models.Model):
     _inherit = "stock.move"
 
     alasan_selisih = fields.Char(string='Alasan Selisih')
+
     
     def action_assign_alasan_selisih(self):
         self.ensure_one()
@@ -103,4 +104,5 @@ class StockMove(models.Model):
             'view_mode': 'form',
             'view_id': self.env.ref('sdt_udf_besindo.alasan_selisih_wizard',False).id,
             'target': 'new',
+
         }
