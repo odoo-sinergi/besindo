@@ -123,25 +123,25 @@
                                     <td style="border-top: 1px solid black; border-bottom: 2px solid white; border-left: 2px solid white; border-right: 2px solid white"/>
                                     <td style="border-top: 1px solid black; border-bottom: 2px solid white; border-left: 2px solid white; border-right: 2px solid white"/>
                                     
-                                    <td style="border-top: 1px solid black; border-bottom: 1px solid black; border-left: 2px solid white; border-right: 2px solid white" class="text-right"><span t-field="doc.amount_total"/></td>
-                                    <td style="border-top: 1px solid black; border-bottom: 1px solid black; border-left: 2px solid white; border-right: 2px solid white" class="text-right"><span t-field="doc.amount_total"/></td>
+                                    <td style="border-top: 1px solid black; border-bottom: 1px solid black; border-left: 2px solid white; border-right: 2px solid white" class="text-end"><span t-field="doc.amount_total"/></td>
+                                    <td style="border-top: 1px solid black; border-bottom: 1px solid black; border-left: 2px solid white; border-right: 2px solid white" class="text-end"><span t-field="doc.amount_total"/></td>
                                  </tr>
                                  <!-- <tr>
-                                    <td class="text-right" colspan="4">Discount</td>
-                                    <td class="text-right">
+                                    <td class="text-end" colspan="4">Discount</td>
+                                    <td class="text-end">
                                         <span t-esc="'%.2f'%total_discount"/>
                                     </td>
                                  </tr>
 
                                  <tr>
-                                   <td class="text-right" colspan="4">Tax</td>
-                                    <td class="text-right">
+                                   <td class="text-end" colspan="4">Tax</td>
+                                    <td class="text-end">
                                         <span t-field="doc.amount_tax" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
                                     </td>
                                  </tr>
                                 <tr>
-                                   <td class="text-right" colspan="4"><strong>Grand Total</strong></td>
-                                    <td class="text-right">
+                                   <td class="text-end" colspan="4"><strong>Grand Total</strong></td>
+                                    <td class="text-end">
                                         <span t-field="doc.amount_total" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
                                     </td>
                                 </tr> -->
@@ -161,8 +161,8 @@
                      <!--     <td width="20%" style="border: 1px solid white"/>-->
                      <!--     <td width="20%" style="border: 1px solid white"/>-->
                      <!--     <td width="40%" style="border: 1px solid white"/>-->
-                     <!--     <td width="10%" style="border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid white; border-right: 2px solid white" class="text-right"><span t-field="doc.amount_total"/></td>-->
-                     <!--     <td width="10%" style="border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid white; border-right: 2px solid white" class="text-right"><span t-field="doc.amount_total"/></td>-->
+                     <!--     <td width="10%" style="border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid white; border-right: 2px solid white" class="text-end"><span t-field="doc.amount_total"/></td>-->
+                     <!--     <td width="10%" style="border-top: 2px solid black; border-bottom: 2px solid black; border-left: 2px solid white; border-right: 2px solid white" class="text-end"><span t-field="doc.amount_total"/></td>-->
                      <!--  </tr>-->
                      <!--</table>-->
                 </div>
