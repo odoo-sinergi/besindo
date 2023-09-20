@@ -87,19 +87,19 @@
                     <table>
                         <thead>
                             <tr style="font-Size:11;text-align:center;border-bottom:2px solid black;">
-                                <th class="text-center" width="40">No</th>
-                                <th class="text-center">Product Code</th>
-                                <th class="text-center">Product Name</th>
-                                <th class="text-center">QTY</th>
-                                <th class="text-center">UoM</th>
-                                <th class="text-center">Unit Price</th>
-                                <th class="text-center">Amount</th>
+                                <th class="text-center" width="5%">No</th>
+                                <th class="text-center" width="15%">Product Code</th>
+                                <th class="text-center" width="33%">Product Name</th>
+                                <th class="text-center" width="7%">QTY</th>
+                                <th class="text-center" width="10%">UoM</th>
+                                <th class="text-center" width="14%">Unit Price</th>
+                                <th class="text-center" width="16%">Amount</th>
                             </tr>
                         </thead>
                         <tbody class="lines_tbody">
                             <t t-set="LineNum" t-value="1"/>
                             <tr t-foreach="doc.order_line" t-as="line">
-                                <td class="text-center" width="40">
+                                <td class="text-center">
                                     <span><t t-esc="LineNum"/></span>
                                 </td>
                                 <td class="text-left">
@@ -108,55 +108,58 @@
                                 <td>
                                     <span t-field="line.display_name"/>
                                 </td>
-                                <td class="text-right">
+                                <td class="text-center">
                                     <span t-esc="'{0:,.2f}'.format(line.product_qty)"/>
                                 </td>
                                 <td class="text-center">
                                     <span t-field="line.product_uom.name"/>
                                 </td>
-                                <td class="text-right">
-                                    <span t-field="doc.currency_id.symbol"/>
-                                    <span t-esc="'{0:,.2f}'.format(line.price_unit)"/>
+                                <td class="text-end">
+                                    <!-- <span t-field="doc.currency_id.symbol"/>
+                                    <span t-esc="'{0:,.2f}'.format(line.price_unit)"/> -->
+                                    <span t-field="line.price_unit" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
                                 </td>
-                                <td class="text-right">
-                                    <span t-field="doc.currency_id.symbol"/>
-                                    <span t-esc="'{0:,.2f}'.format(line.price_subtotal)"/>
+                                <td class="text-end">
+                                    <!-- <span t-field="doc.currency_id.symbol"/>
+                                    <span t-esc="'{0:,.2f}'.format(line.price_subtotal)"/> -->
+                                    <span t-field="line.price_subtotal" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
                                 </td>
                                 <t t-set="LineNum" t-value="LineNum+1"/>
-                                <!--<td class="text-right"/>-->
+                                <!--<td class="text-end"/>-->
                             </tr>
 
                             <tr>
                                 <td colspan="2" rowspan="6"/>
                                 <td colspan="4">Subtotal</td>
-                                <td class="text-right">
-                                    <span t-field="doc.currency_id.symbol"/>
-                                    <span t-esc="'{0:,.2f}'.format(doc.amount_untaxed)"/>
-                                    <!-- <span t-field="doc.amount_untaxed" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/> -->
+                                <td class="text-end">
+                                    <!-- <span t-field="doc.currency_id.symbol"/>
+                                    <span t-esc="'{0:,.2f}'.format(doc.amount_untaxed)"/> -->
+                                    <span t-field="doc.amount_untaxed" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="4">VAT</td>
-                                <td class="text-right">
-                                    <span t-esc="'{0:,.2f}'.format(doc.amount_untaxed)"/>
-                                    <span t-esc="'{0:,.2f}'.format(doc.amount_ppn)"/>
-                                    <!-- <span t-field="doc.amount_ppn" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/> -->
+                                <td class="text-end">
+                                    <!-- <span t-esc="'{0:,.2f}'.format(doc.amount_untaxed)"/>
+                                    <span t-esc="'{0:,.2f}'.format(doc.amount_ppn)"/> -->
+                                    <!-- <span t-field="doc.amount_untaxed" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/> -->
+                                    <span t-field="doc.amount_ppn" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="4">PPh</td>
-                                <td class="text-right">
-                                    <span t-field="doc.currency_id.symbol"/>
-                                    <span t-esc="'{0:,.2f}'.format(doc.amount_pph)"/>
-                                    <!-- <span t-field="doc.amount_pph" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/> -->
+                                <td class="text-end">
+                                    <!-- <span t-field="doc.currency_id.symbol"/>
+                                    <span t-esc="'{0:,.2f}'.format(doc.amount_pph)"/> -->
+                                    <span t-field="doc.amount_pph" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="4"><strong>Grand Total</strong></td>
-                                <td class="text-right">
-                                    <span t-field="doc.currency_id.symbol"/>
-                                    <span t-esc="'{0:,.2f}'.format(doc.amount_total)"/>
-                                    <!-- <span t-field="doc.amount_total" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/> -->
+                                <td class="text-end">
+                                    <!-- <span t-field="doc.currency_id.symbol"/>
+                                    <span t-esc="'{0:,.2f}'.format(doc.amount_total)"/> -->
+                                    <span t-field="doc.amount_total" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
                                 </td>
 
                             </tr>
