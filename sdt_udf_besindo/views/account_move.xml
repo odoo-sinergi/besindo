@@ -15,9 +15,9 @@
                 <xpath expr="//field[@name='partner_shipping_id']" position="attributes">
                     <attribute name="domain">[('type','=','delivery')]</attribute>
                 </xpath>
-                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='invoice_tab']/field[@name='invoice_line_ids']/tree[1]/field[@name='price_unit']" position="after">
-                    <field name="sdt_price_unit" optional="show" readonly="1"/>
-                  </xpath>
+                <!-- <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='invoice_tab']/field[@name='invoice_line_ids']/tree[1]/field[@name='price_unit']" position="after">
+                    <field name="sdt_price_unit" readonly="1"/>
+                  </xpath> -->
             </field>
         </record>
 
