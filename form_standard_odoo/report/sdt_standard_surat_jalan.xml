@@ -288,13 +288,18 @@
                                     <t t-set="LineName" t-value="move_lines.product_id.nama_alias"/>
                                 </t>
                                 <t t-else="">
+                                    <t t-if="move_lines.description_picking">                            
+                                        <t t-set="LineName" t-value="move_lines.description_picking"/>
+                                    </t>
+                                    <t t-else="">
                                         <!-- <span t-field="move_lines.product_id.name"/> -->
                                         <t t-set="LineName" t-value="move_lines.product_id.name"/>
+                                    </t>
                                 </t>
-
-                                <t t-if="LineName != move_lines.description_picking.replace('[%s] '%move_lines.product_id.default_code, '')">
+                                
+                                <!-- <t t-if="LineName != move_lines.description_picking.replace('[%s] '%move_lines.product_id.default_code, '')">
                                   <t t-set="LineName" t-value="move_lines.description_picking"/>
-                                </t>
+                                </t> -->
                                 <span t-esc="LineName"/>
                             </div>
                             <div class="col-2">
