@@ -18,7 +18,7 @@
                     <attribute name="domain">[('category_id', '=', 5)]</attribute>
                 </xpath>
                 <field name="price_unit" position="after">
-                    <field name="price_per_kg" optional="hide">
+                    <field name="price_per_kg" optional="hide"/>
                 </field>
             </field>
         </record>
