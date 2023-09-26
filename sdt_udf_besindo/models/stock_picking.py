@@ -20,6 +20,8 @@ class StockPicking(models.Model):
             if rec.is_qc_production == True :
                 if rec.group_id.name:
                     mrp_obj = self.env['mrp.production'].search([('name', '=', rec.group_id.name)])
+                    if mrp_obj.contact:
+                        rec.partner_id = mrp_obj.contact
                     if mrp_obj.workorder_ids :
                         for workorder_id in mrp_obj.workorder_ids :
                             if not rec.workcenter_name :
@@ -83,6 +85,11 @@ class StockPicking(models.Model):
                                     move.description_picking = line.name
                                 break
             rec._compute_move_without_package()
+
+    def _mrp_update_partner_id(self, name, partner):
+        for pick in self:
+            if pick.name == name:
+                pick._origin.partner_id = partner
     
 class StockMove(models.Model):
     _inherit = "stock.move"
