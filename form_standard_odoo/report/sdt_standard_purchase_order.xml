@@ -127,7 +127,12 @@
                                     <span t-field="line.product_id.default_code"/>
                                 </td>
                                 <td>
-                                    <span t-field="line.display_name"/>
+                                    <t t-if="line.product_id.nama_alias">
+                                        <span t-field="line.product_id.nama_alias"/>
+                                    </t>
+                                    <t t-else="">
+                                        <span t-field="line.display_name"/>
+                                    </t>
                                 </td>
                                 <td class="text-center">
 
