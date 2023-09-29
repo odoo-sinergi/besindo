@@ -8,11 +8,12 @@
                 <xpath expr="//field[@name='effective_date']" position="after">
                     <field name="tempat_pengiriman_id" options="{'no_open': True, 'no_create': True}"/>
                     <field name="pembayaran" />
-                    <!-- <field name="req_approval" readonly="1" force_save="1" invisible="1"/> -->
+                    <field name="req_approval" readonly="1" force_save="1" invisible="1"/>
+                    <field name="info_status" readonly="1" force_save="1"/>
                 </xpath>
-                <!-- <xpath expr="//button[@name='button_cancel']" position="after">
+                <xpath expr="//button[@name='button_cancel']" position="after">
                     <button name="action_req_approval" string="Req Approval" type="object" class="btn-primary" attrs="{'invisible': [('req_approval','=', True)]}"/>
-                </xpath> -->
+                </xpath>
                 <xpath expr="//field[@name='partner_id']" position="attributes">
                     <attribute name="context">{'res_partner_search_mode': 'vendor', 'show_address': 1, 'show_vat': True}</attribute>
                     <attribute name="domain">[('category_id', '=', 5)]</attribute>
