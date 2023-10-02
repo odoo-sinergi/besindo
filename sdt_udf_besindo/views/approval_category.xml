@@ -10,18 +10,17 @@
                     <field name="approval_po"/>
                     <field name="min_approve_lvl_2_po" attrs="{'invisible': [('approval_po', '=', False)]}"/>
                 </xpath>
+                <xpath expr="//field[@name='approver_ids']" position="inside">
+                    <tree editable="bottom">
+                    <field name="existing_user_ids" invisible="1"/>
+                    <field name="company_id" invisible="1"/>
+                    <field name="sequence" widget="handle"/>
+                    <field name="user_id" options="{'no_create': True}"/>
+                    <field name="required"/>
+                    <field name="lvl_approver" optional="show"/>
+                    </tree>
+                </xpath>
             </field>
         </record>
-
-        <xpath expr="//field[@name='approver_ids']" position="inside">
-            <tree editable="bottom">
-              <field name="existing_user_ids" invisible="1"/>
-              <field name="company_id" invisible="1"/>
-              <field name="sequence" widget="handle"/>
-              <field name="user_id" options="{'no_create': True}"/>
-              <field name="required"/>
-              <field name="lvl_approver" optional="show"/>
-            </tree>
-        </xpath>
     </data>
 </odoo>
