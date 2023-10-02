@@ -17,7 +17,10 @@
                 </xpath>
                 <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='invoice_tab']/field[@name='invoice_line_ids']/tree[1]/field[@name='price_unit']" position="after">
                     <field name="sdt_price_unit" optional="show" readonly="1"/>
-                  </xpath>
+                </xpath>
+                <field name="payment_reference" position="after">
+                    <field name="accounting_ref" attrs="{'invisible':[('move_type','=','entry')]}"/>
+                </field>
             </field>
         </record>
 

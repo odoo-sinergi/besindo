@@ -1,6 +1,7 @@
 from odoo import api, fields, models, _ , SUPERUSER_ID
 from odoo.exceptions import UserError
 from functools import lru_cache
+from contextlib import ExitStack, contextmanager
 
 
 class AccountMove(models.Model):
@@ -29,6 +30,7 @@ class AccountMove(models.Model):
     hs_code = fields.Char(string='HS Code',)
     no_faktur_pajak = fields.Char(string='Tax Invoice Number',)
     date_payment = fields.Date(string='Paid Date', store=True, )
+    accounting_ref = fields.Char(string='Accounting Reference')
     
 
     def _compute_date_payment(self):
@@ -87,6 +89,30 @@ class AccountMove(models.Model):
                 move.amount_pph = 0
         self._compute_date_payment()
         return res
+    
+    @contextmanager
+    def _sync_invoice(self, container):
+        def existing():
+            return {
+                move: {
+                    'payment_reference': move.payment_reference+' ('+move.accounting_ref+')' if move.accounting_ref else move.payment_reference,
+                    'commercial_partner_id': move.commercial_partner_id,
+                }
+                for move in container['records'].filtered(lambda m: m.is_invoice(True))
+            }
+
+        def changed(fname):
+            return move not in before or before[move][fname] != after[move][fname]
+
+        before = existing()
+        yield
+        after = existing()
+
+        for move in after:
+            if changed('payment_reference'):
+                move.line_ids.filtered(lambda l: l.display_type == 'payment_term').name = after[move]['payment_reference']
+            if changed('commercial_partner_id'):
+                move.line_ids.partner_id = after[move]['commercial_partner_id']
     
 
 class AccountMoveLine(models.Model):
