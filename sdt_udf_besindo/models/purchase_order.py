@@ -158,3 +158,8 @@ class PurchaseOrder(models.Model):
 
             rec.req_approval = True
 
+
+class OrderLine(models.Model):
+        _inherit = 'purchase.order.line'
+
+        price_per_kg = fields.Float(string='Price per KG', default=0)
