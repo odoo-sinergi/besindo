@@ -146,10 +146,10 @@
                              </thead>
                              <tbody class="lines_tbody">
                                      <td class="text-left"><span t-field="doc.ref"/></td>
-                                     <td class="text-right"><span t-field="doc.amount"/></td>
+                                     <td class="text-end"><span t-field="doc.amount"/></td>
                                   <tr>
                                     <td class="text-center"><strong>Total</strong></td>
-                                    <td class="text-right">
+                                    <td class="text-end">
                                         <strong><span t-field="doc.amount" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/></strong>
                                     </td>
                                 </tr>

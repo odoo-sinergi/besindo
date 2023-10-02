@@ -159,29 +159,29 @@
                                 <td><span t-field="line.name"/></td>
                                 <td><span t-field="line.quantity"/></td>
                                 <td><span t-field="line.price_unit"/></td>
-                                <td class="text-right"><span t-field="line.price_subtotal"/></td>
+                                <td class="text-end"><span t-field="line.price_subtotal"/></td>
                                 <t t-set="LineNum" t-value="LineNum+1"/>
                                 <t t-set="amount_untaxed" t-value="amount_untaxed+line.price_subtotal"/>
                             </tr>
                             <group class="oe_subtotal_footer oe_right">
                                 <tr>
                                     <td colspan="3" rowspan="5"/>
-                                    <td class="text-right" colspan="2">Subtotal</td>
-                                    <td class="text-right" colspan="1">
+                                    <td class="text-end" colspan="2">Subtotal</td>
+                                    <td class="text-end" colspan="1">
                                         Rp <span t-esc="'{0:,.2f}'.format(amount_untaxed)"/>
                                     </td>
                                 </tr>
                                 <tr>
 
-                                    <td class="text-right" colspan="2">Tax</td>
-                                    <td class="text-right" colspan="1">
+                                    <td class="text-end" colspan="2">Tax</td>
+                                    <td class="text-end" colspan="1">
                                         <span t-field="doc.amount_tax" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
                                     </td>
 
                                 </tr>
                                 <tr>
-                                    <td class="text-right" colspan="2"><strong>Grand Total</strong></td>
-                                    <td class="text-right" colspan="1">
+                                    <td class="text-end" colspan="2"><strong>Grand Total</strong></td>
+                                    <td class="text-end" colspan="1">
                                        <span t-field="doc.amount_total" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
                                     </td>
                                 </tr>

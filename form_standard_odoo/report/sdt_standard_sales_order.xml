@@ -124,33 +124,33 @@
                              <t t-if="line.product_id.default_code">
                                <td class="text-left"><span t-field="line.product_id.default_code"/></td>
                                <td class="text-left"><span t-field="line.product_id.name"/></td>
-                               <td class="text-right"><span t-field="line.product_uom_qty"/></td>
+                               <td class="text-end"><span t-field="line.product_uom_qty"/></td>
                                <td class="text-center"><span t-field="line.product_uom"/></td>
-                               <!-- <td class="text-right"><span t-field="line.price_unit"/></td> -->
-                               <td class="text-right"><span t-field="doc.currency_id.symbol"/>
+                               <!-- <td class="text-end"><span t-field="line.price_unit"/></td> -->
+                               <td class="text-end"><span t-field="doc.currency_id.symbol"/>
                                   <!--<t t-if="doc.currency_id.symbol == 'Rp'"><span t-esc="'%.5f'%line.price_unit"/></t>-->
                                   <t t-if="doc.currency_id.symbol == 'Rp'"><span t-esc="'{0:,.2f}'.format(line.price_unit)"/></t>
                                   <t t-if="doc.currency_id.symbol == '$'"><span t-esc="'{0:,.5f}'.format(line.sdt_price_unit)"/></t>
                                </td>
-                               <td class="text-right"><span t-field="doc.currency_id.symbol"/> <span t-field="line.price_subtotal" t-options="{'widget': 'float', 'precision': 2}"/></td>
+                               <td class="text-end"><span t-field="doc.currency_id.symbol"/> <span t-field="line.price_subtotal" t-options="{'widget': 'float', 'precision': 2}"/></td>
                              </t>
                            </tr>
                            <tr>
                                <td colspan="2" rowspan="5"/>
                                <td colspan="3"><strong> Subtotal</strong></td>
-                                <td class="text-right" colspan="2">
+                                <td class="text-end" colspan="2">
                                     <span t-field="doc.currency_id.symbol"/> <span t-field="doc.amount_untaxed" t-options="{'widget': 'float', 'precision': 2}"/>
                                </td>
                            </tr>
                            <tr>
                                <td colspan="3"><strong>Tax</strong></td>
-                               <td class="text-right" colspan="2">
+                               <td class="text-end" colspan="2">
                                 <span t-field="doc.currency_id.symbol"/> <span t-field="doc.amount_tax" t-options="{'widget': 'float', 'precision': 2}"/>
                                </td>
                            </tr>
                            <tr>
                                <td colspan="3"><strong>Grand Total</strong></td>
-                               <td class="text-right" colspan="2">
+                               <td class="text-end" colspan="2">
                                 <span t-field="doc.currency_id.symbol"/> <span t-field="doc.amount_total" t-options="{'widget': 'float', 'precision': 2}"/>
                                </td>
                            </tr>

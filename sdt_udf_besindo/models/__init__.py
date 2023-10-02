@@ -15,3 +15,5 @@ from . import stock_picking_type
 from . import sale_order
 from . import approval_category
 from . import approval_request
+from . import approval_category_approver
+from . import account_payment_register

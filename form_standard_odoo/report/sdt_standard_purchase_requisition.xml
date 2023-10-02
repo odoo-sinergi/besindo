@@ -93,9 +93,9 @@
                                         <td class="text-center" style="border:2px solid black;"><span t-field="line.product_id.barcode"/></td>
                                      </t>
                                      <td><span><t t-esc="line.display_name"/></span></td>
-                                     <td class="text-right"><span><t t-esc="line.product_qty"/></span></td>
+                                     <td class="text-end"><span><t t-esc="line.product_qty"/></span></td>
                                      <td class="text-center"><span><t t-esc="line.product_uom_id.name"/></span></td>
-                                     <td class="text-right"><span t-field="line.schedule_date"/></td>
+                                     <td class="text-end"><span t-field="line.schedule_date"/></td>
                                      <t t-set="LineNum" t-value="LineNum+1"/>
                                  </tr>
                              </tbody>

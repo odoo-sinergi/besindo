@@ -112,7 +112,7 @@
                                  <th class="text-center" style="border:2px solid black;">Qty Done</th>
                                  <th class="text-center" style="border:2px solid black;">UoM</th>
                                  <th class="text-center" style="border:2px solid black;">Alasan Selisih</th>
-                                 <!--<th class="text-right"/>-->
+                                 <!--<th class="text-end"/>-->
                              </tr>
                          </thead>
                          <tbody class="lines_tbody">

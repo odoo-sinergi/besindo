@@ -84,27 +84,27 @@
                             <tr t-foreach="doc.order_line" t-as="line">
                                 <td class="text-left"><span t-field="line.product_id.default_code"/></td>
                                 <td class="text-left"><span t-field="line.product_id.name"/></td>
-                                <td class="text-right"><span t-field="line.product_uom_qty"/></td>
+                                <td class="text-end"><span t-field="line.product_uom_qty"/></td>
                                 <td class="text-center"><span t-field="line.product_uom"/></td>
-                                <td class="text-right"><span t-field="line.price_unit"/></td>
-                                <td class="text-right"><span t-field="line.price_subtotal"/></td>
+                                <td class="text-end"><span t-field="line.price_unit"/></td>
+                                <td class="text-end"><span t-field="line.price_subtotal"/></td>
                             </tr>
                             <tr>
                                 <td colspan="2" rowspan="5"/>
                                 <td colspan="3"><strong> Subtotal</strong></td>
-                                 <td class="text-right" colspan="2">
+                                 <td class="text-end" colspan="2">
                                      <span t-field="doc.amount_untaxed" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="3"><strong>Tax</strong></td>
-                                <td class="text-right" colspan="2">
+                                <td class="text-end" colspan="2">
                                     <span t-field="doc.amount_tax" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="3"><strong>Grand Total</strong></td>
-                                <td class="text-right" colspan="2">
+                                <td class="text-end" colspan="2">
                                     <span t-field="doc.amount_total" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
                                 </td>
                             </tr>
