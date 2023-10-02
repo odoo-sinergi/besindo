@@ -95,7 +95,7 @@ class AccountMove(models.Model):
         def existing():
             return {
                 move: {
-                    'payment_reference': move.payment_reference+' ('+move.accounting_ref+')' if move.accounting_ref else move.payment_reference,
+                    'payment_reference': move.payment_reference+' ('+move.accounting_ref+')' if move.accounting_ref and move.payment_reference else move.payment_reference,
                     'commercial_partner_id': move.commercial_partner_id,
                 }
                 for move in container['records'].filtered(lambda m: m.is_invoice(True))
