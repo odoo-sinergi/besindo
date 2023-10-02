@@ -21,6 +21,18 @@ class MRPProduction(models.Model):
             else :
                 workorder_id.name = ""
 
+    @api.onchange('contact')
+    def _onchange_contact(self):
+        if self.picking_ids:
+            for pick in self.picking_ids:
+                test1 = '%s - %s'%(pick.id, pick.partner_id.name)
+                test2 = '%s - %s'%(self.id, self.contact.name)
+                print(test1)
+                print(test2)
+                pick._mrp_update_partner_id(pick.name, self.contact)
+                test1 = '%s - %s'%(pick.id, pick.partner_id.name)
+                print(test1)
+
     def action_confirm(self):
         self._check_company()
         for production in self:

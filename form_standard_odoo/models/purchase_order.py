@@ -8,6 +8,9 @@ class PurchaseOrder(models.Model):
     def terbilang_idr(self):
         return terbilang.terbilang(self.amount_total, 'idr', 'id')
 
+    def terbilang_usd(self):
+        return terbilang.terbilang(self.amount_total, 'usd', 'en')
+    
     def render_html(self, data=None):
         report_obj = self.env['report']
         report = report_obj._get_report_from_name(self._template)

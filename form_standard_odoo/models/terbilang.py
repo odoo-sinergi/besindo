@@ -20,7 +20,9 @@ def terbilang(number, currency, bhs):
     start_word = english_number(int(lis[0]), bhs)
     end_word = english_number(int(lis[1]), bhs)
     cents_number = int(lis[1])
-    cents_name = (cents_number > 1) and 'Sen' or 'sen'
+    x = 'Cents' if bhs == 'en' else 'Sen'
+    z = 'cents' if bhs == 'en' else 'sen'
+    cents_name = (cents_number > 1) and x or z
     final_result_sen = start_word + units_name + end_word + ' ' + cents_name
     final_result = start_word + units_name
     if end_word == 'Nol' or end_word == 'Zero':

@@ -47,9 +47,9 @@
 
         <template id="label_qc_post_prod_report_qc">
             <t t-call="web.html_container">
-                <!-- <t t-foreach="docs" t-as="doc"> -->
+                <t t-foreach="docs" t-as="doc">
                     <t t-call="form_standard_odoo.label_qc_post_prod_document_qc"></t>
-                <!-- </t> -->
+                </t>
             </t>
         </template>
 

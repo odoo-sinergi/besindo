@@ -14,7 +14,7 @@ class StockPicking(models.Model):
     @api.onchange('origin')
     def partner_origin(self):
         # self.partner_id = self.env['mrp.production'].search([('name', '=', self.origin)]).contact
-        mrp_production_obj = self.env['mrp.production'].search([('name', '=', self.origin)])
+        mrp_production_obj = self.env['mrp.production'].search([('name', 'like', '%s%%'%self.origin)])
         for mrp_production in mrp_production_obj :
             self.partner_id = mrp_production.contact
 
@@ -23,7 +23,7 @@ class StockPicking(models.Model):
     def onchange_mrp_id(self):
         # self.mrp_id = self.env['mrp.production'].search([('name', '=', self.origin)])
         # self.partner_id = self.mrp_id.contact
-        mrp_production_obj = self.env['mrp.production'].search([('name', '=', self.origin)])
+        mrp_production_obj = self.env['mrp.production'].search([('name', 'like', '%s%%'%self.origin)])
         for mrp_production in mrp_production_obj :
             self.mrp_id = mrp_production.id
             self.partner_id = mrp_production.contact
@@ -33,7 +33,7 @@ class StockPicking(models.Model):
     def _compute_customer_reference(self):
         for pick in self:
             pick.customer_reference = False
-            so_ref = self.env['sale.order'].search([('name', '=', pick.origin)], limit=1).client_order_ref
+            so_ref = self.env['sale.order'].search([('name', 'like', '%s%%'%pick.origin)], limit=1).client_order_ref
             if so_ref:
                 pick.customer_reference = so_ref
 
@@ -42,7 +42,7 @@ class StockPicking(models.Model):
     def _compute_mrp_shift(self):
         for pick in self:
             pick.mrp_shift = False
-            mrp_production_obj = self.env['mrp.production'].search([('name', '=', pick.origin)], limit=1)
+            mrp_production_obj = self.env['mrp.production'].search([('name', 'like', '%s%%'%pick.origin)], limit=1)
             if mrp_production_obj.workorder_ids:
                 for mrp in mrp_production_obj.workorder_ids:
                     shift = {

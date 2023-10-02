@@ -157,3 +157,4 @@ class PurchaseOrder(models.Model):
 
 
             rec.req_approval = True
+

@@ -7,7 +7,7 @@
             <field name="arch" type="xml">
                 <field name="origin" position="after">
                     <field name="mrp_id" invisible="1"/>
-                    <!-- <field name="label_qty" attrs="{'invisible':[('picking_type_id', '!=', 8), ('state', '=', 'done')]}"/> -->
+                    <field name="label_qty" attrs="{'invisible':['|', ('picking_type_id', '!=', 8), ('state', '!=', 'done')]}"/> 
                 </field>
                 <xpath expr="//form[1]/sheet[1]/group[1]/group[1]" position="inside">
                     <field name="customer_reference"/>

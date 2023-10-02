@@ -18,6 +18,9 @@
                     <attribute name="context">{'res_partner_search_mode': 'vendor', 'show_address': 1, 'show_vat': True}</attribute>
                     <attribute name="domain">[('category_id', '=', 5)]</attribute>
                 </xpath>
+                <field name="price_unit" position="after">
+                    <field name="price_per_kg" optional="hide"/>
+                </field>
             </field>
         </record>
     </data>

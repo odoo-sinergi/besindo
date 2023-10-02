@@ -84,17 +84,37 @@
                         </div>
                     </div>
 
+                    <t t-set="ppk" t-value="0"/>
+                    <t t-foreach="doc.order_line" t-as="ol">
+                        <t t-if="ol.price_per_kg != 0">
+                            <t t-set="ppk" t-value="1"/>
+                        </t>
+                    </t>
                     <table>
                         <thead>
-                            <tr style="font-Size:11;text-align:center;border-bottom:2px solid black;">
-                                <th class="text-center" width="5%">No</th>
-                                <th class="text-center" width="15%">Product Code</th>
-                                <th class="text-center" width="33%">Product Name</th>
-                                <th class="text-center" width="7%">QTY</th>
-                                <th class="text-center" width="10%">UoM</th>
-                                <th class="text-center" width="14%">Unit Price</th>
-                                <th class="text-center" width="16%">Amount</th>
-                            </tr>
+                            <t t-if="ppk == 1">
+                                <tr style="font-Size:11;text-align:center;border-bottom:2px solid black;">
+                                    <th class="text-center" width="5%">No</th>
+                                    <th class="text-center" width="10%">Product Code</th>
+                                    <th class="text-center" width="30%">Product Name</th>
+                                    <th class="text-center" width="7%">QTY</th>
+                                    <th class="text-center" width="10%">UoM</th>
+                                    <th class="text-center" width="11%">Unit Price</th>
+                                    <th class="text-center" width="12%">Price per KG</th>
+                                    <th class="text-center" width="15%">Amount</th>
+                                </tr>
+                            </t>
+                            <t t-else="">
+                                <tr style="font-Size:11;text-align:center;border-bottom:2px solid black;">
+                                    <th class="text-center" width="5%">No</th>
+                                    <th class="text-center" width="15%">Product Code</th>
+                                    <th class="text-center" width="33%">Product Name</th>
+                                    <th class="text-center" width="7%">QTY</th>
+                                    <th class="text-center" width="10%">UoM</th>
+                                    <th class="text-center" width="14%">Unit Price</th>
+                                    <th class="text-center" width="16%">Amount</th>
+                                </tr>
+                            </t>
                         </thead>
                         <tbody class="lines_tbody">
                             <t t-set="LineNum" t-value="1"/>
@@ -107,7 +127,12 @@
                                     <span t-field="line.product_id.default_code"/>
                                 </td>
                                 <td>
-                                    <span t-field="line.display_name"/>
+                                    <t t-if="line.product_id.nama_alias">
+                                        <span t-field="line.product_id.nama_alias"/>
+                                    </t>
+                                    <t t-else="">
+                                        <span t-field="line.display_name"/>
+                                    </t>
                                 </td>
                                 <td class="text-center">
 
@@ -121,32 +146,44 @@
                                     <span t-esc="'{0:,.2f}'.format(line.price_unit)"/> -->
                                     <span t-field="line.price_unit" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
                                 </td>
+                                <t t-if="ppk == 1">
+                                    <td class="text-end">
+                                        <span t-field="line.price_per_kg" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
+                                    </td>
+                                </t>
                                 <td class="text-end">
-                                    <!-- <span t-field="doc.currency_id.symbol"/>
-                                    <span t-esc="'{0:,.2f}'.format(line.price_subtotal)"/> -->
-                                    <span t-field="line.price_subtotal" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
+                                    <span t-field="doc.currency_id.symbol"/>
+                                    <span t-esc="'{0:,.2f}'.format(line.price_subtotal)"/>
+                                    <!--<span t-field="line.price_subtotal" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>-->
                                 </td>
                                 <t t-set="LineNum" t-value="LineNum+1"/>
                                 <!--<td class="text-end"/>-->
                             </tr>
 
                             <tr>
+                              <t t-if="ppk == 1">
+                                <td colspan="3" rowspan="6"/>
+                              </t>
+                              <t t-else="">
                                 <td colspan="2" rowspan="6"/>
+                              </t>
                                 <td colspan="4">Subtotal</td>
                                 <td class="text-end">
-                                    <!-- <span t-field="doc.currency_id.symbol"/>
-                                    <span t-esc="'{0:,.2f}'.format(doc.amount_untaxed)"/> -->
-                                    <span t-field="doc.amount_untaxed" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
+                                    <!-- <span t-field="doc.currency_id.symbol"/> -->
+                                    <span t-field="doc.currency_id.symbol"/> 
+                                    <span t-esc="'{0:,.2f}'.format(doc.amount_untaxed)"/>
+                                    <!--<span t-field="doc.amount_untaxed" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>-->
 
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="4">VAT</td>
                                 <td class="text-end">
-                                    <!-- <span t-esc="'{0:,.2f}'.format(doc.amount_untaxed)"/>
-                                    <span t-esc="'{0:,.2f}'.format(doc.amount_ppn)"/> -->
+                                     <!--<span t-esc="'{0:,.2f}'.format(doc.amount_untaxed)"/>-->
+                                    <span t-field="doc.currency_id.symbol"/> 
+                                    <span t-esc="'{0:,.2f}'.format(doc.amount_ppn)"/>
                                     <!-- <span t-field="doc.amount_untaxed" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/> -->
-                                    <span t-field="doc.amount_ppn" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
+                                    <!--<span t-field="doc.amount_ppn" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>-->
 
                                 </td>
                             </tr>
@@ -154,18 +191,18 @@
                                 <td colspan="4">PPh</td>
 
                                 <td class="text-end">
-                                    <!-- <span t-field="doc.currency_id.symbol"/>
-                                    <span t-esc="'{0:,.2f}'.format(doc.amount_pph)"/> -->
-                                    <span t-field="doc.amount_pph" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
+                                    <span t-field="doc.currency_id.symbol"/> 
+                                    <span t-esc="'{0:,.2f}'.format(doc.amount_pph)"/>
+                                    <!--<span t-field="doc.amount_pph" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>-->
 
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="4"><strong>Grand Total</strong></td>
                                 <td class="text-end">
-                                    <!-- <span t-field="doc.currency_id.symbol"/>
-                                    <span t-esc="'{0:,.2f}'.format(doc.amount_total)"/> -->
-                                    <span t-field="doc.amount_total" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>
+                                    <span t-field="doc.currency_id.symbol"/> 
+                                    <span t-esc="'{0:,.2f}'.format(doc.amount_total)"/>
+                                    <!--<span t-field="doc.amount_total" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/>-->
 
                                 </td>
 
