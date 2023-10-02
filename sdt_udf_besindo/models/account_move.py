@@ -1,5 +1,6 @@
 from odoo import api, fields, models, _ , SUPERUSER_ID
 from odoo.exceptions import UserError
+from functools import lru_cache
 
 
 class AccountMove(models.Model):
@@ -92,3 +93,22 @@ class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
     sdt_price_unit = fields.Float(string='Sdt Price Unit', digits='Product Price Sales',) 
+
+
+    @api.depends('currency_id', 'company_id', 'move_id.date')
+    def _compute_currency_rate(self):
+        @lru_cache()
+        def get_rate(from_currency, to_currency, company, date):
+            return self.env['res.currency']._get_conversion_rate(
+                from_currency=from_currency,
+                to_currency=to_currency,
+                company=company,
+                date=date,
+            )
+        for line in self:
+            line.currency_rate = get_rate(
+                from_currency=line.company_currency_id,
+                to_currency=line.currency_id,
+                company=line.company_id,
+                date=line.move_id.date or line.move_id.invoice_date or fields.Date.context_today(line),
+            )
