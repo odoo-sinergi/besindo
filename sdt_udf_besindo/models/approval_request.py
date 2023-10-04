@@ -81,6 +81,8 @@ class ApprovalRequest(models.Model):
                     pass
                 else :
                     self.purchase_order_id.info_status = 'APPROVE'
+                    self.purchase_order_id.button_confirm()
+
         return super(ApprovalRequest, self).action_approve()
 
     def sdt_action_refuse (self):
