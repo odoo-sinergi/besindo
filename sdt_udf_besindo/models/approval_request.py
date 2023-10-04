@@ -63,7 +63,7 @@ class ApprovalRequest(models.Model):
             if result :
                 for res in result :
                     if res['request_status'] == 'pending':
-                        raise UserError(_("Waiting Approval From Level, %s", (self.lvl_approver-1)))
+                        raise UserError(_("Waiting Approval From Level %s", (self.lvl_approver-1)))
                     else :
                         pass
             else :
@@ -104,7 +104,7 @@ class ApprovalRequest(models.Model):
             if result :
                 for res in result :
                     if res['request_status'] == 'pending':
-                        raise UserError(_("Waiting Approval From Level, %s", (self.lvl_approver-1)))
+                        raise UserError(_("Waiting Approval From Level %s", (self.lvl_approver-1)))
                     else :
                         pass
             else :
