@@ -159,7 +159,8 @@ class PurchaseOrder(models.Model):
             rec.req_approval = True
 
 
-class OrderLine(models.Model):
-        _inherit = 'purchase.order.line'
+class PurchaseOrderLine(models.Model):
+    _inherit = 'purchase.order.line'
 
-        price_per_kg = fields.Float(string='Price per KG', default=0)
+    price_per_kg = fields.Float(string='Price per KG', default=0)
+    req_approval = fields.Boolean(string='Req Approval', related='order_id.req_approval', readonly=True,store=True)
