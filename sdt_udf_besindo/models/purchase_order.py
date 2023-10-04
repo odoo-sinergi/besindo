@@ -18,7 +18,7 @@ class PurchaseOrder(models.Model):
         compute='_compute_tax_totals', store=True, readonly=True,
         inverse='_inverse_amount_total',
     )
-    info_status = fields.Char(string='Info Status', copy=False)
+    info_status = fields.Char(string='Status Approval', copy=False)
 
     @api.depends('order_line.taxes_id', 'order_line.price_subtotal', 'amount_total', 'amount_untaxed')
     def  _compute_tax_totals(self):
@@ -87,6 +87,7 @@ class PurchaseOrder(models.Model):
 
     def action_req_approval (self):
         for rec in self :
+            rec.info_status = 'Waiting'
             approval_po_obj = self.env['approval.category'].search([('approval_po','=',True)], limit=1)
             for approval_po in approval_po_obj :
                 if rec.amount_total >= approval_po.min_approve_lvl_2_po:
@@ -159,7 +160,8 @@ class PurchaseOrder(models.Model):
             rec.req_approval = True
 
 
-class OrderLine(models.Model):
-        _inherit = 'purchase.order.line'
+class PurchaseOrderLine(models.Model):
+    _inherit = 'purchase.order.line'
 
-        price_per_kg = fields.Float(string='Price per KG', default=0)
+    price_per_kg = fields.Float(string='Price per KG', default=0)
+    req_approval = fields.Boolean(string='Req Approval', related='order_id.req_approval', readonly=True,store=True)
