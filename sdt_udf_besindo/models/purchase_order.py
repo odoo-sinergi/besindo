@@ -87,6 +87,7 @@ class PurchaseOrder(models.Model):
 
     def action_req_approval (self):
         for rec in self :
+            rec.info_status = 'Waiting'
             approval_po_obj = self.env['approval.category'].search([('approval_po','=',True)], limit=1)
             for approval_po in approval_po_obj :
                 if rec.amount_total >= approval_po.min_approve_lvl_2_po:

@@ -67,6 +67,7 @@ class ApprovalRequest(models.Model):
                     else :
                         pass
             else :
+                self.purchase_order_id.info_status = 'Approved By Level ' + str(self.lvl_approver),
                 approver = self.mapped('approver_ids').filtered(lambda approver: approver.user_id == self.env.user)
                 approver.write({'status': 'approved'})
                 self.sudo()._get_user_approval_activities(user=self.env.user).action_feedback()
