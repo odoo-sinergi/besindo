@@ -7,6 +7,8 @@ class MRPProduction(models.Model):
     _inherit = "mrp.production"
 
     contact = fields.Many2one("res.partner", string="Contact", domain=[('category_id.name','=','Customer')], required=True)
+    label_qty = fields.Float(string='Label Print Quantity')
+
 
     @api.onchange('workorder_ids','workorder_ids.workcenter_id')
     def _onchange_workcenter_id(self):
