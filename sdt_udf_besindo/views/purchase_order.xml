@@ -9,7 +9,7 @@
                     <field name="tempat_pengiriman_id" options="{'no_open': True, 'no_create': True}"/>
                     <field name="pembayaran" />
                     <field name="req_approval" readonly="1" force_save="1" invisible="1"/>
-                    <!-- <field name="info_status" readonly="1" force_save="1"/> -->
+                    <field name="info_status" readonly="1" force_save="1"/>
                 </xpath>
                 <xpath expr="//button[@name='button_cancel']" position="after">
                     <button name="action_req_approval" string="Req Approval" type="object" class="btn-primary" attrs="{'invisible': [('req_approval','=', True)]}"/>
