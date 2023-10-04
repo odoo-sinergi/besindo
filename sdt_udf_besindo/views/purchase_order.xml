@@ -21,6 +21,9 @@
                 <field name="price_unit" position="after">
                     <field name="price_per_kg" optional="hide"/>
                 </field>
+                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='products']/field[@name='order_line']/tree[1]/field[@name='product_qty']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('parent.req_approval', '=', True)]}</attribute>
+                </xpath>
             </field>
         </record>
     </data>
