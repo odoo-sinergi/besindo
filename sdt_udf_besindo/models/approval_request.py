@@ -80,7 +80,7 @@ class ApprovalRequest(models.Model):
                 if final_result :
                     pass
                 else :
-                    self.purchase_order_id.info_status = 'APPROVE'
+                    self.purchase_order_id.info_status = 'APPROVED'
                     self.purchase_order_id.button_confirm()
 
         return super(ApprovalRequest, self).action_approve()

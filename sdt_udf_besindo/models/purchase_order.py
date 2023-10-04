@@ -18,7 +18,7 @@ class PurchaseOrder(models.Model):
         compute='_compute_tax_totals', store=True, readonly=True,
         inverse='_inverse_amount_total',
     )
-    info_status = fields.Char(string='Info Status', copy=False)
+    info_status = fields.Char(string='Status Approval', copy=False)
 
     @api.depends('order_line.taxes_id', 'order_line.price_subtotal', 'amount_total', 'amount_untaxed')
     def  _compute_tax_totals(self):
