@@ -124,37 +124,38 @@ class PurchaseOrder(models.Model):
                         approvals_id.action_confirm()
                 else :
                     for user_id in approval_po.approver_ids:
-                        approvals_id = self.env['approval.request'].sudo().create({
-                        'name':'Approval/PO/-'+self.name,
-                        'date' : fields.Datetime.now(),
-                        'reference':rec.name,
-                        'category_id' : approval_po.id,
-                        'purchase_order_id' : self.id,
-                        'lvl_approver' : user_id.lvl_approver,
-                        'request_owner_id' : self.env.uid,
-                        'request_status' : 'pending',
-                        'amount' : self.amount_total,
-                        })
-                        for line_id in self.order_line:
-                            vals ={
-                                'approval_request_id': approvals_id.id,
-                                'product_id': line_id.product_id.id,
-                                'description': line_id.name,
-                                'quantity': line_id.product_uom_qty,
-                                'product_uom_id': line_id.product_uom.id,
-                            }
-                            self.env['approval.product.line'].create(vals)
-                        for approver_id in approvals_id.approver_ids :
-                            approver_id.unlink()
-                        if user_id :
-                            if user_id.lvl_approver == 1 :
-                                approvals_id.approver_ids += self.env['approval.approver'].create({
-                                    'user_id': user_id.user_id.id,
-                                    'request_id': approvals_id.id,
-                                    'status': 'new',
-                                    'company_id': rec.company_id.id,
-                                })
-                        approvals_id.action_confirm()
+                        if user_id.lvl_approver == 1 :
+                            approvals_id = self.env['approval.request'].sudo().create({
+                            'name':'Approval/PO/-'+self.name,
+                            'date' : fields.Datetime.now(),
+                            'reference':rec.name,
+                            'category_id' : approval_po.id,
+                            'purchase_order_id' : self.id,
+                            'lvl_approver' : user_id.lvl_approver,
+                            'request_owner_id' : self.env.uid,
+                            'request_status' : 'pending',
+                            'amount' : self.amount_total,
+                            })
+                            for line_id in self.order_line:
+                                vals ={
+                                    'approval_request_id': approvals_id.id,
+                                    'product_id': line_id.product_id.id,
+                                    'description': line_id.name,
+                                    'quantity': line_id.product_uom_qty,
+                                    'product_uom_id': line_id.product_uom.id,
+                                }
+                                self.env['approval.product.line'].create(vals)
+                            for approver_id in approvals_id.approver_ids :
+                                approver_id.unlink()
+                            if user_id :
+                                if user_id.lvl_approver == 1 :
+                                    approvals_id.approver_ids += self.env['approval.approver'].create({
+                                        'user_id': user_id.user_id.id,
+                                        'request_id': approvals_id.id,
+                                        'status': 'new',
+                                        'company_id': rec.company_id.id,
+                                    })
+                            approvals_id.action_confirm()
 
 
             rec.req_approval = True
