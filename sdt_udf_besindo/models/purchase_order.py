@@ -156,8 +156,6 @@ class PurchaseOrder(models.Model):
                                         'company_id': rec.company_id.id,
                                     })
                             approvals_id.action_confirm()
-
-
             rec.req_approval = True
 
 
