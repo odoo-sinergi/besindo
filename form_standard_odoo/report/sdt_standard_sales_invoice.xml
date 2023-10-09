@@ -147,7 +147,7 @@
                         <t t-set="total_discount" t-value="0"/>
                         <t t-set="lines" t-value="doc.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
                         <t t-foreach="lines" t-as="line">
-                          <tr t-foreach="lines" t-as="line">
+                          <tr>
                               <t t-set="total_discount" t-value="total_discount +(line.price_unit * line.quantity * line.discount)"/>
                               <td>
                                   <span t-field="line.name"/>
