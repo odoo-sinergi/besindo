@@ -159,7 +159,7 @@ class PurchaseOrder(models.Model):
                                                 'company_id': rec.company_id.id,
                                             })
                                     approvals_id.action_confirm()
-                    else :
+                    if approval_po.currency_id.display_name != 'IDR' :
                         for user_id in approval_po.approver_ids:
                             approvals_id = self.env['approval.request'].sudo().create({
                             'name':'Approval/PO/-'+self.name,
