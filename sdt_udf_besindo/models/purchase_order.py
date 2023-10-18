@@ -87,79 +87,114 @@ class PurchaseOrder(models.Model):
 
     def action_req_approval (self):
         for rec in self :
-            rec.info_status = 'Waiting'
-            approval_po_obj = self.env['approval.category'].search([('approval_po','=',True)], limit=1)
+            approval_po_obj = self.env['approval.category'].search([('approval_po','=',True)])
+            if not approval_po_obj :
+                raise UserError('Settingan Tidak Ditemukan')
             for approval_po in approval_po_obj :
-                if rec.amount_total >= approval_po.min_approve_lvl_2_po:
-                    for user_id in approval_po.approver_ids:
-                        approvals_id = self.env['approval.request'].sudo().create({
-                        'name':'Approval/PO/-'+self.name,
-                        'date' : fields.Datetime.now(),
-                        'reference':rec.name,
-                        'category_id' : approval_po.id,
-                        'purchase_order_id' : self.id,
-                        'lvl_approver' : user_id.lvl_approver,
-                        'request_owner_id' : self.env.uid,
-                        'request_status' : 'pending',
-                        'amount' : self.amount_total,
-                        })
-                        for line_id in self.order_line:
-                            vals ={
-                                'approval_request_id': approvals_id.id,
-                                'product_id': line_id.product_id.id,
-                                'description': line_id.name,
-                                'quantity': line_id.product_uom_qty,
-                                'product_uom_id': line_id.product_uom.id,
-                            }
-                            self.env['approval.product.line'].create(vals)
-                        for approver_id in approvals_id.approver_ids :
-                            approver_id.unlink()
-                        if user_id :
-                            approvals_id.approver_ids += self.env['approval.approver'].create({
-                                'user_id': user_id.user_id.id,
-                                'request_id': approvals_id.id,
-                                'status': 'new',
-                                'company_id': rec.company_id.id,
+                if rec.currency_id.id == approval_po.currency_id.id :
+                    if approval_po.currency_id.display_name == 'IDR' :
+                        if rec.amount_total >= approval_po.min_approve_lvl_2_po:
+                            for user_id in approval_po.approver_ids:
+                                approvals_id = self.env['approval.request'].sudo().create({
+                                'name':'Approval/PO/-'+self.name,
+                                'date' : fields.Datetime.now(),
+                                'reference':rec.name,
+                                'category_id' : approval_po.id,
+                                'purchase_order_id' : self.id,
+                                'lvl_approver' : user_id.lvl_approver,
+                                'request_owner_id' : self.env.uid,
+                                'request_status' : 'pending',
+                                'amount' : self.amount_total,
+                                })
+                                for line_id in self.order_line:
+                                    vals ={
+                                        'approval_request_id': approvals_id.id,
+                                        'product_id': line_id.product_id.id,
+                                        'description': line_id.name,
+                                        'quantity': line_id.product_uom_qty,
+                                        'product_uom_id': line_id.product_uom.id,
+                                    }
+                                    self.env['approval.product.line'].create(vals)
+                                for approver_id in approvals_id.approver_ids :
+                                    approver_id.unlink()
+                                if user_id :
+                                    approvals_id.approver_ids += self.env['approval.approver'].create({
+                                        'user_id': user_id.user_id.id,
+                                        'request_id': approvals_id.id,
+                                        'status': 'new',
+                                        'company_id': rec.company_id.id,
+                                    })
+                                approvals_id.action_confirm()
+                        else :
+                            for user_id in approval_po.approver_ids:
+                                if user_id.lvl_approver == 1 :
+                                    approvals_id = self.env['approval.request'].sudo().create({
+                                    'name':'Approval/PO/-'+self.name,
+                                    'date' : fields.Datetime.now(),
+                                    'reference':rec.name,
+                                    'category_id' : approval_po.id,
+                                    'purchase_order_id' : self.id,
+                                    'lvl_approver' : user_id.lvl_approver,
+                                    'request_owner_id' : self.env.uid,
+                                    'request_status' : 'pending',
+                                    'amount' : self.amount_total,
+                                    })
+                                    for line_id in self.order_line:
+                                        vals ={
+                                            'approval_request_id': approvals_id.id,
+                                            'product_id': line_id.product_id.id,
+                                            'description': line_id.name,
+                                            'quantity': line_id.product_uom_qty,
+                                            'product_uom_id': line_id.product_uom.id,
+                                        }
+                                        self.env['approval.product.line'].create(vals)
+                                    for approver_id in approvals_id.approver_ids :
+                                        approver_id.unlink()
+                                    if user_id :
+                                        if user_id.lvl_approver == 1 :
+                                            approvals_id.approver_ids += self.env['approval.approver'].create({
+                                                'user_id': user_id.user_id.id,
+                                                'request_id': approvals_id.id,
+                                                'status': 'new',
+                                                'company_id': rec.company_id.id,
+                                            })
+                                    approvals_id.action_confirm()
+                    if approval_po.currency_id.display_name != 'IDR' :
+                        for user_id in approval_po.approver_ids:
+                            approvals_id = self.env['approval.request'].sudo().create({
+                            'name':'Approval/PO/-'+self.name,
+                            'date' : fields.Datetime.now(),
+                            'reference':rec.name,
+                            'category_id' : approval_po.id,
+                            'purchase_order_id' : self.id,
+                            'lvl_approver' : user_id.lvl_approver,
+                            'request_owner_id' : self.env.uid,
+                            'request_status' : 'pending',
+                            'amount' : self.amount_total,
                             })
-                        approvals_id.action_confirm()
-                else :
-                    for user_id in approval_po.approver_ids:
-                        approvals_id = self.env['approval.request'].sudo().create({
-                        'name':'Approval/PO/-'+self.name,
-                        'date' : fields.Datetime.now(),
-                        'reference':rec.name,
-                        'category_id' : approval_po.id,
-                        'purchase_order_id' : self.id,
-                        'lvl_approver' : user_id.lvl_approver,
-                        'request_owner_id' : self.env.uid,
-                        'request_status' : 'pending',
-                        'amount' : self.amount_total,
-                        })
-                        for line_id in self.order_line:
-                            vals ={
-                                'approval_request_id': approvals_id.id,
-                                'product_id': line_id.product_id.id,
-                                'description': line_id.name,
-                                'quantity': line_id.product_uom_qty,
-                                'product_uom_id': line_id.product_uom.id,
-                            }
-                            self.env['approval.product.line'].create(vals)
-                        for approver_id in approvals_id.approver_ids :
-                            approver_id.unlink()
-                        if user_id :
-                            if user_id.lvl_approver == 1 :
+                            for line_id in self.order_line:
+                                vals ={
+                                    'approval_request_id': approvals_id.id,
+                                    'product_id': line_id.product_id.id,
+                                    'description': line_id.name,
+                                    'quantity': line_id.product_uom_qty,
+                                    'product_uom_id': line_id.product_uom.id,
+                                }
+                                self.env['approval.product.line'].create(vals)
+                            for approver_id in approvals_id.approver_ids :
+                                approver_id.unlink()
+                            if user_id :
                                 approvals_id.approver_ids += self.env['approval.approver'].create({
                                     'user_id': user_id.user_id.id,
                                     'request_id': approvals_id.id,
                                     'status': 'new',
                                     'company_id': rec.company_id.id,
                                 })
-                        approvals_id.action_confirm()
+                            approvals_id.action_confirm()
+                rec.req_approval = True
 
 
             rec.req_approval = True
-
-
 class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
 

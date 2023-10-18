@@ -113,7 +113,56 @@ class SaleOrder(models.Model):
                 raise UserError('Jumlah Approver Tidak Boleh Nol')
             rec.req_approval = True
             rec.status_approval = 'waiting'
-
+    
+    #patching sequence error
+    @api.model
+    def get_views(self, views, options=None):
+        res = super(SaleOrder, self).get_views(views, options)
+        self._cr.execute("""
+            SELECT id 
+            FROM sale_order 
+            WHERE name IN (
+                SELECT name 
+                FROM sale_order
+                GROUP BY name
+                HAVING COUNT(name) > 1)
+            AND id > 901
+            ORDER BY id ASC
+        """)
+        ids = self._cr.fetchall()
+        self._cr.execute("""
+            SELECT name
+            FROM sale_order 
+            ORDER BY name DESC
+            LIMIT 1
+        """)
+        name = self._cr.fetchall()
+        counter = int(name[0][0][-6:])
+        for id in ids:
+            counter += 1
+            prefix = "SO/"
+            if len("%s"%counter) == 1:
+                prefix += "00000"
+            elif len("%s"%counter) == 2:
+                prefix += "0000"
+            elif len("%s"%counter) == 3:
+                prefix += "000"
+            elif len("%s"%counter) == 4:
+                prefix += "00"
+            elif len("%s"%counter) == 5:
+                prefix += "0"
+            n = "%s%s"%(prefix, counter)
+            self._cr.execute("""
+                UPDATE sale_order
+                SET name = %s
+                WHERE id = %s
+            """, [n, id[0]])
+            self._cr.execute("""
+                UPDATE stock_picking
+                SET origin = %s
+                WHERE sale_id = %s
+            """, [n, id[0]])
+        return res
 
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"

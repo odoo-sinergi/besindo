@@ -8,7 +8,8 @@
                 <xpath expr="//field[@name='approver_ids']" position="before">
                     <field name="approval_so"/>
                     <field name="approval_po"/>
-                    <field name="min_approve_lvl_2_po" attrs="{'invisible': [('approval_po', '=', False)]}"/>
+                    <field name="currency_id" attrs="{'invisible': [('approval_po', '=', False)]}"/>
+                    <field name="min_approve_lvl_2_po" attrs="{'invisible': [('currency_id', '!=', 12)]}"/>
                 </xpath>
                 <xpath expr="//field[@name='approver_ids']" position="inside">
                     <tree editable="bottom">

@@ -145,40 +145,42 @@
                     </thead>
                     <tbody>
                         <t t-set="total_discount" t-value="0"/>
-                        <t t-set="lines" t-value="o.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
-                        <tr t-foreach="lines" t-as="line">
-                            <t t-set="total_discount" t-value="total_discount +(line.price_unit * line.quantity * line.discount)"/>
-                            <td>
-                                <span t-field="line.name"/>
-                                <t t-if="line.product_id.part_number">
-                                    <t t-if="len(line.product_id.part_number) &gt; 1 and line.product_id.part_number != ' '">
-                                        <span t-esc="' (%s) ' % line.product_id.part_number"/>
-                                        <!--<span t-raw="' (%s) ' % line.product_id.part_number"/>-->
-                                    </t>
-                                </t>
-                            </td>
-                            <td style="text-align:center;">
-                                <span t-esc="'{0:,.2f}'.format(line.quantity)"/>
-                            </td>
-                            <td style="text-align:center;">
-                                <span>
-                                    <t t-esc="line.product_uom_id.name"/>
-                                </span>
-                            </td>
-                            <td style="text-align:right;">
-                                <span t-field="doc.currency_id.symbol"/>
-                                <span t-if="doc.currency_id.symbol == 'Rp'" t-esc="'{0:,.2f}'.format(line.price_unit)"/>
-                                <span t-if="doc.currency_id.symbol == '$'" t-esc="'{0:,.5f}'.format(line.price_unit)"/>
-                            </td>
-                            <td style="text-align:right;">
-                                <span t-esc="'%.0f'%line.discount"/>
-                            </td>
-                            <td style="text-align:right;">
-                                <!-- <span t-field="line.price_subtotal" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/> -->
-                                <span t-field="doc.currency_id.symbol"/>
-                                <span t-esc="'{0:,.2f}'.format(line.price_subtotal)"/>
-                            </td>
-                        </tr>
+                        <t t-set="lines" t-value="doc.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
+                        <t t-foreach="lines" t-as="line">
+                          <tr>
+                              <t t-set="total_discount" t-value="total_discount +(line.price_unit * line.quantity * line.discount)"/>
+                              <td>
+                                  <span t-field="line.name"/>
+                                  <t t-if="line.product_id.part_number">
+                                      <t t-if="len(line.product_id.part_number) &gt; 1 and line.product_id.part_number != ' '">
+                                          <span t-esc="' (%s) ' % line.product_id.part_number"/>
+                                          <!--<span t-raw="' (%s) ' % line.product_id.part_number"/>-->
+                                      </t>
+                                  </t>
+                              </td>
+                              <td style="text-align:center;">
+                                  <span t-esc="'{0:,.2f}'.format(line.quantity)"/>
+                              </td>
+                              <td style="text-align:center;">
+                                  <span>
+                                      <t t-esc="line.product_uom_id.name"/>
+                                  </span>
+                              </td>
+                              <td style="text-align:right;">
+                                  <span t-field="doc.currency_id.symbol"/>
+                                  <span t-if="doc.currency_id.symbol == 'Rp'" t-esc="'{0:,.2f}'.format(line.price_unit)"/>
+                                  <span t-if="doc.currency_id.symbol == '$'" t-esc="'{0:,.5f}'.format(line.price_unit)"/>
+                              </td>
+                              <td style="text-align:right;">
+                                  <span t-esc="'%.0f'%line.discount"/>
+                              </td>
+                              <td style="text-align:right;">
+                                  <!-- <span t-field="line.price_subtotal" t-options="{&quot;widget&quot;: &quot;monetary&quot;}"/> -->
+                                  <span t-field="doc.currency_id.symbol"/>
+                                  <span t-esc="'{0:,.2f}'.format(line.price_subtotal)"/>
+                              </td>
+                          </tr>
+                        </t>
                     </tbody>
                 </table>
                 
