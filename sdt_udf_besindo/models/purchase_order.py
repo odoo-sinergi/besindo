@@ -195,8 +195,6 @@ class PurchaseOrder(models.Model):
 
 
             rec.req_approval = True
-
-
 class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
 
