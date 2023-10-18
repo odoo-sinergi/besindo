@@ -131,12 +131,12 @@ class SaleOrder(models.Model):
         """)
         ids = self._cr.fetchall()
         self._cr.execute("""
-            SELECT name, invoice_ids
+            SELECT name
             FROM sale_order 
             ORDER BY name DESC
             LIMIT 1
         """)
-        name, invoice_ids = self._cr.fetchall()
+        name = self._cr.fetchall()
         counter = int(name[0][0][-6:])
         for id in ids:
             counter += 1
