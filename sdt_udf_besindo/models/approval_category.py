@@ -9,4 +9,3 @@ class ApprovalCategory(models.Model):
     approval_po = fields.Boolean(string='Approval PO',)
     min_approve_lvl_2_po = fields.Float(string='Amount Min Lvl 2',)
     currency_id = fields.Many2one('res.currency', 'Currency',)
-
