@@ -19,5 +19,8 @@
         <record id="group_picking_validate_qc" model="res.groups">
             <field name="name">Picking Validate / QC</field>
         </record>
+        <record id="group_sale_quotation_cancel" model="res.groups">
+            <field name="name">Sales / Set to Quotation</field>
+        </record>
     </data>
 </odoo>
