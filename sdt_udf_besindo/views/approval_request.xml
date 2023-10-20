@@ -16,7 +16,9 @@
             <xpath expr="//button[@name='action_refuse']" position="replace">
                 <button name="sdt_action_refuse" string="Refuse" type="object" attrs="{'invisible':['|', ('request_status', 'in', ['approved', 'refused', 'cancel']), ('user_status','!=','pending')]}" data-hotkey="x"/>
             </xpath>
-            
+            <xpath expr="//button[@name='action_approve']" position="replace">
+                <button name="sdt_action_approve" string="Approve" type="object" attrs="{'invisible':['|', ('request_status', 'in', ['approved', 'refused', 'cancel']), ('user_status','!=','pending')]}" data-hotkey="q"/>
+            </xpath>
         </field>
     </record>
 
