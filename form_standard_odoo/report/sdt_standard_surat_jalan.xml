@@ -243,7 +243,8 @@
                                         <td style="border: 0px solid white; padding: 0px; width:30%;">Date</td>
                                         <td style="border: 0px solid white; padding: 0px; width:5%;"> : </td>
                                         <td style="border: 0px solid white; padding: 0px; width:65%;">
-                                            <span t-field="doc.force_date" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/>
+                                            <!-- <span t-field="doc.force_date" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/> -->
+                                            <span t-field="doc.actual_date" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/>
                                         </td>
                                     </tr>
                                     <tr style="border: 0px solid white; padding: 0px;">
