@@ -213,7 +213,6 @@ class PurchaseOrder(models.Model):
                             approvals_id.action_confirm()
                 rec.req_approval = True
             rec.req_approval = True
-            
 class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
 
