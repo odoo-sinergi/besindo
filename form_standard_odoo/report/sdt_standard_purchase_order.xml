@@ -253,7 +253,7 @@
                             <td style="border: 1px solid white;"><span t-field="doc.pembayaran"/></td>
                         </tr>
                         <tr style="border: 1px solid white;">
-                            <td style="border: 1px solid white;">Keterangan</td>
+                            <!-- <td style="border: 1px solid white;">Keterangan</td> -->
                             <td width="20%" style="border: 1px solid white;">
                                 <span t-if="doc.currency_id.symbol=='Rp'" t-esc="Keterangan"/>
                                 <span t-if="doc.currency_id.symbol=='$'" t-esc="Notes"/>
