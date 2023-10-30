@@ -223,8 +223,8 @@
                         <tr style="border: 1px solid white;">
                             <!-- <td width="20%" style="border: 1px solid white;">Waktu Pengiriman</td> -->
                             <td width="20%" style="border: 1px solid white;">
-                                <span t-if="doc.currency_id.symbol=='Rp'" t-esc="Waktu Pengiriman"/>
-                                <span t-if="doc.currency_id.symbol=='$'" t-esc="Delivery Date"/>
+                                <span t-if="doc.currency_id.symbol=='Rp'" t-esc="'Waktu Pengiriman'"/>
+                                <span t-if="doc.currency_id.symbol=='$'" t-esc="'Delivery Date'"/>
                             </td>
                             <td width="1%" style="border: 1px solid white;">:</td>
                             <td width="79%" style="border: 1px solid white;"><span t-field="doc.date_planned"/></td>
