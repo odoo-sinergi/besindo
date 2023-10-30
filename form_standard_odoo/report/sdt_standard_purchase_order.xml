@@ -221,12 +221,20 @@
                             <td width="79%" style="border: 1px solid white;"><span t-field="doc.partner_ref"/></td>
                         </tr> -->
                         <tr style="border: 1px solid white;">
-                            <td width="20%" style="border: 1px solid white;">Waktu Pengiriman</td>
+                            <!-- <td width="20%" style="border: 1px solid white;">Waktu Pengiriman</td> -->
+                            <td width="20%" style="border: 1px solid white;">
+                                <span t-if="doc.currency_id.symbol=='Rp'" t-esc="Waktu Pengiriman"/>
+                                <span t-if="doc.currency_id.symbol=='$'" t-esc="Delivery Date"/>
+                            </td>
                             <td width="1%" style="border: 1px solid white;">:</td>
                             <td width="79%" style="border: 1px solid white;"><span t-field="doc.date_planned"/></td>
                         </tr>
                         <tr style="border: 1px solid white;">
-                            <td style="border: 1px solid white;">Tempat Pengiriman</td>
+                            <!-- <td style="border: 1px solid white;">Tempat Pengiriman</td> -->
+                            <td width="20%" style="border: 1px solid white;">
+                                <span t-if="doc.currency_id.symbol=='Rp'" t-esc="Tempat Pengiriman"/>
+                                <span t-if="doc.currency_id.symbol=='$'" t-esc="Delivery Address"/>
+                            </td>
                             <td style="border: 1px solid white;">:</td>
                             <td style="border: 1px solid white;">
                                 <span t-field="doc.tempat_pengiriman_id.name"/><br/>
@@ -236,12 +244,20 @@
                             </td>
                         </tr>
                         <tr style="border: 1px solid white;">
-                            <td style="border: 1px solid white;">Pembayaran</td>
+                            <!-- <td style="border: 1px solid white;">Pembayaran</td> -->
+                            <td width="20%" style="border: 1px solid white;">
+                                <span t-if="doc.currency_id.symbol=='Rp'" t-esc="Pembayaran"/>
+                                <span t-if="doc.currency_id.symbol=='$'" t-esc="Payment"/>
+                            </td>
                             <td style="border: 1px solid white;">:</td>
                             <td style="border: 1px solid white;"><span t-field="doc.pembayaran"/></td>
                         </tr>
                         <tr style="border: 1px solid white;">
                             <td style="border: 1px solid white;">Keterangan</td>
+                            <td width="20%" style="border: 1px solid white;">
+                                <span t-if="doc.currency_id.symbol=='Rp'" t-esc="Keterangan"/>
+                                <span t-if="doc.currency_id.symbol=='$'" t-esc="Notes"/>
+                            </td>
                             <td style="border: 1px solid white;">:</td>
                             <td style="border: 1px solid white;"><span t-field="doc.notes"/></td>
                         </tr>
