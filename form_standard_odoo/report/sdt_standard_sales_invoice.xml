@@ -79,52 +79,52 @@
                     </div>
                     <div class="col-6">
                         <table style="border: 2px solid white" width="100%">
-                            <tr style="border: 2px solid white; padding: 0px;">
-                                <td style="border: 2px solid white; padding: 0px;" width="39%">Invoice Date</td>
-                                <td style="border: 2px solid white; padding: 0px;" width="1%"> : </td>
-                                <td style="border: 2px solid white; padding: 0px;" width="60%">
+                            <tr style="border: 2px solid white; padding: 1px;">
+                                <td style="border: 2px solid white; padding: 1px;" width="39%">Invoice Date</td>
+                                <td style="border: 2px solid white; padding: 1px;" width="1%"> : </td>
+                                <td style="border: 2px solid white; padding: 1px;" width="60%">
                                     <span t-field="doc.invoice_date" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/>
                                 </td>
                             </tr>
                             <tr style="border: 2px solid white">
-                                <td style="border: 2px solid white; padding: 0px;" width="39%">Due Date</td>
-                                <td style="border: 2px solid white; padding: 0px;" width="1%"> : </td>
-                                <td style="border: 2px solid white; padding: 0px;" width="60%">
+                                <td style="border: 2px solid white; padding: 1px;" width="39%">Due Date</td>
+                                <td style="border: 2px solid white; padding: 1px;" width="1%"> : </td>
+                                <td style="border: 2px solid white; padding: 1px;" width="60%">
                                     <span t-field="doc.invoice_date_due" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/>
                                 </td>
                             </tr>
                             <tr style="border: 2px solid white">
-                                <td style="border: 2px solid white; padding: 0px;" width="39%">Payment Term</td>
-                                <td style="border: 2px solid white; padding: 0px;" width="1%"> : </td>
-                                <td style="border: 2px solid white; padding: 0px;" width="60%">
+                                <td style="border: 2px solid white; padding: 1px;" width="39%">Payment Term</td>
+                                <td style="border: 2px solid white; padding: 1px;" width="1%"> : </td>
+                                <td style="border: 2px solid white; padding: 1px;" width="60%">
                                     <span t-field="doc.invoice_payment_term_id"/>
                                 </td>
                             </tr>
                             <tr style="border: 2px solid white">
-                                <td style="border: 2px solid white; padding: 0px;" width="39%">SO No</td>
-                                <td style="border: 2px solid white; padding: 0px;" width="1%"> : </td>
-                                <td style="font-Size:14px; border: 2px solid white; padding: 0px;" width="60%">
+                                <td style="border: 2px solid white; padding: 1px;" width="39%">SO No</td>
+                                <td style="border: 2px solid white; padding: 1px;" width="1%"> : </td>
+                                <td style="font-Size:14px; border: 2px solid white; padding: 1px;" width="60%">
                                     <span t-field="doc.invoice_origin"/>
                                 </td>
                             </tr>
                             <tr style="border: 2px solid white">
-                                <td style="border: 2px solid white; padding: 0px;" width="39%">DO Number</td>
-                                <td style="border: 2px solid white; padding: 0px;" width="1%"> : </td>
-                                <td style="font-Size:14px; border: 2px solid white; padding: 0px;" width="60%">
+                                <td style="border: 2px solid white; padding: 1px;" width="39%">DO Number</td>
+                                <td style="border: 2px solid white; padding: 1px;" width="1%"> : </td>
+                                <td style="font-Size:14px; border: 2px solid white; padding: 1px;" width="60%">
                                     <span t-field="doc.do_number"/>
                                 </td>
                             </tr>
                             <tr style="border: 2px solid white">
-                                <td style="border: 2px solid white; padding: 0px;">PO Number</td>
-                                <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                <td style="font-Size:14px; border: 2px solid white; padding: 0px;">
+                                <td style="border: 2px solid white; padding: 1px;">PO Number</td>
+                                <td style="border: 2px solid white; padding: 1px;"> : </td>
+                                <td style="font-Size:14px; border: 2px solid white; padding: 1px;">
                                     <span t-field="doc.ref"/>
                                 </td>
                             </tr>
                             <tr style="border: 2px solid white">
-                                <td style="border: 2px solid white; padding: 0px;">HS Code</td>
-                                <td style="border: 2px solid white; padding: 0px;"> : </td>
-                                <td style="font-Size:14px; border: 2px solid white; padding: 0px;">
+                                <td style="border: 2px solid white; padding: 1px;">HS Code</td>
+                                <td style="border: 2px solid white; padding: 1px;"> : </td>
+                                <td style="font-Size:14px; border: 2px solid white; padding: 1px;">
                                     <span t-field="doc.hs_code"/>
                                 </td>
                             </tr>
@@ -135,8 +135,8 @@
                 <table>
                     <thead>
                         <tr style="font-Size:11;text-align:center;border-bottom:2px solid black;">
-                            <th style="text-align:center; width:10%;">PART NO</th>
-                            <th style="text-align:center; width:30%;">DESCRIPTION</th>
+                            <!-- <th style="text-align:center; width:10%;">PART NO</th> -->
+                            <th style="text-align:center; width:40%;">DESCRIPTION</th>
                             <th style="text-align:center; width:7%;">QTY</th>
                             <th style="text-align:center; width:8%;">UOM</th>
                             <th style="text-align:center; width:15%;">UNIT PRICE</th>
@@ -158,17 +158,17 @@
                                       </t>
                                   </t>
                               </td> -->
-                              <td class="text-left" style="border:0px solid black; padding: 0px;">
+                              <!-- <td class="text-left" style="border:0px solid black; padding: 1px;">
                                 <span t-field="line.product_id.part_number"/>
-                            </td>
+                            </td> -->
                               <t t-if="line.product_id.nama_alias">
-                                <td class="text-left" style="border:0px solid black; padding: 0px;">
-                                    <span t-field="line.product_id.nama_alias"/>
+                                <td class="text-left" style="border:0px solid black; padding: 1px;">
+                                    span t-field="line.product_id.nama_alias"/> <span t-if="line.product_id.part_number">(<span t-field="line.product_id.part_number"/>)</span>
                                 </td>
                             </t>
                             <t t-else="">
-                                <td class="text-left" style="border:0px solid black; padding: 0px;">
-                                    <span t-field="line.product_id.name"/>
+                                <td class="text-left" style="border:0px solid black; padding: 1px;">
+                                    <span t-field="line.product_id.name"/>  <span t-if="line.product_id.part_number">(<span t-field="line.product_id.part_number"/>)</span>
                                 </td>
                             </t>
                               <td style="text-align:center;">
