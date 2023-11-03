@@ -163,7 +163,7 @@
                             </td> -->
                               <t t-if="line.product_id.nama_alias">
                                 <td class="text-left" style="border:0px solid black; padding: 1px;">
-                                    <span t-field="line.product_id.nama_alias"/> <span t-if="line.product_id.part_number">(<span t-field="line.product_id.part_number"/>)</span>
+                                    span t-field="line.product_id.nama_alias"/> <span t-if="line.product_id.part_number">(<span t-field="line.product_id.part_number"/>)</span>
                                 </td>
                             </t>
                             <t t-else="">
