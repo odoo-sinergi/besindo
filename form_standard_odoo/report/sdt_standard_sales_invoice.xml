@@ -135,8 +135,8 @@
                 <table>
                     <thead>
                         <tr style="font-Size:11;text-align:center;border-bottom:2px solid black;">
-                            <th style="text-align:center; width:10%;">PART NO</th>
-                            <th style="text-align:center; width:30%;">DESCRIPTION</th>
+                            <!-- <th style="text-align:center; width:10%;">PART NO</th> -->
+                            <th style="text-align:center; width:40%;">DESCRIPTION</th>
                             <th style="text-align:center; width:7%;">QTY</th>
                             <th style="text-align:center; width:8%;">UOM</th>
                             <th style="text-align:center; width:15%;">UNIT PRICE</th>
@@ -158,17 +158,17 @@
                                       </t>
                                   </t>
                               </td> -->
-                              <td class="text-left" style="border:0px solid black; padding: 1px;">
+                              <!-- <td class="text-left" style="border:0px solid black; padding: 1px;">
                                 <span t-field="line.product_id.part_number"/>
-                            </td>
+                            </td> -->
                               <t t-if="line.product_id.nama_alias">
                                 <td class="text-left" style="border:0px solid black; padding: 1px;">
-                                    <span t-field="line.product_id.nama_alias"/>
+                                    <span t-field="line.product_id.nama_alias"/> <span t-field="line.product_id.part_number"/>
                                 </td>
                             </t>
                             <t t-else="">
                                 <td class="text-left" style="border:0px solid black; padding: 1px;">
-                                    <span t-field="line.product_id.name"/>
+                                    <span t-field="line.product_id.name"/> <span t-field="line.product_id.part_number"/>
                                 </td>
                             </t>
                               <td style="text-align:center;">
