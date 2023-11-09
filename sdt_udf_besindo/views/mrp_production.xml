@@ -150,6 +150,9 @@
                         <field name="json_popover" widget="mrp_workorder_popover" string=" " width="0.1" attrs="{'invisible': [('show_json_popover', '=', False)]}"/>
                     </tree>
                 </xpath>
+                <button name="button_unbuild" position="attributes">
+                    <attribute name="groups">sdt_udf_besindo.group_mrp_unbuild</attribute>
+                </button>
             </field>
         </record>
     </data>
