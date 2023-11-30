@@ -1,6 +1,6 @@
 <odoo>
     <data>
-        <template id="label_qc_post_prod_document_qc">
+        <template id="label_qc_post_prod_document">
             <t t-call="form_standard_odoo.sdt_header_internal_layout_polos">
                 <div style="font-Size:10px;" class="page">
                     <style type="text/css">
@@ -58,7 +58,7 @@
                         <t t-if="row == rows-1">
                             <t t-set="cols" t-value="lastCol"/>
                         </t>
-                        <tr style="height: 150pt">
+                        <tr>
                             <t t-foreach="cols" t-as="col">
                                 <td>
                                     <table width="100%">
@@ -83,7 +83,7 @@
                                                 <span>Customer</span>
                                             </td>
                                             <td colspan="2">
-                                                <span t-field="doc.partner_id.name"/>
+                                                <span t-field="doc.contact.name"/>
                                             </td>
                                         </tr>
                                         <tr>
@@ -121,12 +121,12 @@
                                                 <span>Date</span>
                                             </td>
                                             <td>
-                                                <span t-field="doc.force_date" t-options='{"format": "dd MMMM yyyy"}'/>
-                                                <!-- <span t-field="doc.mrp_id.date_planned_start" t-field-options="{&quot;format&quot;: &quot;dd MM yy&quot;}"/> -->
+                                                <span t-field="doc.mrp_date" t-options='{"format": "dd MMMM yyyy"}'/>
                                             </td>
                                             <td>
                                                 <span>Line </span>
-                                                <span t-foreach="doc.mrp_id.workorder_ids" t-as="lines">:                                                            <span t-esc="lines.workcenter_id.code"/>
+                                                <span t-foreach="doc.workorder_ids" t-as="lines">:
+                                                    <span t-esc="lines.workcenter_id.code"/>
                                                 </span>
                                             </td>
                                         </tr>
@@ -135,10 +135,26 @@
                                                 <span>Operator</span>
                                             </td>
                                             <td>
-                                                <span t-field="doc.mrp_id.user_id"/>
+                                                <t t-set="i" t-value="0"/>
+                                                <t t-foreach="doc.workorder_ids" t-as="lines">
+                                                    <t t-foreach="lines.operator_factory_ids" t-as="operator">
+                                                        <span t-if="i>0">,</span>
+                                                        <span t-esc="operator.name"/>
+                                                        <t t-set="i" t-value="i+1"/>
+                                                    </t>
+                                                </t>
                                             </td>
                                             <td>
-                                                <span t-esc="'Shift : %s'%doc.mrp_shift.replace('Shift ', '')"/>
+                                                <t t-set="x" t-value=""/>
+                                                <t t-foreach="doc.workorder_ids" t-as="lines">
+                                                    <t t-if="lines.shift == 'shift_1'">
+                                                        <t t-set="x" t-value="1"/>
+                                                    </t>
+                                                    <t t-if="lines.shift == 'shift_2'">
+                                                        <t t-set="x" t-value="2"/>
+                                                    </t>
+                                                </t>
+                                                <span t-esc="'Shift : %s'%x"/>
                                             </td>
                                         </tr>
                                     </table>
