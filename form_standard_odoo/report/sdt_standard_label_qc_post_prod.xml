@@ -58,7 +58,7 @@
                         <t t-if="row == rows-1">
                             <t t-set="cols" t-value="lastCol"/>
                         </t>
-                        <tr>
+                        <tr style="height: 150pt;">
                             <t t-foreach="cols" t-as="col">
                                 <td>
                                     <table width="100%">
