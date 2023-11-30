@@ -8,7 +8,8 @@ class MRPProduction(models.Model):
 
     contact = fields.Many2one("res.partner", string="Contact", domain=[('category_id.name','=','Customer')], required=True)
     label_qty = fields.Float(string='Label Print Quantity')
-
+    label_qty_per_pack = fields.Float(string='Quantity per Pack')
+    label_part_num = fields.Char(string='Part Number')
 
     @api.onchange('workorder_ids','workorder_ids.workcenter_id')
     def _onchange_workcenter_id(self):
