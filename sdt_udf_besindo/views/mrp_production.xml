@@ -110,6 +110,8 @@
                 <field name="user_id" position="after">
                     <field name="contact" options="{'no_create':true, 'no_edit':true}"/>
                     <field name="label_qty" attrs="{'invisible':[('state', '=', 'draft')]}"/>
+                    <field name="label_qty_per_pack" attrs="{'invisible':[('state', '=', 'draft')]}"/>
+                    <field name="label_part_num" attrs="{'invisible':[('state', '=', 'draft')]}"/>
                 </field>
                 <xpath expr="/form[1]/sheet[1]/notebook[1]/page[2]/field[1]" position="inside">
                     <tree editable="bottom" multi_edit="1">
