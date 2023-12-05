@@ -53,7 +53,7 @@
                     </t>
                     <t t-set="no" t-value="1"/>
                     
-                    <table>
+                    <table style="border-right:0px;">
                     <t t-foreach="rows" t-as="row">
                         <t t-if="row == rows-1">
                             <t t-set="cols" t-value="lastCol"/>
