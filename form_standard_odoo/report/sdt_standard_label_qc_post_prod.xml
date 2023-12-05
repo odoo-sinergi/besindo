@@ -60,7 +60,7 @@
                         </t>
                         <tr>
                             <t t-foreach="cols" t-as="col">
-                                <td style="height: 195px;">
+                                <td style="height: 185px;">
                                     <table width="100%">
                                         <tr>
                                             <td colspan="2" style="border-right:0px;">
