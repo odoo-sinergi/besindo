@@ -28,14 +28,22 @@ class StockPicking(models.Model):
             self.mrp_id = mrp_production.id
             self.partner_id = mrp_production.contact
 
-    @api.depends('origin')
-    @api.onchange('origin')
+    @api.depends('move_ids_without_package')
     def _compute_customer_reference(self):
         for pick in self:
             pick.customer_reference = False
-            so_ref = self.env['sale.order'].search([('name', 'like', pick.origin)], limit=1).client_order_ref
+            so_ref = False
+            if pick.origin:
+                so_ref = self.env['sale.order'].search([('name', '=', pick.origin)], limit=1).client_order_ref
             if so_ref:
                 pick.customer_reference = so_ref
+
+    @api.onchange('origin')
+    def _onchange_customer_reference(self):
+        self.customer_reference = False
+        so_ref = self.env['sale.order'].search([('name', '=', self.origin)], limit=1).client_order_ref
+        if so_ref:
+            self.customer_reference = so_ref
 
     @api.depends('origin')
     @api.onchange('origin')
