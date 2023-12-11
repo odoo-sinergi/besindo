@@ -307,9 +307,9 @@
                                 </tr>
                             </table>
                         </div>
-                        <div class="col-3">
+                        <div class="col-1">
                         </div>
-                        <div class="col-3">
+                        <div class="col-5">
                             <table style="border: 1px solid white;" width="100%">
                                 <tr style="border: 1px solid white;">
                                     <td style="border: 1px solid white;">
@@ -321,7 +321,7 @@
                                     </td>
                                 </tr>
                                 <tr style="border: 1px solid white;">
-                                    <td style="border: 1px solid white;">Date : ___________________</td>
+                                    <td style="border: 1px solid white;">Date : _______________</td>
                                 </tr>
                             </table>
                         </div>
