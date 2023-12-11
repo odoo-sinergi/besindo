@@ -122,10 +122,20 @@ class ApprovalRequest(models.Model):
                 final_result = self.env.cr.dictfetchall()
                 if final_result :
                     self.action_approve()
+                    self.purchase_order_id.user_lvl_1_id = self._uid,
+                    self.purchase_order_id.approve_date_lvl_1 = fields.Datetime.now()
+                    x=1
                 else :
+                    if self.purchase_order_id.user_lvl_1_id.id == False :
+                        self.purchase_order_id.user_lvl_1_id = self._uid,
+                        self.purchase_order_id.approve_date_lvl_1 = fields.Datetime.now()
+                    else :
+                        self.purchase_order_id.user_lvl_2_id = self._uid,
+                        self.purchase_order_id.approve_date_lvl_2 = fields.Datetime.now()
                     self.action_approve()
                     self.purchase_order_id.info_status = 'APPROVED'
                     self.purchase_order_id.button_confirm()
+                    x=2
                     
     def sdt_action_refuse (self):
         if self.sale_order_id :
