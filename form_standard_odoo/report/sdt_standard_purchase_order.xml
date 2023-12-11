@@ -279,9 +279,6 @@
                                 <tr style="border: 1px solid white;">
                                     <td style="border: 1px solid white;"><span t-esc="doc.user_lvl_1_id.name"/></td>
                                 </tr>
-                                <tr style="border: 1px solid white;">
-                                    <td style="border: 1px solid white;">Date : <span t-esc="doc.approve_date_lvl_1"/></td>
-                                </tr>
                             </table>
                         </div>
                         <div class="col-3">
@@ -302,9 +299,6 @@
                                 <tr style="border: 1px solid white;">
                                     <td style="border: 1px solid white;"><span t-esc="doc.user_lvl_2_id.name"/></td>
                                 </tr>
-                                <tr style="border: 1px solid white;">
-                                    <td style="border: 1px solid white;">Date : <span t-esc="doc.approve_date_lvl_2"/></td>
-                                </tr>
                             </table>
                         </div>
                         <div class="col-1">
@@ -320,8 +314,31 @@
                                     <td style="border: 1px solid white;" height="154px">
                                     </td>
                                 </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- date -->
+                    <div class="row mt32 mb32">
+                        <div class="col-3">
+                            <table style="border: 1px solid white;" width="100%" t-if="doc.user_lvl_1_id">
                                 <tr style="border: 1px solid white;">
-                                    <td style="border: 1px solid white;">Date : _______________</td>
+                                    <td style="border: 1px solid white;">Date : <span t-esc="doc.approve_date_lvl_1"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-3">
+                            <table style="border: 1px solid white;" width="100%" t-if="doc.user_lvl_2_id">
+                                <tr style="border: 1px solid white;">
+                                    <td style="border: 1px solid white;">Date : <span t-esc="doc.approve_date_lvl_2"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-1">
+                        </div>
+                        <div class="col-5">
+                            <table style="border: 1px solid white;" width="100%">
+                                <tr style="border: 1px solid white;">
+                                    <td style="border: 1px solid white;">Date : ______________________________</td>
                                 </tr>
                             </table>
                         </div>
