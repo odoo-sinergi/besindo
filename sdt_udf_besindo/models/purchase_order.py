@@ -94,7 +94,6 @@ class PurchaseOrder(models.Model):
 
     def action_req_approval (self):
         for rec in self :
-            self.min_approve_lvl_2_po = 0.0
             approval_po_obj = self.env['approval.category'].search([('approval_po','=',True)])
             if not approval_po_obj :
                 raise UserError('Settingan Tidak Ditemukan')
@@ -155,7 +154,6 @@ class PurchaseOrder(models.Model):
                                         'company_id': rec.company_id.id,
                                     })
                         else :
-                            self.min_approve_lvl_2_po = approval_po.min_approve_lvl_2_po
                             for user_id in approval_po.approver_ids:
                                 if user_id.lvl_approver == 1 :
                                     approvals_id = self.env['approval.request'].sudo().create({
