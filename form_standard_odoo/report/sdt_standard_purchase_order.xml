@@ -273,10 +273,8 @@
                                     <td style="border: 1px solid white; padding : 2px"><span>Factory General Manager</span></td>
                                 </tr>
                                 <tr style="border: 1px solid white; padding : 2px">
-                                    <td style="border: 1px solid white; padding : 2px">
-                                        <t t-if="doc.user_lvl_1_id">
-                                            <img t-attf-src="data:image/png;base64,{{ doc.user_lvl_1_id.digital_signature }}" style="width:100px; height:70px; padding : 2px"/>
-                                        </t>
+                                    <td style="border: 1px solid white; padding : 2px" t-if="doc.user_lvl_1_id">
+                                        <img t-attf-src="data:image/png;base64,{{ doc.user_lvl_1_id.digital_signature }}" style="width:100px; height:70px; padding : 2px"/>
                                     </td>
                                 </tr>
                                 <tr style="border: 1px solid white; padding : 2px">
