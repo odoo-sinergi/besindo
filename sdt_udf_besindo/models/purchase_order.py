@@ -25,6 +25,7 @@ class PurchaseOrder(models.Model):
     
     user_lvl_2_id = fields.Many2one('res.users' ,string='user 2',)
     approve_date_lvl_2 = fields.Date(string='Approve Date',)
+    min_approve_lvl_2_po = fields.Float(string='Amount Min Lvl 2',)
     
     @api.depends('order_line.taxes_id', 'order_line.price_subtotal', 'amount_total', 'amount_untaxed')
     def  _compute_tax_totals(self):
@@ -100,6 +101,7 @@ class PurchaseOrder(models.Model):
                 if rec.currency_id.id == approval_po.currency_id.id :
                     if approval_po.currency_id.display_name == 'IDR' :
                         if rec.amount_total >= approval_po.min_approve_lvl_2_po:
+                            self.min_approve_lvl_2_po = approval_po.min_approve_lvl_2_po
                             for user_id in approval_po.approver_ids:
                                 sql_query="""
                                     select count(1) from approval_request where purchase_order_id= %s and lvl_approver = %s
