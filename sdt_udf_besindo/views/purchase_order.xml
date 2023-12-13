@@ -14,6 +14,7 @@
                     <field name="approve_date_lvl_1" readonly="1" force_save="1" invisible="1"/>
                     <field name="user_lvl_2_id" readonly="1" force_save="1" invisible="1"/>
                     <field name="approve_date_lvl_2" readonly="1" force_save="1" invisible="1"/>
+                    <field name="min_approve_lvl_2_po" readonly="1" force_save="1" invisible="1"/>
                 </xpath>
                 <xpath expr="//button[@name='button_cancel']" position="after">
                     <button name="action_req_approval" string="Req Approval" type="object" class="btn-primary" attrs="{'invisible': [('req_approval','=', True)]}"/>

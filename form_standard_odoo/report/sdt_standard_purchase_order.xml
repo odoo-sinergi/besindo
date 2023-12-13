@@ -262,9 +262,10 @@
                             <td style="border: 1px solid white;"><span t-field="doc.notes"/></td>
                         </tr>
                     </table>
-                    <div class="row mt32 mb32">
+                    <!-- ttd IDR -->
+                    <div class="row mt32 mb32" t-if="doc.currency_id.symbol=='Rp'">
                         <div class="col-3">
-                            <table style="border: 1px solid white; padding : 2px" width="100%" t-if="doc.user_lvl_1_id">
+                            <table style="border: 1px solid white; padding : 2px" width="100%">
                                 <tr style="border: 1px solid white; padding : 2px">
                                     <td style="border: 1px solid white; padding : 2px"><span t-field="doc.company_id"/></td>
                                 </tr>
@@ -282,7 +283,7 @@
                             </table>
                         </div>
                         <div class="col-3">
-                            <table style="border: 1px solid white; padding : 2px" width="100%" t-if="doc.user_lvl_2_id">
+                            <table style="border: 1px solid white; padding : 2px" width="100%" t-if="doc.min_approve_lvl_2_po > 0">
                                 <tr style="border: 1px solid white; padding : 2px">
                                     <td style="border: 1px solid white; padding : 2px" height="15px">
 
@@ -317,17 +318,16 @@
                             </table>
                         </div>
                     </div>
-                    <!-- date -->
-                    <div class="row mt32 mb32">
+                    <div class="row mt32 mb32" t-if="doc.currency_id.symbol=='Rp'">
                         <div class="col-3">
-                            <table style="border: 1px solid white; padding : 2px" width="100%" t-if="doc.user_lvl_1_id">
+                            <table style="border: 1px solid white; padding : 2px" width="100%">
                                 <tr style="border: 1px solid white; padding : 2px">
                                     <td style="border: 1px solid white; padding : 2px">Date : <span t-esc="doc.approve_date_lvl_1"/></td>
                                 </tr>
                             </table>
                         </div>
                         <div class="col-3">
-                            <table style="border: 1px solid white; padding : 2px" width="100%" t-if="doc.user_lvl_2_id">
+                            <table style="border: 1px solid white; padding : 2px" width="100%" t-if="doc.min_approve_lvl_2_po > 0">
                                 <tr style="border: 1px solid white; padding : 2px">
                                     <td style="border: 1px solid white; padding : 2px">Date : <span t-esc="doc.approve_date_lvl_2"/></td>
                                 </tr>
@@ -343,6 +343,89 @@
                             </table>
                         </div>
                     </div>
+                    
+                    <!-- ttd USD -->
+                    <div class="row mt32 mb32" t-if="doc.currency_id.symbol=='$'">
+                        <div class="col-3">
+                            <table style="border: 1px solid white; padding : 2px" width="100%">
+                                <tr style="border: 1px solid white; padding : 2px">
+                                    <td style="border: 1px solid white; padding : 2px"><span t-field="doc.company_id"/></td>
+                                </tr>
+                                <tr style="border: 1px solid white; padding : 2px">
+                                    <td style="border: 1px solid white; padding : 2px"><span>Factory General Manager</span></td>
+                                </tr>
+                                <tr style="border: 1px solid white; padding : 2px">
+                                    <td style="border: 1px solid white; padding : 2px">
+                                        <img t-attf-src="data:image/png;base64,{{ doc.user_lvl_1_id.digital_signature }}" style="width:100px; height:70px; padding : 2px"/>
+                                    </td>
+                                </tr>
+                                <tr style="border: 1px solid white; padding : 2px">
+                                    <td style="border: 1px solid white; padding : 2px"><span t-esc="doc.user_lvl_1_id.name"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-3">
+                            <table style="border: 1px solid white; padding : 2px" width="100%">
+                                <tr style="border: 1px solid white; padding : 2px">
+                                    <td style="border: 1px solid white; padding : 2px" height="15px">
+
+                                    </td>
+                                </tr>
+                                <tr style="border: 1px solid white; padding : 2px">
+                                    <td style="border: 1px solid white; padding : 2px"><span>Director</span></td>
+                                </tr>
+                                <tr style="border: 1px solid white; padding : 2px">
+                                    <td style="border: 1px solid white; padding : 2px">
+                                        <img t-attf-src="data:image/png;base64,{{ doc.user_lvl_2_id.digital_signature }}" style="width:100px; height:70px; padding : 2px"/>
+                                    </td>
+                                </tr>
+                                <tr style="border: 1px solid white; padding : 2px">
+                                    <td style="border: 1px solid white; padding : 2px"><span t-esc="doc.user_lvl_2_id.name"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-1">
+                        </div>
+                        <div class="col-5">
+                            <table style="border: 1px solid white;" width="100%">
+                                <tr style="border: 1px solid white;">
+                                    <td style="border: 1px solid white;">
+                                        <span t-field="doc.partner_id"/>
+                                    </td>
+                                </tr>
+                                <tr style="border: 1px solid white;">
+                                    <td style="border: 1px solid white;" height="50px">
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row mt32 mb32" t-if="doc.currency_id.symbol=='$'">
+                        <div class="col-3">
+                            <table style="border: 1px solid white; padding : 2px" width="100%">
+                                <tr style="border: 1px solid white; padding : 2px">
+                                    <td style="border: 1px solid white; padding : 2px">Date : <span t-esc="doc.approve_date_lvl_1"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-3">
+                            <table style="border: 1px solid white; padding : 2px" width="100%">
+                                <tr style="border: 1px solid white; padding : 2px">
+                                    <td style="border: 1px solid white; padding : 2px">Date : <span t-esc="doc.approve_date_lvl_2"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-1">
+                        </div>
+                        <div class="col-5">
+                            <table style="border: 1px solid white; padding : 2px" width="100%">
+                                <tr style="border: 1px solid white; padding : 2px">
+                                    <td style="border: 1px solid white; padding : 2px">Date : ______________________________</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
                 </div>
             </t>
         </template>
