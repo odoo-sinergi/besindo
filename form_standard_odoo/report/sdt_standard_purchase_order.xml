@@ -264,40 +264,40 @@
                     </table>
                     <div class="row mt32 mb32">
                         <div class="col-3">
-                            <table style="border: 1px solid white;" width="100%" t-if="doc.user_lvl_1_id">
-                                <tr style="border: 1px solid white;">
-                                    <td style="border: 1px solid white;"><span t-field="doc.company_id"/></td>
+                            <table style="border: 1px solid white; padding : 2px" width="100%" t-if="doc.user_lvl_1_id">
+                                <tr style="border: 1px solid white; padding : 2px">
+                                    <td style="border: 1px solid white; padding : 2px"><span t-field="doc.company_id"/></td>
                                 </tr>
-                                <tr style="border: 1px solid white;">
-                                    <td style="border: 1px solid white;"><span>Factory Director</span></td>
+                                <tr style="border: 1px solid white; padding : 2px">
+                                    <td style="border: 1px solid white; padding : 2px"><span>Factory General Manager</span></td>
                                 </tr>
-                                <tr style="border: 1px solid white;">
-                                    <td style="border: 1px solid white;">
-                                        <img t-attf-src="data:image/png;base64,{{ doc.user_lvl_1_id.digital_signature }}" style="width:160px; height:120px;"/>
+                                <tr style="border: 1px solid white; padding : 2px">
+                                    <td style="border: 1px solid white; padding : 2px">
+                                        <img t-attf-src="data:image/png;base64,{{ doc.user_lvl_1_id.digital_signature }}" style="width:100px; height:70px; padding : 2px"/>
                                     </td>
                                 </tr>
-                                <tr style="border: 1px solid white;">
-                                    <td style="border: 1px solid white;"><span t-esc="doc.user_lvl_1_id.name"/></td>
+                                <tr style="border: 1px solid white; padding : 2px">
+                                    <td style="border: 1px solid white; padding : 2px"><span t-esc="doc.user_lvl_1_id.name"/></td>
                                 </tr>
                             </table>
                         </div>
                         <div class="col-3">
-                            <table style="border: 1px solid white;" width="100%" t-if="doc.user_lvl_2_id">
-                                <tr style="border: 1px solid white;">
-                                    <td style="border: 1px solid white;" height="15px">
+                            <table style="border: 1px solid white; padding : 2px" width="100%" t-if="doc.user_lvl_2_id">
+                                <tr style="border: 1px solid white; padding : 2px">
+                                    <td style="border: 1px solid white; padding : 2px" height="15px">
 
                                     </td>
                                 </tr>
-                                <tr style="border: 1px solid white;">
-                                    <td style="border: 1px solid white;"><span>Director</span></td>
+                                <tr style="border: 1px solid white; padding : 2px">
+                                    <td style="border: 1px solid white; padding : 2px"><span>Director</span></td>
                                 </tr>
-                                <tr style="border: 1px solid white;">
-                                    <td style="border: 1px solid white;">
-                                        <img t-attf-src="data:image/png;base64,{{ doc.user_lvl_2_id.digital_signature }}" style="width:160px; height:120px;"/>
+                                <tr style="border: 1px solid white; padding : 2px">
+                                    <td style="border: 1px solid white; padding : 2px">
+                                        <img t-attf-src="data:image/png;base64,{{ doc.user_lvl_2_id.digital_signature }}" style="width:100px; height:70px; padding : 2px"/>
                                     </td>
                                 </tr>
-                                <tr style="border: 1px solid white;">
-                                    <td style="border: 1px solid white;"><span t-esc="doc.user_lvl_2_id.name"/></td>
+                                <tr style="border: 1px solid white; padding : 2px">
+                                    <td style="border: 1px solid white; padding : 2px"><span t-esc="doc.user_lvl_2_id.name"/></td>
                                 </tr>
                             </table>
                         </div>
@@ -311,7 +311,7 @@
                                     </td>
                                 </tr>
                                 <tr style="border: 1px solid white;">
-                                    <td style="border: 1px solid white;" height="154px">
+                                    <td style="border: 1px solid white;" height="50px">
                                     </td>
                                 </tr>
                             </table>
@@ -320,25 +320,25 @@
                     <!-- date -->
                     <div class="row mt32 mb32">
                         <div class="col-3">
-                            <table style="border: 1px solid white;" width="100%" t-if="doc.user_lvl_1_id">
-                                <tr style="border: 1px solid white;">
-                                    <td style="border: 1px solid white;">Date : <span t-esc="doc.approve_date_lvl_1"/></td>
+                            <table style="border: 1px solid white; padding : 2px" width="100%" t-if="doc.user_lvl_1_id">
+                                <tr style="border: 1px solid white; padding : 2px">
+                                    <td style="border: 1px solid white; padding : 2px">Date : <span t-esc="doc.approve_date_lvl_1"/></td>
                                 </tr>
                             </table>
                         </div>
                         <div class="col-3">
-                            <table style="border: 1px solid white;" width="100%" t-if="doc.user_lvl_2_id">
-                                <tr style="border: 1px solid white;">
-                                    <td style="border: 1px solid white;">Date : <span t-esc="doc.approve_date_lvl_2"/></td>
+                            <table style="border: 1px solid white; padding : 2px" width="100%" t-if="doc.user_lvl_2_id">
+                                <tr style="border: 1px solid white; padding : 2px">
+                                    <td style="border: 1px solid white; padding : 2px">Date : <span t-esc="doc.approve_date_lvl_2"/></td>
                                 </tr>
                             </table>
                         </div>
                         <div class="col-1">
                         </div>
                         <div class="col-5">
-                            <table style="border: 1px solid white;" width="100%">
-                                <tr style="border: 1px solid white;">
-                                    <td style="border: 1px solid white;">Date : ______________________________</td>
+                            <table style="border: 1px solid white; padding : 2px" width="100%">
+                                <tr style="border: 1px solid white; padding : 2px">
+                                    <td style="border: 1px solid white; padding : 2px">Date : ______________________________</td>
                                 </tr>
                             </table>
                         </div>
