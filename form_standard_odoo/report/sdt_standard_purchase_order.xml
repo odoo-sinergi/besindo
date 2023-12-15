@@ -283,7 +283,7 @@
                             </table>
                         </div>
                         <div class="col-3">
-                            <table style="border: 1px solid white; padding : 2px" width="100%" t-if="doc.min_approve_lvl_2_po > 0">
+                            <table style="border: 1px solid white; padding : 2px" width="100%" t-if="doc.min_approve_lvl_2_po &gt; 0">
                                 <tr style="border: 1px solid white; padding : 2px">
                                     <td style="border: 1px solid white; padding : 2px" height="15px">
 
@@ -322,14 +322,14 @@
                         <div class="col-3">
                             <table style="border: 1px solid white; padding : 2px" width="100%">
                                 <tr style="border: 1px solid white; padding : 2px">
-                                    <td style="border: 1px solid white; padding : 2px">Date : <span t-if="doc.user_lvl_1_id" t-esc="doc.approve_date_lvl_1"/></td>
+                                    <td style="border: 1px solid white; padding : 2px">Date : <span t-esc="doc.approve_date_lvl_1 and doc.approve_date_lvl_1.strftime('%d/%m/%Y') or ''"/></td>
                                 </tr>
                             </table>
                         </div>
                         <div class="col-3">
-                            <table style="border: 1px solid white; padding : 2px" width="100%" t-if="doc.min_approve_lvl_2_po > 0">
+                            <table style="border: 1px solid white; padding : 2px" width="100%" t-if="doc.min_approve_lvl_2_po &gt; 0">
                                 <tr style="border: 1px solid white; padding : 2px">
-                                    <td style="border: 1px solid white; padding : 2px">Date : <span t-esc="doc.approve_date_lvl_2"/></td>
+                                    <td style="border: 1px solid white; padding : 2px">Date : <span t-esc="doc.approve_date_lvl_2 and doc.approve_date_lvl_2.strftime('%d/%m/%Y') or ''"/></td>
                                 </tr>
                             </table>
                         </div>
@@ -404,14 +404,14 @@
                         <div class="col-3">
                             <table style="border: 1px solid white; padding : 2px" width="100%">
                                 <tr style="border: 1px solid white; padding : 2px">
-                                    <td style="border: 1px solid white; padding : 2px">Date : <span t-esc="doc.approve_date_lvl_1"/></td>
+                                    <td style="border: 1px solid white; padding : 2px">Date : <span t-esc="doc.approve_date_lvl_1 and doc.approve_date_lvl_1.strftime('%d/%m/%Y') or ''"/></td>
                                 </tr>
                             </table>
                         </div>
                         <div class="col-3">
                             <table style="border: 1px solid white; padding : 2px" width="100%">
                                 <tr style="border: 1px solid white; padding : 2px">
-                                    <td style="border: 1px solid white; padding : 2px">Date : <span t-esc="doc.approve_date_lvl_2"/></td>
+                                    <td style="border: 1px solid white; padding : 2px">Date : <span t-esc="doc.approve_date_lvl_2 and doc.approve_date_lvl_2.strftime('%d/%m/%Y') or ''"/></td>
                                 </tr>
                             </table>
                         </div>
