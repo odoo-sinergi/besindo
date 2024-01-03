@@ -112,7 +112,14 @@ class SdtMrpProduction(models.Model):
                     self.env.cr.execute(sql_query,(data.mrp_date,rec.id))
 
                     if rec.account_move_ids:
-                        rec.account_move_ids.write({'date': user_date})
+                        name = rec.account_move_ids.name.split('/')
+                        if name[0] == 'STJ' and name[1] != str(user_date.year):
+                            query = """update account_move set name = %s , create_date = %s, date = %s where id = %s"""
+                            seq = self.env['ir.sequence'].search([('name', '=', 'STJ Sequence')])
+                            new_sequence = seq.next_by_id(user_date)
+                            self.env.cr.execute(query, (new_sequence, str(user_date), str(user_date), rec.account_move_ids.id))
+                        else:
+                            rec.account_move_ids.write({'date': user_date})
 
                 data.move_finished_ids.write({'date': data.mrp_date})
                 data.finished_move_line_ids.write({'date': data.mrp_date})
@@ -121,6 +128,14 @@ class SdtMrpProduction(models.Model):
                             """
                     self.env.cr.execute(sql_query,(data.mrp_date,move_finish.id))
 
-                    move_finish.account_move_ids.write({'date': user_date})
+                    name = move_finish.account_move_ids.name.split('/')
+                    if name[0] == 'STJ' and name[1] != str(user_date.year):
+                        query = """update account_move set name = %s , create_date = %s, date = %s where id = %s"""
+                        seq = self.env['ir.sequence'].search([('name', '=', 'STJ Sequence')])
+                        new_sequence = seq.next_by_id(user_date)
+                        self.env.cr.execute(query, (new_sequence, str(user_date), str(user_date), move_finish.account_move_ids.id))
+                    else:
+                        move_finish.account_move_ids.write({'date': user_date})
+                    # move_finish.account_move_ids.write({'date': user_date})
             else:
                 return res
