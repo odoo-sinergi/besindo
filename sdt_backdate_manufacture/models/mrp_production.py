@@ -112,7 +112,14 @@ class SdtMrpProduction(models.Model):
                     self.env.cr.execute(sql_query,(data.mrp_date,rec.id))
 
                     if rec.account_move_ids:
-                        rec.account_move_ids.write({'date': user_date})
+                        update = {}
+                        if rec.account_move_ids.name[4:8] != user_date.year:
+                            seq = self.env['ir.sequence'].search([('name', '=', 'STJ Sequence')])
+                            new_sequence = seq.next_by_id(user_date)
+                            update['name'] = new_sequence
+                            # rec.account_move_ids.write({'name': new_sequence})
+                        update['date'] = user_date
+                        rec.account_move_ids.write(update)
 
                 data.move_finished_ids.write({'date': data.mrp_date})
                 data.finished_move_line_ids.write({'date': data.mrp_date})
