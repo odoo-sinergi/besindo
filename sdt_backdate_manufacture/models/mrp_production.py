@@ -114,10 +114,12 @@ class SdtMrpProduction(models.Model):
                     if rec.account_move_ids:
                         name = rec.account_move_ids.name.split('/')
                         if name[0] == 'STJ' and name[1] != str(user_date.year):
+                            old_sequence = self.env['ir.sequence.date_range'].search([('date_from', '=', name[1]), ('sequence_id', '=', seq.id)])
                             query = """update account_move set name = %s , date = %s where id = %s"""
                             seq = self.env['ir.sequence'].search([('name', '=', 'STJ Sequence')])
                             new_sequence = seq.next_by_id(user_date)
                             self.env.cr.execute(query, (new_sequence, str(user_date), rec.account_move_ids.id))
+                            old_sequence.number_next_actual = old_sequence.number_next_actual - 1
                         else:
                             rec.account_move_ids.write({'date': user_date})
 
@@ -130,10 +132,12 @@ class SdtMrpProduction(models.Model):
 
                     name = move_finish.account_move_ids.name.split('/')
                     if name[0] == 'STJ' and name[1] != str(user_date.year):
+                        old_sequence = self.env['ir.sequence.date_range'].search([('date_from', '=', name[1]), ('sequence_id', '=', seq.id)])
                         query = """update account_move set name = %s , create_date = %s, date = %s where id = %s"""
                         seq = self.env['ir.sequence'].search([('name', '=', 'STJ Sequence')])
                         new_sequence = seq.next_by_id(user_date)
                         self.env.cr.execute(query, (new_sequence, str(user_date), str(user_date), move_finish.account_move_ids.id))
+                        old_sequence.number_next_actual = old_sequence.number_next_actual - 1
                     else:
                         move_finish.account_move_ids.write({'date': user_date})
                     # move_finish.account_move_ids.write({'date': user_date})
