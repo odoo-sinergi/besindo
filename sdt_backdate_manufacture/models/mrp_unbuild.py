@@ -53,11 +53,13 @@ class SdtMrpUnbuild(models.Model):
                                 seq = self.env['ir.sequence'].search([('name', '=', 'STJ Sequence')])
                                 new_sequence = seq.next_by_id(user_date)
                                 self.env.cr.execute(query, (new_sequence, str(user_date), account.id))
+                                for account_line in account.invoice_line_ids:
+                                    account_line.write({'date': user_date})
                             else:
                                 account.write({'date': user_date})
-                        for account_line in account.invoice_line_ids:
-                            account_line.write({'date': user_date})
-                            
+                                for account_line in account.invoice_line_ids:
+                                    account_line.write({'date': user_date})
+
             if self.consume_line_ids:
                 for move in self.consume_line_ids:
                     move.write({'date': self.unbuild_date})
@@ -77,10 +79,12 @@ class SdtMrpUnbuild(models.Model):
                                 seq = self.env['ir.sequence'].search([('name', '=', 'STJ Sequence')])
                                 new_sequence = seq.next_by_id(user_date)
                                 self.env.cr.execute(query, (new_sequence, str(user_date), account.id))
+                                for account_line in account.invoice_line_ids:
+                                    account_line.write({'date': user_date})
                             else:
                                 account.write({'date': user_date})
-                        for account_line in account.invoice_line_ids:
-                            account_line.write({'date': user_date})
+                                for account_line in account.invoice_line_ids:
+                                    account_line.write({'date': user_date})
         else:
             return res
         
