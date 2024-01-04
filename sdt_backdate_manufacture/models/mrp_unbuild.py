@@ -51,7 +51,7 @@ class SdtMrpUnbuild(models.Model):
                             if name[0] == 'STJ' and name[1] != str(user_date.year):
                                 query = """update account_move set name = %s , date = %s where id = %s"""
                                 seq = self.env['ir.sequence'].search([('name', '=', 'STJ Sequence')])
-                                old_sequence = self.env['ir.sequence.date_range'].search([('date_from.year', '=', name[1]), ('sequence_id', '=', seq.id)])
+                                old_sequence = self.env['ir.sequence.date_range'].search([('date_from', '=', datetime.strptime('%s-01-01 24:00:00'%name[1], "%Y-%m-%d %H:%M:%S")), ('sequence_id', '=', seq.id)])
                                 new_sequence = seq.next_by_id(user_date)
                                 self.env.cr.execute(query, (new_sequence, str(user_date), account.id))
                                 old_sequence.number_next_actual = old_sequence.number_next_actual - 1
@@ -79,7 +79,7 @@ class SdtMrpUnbuild(models.Model):
                             if name[0] == 'STJ' and name[1] != str(user_date.year):
                                 query = """update account_move set name = %s , date = %s where id = %s"""
                                 seq = self.env['ir.sequence'].search([('name', '=', 'STJ Sequence')])
-                                old_sequence = self.env['ir.sequence.date_range'].search([('date_from.year', '=', name[1]), ('sequence_id', '=', seq.id)])
+                                old_sequence = self.env['ir.sequence.date_range'].search([('date_from', '=', datetime.strptime('%s-01-01 24:00:00'%name[1], "%Y-%m-%d %H:%M:%S")), ('sequence_id', '=', seq.id)])
                                 new_sequence = seq.next_by_id(user_date)
                                 self.env.cr.execute(query, (new_sequence, str(user_date), account.id))
                                 old_sequence.number_next_actual = old_sequence.number_next_actual - 1
@@ -123,7 +123,7 @@ class SdtStockWarnInsufficientQtyUnbuild(models.TransientModel):
                     if name[0] == 'STJ' and name[1] != str(user_date.year):
                         query = """update account_move set name = %s , date = %s where id = %s"""
                         seq = self.env['ir.sequence'].search([('name', '=', 'STJ Sequence')])
-                        old_sequence = self.env['ir.sequence.date_range'].search([('date_from.year', '=', name[1]), ('sequence_id', '=', seq.id)])
+                        old_sequence = self.env['ir.sequence.date_range'].search([('date_from', '=', datetime.strptime('%s-01-01 24:00:00'%name[1], "%Y-%m-%d %H:%M:%S")), ('sequence_id', '=', seq.id)])
                         new_sequence = seq.next_by_id(user_date)
                         self.env.cr.execute(query, (new_sequence, str(user_date), account.id))
                         old_sequence.number_next_actual = old_sequence.number_next_actual - 1
@@ -157,7 +157,7 @@ class SdtStockWarnInsufficientQtyUnbuild(models.TransientModel):
                     if name[0] == 'STJ' and name[1] != str(user_date.year):
                         query = """update account_move set name = %s , date = %s where id = %s"""
                         seq = self.env['ir.sequence'].search([('name', '=', 'STJ Sequence')])
-                        old_sequence = self.env['ir.sequence.date_range'].search([('date_from.year', '=', name[1]), ('sequence_id', '=', seq.id)])
+                        old_sequence = self.env['ir.sequence.date_range'].search([('date_from', '=', datetime.strptime('%s-01-01 24:00:00'%name[1], "%Y-%m-%d %H:%M:%S")), ('sequence_id', '=', seq.id)])
                         new_sequence = seq.next_by_id(user_date)
                         self.env.cr.execute(query, (new_sequence, str(user_date), account.id))
                         old_sequence.number_next_actual = old_sequence.number_next_actual - 1
