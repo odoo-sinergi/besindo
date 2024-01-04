@@ -46,7 +46,15 @@ class SdtMrpUnbuild(models.Model):
                     self.env.cr.execute(sql_query,(self.unbuild_date,move.id))
                 
                 for account in move.account_move_ids:
-                    account.write({'date': user_date})
+                    if account:
+                        name = account.name.split('/')
+                        if name[0] == 'STJ' and name[1] != str(user_date.year):
+                            query = """update account_move set name = %s , date = %s where id = %s"""
+                            seq = self.env['ir.sequence'].search([('name', '=', 'STJ Sequence')])
+                            new_sequence = seq.next_by_id(user_date)
+                            self.env.cr.execute(query, (new_sequence, str(user_date), account.id))
+                        else:
+                            account.write({'date': user_date})
                     for account_line in account.invoice_line_ids:
                         account_line.write({'date': user_date})
         else:

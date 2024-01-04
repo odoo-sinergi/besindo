@@ -114,10 +114,10 @@ class SdtMrpProduction(models.Model):
                     if rec.account_move_ids:
                         name = rec.account_move_ids.name.split('/')
                         if name[0] == 'STJ' and name[1] != str(user_date.year):
-                            query = """update account_move set name = %s , create_date = %s, date = %s where id = %s"""
+                            query = """update account_move set name = %s , date = %s where id = %s"""
                             seq = self.env['ir.sequence'].search([('name', '=', 'STJ Sequence')])
                             new_sequence = seq.next_by_id(user_date)
-                            self.env.cr.execute(query, (new_sequence, str(user_date), str(user_date), rec.account_move_ids.id))
+                            self.env.cr.execute(query, (new_sequence, str(user_date), rec.account_move_ids.id))
                         else:
                             rec.account_move_ids.write({'date': user_date})
 
@@ -139,3 +139,5 @@ class SdtMrpProduction(models.Model):
                     # move_finish.account_move_ids.write({'date': user_date})
             else:
                 return res
+
+    def button_unbuild(self):
