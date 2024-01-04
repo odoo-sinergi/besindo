@@ -139,5 +139,3 @@ class SdtMrpProduction(models.Model):
                     # move_finish.account_move_ids.write({'date': user_date})
             else:
                 return res
-
-    def button_unbuild(self):
