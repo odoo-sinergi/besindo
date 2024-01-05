@@ -119,7 +119,7 @@ class ApprovalRequest(models.Model):
                 sql_query="""
                     select * from approval_request where request_status = 'new' and purchase_order_id = %s
                 """
-                self.env.cr.execute(sql_query, (self.purchase_order_id.id, self.lvl_approver,))
+                self.env.cr.execute(sql_query, (self.purchase_order_id.id,))
                 final_result = self.env.cr.dictfetchall()
                 lvl_approver = self.lvl_approver + 1
 
