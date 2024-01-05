@@ -26,6 +26,7 @@ class PurchaseOrder(models.Model):
     user_lvl_2_id = fields.Many2one('res.users' ,string='user 2',)
     approve_date_lvl_2 = fields.Date(string='Approve Date',)
     min_approve_lvl_2_po = fields.Float(string='Amount Min Lvl 2',)
+    req_approval = fields.Boolean(string='Req Approval', copy=False)
     
     @api.depends('order_line.taxes_id', 'order_line.price_subtotal', 'amount_total', 'amount_untaxed')
     def  _compute_tax_totals(self):
@@ -59,7 +60,6 @@ class PurchaseOrder(models.Model):
         return res
     
 
-    req_approval = fields.Boolean(string='Req Approval', copy=False)
     # approval_disc = fields.Boolean(string='Approval Disc', copy=False)
 
     # @api.onchange('order_line')
@@ -103,56 +103,112 @@ class PurchaseOrder(models.Model):
                         if rec.amount_total >= approval_po.min_approve_lvl_2_po:
                             self.min_approve_lvl_2_po = approval_po.min_approve_lvl_2_po
                             for user_id in approval_po.approver_ids:
-                                sql_query="""
-                                    select count(1) from approval_request where purchase_order_id= %s and lvl_approver = %s
-                                """
-                                self.env.cr.execute(sql_query, (rec.id, user_id.lvl_approver,))
-                                check_po = self.env.cr.dictfetchall()
-                                check_po = check_po[0]['count']
-                                if check_po == 0 :
-                                    approvals_id = self.env['approval.request'].sudo().create({
-                                    'name':'Approval/PO/-'+self.name,
-                                    'date' : fields.Datetime.now(),
-                                    'reference':rec.name,
-                                    'category_id' : approval_po.id,
-                                    'purchase_order_id' : self.id,
-                                    'lvl_approver' : user_id.lvl_approver,
-                                    'request_owner_id' : self.env.uid,
-                                    'request_status' : 'pending',
-                                    'amount' : self.amount_total,
-                                    })
-                                    for line_id in self.order_line:
-                                        vals ={
-                                            'approval_request_id': approvals_id.id,
-                                            'product_id': line_id.product_id.id,
-                                            'description': line_id.name,
-                                            'quantity': line_id.product_uom_qty,
-                                            'product_uom_id': line_id.product_uom.id,
-                                        }
-                                        self.env['approval.product.line'].create(vals)
-                                    for approver_id in approvals_id.approver_ids :
-                                        approver_id.unlink()
-                                    if user_id :
-                                        approvals_id.approver_ids += self.env['approval.approver'].create({
-                                            'user_id': user_id.user_id.id,
-                                            'request_id': approvals_id.id,
-                                            'status': 'new',
-                                            'company_id': rec.company_id.id,
-                                        })
-                                    approvals_id.action_confirm()
-                                else :
+                                # LEVEL == 1 ======================================================   
+                                if user_id.lvl_approver == 1 :
                                     sql_query="""
-                                        select id from approval_request where purchase_order_id= %s and lvl_approver = %s
+                                        select count(1) from approval_request where purchase_order_id= %s and lvl_approver = %s
                                     """
                                     self.env.cr.execute(sql_query, (rec.id, user_id.lvl_approver,))
-                                    id_aq = self.env.cr.dictfetchall()
-                                    id_aq = id_aq[0]['id']
-                                    approvals_id.approver_ids += self.env['approval.approver'].create({
-                                        'user_id': user_id.user_id.id,
-                                        'request_id': id_aq,
-                                        'status': 'pending',
-                                        'company_id': rec.company_id.id,
-                                    })
+                                    check_po = self.env.cr.dictfetchall()
+                                    check_po = check_po[0]['count']
+                                    if check_po == 0 :
+                                        approvals_id = self.env['approval.request'].sudo().create({
+                                        'name':'Approval/PO/-'+self.name,
+                                        'date' : fields.Datetime.now(),
+                                        'reference':rec.name,
+                                        'category_id' : approval_po.id,
+                                        'purchase_order_id' : self.id,
+                                        'lvl_approver' : user_id.lvl_approver,
+                                        'request_owner_id' : self.env.uid,
+                                        'request_status' : 'pending',
+                                        'amount' : self.amount_total,
+                                        'active' : True,
+                                        })
+                                        for line_id in self.order_line:
+                                            vals ={
+                                                'approval_request_id': approvals_id.id,
+                                                'product_id': line_id.product_id.id,
+                                                'description': line_id.name,
+                                                'quantity': line_id.product_uom_qty,
+                                                'product_uom_id': line_id.product_uom.id,
+                                            }
+                                            self.env['approval.product.line'].create(vals)
+                                        for approver_id in approvals_id.approver_ids :
+                                            approver_id.unlink()
+                                        if user_id :
+                                            approvals_id.approver_ids += self.env['approval.approver'].create({
+                                                'user_id': user_id.user_id.id,
+                                                'request_id': approvals_id.id,
+                                                'status': 'new',
+                                                'company_id': rec.company_id.id,
+                                            })
+                                        approvals_id.action_confirm()
+                                    else :
+                                        sql_query="""
+                                            select id from approval_request where purchase_order_id= %s and lvl_approver = %s
+                                        """
+                                        self.env.cr.execute(sql_query, (rec.id, user_id.lvl_approver,))
+                                        id_aq = self.env.cr.dictfetchall()
+                                        id_aq = id_aq[0]['id']
+                                        approvals_id.approver_ids += self.env['approval.approver'].create({
+                                            'user_id': user_id.user_id.id,
+                                            'request_id': id_aq,
+                                            'status': 'pending',
+                                            'company_id': rec.company_id.id,
+                                        })
+                                # LEVEL != 1 ======================================================   
+                                else :
+                                    sql_query="""
+                                        select count(1) from approval_request where purchase_order_id= %s and lvl_approver = %s
+                                    """
+                                    self.env.cr.execute(sql_query, (rec.id, user_id.lvl_approver,))
+                                    check_po = self.env.cr.dictfetchall()
+                                    check_po = check_po[0]['count']
+                                    if check_po == 0 :
+                                        approvals_id = self.env['approval.request'].sudo().create({
+                                        'name':'Approval/PO/-'+self.name,
+                                        'date' : fields.Datetime.now(),
+                                        'reference':rec.name,
+                                        'category_id' : approval_po.id,
+                                        'purchase_order_id' : self.id,
+                                        'lvl_approver' : user_id.lvl_approver,
+                                        'request_owner_id' : self.env.uid,
+                                        'request_status' : 'new',
+                                        'amount' : self.amount_total,
+                                        'active' : False,
+                                        })
+                                        for line_id in self.order_line:
+                                            vals ={
+                                                'approval_request_id': approvals_id.id,
+                                                'product_id': line_id.product_id.id,
+                                                'description': line_id.name,
+                                                'quantity': line_id.product_uom_qty,
+                                                'product_uom_id': line_id.product_uom.id,
+                                            }
+                                            self.env['approval.product.line'].create(vals)
+                                        for approver_id in approvals_id.approver_ids :
+                                            approver_id.unlink()
+                                        if user_id :
+                                            approvals_id.approver_ids += self.env['approval.approver'].create({
+                                                'user_id': user_id.user_id.id,
+                                                'request_id': approvals_id.id,
+                                                'status': 'new',
+                                                'company_id': rec.company_id.id,
+                                            })
+                                    else :
+                                        sql_query="""
+                                            select id from approval_request where purchase_order_id= %s and lvl_approver = %s
+                                        """
+                                        self.env.cr.execute(sql_query, (rec.id, user_id.lvl_approver,))
+                                        id_aq = self.env.cr.dictfetchall()
+                                        id_aq = id_aq[0]['id']
+                                        approvals_id.approver_ids += self.env['approval.approver'].create({
+                                            'user_id': user_id.user_id.id,
+                                            'request_id': id_aq,
+                                            'status': 'pending',
+                                            'company_id': rec.company_id.id,
+                                        })
+                                
                         else :
                             for user_id in approval_po.approver_ids:
                                 if user_id.lvl_approver == 1 :
