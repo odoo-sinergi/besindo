@@ -313,7 +313,7 @@ class PurchaseOrder(models.Model):
                                         'purchase_order_id' : self.id,
                                         'lvl_approver' : user_id.lvl_approver,
                                         'request_owner_id' : self.env.uid,
-                                        'request_status' : 'pending',
+                                        'request_status' : 'new',
                                         'amount' : self.amount_total,
                                         'active' : False,
                                         })
