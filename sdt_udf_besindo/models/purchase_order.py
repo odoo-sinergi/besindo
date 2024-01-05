@@ -120,7 +120,7 @@ class PurchaseOrder(models.Model):
                                         'purchase_order_id' : self.id,
                                         'lvl_approver' : user_id.lvl_approver,
                                         'request_owner_id' : self.env.uid,
-                                        'request_status' : 'pending',
+                                        'request_status' : 'new',
                                         'amount' : self.amount_total,
                                         'active' : True,
                                         })
@@ -205,7 +205,7 @@ class PurchaseOrder(models.Model):
                                         approvals_id.approver_ids += self.env['approval.approver'].create({
                                             'user_id': user_id.user_id.id,
                                             'request_id': id_aq,
-                                            'status': 'pending',
+                                            'status': 'new',
                                             'company_id': rec.company_id.id,
                                         })
                                 
@@ -220,7 +220,7 @@ class PurchaseOrder(models.Model):
                                     'purchase_order_id' : self.id,
                                     'lvl_approver' : user_id.lvl_approver,
                                     'request_owner_id' : self.env.uid,
-                                    'request_status' : 'pending',
+                                    'request_status' : 'new',
                                     'amount' : self.amount_total,
                                     })
                                     for line_id in self.order_line:
@@ -261,7 +261,7 @@ class PurchaseOrder(models.Model):
                                         'purchase_order_id' : self.id,
                                         'lvl_approver' : user_id.lvl_approver,
                                         'request_owner_id' : self.env.uid,
-                                        'request_status' : 'pending',
+                                        'request_status' : 'new',
                                         'amount' : self.amount_total,
                                         'active' : True,
                                         })
@@ -346,7 +346,7 @@ class PurchaseOrder(models.Model):
                                         approvals_id.approver_ids += self.env['approval.approver'].create({
                                             'user_id': user_id.user_id.id,
                                             'request_id': id_aq,
-                                            'status': 'pending',
+                                            'status': 'new',
                                             'company_id': rec.company_id.id,
                                         })
                 rec.req_approval = True
