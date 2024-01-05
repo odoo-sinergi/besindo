@@ -335,7 +335,7 @@ class PurchaseOrder(models.Model):
                                                 'status': 'new',
                                                 'company_id': rec.company_id.id,
                                             })
-                                        approvals_id.action_confirm()
+                                        # approvals_id.action_confirm()
                                     else :
                                         sql_query="""
                                             select id from approval_request where purchase_order_id= %s and lvl_approver = %s
