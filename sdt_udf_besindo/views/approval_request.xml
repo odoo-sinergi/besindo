@@ -9,7 +9,6 @@
                 <field name="sale_order_id" readonly="1"/>
                 <field name="purchase_order_id" readonly="1"/>
                 <field name="lvl_approver" readonly="1"/>
-                <field name="active" readonly="1" invisible="1"/>
             </xpath>
             <xpath expr="//button[@name='action_cancel']" position="replace">
                 <button name="action_cancel" string="Cancel" type="object" attrs="{'invisible':['|',('request_status','in',['new','cancel']),('user_status','!=','pending')]}" data-hotkey="z" invisible="1"/>
