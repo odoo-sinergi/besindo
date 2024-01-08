@@ -8,6 +8,7 @@ class ApprovalRequest(models.Model):
     sale_order_id = fields.Many2one('sale.order',string='Sale Order',)
     purchase_order_id = fields.Many2one('purchase.order',string='Purchase Order',)
     lvl_approver = fields.Integer(string='Lvl Approver',)
+    active = fields.Boolean('Active', default=True, help="If unchecked, it will allow you to hide the product without removing it.")
     
     def action_confirm(self):
         # make sure that the manager is present in the list if he is required
@@ -116,10 +117,27 @@ class ApprovalRequest(models.Model):
                 self.sudo()._get_user_approval_activities(user=self.env.user).action_feedback()
                 # check Request Approval and auto confirm PR
                 sql_query="""
-                    select * from approval_request where request_status = 'pending' and purchase_order_id = %s and lvl_approver != %s
+                    select * from approval_request where request_status = 'new' and purchase_order_id = %s
                 """
-                self.env.cr.execute(sql_query, (self.purchase_order_id.id, self.lvl_approver,))
+                self.env.cr.execute(sql_query, (self.purchase_order_id.id,))
                 final_result = self.env.cr.dictfetchall()
+                lvl_approver = self.lvl_approver + 1
+
+                # update statu active
+                sql_query="""
+                    update approval_request set active= True where request_status = 'new' and lvl_approver = %s and purchase_order_id = %s
+                """
+                self.env.cr.execute(sql_query, (lvl_approver, self.purchase_order_id.id,))
+                self.env.cr.commit()
+                result1 = self.env.cr.dictfetchall()
+
+                for final in final_result :
+                    approval_request_obj = self.env['approval.request'].search([('id','=',final['id']),('lvl_approver','=',lvl_approver),], limit=1)
+                    if approval_request_obj :
+                        for approval_request in approval_request_obj :
+                            approval_request.active = True
+                            approval_request.action_confirm()
+                
                 if final_result :
                     self.action_approve()
                     self.purchase_order_id.user_lvl_1_id = self._uid,
