@@ -60,8 +60,13 @@ class StockMove(models.Model):
 								new_sequence = seq.next_by_id(user_date)
 								self.env.cr.execute(query, (new_sequence, str(user_date), account_move.id))
 								old_sequence.number_next_actual = old_sequence.number_next_actual - 1
+
+								for line in account_move.line_ids:
+									line.write({'date': user_date})
 							else:
 								account_move.write({'date': user_date})
+								for line in account_move.line_ids:
+									line.write({'date': user_date})
 							# account_move.write({'date':user_date})
 							# if move.inventory_id:
 							# 	account_move.write({'ref':move.inventory_id.name})
