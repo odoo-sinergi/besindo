@@ -52,8 +52,8 @@ class StockMove(models.Model):
 					company_curr=move.company_id.currency_id.id
 					if move.account_move_ids:
 						for account_move in move.account_move_ids:
-							name = account_move.name.split('/')
-							if name[0] == 'STJ' and name[1] != str(user_date.year):
+							name = account_move.name.split('/') if account_move.name else False
+							if name and name[0] == 'STJ' and name[1] != str(user_date.year):
 								query = """update account_move set name = %s , date = %s where id = %s"""
 								seq = self.env['ir.sequence'].search([('name', '=', 'STJ Sequence')])
 								old_sequence = self.env['ir.sequence.date_range'].search([('sequence_id', '=', seq.id)]).filtered(lambda x: str(x.date_from.year) == name[1])

@@ -112,8 +112,8 @@ class SdtMrpProduction(models.Model):
                     self.env.cr.execute(sql_query,(data.mrp_date,rec.id))
 
                     if rec.account_move_ids:
-                        name = rec.account_move_ids.name.split('/')
-                        if name[0] == 'STJ' and name[1] != str(user_date.year):
+                        name = rec.account_move_ids.name.split('/') if rec.account_move_ids.name else False if rec.account_move_ids.name else False
+                        if name and name[0] == 'STJ' and name[1] != str(user_date.year):
                             query = """update account_move set name = %s , date = %s where id = %s"""
                             seq = self.env['ir.sequence'].search([('name', '=', 'STJ Sequence')])
                             old_sequence = self.env['ir.sequence.date_range'].search([('sequence_id', '=', seq.id)]).filtered(lambda x: str(x.date_from.year) == name[1])
@@ -131,7 +131,7 @@ class SdtMrpProduction(models.Model):
                     self.env.cr.execute(sql_query,(data.mrp_date,move_finish.id))
 
                     name = move_finish.account_move_ids.name.split('/')
-                    if name[0] == 'STJ' and name[1] != str(user_date.year):
+                    if name and name[0] == 'STJ' and name[1] != str(user_date.year):
                         query = """update account_move set name = %s , create_date = %s, date = %s where id = %s"""
                         seq = self.env['ir.sequence'].search([('name', '=', 'STJ Sequence')])
                         old_sequence = self.env['ir.sequence.date_range'].search([('sequence_id', '=', seq.id)]).filtered(lambda x: str(x.date_from.year) == name[1])

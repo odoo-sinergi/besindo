@@ -47,8 +47,8 @@ class SdtMrpUnbuild(models.Model):
                     
                     for account in move.account_move_ids:
                         if account:
-                            name = account.name.split('/')
-                            if name[0] == 'STJ' and name[1] != str(user_date.year):
+                            name = account.name.split('/') if account.name else False
+                            if name and name[0] == 'STJ' and name[1] != str(user_date.year):
                                 query = """update account_move set name = %s , date = %s where id = %s"""
                                 seq = self.env['ir.sequence'].search([('name', '=', 'STJ Sequence')])
                                 old_sequence = self.env['ir.sequence.date_range'].search([('sequence_id', '=', seq.id)]).filtered(lambda x: str(x.date_from.year) == name[1])
@@ -75,8 +75,8 @@ class SdtMrpUnbuild(models.Model):
                     
                     for account in move.account_move_ids:
                         if account:
-                            name = account.name.split('/')
-                            if name[0] == 'STJ' and name[1] != str(user_date.year):
+                            name = account.name.split('/') if account.name else False
+                            if name and name[0] == 'STJ' and name[1] != str(user_date.year):
                                 query = """update account_move set name = %s , date = %s where id = %s"""
                                 seq = self.env['ir.sequence'].search([('name', '=', 'STJ Sequence')])
                                 old_sequence = self.env['ir.sequence.date_range'].search([('sequence_id', '=', seq.id)]).filtered(lambda x: str(x.date_from.year) == name[1])
@@ -119,8 +119,8 @@ class SdtStockWarnInsufficientQtyUnbuild(models.TransientModel):
             
             for account in move.account_move_ids:
                 if account:
-                    name = account.name.split('/')
-                    if name[0] == 'STJ' and name[1] != str(user_date.year):
+                    name = account.name.split('/') if account.name else False
+                    if name and name[0] == 'STJ' and name[1] != str(user_date.year):
                         query = """update account_move set name = %s , date = %s where id = %s"""
                         seq = self.env['ir.sequence'].search([('name', '=', 'STJ Sequence')])
                         old_sequence = self.env['ir.sequence.date_range'].search([('sequence_id', '=', seq.id)]).filtered(lambda x: str(x.date_from.year) == name[1])
@@ -153,8 +153,8 @@ class SdtStockWarnInsufficientQtyUnbuild(models.TransientModel):
             
             for account in move.account_move_ids:
                 if account:
-                    name = account.name.split('/')
-                    if name[0] == 'STJ' and name[1] != str(user_date.year):
+                    name = account.name.split('/') if account.name else False
+                    if name and name[0] == 'STJ' and name[1] != str(user_date.year):
                         query = """update account_move set name = %s , date = %s where id = %s"""
                         seq = self.env['ir.sequence'].search([('name', '=', 'STJ Sequence')])
                         old_sequence = self.env['ir.sequence.date_range'].search([('sequence_id', '=', seq.id)]).filtered(lambda x: str(x.date_from.year) == name[1])
