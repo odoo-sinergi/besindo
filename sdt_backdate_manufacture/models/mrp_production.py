@@ -130,7 +130,7 @@ class SdtMrpProduction(models.Model):
                             """
                     self.env.cr.execute(sql_query,(data.mrp_date,move_finish.id))
 
-                    name = move_finish.account_move_ids.name.split('/')
+                    name = move_finish.account_move_ids.name.split('/') if move_finish.account_move_ids.name else False
                     if name and name[0] == 'STJ' and name[1] != str(user_date.year):
                         query = """update account_move set name = %s , create_date = %s, date = %s where id = %s"""
                         seq = self.env['ir.sequence'].search([('name', '=', 'STJ Sequence')])
