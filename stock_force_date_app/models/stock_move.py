@@ -11,10 +11,10 @@ class StockMove(models.Model):
 
 	def _action_done(self, cancel_backorder=False):
 		force_date = time.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
-		if self.date:
-			force_date = self.date
 		if self.env.user.has_group('stock_force_date_app.group_stock_force_date'):
 			for move in self:
+				if move.date:
+					force_date = move.date
 				if move.picking_id:
 					if move.picking_id.force_date:
 						force_date = move.picking_id.force_date
