@@ -17,9 +17,10 @@
                 <xpath expr="//button[@name='action_draft']" position="attributes">
                     <attribute name="groups">sdt_udf_besindo.group_sale_quotation_cancel</attribute>
                 </xpath>
-                <!-- <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='price_unit']" position="after">
-                    <field name="sdt_price_unit" optional="show"/>
-                </xpath> -->
+                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='price_unit']" position="after">
+                    <!-- <field name="sdt_price_unit" optional="show"/> -->
+                    <field name="delivery_deadline" optional="show"/>
+                </xpath>
             </field>
         </record>
 

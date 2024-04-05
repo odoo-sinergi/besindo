@@ -119,4 +119,5 @@ class SaleOrderLine(models.Model):
 
     # price_unit = fields.Float(digits='Product Price Sales',)
     sdt_price_unit = fields.Float(string='Sdt Price Unit', digits='Product Price Sales', store=True) 
+    delivery_deadline = fields.Date(string="Deadline Delivery Date")
     
