@@ -5,7 +5,7 @@
             <field name="model">mrp.bom</field>
             <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
             <field name="arch" type="xml">
-                <xpath expr="//form[1]/sheet[1]/div[1]/button[2]" position="attributes">
+                <xpath expr="//form[1]/sheet[1]/div[1]/button[3]" position="attributes">
                     <attribute name="groups">account.group_account_manager</attribute>
                 </xpath>
             </field>
