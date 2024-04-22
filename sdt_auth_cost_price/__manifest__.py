@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "SDT Authorization for Cost Update",
+    'name': "SDT Authorization for Cost and Price",
 
     'summary': """
-        SDT Authorization for Cost Update""",
+        SDT Authorization for Cost and Price""",
 
     'description': """
-        SDT Authorization for Cost Update
+        SDT Authorization for Cost and Price
     """,
 
     'author': "Sinergi Data Totalindo, PT",
