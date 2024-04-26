@@ -50,6 +50,7 @@
         'views/approval_category.xml',
         'views/approval_request.xml',
         'wizard/sdt_stock_picking_wizard.xml',
+        'views/mrp_bom_views.xml'
     ],
     # only loaded in demonstration mode
     # 'demo': [
