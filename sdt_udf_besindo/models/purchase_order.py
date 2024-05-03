@@ -20,12 +20,12 @@ class PurchaseOrder(models.Model):
     )
     info_status = fields.Char(string='Status Approval', copy=False)
 
-    user_lvl_1_id = fields.Many2one('res.users' ,string='user 1',)
-    approve_date_lvl_1 = fields.Date(string='Approve Date',)
+    user_lvl_1_id = fields.Many2one('res.users' ,string='user 1', copy=False)
+    approve_date_lvl_1 = fields.Date(string='Approve Date', copy=False)
     
-    user_lvl_2_id = fields.Many2one('res.users' ,string='user 2',)
-    approve_date_lvl_2 = fields.Date(string='Approve Date',)
-    min_approve_lvl_2_po = fields.Float(string='Amount Min Lvl 2',)
+    user_lvl_2_id = fields.Many2one('res.users' ,string='user 2', copy=False)
+    approve_date_lvl_2 = fields.Date(string='Approve Date', copy=False)
+    min_approve_lvl_2_po = fields.Float(string='Amount Min Lvl 2', copy=False)
     
     @api.depends('order_line.taxes_id', 'order_line.price_subtotal', 'amount_total', 'amount_untaxed')
     def  _compute_tax_totals(self):
