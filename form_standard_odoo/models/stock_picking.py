@@ -56,6 +56,7 @@ class StockPicking(models.Model):
                     shift = {
                         'shift_1':'Shift 1',
                         'shift_2':'Shift 2',
+                        'shift_3':'Shift 3',
                     }
                     pick.mrp_shift = shift[mrp.shift]
                     

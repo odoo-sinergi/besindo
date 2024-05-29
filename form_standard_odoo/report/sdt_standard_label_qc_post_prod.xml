@@ -153,6 +153,9 @@
                                                     <t t-if="lines.shift == 'shift_2'">
                                                         <t t-set="x" t-value="2"/>
                                                     </t>
+                                                    <t t-if="lines.shift == 'shift_3'">
+                                                        <t t-set="x" t-value="3"/>
+                                                    </t>
                                                 </t>
                                                 <span t-esc="'Shift : %s'%x"/>
                                             </td>
