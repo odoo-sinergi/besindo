@@ -73,7 +73,7 @@ class MRPWorkOrder(models.Model):
 
     operator_factory_ids = fields.Many2many('sdt.operator.factory', string='Operator Factory')
     qty_remaining2 = fields.Float('Quantity to Produced', compute='_compute_qty_remaining2', digits='Product Unit of Measure', store=True)
-    shift = fields.Selection([('shift_1', 'Shift 1'), ('shift_2', 'Shift 2')], string="Shift", required=True, default='shift_1')
+    shift = fields.Selection([('shift_1', 'Shift 1'), ('shift_2', 'Shift 2'), ('shift_3', 'Shift 3')], string="Shift", required=True, default='shift_1')
 
 
     @api.depends('qty_production', 'qty_reported_from_previous_wo', 'qty_produced', 'production_id.product_uom_id')
