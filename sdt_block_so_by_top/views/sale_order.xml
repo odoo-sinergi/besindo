@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_order_form_inherit">
+            <field name="name">sale.order.form.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group/group[@name='order_details']" position="after">
+                    <group name="approval_details" attrs="{'invisible':[('over_credit', '=', False),('over_due_date', '=', False)]}">
+                        <field name="over_credit" attrs="{'invisible':[('over_credit', '=', False)]}" force_save="1" readonly="1"/>
+                        <field name="over_due_date" attrs="{'invisible':[('over_due_date', '=', False)]}" force_save="1" readonly="1"/>
+                        <field name="has_approve" invisible="1"/>
+                        <field name="show_req_approval" invisible="1"/>
+                        <field name="approval_bod" attrs="{'readonly': [('state','in',('sale', 'done', 'cancel'))]}" options="{'no_open': True, 'no_create': True}"/>
+                        <field name="approval_bod_state" readonly="1"/>
+                        <field name="approval_bod_time" readonly="1"/>
+                    </group>
+                </xpath>
+                <xpath expr="//button[@name='action_confirm']" position="before">
+                    <button name="action_request_approval" string="Request Approval" type="object" class="oe_highlight o_expense_sheet_submit" 
+                        attrs="{'invisible':[('show_req_approval', '=', False)]}"/>
+                    <button name="action_approve" string="Approve" type="object" class="oe_highlight o_expense_sheet_submit" attrs="{'invisible':['|',('has_approve', '=', False),('approval_bod_state', '!=', 'waiting')]}" />
+                    <button name="action_refuse" string="Refuse" type="object" attrs="{'invisible':['|',('has_approve', '=', False),('approval_bod_state', '!=', 'waiting')]}" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

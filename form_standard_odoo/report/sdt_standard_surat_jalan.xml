@@ -75,7 +75,7 @@
                             }
                     </style>
 
-                    <table style="border: 0px solid black; border-collapse: collapse;">
+                    <table style="border: 0px solid black; border-collapse: collapse; font-family:'Courier New'">
                         <tr style="border: 0px solid white;">
                             <td style="border: 0px solid white; width:50%;">
                                 Kepada : <br/>
@@ -224,7 +224,7 @@
                             }
                     </style>
 
-                    <table style="border: 0px solid black; border-collapse: collapse;">
+                    <table style="border: 0px solid black; border-collapse: collapse;font-family:'Courier New'">
                         <tr style="border: 0px solid white;">
                             <td style="border: 0px solid white; width:50%;">
                                 Kepada : <br/>
@@ -232,7 +232,7 @@
                             </td>
                             <td style="border: 0px solid white; width:50%;">
                                 <table style="border: 0px solid white; padding: 0px;">
-                                    <tr style="border: 0px solid white; padding: 0px;">
+                                    <tr style="border: 0px solid white; padding: 0px; ">
                                         <td style="border: 0px solid white; padding: 0px;">No. SJ</td>
                                         <td style="border: 0px solid white; padding: 0px;"> : </td>
                                         <td style="border: 0px solid white; padding: 0px;">
