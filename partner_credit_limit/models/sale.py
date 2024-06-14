@@ -112,11 +112,11 @@ class SaleOrder(models.Model):
             moveline_obj = self.env['account.move.line']
             movelines = moveline_obj.search(
                 ['|',('partner_id', '=', partner_inv.id),('partner_id', '=', partner.id),
-                ('account_id.user_type_id.name', 'in',
-                    ['Receivable', 'Payable']),('company_id','=',self.company_id.id),('parent_state','=','posted')])
+                 ('account_id.account_type', 'in', ['liability_payable', 'asset_receivable']),
+                ('company_id','=',self.company_id.id),('parent_state','=','posted')])
             confirm_sale_order = self.search(
                 [('partner_id', '=', partner.id),('state', '=', 'sale'),('company_id','=',self.company_id.id),
-                ('invoice_status', '!=', 'invoiced'),('state_order', '!=', 'close')])
+                ('invoice_status', '!=', 'invoiced')])
 
             debit, credit = 0.0, 0.0
             amount_total = 0.0
