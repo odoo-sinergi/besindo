@@ -8,6 +8,7 @@
              <pivot string="Sales Analysis" sample="1">
                  <field name="team_id" type="col"/>
                  <field name="date" interval="month" type="row"/>
+                 <field name="delivery_date" interval="month" type="row"/>
                  <!-- <field name="price_subtotal" type="measure"/> -->
              </pivot>
          </field>

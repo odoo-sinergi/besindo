@@ -17,6 +17,7 @@ class SaleReport(models.Model):
 
     name = fields.Char('Order Reference', readonly=True)
     date = fields.Datetime('Order Date', readonly=True)
+    delivery_date = fields.Datetime('Delivery Deadline Date', readonly=True)
     product_id = fields.Many2one('product.product', 'Product Variant', readonly=True)
     product_uom = fields.Many2one('uom.uom', 'Unit of Measure', readonly=True)
     product_uom_qty = fields.Float('Qty Ordered', readonly=True)
@@ -64,6 +65,7 @@ class SaleReport(models.Model):
             CASE WHEN l.product_id IS NOT NULL THEN SUM((l.product_uom_qty - l.qty_delivered) / u.factor * u2.factor) ELSE 0 END AS qty_to_deliver,
             CASE WHEN l.product_id IS NOT NULL THEN SUM(l.qty_invoiced / u.factor * u2.factor) ELSE 0 END AS qty_invoiced,
             CASE WHEN l.product_id IS NOT NULL THEN SUM(l.qty_to_invoice / u.factor * u2.factor) ELSE 0 END AS qty_to_invoice,
+            l.delivery_deadline AS delivery_date,
             COUNT(*) AS nbr,
             s.name AS name,
             s.date_order AS date,
@@ -130,6 +132,7 @@ class SaleReport(models.Model):
         return """
             l.product_id,
             l.order_id,
+            l.delivery_deadline,
             t.uom_id,
             t.categ_id,
             s.name,
