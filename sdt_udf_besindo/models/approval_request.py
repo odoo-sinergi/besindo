@@ -88,10 +88,14 @@ class ApprovalRequest(models.Model):
     def sdt_action_approve(self):
         # Approval SO
         if self.sale_order_id :
-            approval_request_obj = self.env['approval.request'].search([('sale_order_id','=',self.sale_order_id.id)])
-            for approval_request in approval_request_obj :
-                if approval_request.request_status == 'pending':
-                        approval_request.sale_order_id.status_approval = 'approved'
+            if self.category_id.overdue_so:
+                self.sale_order_id.approval_bod_state = 'approved'
+            else:
+                self.sale_order_id.status_approval = 'approved'
+
+            # approval_request_obj = self.env['approval.request'].search([('sale_order_id','=',self.sale_order_id.id)])
+            # for approval_request in approval_request_obj :
+            #             approval_request.sale_order_id.status_approval = 'approved'
             approver = self.mapped('approver_ids').filtered(lambda approver: approver.user_id == self.env.user)
             approver.write({'status': 'approved'})
             self.sudo()._get_user_approval_activities(user=self.env.user).action_feedback()

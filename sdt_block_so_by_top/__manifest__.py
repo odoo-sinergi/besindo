@@ -10,7 +10,7 @@
     """,
     'summary': 'Block SO By TOP',
     'website': 'http://sinergidata.co.id',
-    'depends': ['base', 'sale', 'stock', 'account', 'partner_credit_limit'],
+    'depends': ['base', 'sale', 'stock', 'account', 'partner_credit_limit', 'sdt_udf_besindo'],
     'data': [
         'security/group.xml',
         'views/account_move.xml',

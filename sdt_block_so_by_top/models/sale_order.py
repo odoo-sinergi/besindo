@@ -24,8 +24,9 @@ class SaleOrder(models.Model):
             inv_name = ', '.join(inv for inv in inv_obj.mapped('name'))
             raise ValidationError(
                     _(
-                        "You can not confirm Sale Order.\n"
-                        "Because Invoice '%s'."
+                        "Tidak dapat confirm Sale Order.\n"
+                        "Karena invoice ('%s') overdue.\n"
+                        "Ajukan approval terlebih dahulu.\n"
                     )
                     % (inv_name)
                 )
@@ -105,10 +106,10 @@ class SaleOrder(models.Model):
     #         order.check_top(False)
     
     def action_confirm(self):
-        res = super(SaleOrder, self).action_confirm()
         for order in self:
             inv_obj = order.check_top(False)
             order.check_blocking_top(inv_obj)
+        res = super(SaleOrder, self).action_confirm()
         return res
     
     @api.model
@@ -162,15 +163,15 @@ class StockPicking(models.Model):
         activities = self.env['mail.activity'].search(domain)
         return activities
     
-    def action_request_approval(self):
-        for data in self:
-            if not data.approval_bod:
-                raise ValidationError(_('Please select a User for Approval.'))
-            data.write({'approval_bod_state': 'waiting',})
-            data.activity_schedule(
-                'mail.mail_activity_todo',
-                user_id=data.approval_bod.id,
-                summary='Delivery Order: To Approve')
+    # def action_request_approval(self):
+        # for data in self:
+        #     if not data.approval_bod:
+        #         raise ValidationError(_('Please select a User for Approval.'))
+        #     data.write({'approval_bod_state': 'waiting',})
+        #     data.activity_schedule(
+        #         'mail.mail_activity_todo',
+        #         user_id=data.approval_bod.id,
+        #         summary='Delivery Order: To Approve')
     
     def action_approve(self):
         for data in self:
@@ -202,8 +203,8 @@ class StockPicking(models.Model):
                     inv_name = ', '.join(inv for inv in inv_obj.mapped('name'))
                     raise ValidationError(
                             _(
-                                "You can not confirm Delivery Order.\n"
-                                "Because Invoice '%s'."
+                                "Tidak dapat confirm Delivery Order.\n"
+                                "Karena invoice ('%s') overdue."
                             )
                             % (inv_name)
                         )

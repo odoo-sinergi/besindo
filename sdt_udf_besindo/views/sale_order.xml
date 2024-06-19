@@ -12,7 +12,7 @@
                 <xpath expr="//field[@name='payment_term_id']" position="after">
                     <field name="approval_disc" readonly="1" invisible="1" force_save="1"/>
                     <field name="req_approval" readonly="1" invisible="1" force_save="1"/>
-                    <field name="status_approval" readonly="1" invisible="1" force_save="1"/>
+                    <field name="status_approval" string="Status Approval Diskon" readonly="1" force_save="1" attrs="{'invisible':[('approval_disc','!=',True)]}"/>
                 </xpath>
                 <xpath expr="//button[@name='action_draft']" position="attributes">
                     <attribute name="groups">sdt_udf_besindo.group_sale_quotation_cancel</attribute>
