@@ -59,15 +59,15 @@ class SaleOrder(models.Model):
         activities = self.env['mail.activity'].search(domain)
         return activities
     
-    def action_request_approval(self):
-        for data in self:
-            if not data.approval_bod:
-                raise ValidationError(_('Please select a User for Approval.'))
-            data.write({'approval_bod_state': 'waiting',})
-            data.activity_schedule(
-                'mail.mail_activity_todo',
-                user_id=data.approval_bod.id,
-                summary='Sale Order: To Approve')
+    # def action_request_approval(self):
+    #     for data in self:
+    #         if not data.approval_bod:
+    #             raise ValidationError(_('Please select a User for Approval.'))
+    #         data.write({'approval_bod_state': 'waiting',})
+    #         data.activity_schedule(
+    #             'mail.mail_activity_todo',
+    #             user_id=data.approval_bod.id,
+    #             summary='Sale Order: To Approve')
     
     def action_approve(self):
         for data in self:

@@ -50,3 +50,114 @@ class SaleOrder(models.Model):
             })
             new_approval_request.action_confirm()
             data.approval_id = new_approval_request.id
+
+    def action_request_approval(self):
+        for rec in self :
+            if not rec.req_approval and rec.approval_disc:
+                approval_so_obj = self.env['approval.category'].search([('approval_so','=',True),('overdue_so','=',False),('active','=',True)], limit=1)
+                if approval_so_obj.approval_minimum == 1 :
+                    approvals_id = self.env['approval.request'].sudo().create({
+                    'name':'Approval/SO/-'+self.name,
+                    'date' : fields.Datetime.now(),
+                    'reference':rec.name,
+                    'category_id' : approval_so_obj.id,
+                    'sale_order_id' : rec.id,
+                    'request_owner_id' : self.env.uid,
+                    'request_status' : 'pending',
+                    'amount' : rec.amount_total,
+                    })
+                    for line_id in self.order_line:
+                        vals ={
+                            'approval_request_id': approvals_id.id,
+                            'product_id': line_id.product_id.id,
+                            'description': line_id.name,
+                            'quantity': line_id.product_uom_qty,
+                            'product_uom_id': line_id.product_uom.id,
+                        }
+                        self.env['approval.product.line'].create(vals)
+                    approvals_id.action_confirm()
+                elif approval_so_obj.approval_minimum == len(approval_so_obj.approver_ids.ids) :
+                    for user_id in approval_so_obj.user_ids:
+                        approvals_id = self.env['approval.request'].sudo().create({
+                        'name':'Approval/SO/-'+self.name,
+                        'date' : fields.Datetime.now(),
+                        'reference':rec.name,
+                        'category_id' : approval_so_obj.id,
+                        'sale_order_id' : rec.id,
+                        'request_owner_id' : self.env.uid,
+                        'request_status' : 'pending',
+                        'amount' : rec.amount_total,
+                        })
+                        for line_id in rec.order_line:
+                            vals ={
+                                'approval_request_id': approvals_id.id,
+                                'product_id': line_id.product_id.id,
+                                'description': line_id.name,
+                                'quantity': line_id.product_uom_qty,
+                                'product_uom_id': line_id.product_uom.id,
+                            }
+                            self.env['approval.product.line'].create(vals)
+                        for approver_id1 in approvals_id.approver_ids :
+                            approver_id1.unlink()
+                        
+                        approvals_id.approver_ids += self.env['approval.approver'].new({
+                            'request_id': approvals_id.id,
+                            'user_id': user_id.id,
+                        })
+                        approvals_id.action_confirm()
+                elif approval_so_obj.approval_minimum > len(approval_so_obj.approver_ids.ids) :
+                    raise UserError('Jumlah Approver Tidak Boleh Lebih Besar Dari Approver')
+                else :
+                    raise UserError('Jumlah Approver Tidak Boleh Nol')
+                rec.req_approval = True
+                rec.status_approval = 'waiting'
+
+            if rec.show_req_approval:
+                approval_so_obj = self.env['approval.category'].search([('approval_so','=',True),('overdue_so','=',True),('active','=',True)])
+                if not approval_so_obj :
+                    raise UserError('Settingan Approval Tidak Ditemukan')
+                for approval_so in approval_so_obj :
+                    for user_id in approval_so.approver_ids:
+                        sql_query="""
+                            select count(1) from approval_request where sale_order_id= %s and lvl_approver = %s
+                        """
+                        self.env.cr.execute(sql_query, (rec.id, user_id.lvl_approver,))
+                        check_po = self.env.cr.dictfetchall()
+                        check_po = check_po[0]['count']
+                        if check_po == 0 :
+                            approvals_id = self.env['approval.request'].sudo().create({
+                            'name':'Approval/SO/-'+self.name,
+                            'date' : fields.Datetime.now(),
+                            'reference':rec.name,
+                            'category_id' : approval_so.id,
+                            'sale_order_id' : rec.id,
+                            'lvl_approver' : user_id.lvl_approver,
+                            'request_owner_id' : self.env.uid,
+                            'request_status' : 'pending',
+                            'amount' : rec.amount_total,
+                            })
+                            for approver_id in approvals_id.approver_ids :
+                                approver_id.unlink()
+                            if user_id :
+                                approvals_id.approver_ids += self.env['approval.approver'].create({
+                                    'user_id': user_id.user_id.id,
+                                    'request_id': approvals_id.id,
+                                    'status': 'new',
+                                    'company_id': rec.company_id.id,
+                                })
+                            approvals_id.action_confirm()
+                        else :
+                            sql_query="""
+                                select id from approval_request where sale_order_id= %s and lvl_approver = %s
+                            """
+                            self.env.cr.execute(sql_query, (rec.id, user_id.lvl_approver,))
+                            id_aq = self.env.cr.dictfetchall()
+                            id_aq = id_aq[0]['id']
+                            approvals_id.approver_ids += self.env['approval.approver'].create({
+                                'user_id': user_id.user_id.id,
+                                'request_id': id_aq,
+                                'status': 'pending',
+                                'company_id': rec.company_id.id,
+                            })
+                    rec.show_req_approval = False
+                    rec.approval_bod_state = 'waiting'

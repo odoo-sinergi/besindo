@@ -7,6 +7,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='approver_ids']" position="before">
                     <field name="approval_so"/>
+                    <field name="overdue_so" attrs="{'invisible': [('approval_so', '!=', True)]}"/>
                     <field name="approval_po"/>
                     <field name="currency_id" attrs="{'invisible': [('approval_po', '=', False)]}"/>
                     <field name="min_approve_lvl_2_po" attrs="{'invisible': [('currency_id', '!=', 12)]}"/>
