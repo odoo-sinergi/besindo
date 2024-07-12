@@ -280,10 +280,10 @@
                                     <t t-esc="LineNum"/>
                                 </span>
                             </div>
-                            <div class="col-1">
+                            <div class="col-3">
                                 <span t-field="move_lines.product_id.part_number"/>
                             </div>
-                            <div class="col-8">
+                            <div class="col-6">
                                 <t t-if="move_lines.product_id.nama_alias">                            
                                     <!-- <span t-field="move_lines.product_id.nama_alias"/> -->
                                     <t t-set="LineName" t-value="move_lines.product_id.nama_alias"/>
