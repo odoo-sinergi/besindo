@@ -64,9 +64,13 @@ class StockMove(models.Model):
 								for line in account_move.line_ids:
 									line.write({'date': user_date})
 							else:
-								account_move.write({'date': user_date})
+								# account_move.write({'date': user_date})
+								query="""update account_move set date = %s where id = %s"""
+								self.env.cr.execute(query, (str(user_date), account_move.id))
 								for line in account_move.line_ids:
-									line.write({'date': user_date})
+									query="""update account_move_line set date = %s where id = %s"""
+									self.env.cr.execute(query, (str(user_date), line.id))
+									# line.write({'date': user_date})
 							# account_move.write({'date':user_date})
 							# if move.inventory_id:
 							# 	account_move.write({'ref':move.inventory_id.name})

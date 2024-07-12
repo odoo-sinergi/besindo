@@ -8,7 +8,7 @@ from odoo.exceptions import UserError
 
 class AccountMove(models.Model):
     _inherit = 'account.move'
-
+    #restart server
     def _stock_account_prepare_anglo_saxon_in_lines_vals(self):
         ''' Prepare values used to create the journal items (account.move.line) corresponding to the price difference
          lines for vendor bills.
