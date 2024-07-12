@@ -117,8 +117,8 @@
                         <thead>
                             <tr>
                                 <th style="text-align:center; border:0px solid black; width: 5%">No</th>
-                                <th style="text-align:center; border:0px solid black; width: 15%">Part No.</th>
-                                <th style="text-align:center; border:0px solid black; width: 50%">Part Name</th>
+                                <th style="text-align:center; border:0px solid black; width: 25%">Part No.</th>
+                                <th style="text-align:center; border:0px solid black; width: 40%">Part Name</th>
                                 <th style="text-align:center; border:0px solid black; width: 30%">Qty</th>
                             </tr>
                         </thead>
