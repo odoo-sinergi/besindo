@@ -267,8 +267,8 @@
                     </table>
                     <div class="row">
                         <div class="col-1">No</div>
-                        <div class="col-1">Part No.</div>
-                        <div class="col-8">Part Name</div>
+                        <div class="col-3">Part No.</div>
+                        <div class="col-6">Part Name</div>
                         <div class="col-2">Qty</div>
                     </div>
                     <t t-set="LineNum" t-value="1"/>
