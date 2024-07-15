@@ -29,15 +29,15 @@ class AccountMove(models.Model):
     do_number = fields.Char(string='DO Number',)
     hs_code = fields.Char(string='HS Code',)
     no_faktur_pajak = fields.Char(string='Tax Invoice Number',)
-    date_payment = fields.Date(string='Paid Date', compute="_compute_date_payment", store=True, )
+    date_payment = fields.Date(string='Paid Date', store=True, )
     accounting_ref = fields.Char(string='Accounting Reference')
     
 
     def _compute_date_payment(self):
         for record in self:
             if record.payment_state == 'paid' :
-                # payment_obj = self.env['account.payment'].search([('ref', '=', record.name)], order='date desc', limit=1)
-                payment_obj = self.env['account.payment'].filtered(lambda ap: record.id in ap.reconciled_invoice_ids.ids).sorted('date')
+                payment_obj = self.env['account.payment'].search([('ref', '=', record.name)], order='date desc', limit=1)
+                # payment_obj = self.env['account.payment'].filtered(lambda ap: record.id in ap.reconciled_invoice_ids.ids).sorted('date')
                 if payment_obj :
                     payment_obj = payment_obj[-1]
                     for payment in payment_obj :
