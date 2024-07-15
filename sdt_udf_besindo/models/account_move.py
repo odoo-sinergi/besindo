@@ -37,7 +37,7 @@ class AccountMove(models.Model):
         for record in self:
             if record.payment_state == 'paid' :
                 # payment_obj = self.env['account.payment'].search([('ref', '=', record.name)], order='date desc', limit=1)
-                payment_obj = self.env['account.payment'].filtered(lambda ap: self.id in ap.reconciled_invoice_ids.ids).sorted('date')
+                payment_obj = self.env['account.payment'].filtered(lambda ap: record.id in ap.reconciled_invoice_ids.ids).sorted('date')
                 if payment_obj :
                     payment_obj = payment_obj[-1]
                     for payment in payment_obj :
