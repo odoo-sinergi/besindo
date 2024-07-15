@@ -36,8 +36,10 @@ class AccountMove(models.Model):
     def _compute_date_payment(self):
         for record in self:
             if record.payment_state == 'paid' :
-                payment_obj = self.env['account.payment'].search([('ref', 'ilike', f'%{record.name}%')], order='date desc', limit=1)
+                # payment_obj = self.env['account.payment'].search([('ref', '=', record.name)], order='date desc', limit=1)
+                payment_obj = self.env['account.payment'].filtered(lambda ap: self.id in ap.reconciled_invoice_ids.ids).sorted('date')
                 if payment_obj :
+                    payment_obj = payment_obj[-1]
                     for payment in payment_obj :
                         if not record.date_payment :
                             record.date_payment = payment.date
