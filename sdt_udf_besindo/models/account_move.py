@@ -36,7 +36,6 @@ class AccountMove(models.Model):
     def recalculate_date_payment(self):
         records = self.env['account.move'].search([('payment_state','in',['paid','partial'])])
         for record in records:
-            len(record.line_ids)
             # payment_obj = self.env['account.payment'].search([('ref', '=', record.name)], order='date desc', limit=1)
             payment_obj = self.env['account.payment'].search([]).filtered(lambda ap: record in ap.reconciled_invoice_ids).sorted('date')
             if payment_obj :
@@ -53,7 +52,6 @@ class AccountMove(models.Model):
     def _compute_date_payment(self):
         for record in self:
             if record.payment_state in ['paid','partial'] :
-                # len(record.line_ids)
                 # payment_obj = self.env['account.payment'].search([('ref', '=', record.name)], order='date desc', limit=1)
                 payment_obj = self.env['account.payment'].search([]).filtered(lambda ap: record in ap.reconciled_invoice_ids).sorted('date')
                 if payment_obj :
