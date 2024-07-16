@@ -34,7 +34,7 @@ class AccountMove(models.Model):
     
 
     def recalculate_date_payment(self):
-        records = self.env['account.move'].search(['payment_state','=','paid'])
+        records = self.env['account.move'].search([('payment_state','=','paid')])
         for record in records:
             len(record.line_ids)
             # payment_obj = self.env['account.payment'].search([('ref', '=', record.name)], order='date desc', limit=1)
