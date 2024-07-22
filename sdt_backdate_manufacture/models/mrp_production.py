@@ -15,7 +15,7 @@ class SdtMrpProduction(models.Model):
             user_tz = self.env.user.tz or pytz.utc
             local = pytz.timezone(user_tz)
             local_date = pytz.utc.localize(self.mrp_date).astimezone(local)
-            local_now = pytz.utc.localize(self.Datetime.now()).astimezone(local)
+            local_now = pytz.utc.localize(fields.Datetime.now()).astimezone(local)
             user_date = local_date.replace(tzinfo=None)
             user_now = local_now.replace(tzinfo=None)
 
