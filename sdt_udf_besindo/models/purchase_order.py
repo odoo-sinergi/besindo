@@ -147,6 +147,7 @@ class PurchaseOrder(models.Model):
                                     self.env.cr.execute(sql_query, (rec.id, user_id.lvl_approver,))
                                     id_aq = self.env.cr.dictfetchall()
                                     id_aq = id_aq[0]['id']
+                                    approvals_id = self.env['approval.request'].browse(id_aq)
                                     approvals_id.approver_ids += self.env['approval.approver'].create({
                                         'user_id': user_id.user_id.id,
                                         'request_id': id_aq,
