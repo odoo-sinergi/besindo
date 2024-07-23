@@ -54,83 +54,126 @@ class AccountMove(models.Model):
                                   string="Down Payment Lines", required=False, states={'open': [('readonly', False)]}, )
 
     amount_payment = fields.Monetary(currency_field='currency_id')
+
+    @api.depends('move_type', 'line_ids.amount_residual')
     def _compute_payments_widget_reconciled_info(self):
         for move in self:
             # reconciled_vals = move._get_reconciled_info_JSON_values()
             # reconciled_vals = move._compute_payments_widget_reconciled_info()
-            reconciled_vals = []
-            reconciled_partials = move._get_all_reconciled_invoice_partials()
-            for reconciled_partial in reconciled_partials:
-                counterpart_line = reconciled_partial['aml']
-                if counterpart_line.move_id.ref:
-                    reconciliation_ref = '%s (%s)' % (counterpart_line.move_id.name, counterpart_line.move_id.ref)
-                else:
-                    reconciliation_ref = counterpart_line.move_id.name
-                if counterpart_line.amount_currency and counterpart_line.currency_id != counterpart_line.company_id.currency_id:
-                    foreign_currency = counterpart_line.currency_id
-                else:
-                    foreign_currency = False
+            if move.state == 'posted' and move.is_invoice(include_receipts=True):
+                reconciled_vals = []
+                reconciled_partials = move._get_all_reconciled_invoice_partials()
+                for reconciled_partial in reconciled_partials:
+                    counterpart_line = reconciled_partial['aml']
+                    if counterpart_line.move_id.ref:
+                        reconciliation_ref = '%s (%s)' % (counterpart_line.move_id.name, counterpart_line.move_id.ref)
+                    else:
+                        reconciliation_ref = counterpart_line.move_id.name
+                    if counterpart_line.amount_currency and counterpart_line.currency_id != counterpart_line.company_id.currency_id:
+                        foreign_currency = counterpart_line.currency_id
+                    else:
+                        foreign_currency = False
 
-                reconciled_vals.append({
-                    'name': counterpart_line.name,
-                    'journal_name': counterpart_line.journal_id.name,
-                    'amount': reconciled_partial['amount'],
-                    'currency_id': move.company_id.currency_id.id if reconciled_partial['is_exchange'] else reconciled_partial['currency'].id,
-                    'date': counterpart_line.date,
-                    'partial_id': reconciled_partial['partial_id'],
-                    'account_payment_id': counterpart_line.payment_id.id,
-                    'payment_method_name': counterpart_line.payment_id.payment_method_line_id.name,
-                    'move_id': counterpart_line.move_id.id,
-                    'ref': reconciliation_ref,
-                    # these are necessary for the views to change depending on the values
-                    'is_exchange': reconciled_partial['is_exchange'],
-                    'amount_company_currency': formatLang(self.env, abs(counterpart_line.balance), currency_obj=counterpart_line.company_id.currency_id),
-                    'amount_foreign_currency': foreign_currency and formatLang(self.env, abs(counterpart_line.amount_currency), currency_obj=foreign_currency)
-                })
-            if reconciled_vals:
-                # Add downpayment
-                unrecon = 'N'
-                for recon in reconciled_vals:
-                    payment_id = recon['account_payment_id']
-                    payment_obj = self.env['account.payment'].search([('id', '=', payment_id)])
-                    if payment_obj.down_payment == True:
-                        dp_obj = self.env['sdt.downpayment'].search([('payment_id', '=', payment_id)])
-                        if dp_obj:
-                            if dp_obj.state != 'close':
-                                close_obj = self.env['sdt.downpayment.lines'].search(
-                                    [('dp_id', '=', dp_obj.id), ('inv_id', '=', self.id), ('state', '=', 'assigned')])
-                                if not close_obj:
-                                    self.update_downpayment(recon, dp_obj)
-                            unrecon = 'Y'
-                if unrecon == 'Y':
-                    dp_line_obj = self.env['sdt.downpayment.lines'].search([('inv_id', '=', self.id),('state', '=', 'assigned')])
-                    if dp_line_obj:
-                        for dp in dp_line_obj:
-                            dp_unlink = 'Y'
-                            # if dp.state=='canceled':
-                            #     sql_query="""Delete from sdt_downpayment_lines where id=%s;"""
-                            #     self.env.cr.execute(sql_query,(dp.id,))
-                            # dp.unlink()
-                            for rec in reconciled_vals:
-                                if dp.dp_id.payment_id.id == rec['account_payment_id']:
-                                    dp_unlink = 'N'
-                            if dp_unlink == 'Y':
-                                inv_id = dp.close_move_id.id
-                                if inv_id != False:
-                                    dp_id = dp.dp_id.id
-                                    amount = dp.close_amount
-                                    po = move.invoice_origin
-                                    sql_query = """Delete from account_move where id=%s;"""
-                                    self.env.cr.execute(sql_query, (inv_id,))
-                                    sql_query = """Delete from account_move_line where move_id=%s;"""
-                                    self.env.cr.execute(sql_query, (inv_id,))
-                                    sql_query="""Update sdt_downpayment_lines set state='canceled' where dp_id=%s;"""
-                                    #sql_query="""Delete from sdt_downpayment_lines where id=%s;"""
-                                    self.env.cr.execute(sql_query, (dp_id,))
-                                    sql_query = """
-                                        Update sdt_downpayment set state='open',close_amount=close_amount-%s,balance_amount=balance_amount+%s where id=%s;
-                                        """
-                                    self.env.cr.execute(sql_query, (amount, amount, dp_id,))
+                    reconciled_vals.append({
+                        'name': counterpart_line.name,
+                        'journal_name': counterpart_line.journal_id.name,
+                        'amount': reconciled_partial['amount'],
+                        'currency_id': move.company_id.currency_id.id if reconciled_partial['is_exchange'] else reconciled_partial['currency'].id,
+                        'date': counterpart_line.date,
+                        'partial_id': reconciled_partial['partial_id'],
+                        'account_payment_id': counterpart_line.payment_id.id,
+                        'payment_method_name': counterpart_line.payment_id.payment_method_line_id.name,
+                        'move_id': counterpart_line.move_id.id,
+                        'ref': reconciliation_ref,
+                        # these are necessary for the views to change depending on the values
+                        'is_exchange': reconciled_partial['is_exchange'],
+                        'amount_company_currency': formatLang(self.env, abs(counterpart_line.balance), currency_obj=counterpart_line.company_id.currency_id),
+                        'amount_foreign_currency': foreign_currency and formatLang(self.env, abs(counterpart_line.amount_currency), currency_obj=foreign_currency)
+                    })
+                if reconciled_vals:
+                    # Add downpayment
+                    unrecon = 'N'
+                    for recon in reconciled_vals:
+                        payment_id = recon['account_payment_id']
+                        payment_obj = self.env['account.payment'].search([('id', '=', payment_id)])
+                        if payment_obj.down_payment == True:
+                            dp_obj = self.env['sdt.downpayment'].search([('payment_id', '=', payment_id)])
+                            if dp_obj:
+                                if dp_obj.state != 'close':
+                                    close_obj = self.env['sdt.downpayment.lines'].search(
+                                        [('dp_id', '=', dp_obj.id), ('inv_id', '=', self.id), ('state', '=', 'assigned')])
+                                    if not close_obj:
+                                        self.update_downpayment(recon, dp_obj)
+                                unrecon = 'Y'
+                    if unrecon == 'Y':
+                        dp_line_obj = self.env['sdt.downpayment.lines'].search([('inv_id', '=', self.id),('state', '=', 'assigned')])
+                        if dp_line_obj:
+                            for dp in dp_line_obj:
+                                dp_unlink = 'Y'
+                                # if dp.state=='canceled':
+                                #     sql_query="""Delete from sdt_downpayment_lines where id=%s;"""
+                                #     self.env.cr.execute(sql_query,(dp.id,))
+                                # dp.unlink()
+                                for rec in reconciled_vals:
+                                    if dp.dp_id.payment_id.id == rec['account_payment_id']:
+                                        dp_unlink = 'N'
+                                if dp_unlink == 'Y':
+                                    inv_id = dp.close_move_id.id
+                                    if inv_id != False:
+                                        dp_id = dp.dp_id.id
+                                        amount = dp.close_amount
+                                        po = move.invoice_origin
+                                        sql_query = """Delete from account_move where id=%s;"""
+                                        self.env.cr.execute(sql_query, (inv_id,))
+                                        sql_query = """Delete from account_move_line where move_id=%s;"""
+                                        self.env.cr.execute(sql_query, (inv_id,))
+                                        sql_query="""Update sdt_downpayment_lines set state='canceled' where dp_id=%s;"""
+                                        #sql_query="""Delete from sdt_downpayment_lines where id=%s;"""
+                                        self.env.cr.execute(sql_query, (dp_id,))
+                                        sql_query = """
+                                            Update sdt_downpayment set state='open',close_amount=close_amount-%s,balance_amount=balance_amount+%s where id=%s;
+                                            """
+                                        self.env.cr.execute(sql_query, (amount, amount, dp_id,))
+                    else:
+                        # Release downpayment
+                        if move.state == 'posted':
+                            if move.dp_line_ids:
+                                dp_line_ids = move.dp_line_ids.filtered(lambda x: x.close_move_id)
+                                if dp_line_ids:
+                                    for line in dp_line_ids:
+                                        dp_unlink = 'Y'
+                                        for rec in reconciled_vals:
+                                            if line.dp_id.payment_id.id == rec['account_payment_id']:
+                                                dp_unlink = 'N'
+                                        if dp_unlink == 'Y':
+                                            inv_id = line.close_move_id
+                                            if inv_id != False:
+                                                domain = [('account_type', 'in', ('asset_receivable', 'liability_payable'))]
+                                                payment_lines = line.dp_id.payment_id.journal_dp.line_ids.filtered_domain(domain)
+                                                lines = inv_id.line_ids.filtered_domain(domain)
+
+                                                if payment_lines.account_type == 'asset_receivable':
+                                                    if len(payment_lines.matched_credit_ids.ids) > 1:
+                                                        (lines).remove_move_reconcile()
+                                                    else:
+                                                        (payment_lines + lines).remove_move_reconcile()
+                                                else:
+                                                    if len(payment_lines.matched_debit_ids.ids) > 1:
+                                                        (lines).remove_move_reconcile()
+                                                    else:
+                                                        (payment_lines + lines).remove_move_reconcile()
+
+                                                amount = line.close_amount
+                                                sql_query = """Delete from account_move where id=%s;"""
+                                                self.env.cr.execute(sql_query, (inv_id.id,))
+                                                sql_query = """Delete from account_move_line where move_id=%s;"""
+                                                self.env.cr.execute(sql_query, (inv_id.id,))
+                                                sql_query="""Update sdt_downpayment_lines set state='canceled' where id=%s;"""
+                                                self.env.cr.execute(sql_query, (line.id,))
+                                                sql_query = """
+                                                    Update sdt_downpayment set state='open',close_amount=close_amount-%s,balance_amount=balance_amount+%s where id=%s;
+                                                    """
+                                                self.env.cr.execute(sql_query, (amount, amount, line.dp_id.id,))
                 else:
                     # Release downpayment
                     if move.state == 'posted':
@@ -138,76 +181,36 @@ class AccountMove(models.Model):
                             dp_line_ids = move.dp_line_ids.filtered(lambda x: x.close_move_id)
                             if dp_line_ids:
                                 for line in dp_line_ids:
-                                    dp_unlink = 'Y'
-                                    for rec in reconciled_vals:
-                                        if line.dp_id.payment_id.id == rec['account_payment_id']:
-                                            dp_unlink = 'N'
-                                    if dp_unlink == 'Y':
-                                        inv_id = line.close_move_id
-                                        if inv_id != False:
-                                            domain = [('account_type', 'in', ('asset_receivable', 'liability_payable'))]
-                                            payment_lines = line.dp_id.payment_id.journal_dp.line_ids.filtered_domain(domain)
-                                            lines = inv_id.line_ids.filtered_domain(domain)
+                                    reconciled_vals = move._get_reconciled_info_JSON_values()
+                                    inv_id = line.close_move_id
+                                    dp_id = line.dp_id.id
+                                    amount = line.close_amount
+                                    if inv_id != False:
+                                        domain = [('account_type', 'in', ('asset_receivable', 'liability_payable'))]
+                                        payment_lines = line.dp_id.payment_id.journal_dp.line_ids.filtered_domain(domain)
+                                        lines = inv_id.line_ids.filtered_domain(domain)
 
-                                            if payment_lines.account_type == 'asset_receivable':
-                                                if len(payment_lines.matched_credit_ids.ids) > 1:
-                                                    (lines).remove_move_reconcile()
-                                                else:
-                                                    (payment_lines + lines).remove_move_reconcile()
+                                        if payment_lines.account_type == 'asset_receivable':
+                                            if len(payment_lines.matched_credit_ids.ids) > 1:
+                                                (lines).remove_move_reconcile()
                                             else:
-                                                if len(payment_lines.matched_debit_ids.ids) > 1:
-                                                    (lines).remove_move_reconcile()
-                                                else:
-                                                    (payment_lines + lines).remove_move_reconcile()
-
-                                            amount = line.close_amount
-                                            sql_query = """Delete from account_move where id=%s;"""
-                                            self.env.cr.execute(sql_query, (inv_id.id,))
-                                            sql_query = """Delete from account_move_line where move_id=%s;"""
-                                            self.env.cr.execute(sql_query, (inv_id.id,))
-                                            sql_query="""Update sdt_downpayment_lines set state='canceled' where id=%s;"""
-                                            self.env.cr.execute(sql_query, (line.id,))
-                                            sql_query = """
-                                                Update sdt_downpayment set state='open',close_amount=close_amount-%s,balance_amount=balance_amount+%s where id=%s;
-                                                """
-                                            self.env.cr.execute(sql_query, (amount, amount, line.dp_id.id,))
-            else:
-                # Release downpayment
-                if move.state == 'posted':
-                    if move.dp_line_ids:
-                        dp_line_ids = move.dp_line_ids.filtered(lambda x: x.close_move_id)
-                        if dp_line_ids:
-                            for line in dp_line_ids:
-                                reconciled_vals = move._get_reconciled_info_JSON_values()
-                                inv_id = line.close_move_id
-                                dp_id = line.dp_id.id
-                                amount = line.close_amount
-                                if inv_id != False:
-                                    domain = [('account_type', 'in', ('asset_receivable', 'liability_payable'))]
-                                    payment_lines = line.dp_id.payment_id.journal_dp.line_ids.filtered_domain(domain)
-                                    lines = inv_id.line_ids.filtered_domain(domain)
-
-                                    if payment_lines.account_type == 'asset_receivable':
-                                        if len(payment_lines.matched_credit_ids.ids) > 1:
-                                            (lines).remove_move_reconcile()
+                                                (payment_lines + lines).remove_move_reconcile()
                                         else:
-                                            (payment_lines + lines).remove_move_reconcile()
-                                    else:
-                                        if len(payment_lines.matched_debit_ids.ids) > 1:
-                                            (lines).remove_move_reconcile()
-                                        else:
-                                            (payment_lines + lines).remove_move_reconcile()
+                                            if len(payment_lines.matched_debit_ids.ids) > 1:
+                                                (lines).remove_move_reconcile()
+                                            else:
+                                                (payment_lines + lines).remove_move_reconcile()
 
-                                    sql_query = """Delete from account_move where id=%s;"""
-                                    self.env.cr.execute(sql_query, (inv_id.id,))
-                                    sql_query = """Delete from account_move_line where move_id=%s;"""
-                                    self.env.cr.execute(sql_query, (inv_id.id,))
-                                    sql_query="""Update sdt_downpayment_lines set state='canceled' where id=%s;"""
-                                    self.env.cr.execute(sql_query, (line.id,))
-                                    sql_query = """
-                                        Update sdt_downpayment set state='open',close_amount=close_amount-%s,balance_amount=balance_amount+%s where id=%s;
-                                        """
-                                    self.env.cr.execute(sql_query, (amount, amount, dp_id,))
+                                        sql_query = """Delete from account_move where id=%s;"""
+                                        self.env.cr.execute(sql_query, (inv_id.id,))
+                                        sql_query = """Delete from account_move_line where move_id=%s;"""
+                                        self.env.cr.execute(sql_query, (inv_id.id,))
+                                        sql_query="""Update sdt_downpayment_lines set state='canceled' where id=%s;"""
+                                        self.env.cr.execute(sql_query, (line.id,))
+                                        sql_query = """
+                                            Update sdt_downpayment set state='open',close_amount=close_amount-%s,balance_amount=balance_amount+%s where id=%s;
+                                            """
+                                        self.env.cr.execute(sql_query, (amount, amount, dp_id,))
 
         return super(AccountMove, self)._compute_payments_widget_reconciled_info()
 
