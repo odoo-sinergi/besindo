@@ -9,7 +9,7 @@
                 <xpath expr="//label[@for='date_planned_start']" position="before">
                     <label for="mrp_date"/>
                     <div class="mrp_date">
-                        <field name="mrp_date" attrs="{'required': [('state','in',('confirmed','to_close'))]}"/>
+                        <field name="mrp_date" attrs="{'readonly': [('state','in',('done','cancel'))],required': [('state','in',('confirmed','to_close'))]}"/>
                     </div>
                 </xpath>
             </field>
