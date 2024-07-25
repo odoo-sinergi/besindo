@@ -19,7 +19,7 @@ class SdtMrpProduction(models.Model):
             user_date = local_date.replace(tzinfo=None)
             user_now = local_now.replace(tzinfo=None)
 
-            if not self.env.user.has_group('stock_force_date_app.group_stock_force_date') and user_date > user_now:
+            if not self.env.user.has_group('stock_force_date_app.group_stock_force_date') and user_date.date() > user_now.date():
                 raise UserError(_('You don\'t have authorization to create future tansaction'))
             
 
