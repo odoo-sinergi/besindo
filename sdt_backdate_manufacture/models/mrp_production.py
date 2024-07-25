@@ -9,6 +9,20 @@ class SdtMrpProduction(models.Model):
 
     mrp_date = fields.Datetime('Manufactured Date')
 
+    @api.onchange('mrp_date')
+    def onchange_mrp_date(self):
+        if self.mrp_date:
+            user_tz = self.env.user.tz or pytz.utc
+            local = pytz.timezone(user_tz)
+            local_date = pytz.utc.localize(self.mrp_date).astimezone(local)
+            local_now = pytz.utc.localize(fields.Datetime.now()).astimezone(local)
+            user_date = local_date.replace(tzinfo=None)
+            user_now = local_now.replace(tzinfo=None)
+
+            if not self.env.user.has_group('stock_force_date_app.group_stock_force_date') and user_date.date() > user_now.date():
+                raise UserError(_('You don\'t have authorization to create future tansaction'))
+            
+
     def action_confirm(self):
         res = super(SdtMrpProduction, self).action_confirm()
 

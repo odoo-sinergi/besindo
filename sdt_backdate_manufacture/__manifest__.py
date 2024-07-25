@@ -14,7 +14,7 @@
         'views/mrp_production.xml',
         'views/mrp_unbuild.xml',
     ],
-    'depends': ['mrp',],
+    'depends': ['mrp','stock_force_date_app'],
     'installable': True,
     'auto_install': False,
     'application': True,
