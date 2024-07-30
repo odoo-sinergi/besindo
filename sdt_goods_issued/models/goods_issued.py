@@ -100,6 +100,8 @@ class SDTGoodsIssued(models.Model):
         self.state='open'
 
     def canceled(self):
+        if self.state != 'open':
+            raise UserError("Cancel not allowed")
         #1. Update Stock Quant - Location Source
         self.ensure_one()
         sql_query="""select count(1) from stock_move_line a left join stock_quant b on a.product_id=b.product_id and a.location_id=b.location_id and a.lot_id=b.lot_id
