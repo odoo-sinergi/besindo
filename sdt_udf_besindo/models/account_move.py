@@ -29,7 +29,7 @@ class AccountMove(models.Model):
     do_number = fields.Char(string='DO Number',)
     hs_code = fields.Char(string='HS Code',)
     no_faktur_pajak = fields.Char(string='Tax Invoice Number',)
-    date_payment = fields.Date(string='Paid Date', store=True, )
+    date_payment = fields.Date(string='Paid Date', store=True, compute='_compute_date_payment')
     accounting_ref = fields.Char(string='Accounting Reference')
     
 
@@ -49,6 +49,7 @@ class AccountMove(models.Model):
             else :
                 pass
             
+    @api.depends('state','payment_state')
     def _compute_date_payment(self):
         for record in self:
             if record.payment_state in ['paid','partial'] :
